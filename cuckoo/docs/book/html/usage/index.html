@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Usage &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../index.html" />
+    <link rel="next" title="Starting Cuckoo" href="start.html" />
+    <link rel="prev" title="Upgrade from a previous release" href="../installation/upgrade.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="start.html" title="Starting Cuckoo"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../installation/upgrade.html" title="Upgrade from a previous release"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<p>This chapter explains how to use Cuckoo.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="start.html">Starting Cuckoo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="submit.html">Submit an Analysis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="submit.html#submission-utility">Submission Utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="submit.html#api">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="submit.html#distributed-cuckoo">Distributed Cuckoo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="submit.html#python-functions">Python Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="web.html">Web interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="web.html#configuration">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">REST API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#starting-the-api-server">Starting the API server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#web-deployment">Web deployment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#uwsgi-setup">uWSGI setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#nginx-setup">Nginx setup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#resources">Resources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#tasks-create-file">/tasks/create/file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#tasks-create-url">/tasks/create/url</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#tasks-list">/tasks/list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#tasks-view">/tasks/view</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#tasks-reschedule">/tasks/reschedule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#tasks-delete">/tasks/delete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#tasks-report">/tasks/report</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#tasks-screenshots">/tasks/screenshots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#tasks-rereport">/tasks/rereport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#memory-list">/memory/list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#memory-get">/memory/get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#files-view">/files/view</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#files-get">/files/get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#pcap-get">/pcap/get</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#machines-list">/machines/list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#machines-view">/machines/view</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#cuckoo-status">/cuckoo/status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#vpn-status">/vpn/status</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dist.html">Distributed Cuckoo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dist.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dist.html#starting-the-distributed-rest-api">Starting the Distributed REST API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#report-formats">Report Formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#samples-directory">Samples Directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#reports-directory">Reports Directory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dist.html#restful-resources">RESTful resources</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#get-api-node">GET /api/node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#post-api-node">POST /api/node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#get-api-node-name">GET /api/node/&lt;name&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#put-api-node-name">PUT /api/node/&lt;name&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#delete-api-node-name">DELETE /api/node/&lt;name&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#get-api-task">GET /api/task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#post-api-task">POST /api/task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#get-api-task-id">GET /api/task/&lt;id&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#delete-api-task-id">DELETE /api/task/&lt;id&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#get-api-report-id-format">GET /api/report/&lt;id&gt;/&lt;format&gt;</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dist.html#quick-usage">Quick usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dist.html#proposed-setup">Proposed setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#configuration-settings">Configuration settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dist.html#conf-cuckoo-conf">conf/cuckoo.conf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dist.html#conf-processing-conf">conf/processing.conf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dist.html#conf-reporting-conf">conf/reporting.conf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dist.html#conf-virtualbox-conf">conf/virtualbox.conf</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#setup-cuckoo">Setup Cuckoo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#setup-distributed-cuckoo">Setup Distributed Cuckoo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dist.html#register-cuckoo-nodes">Register Cuckoo nodes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Analysis Packages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="results.html">Analysis Results</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="results.html#analysis-conf">analysis.conf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results.html#analysis-log">analysis.log</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results.html#dump-pcap">dump.pcap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results.html#memory-dmp">memory.dmp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results.html#files">files/</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results.html#logs">logs/</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results.html#reports">reports/</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results.html#shots">shots/</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="clean.html">Clean all Tasks and Samples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utilities.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#submission-utility">Submission Utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#web-utility">Web Utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#processing-utility">Processing Utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#community-download-utility">Community Download Utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#database-migration-utility">Database migration utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#stats-utility">Stats utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#machine-utility">Machine utility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#distributed-scripts">Distributed scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#mac-os-x-bootstrap-scripts">Mac OS X Bootstrap scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#smtp-sinkhole">SMTP Sinkhole</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html#setup-script">Setup script</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../installation/upgrade.html"
+                        title="previous chapter">Upgrade from a previous release</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="start.html"
+                        title="next chapter">Starting Cuckoo</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usage/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="start.html" title="Starting Cuckoo"
+             >next</a></li>
+        <li class="right" >
+          <a href="../installation/upgrade.html" title="Upgrade from a previous release"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

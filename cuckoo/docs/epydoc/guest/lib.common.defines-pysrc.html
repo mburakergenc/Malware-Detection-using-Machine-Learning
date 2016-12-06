@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lib.common.defines</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lib-module.html">Package&nbsp;lib</a> ::
+        <a href="lib.common-module.html">Package&nbsp;common</a> ::
+        Module&nbsp;defines
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lib.common.defines-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lib.common.defines-module.html">Module lib.common.defines</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">ctypes</tt> <tt class="py-keyword">import</tt> <tt class="py-op">*</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable lib.common.defines.NTDLL=lib.common.defines-module.html#NTDLL"><a title="lib.common.defines.NTDLL" class="py-name" href="#" onclick="return doclink('link-0', 'NTDLL', 'link-0');">NTDLL</a></tt>    <tt class="py-op">=</tt> <tt class="py-name">windll</tt><tt class="py-op">.</tt><tt class="py-name">ntdll</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable lib.common.defines.KERNEL32=lib.common.defines-module.html#KERNEL32"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-1', 'KERNEL32', 'link-1');">KERNEL32</a></tt> <tt class="py-op">=</tt> <tt class="py-name">windll</tt><tt class="py-op">.</tt><tt class="py-name">kernel32</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt id="link-2" class="py-name" targets="Variable lib.common.defines.ADVAPI32=lib.common.defines-module.html#ADVAPI32"><a title="lib.common.defines.ADVAPI32" class="py-name" href="#" onclick="return doclink('link-2', 'ADVAPI32', 'link-2');">ADVAPI32</a></tt> <tt class="py-op">=</tt> <tt class="py-name">windll</tt><tt class="py-op">.</tt><tt class="py-name">advapi32</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt id="link-3" class="py-name" targets="Variable lib.common.defines.USER32=lib.common.defines-module.html#USER32"><a title="lib.common.defines.USER32" class="py-name" href="#" onclick="return doclink('link-3', 'USER32', 'link-3');">USER32</a></tt>   <tt class="py-op">=</tt> <tt class="py-name">windll</tt><tt class="py-op">.</tt><tt class="py-name">user32</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable lib.common.defines.SHELL32=lib.common.defines-module.html#SHELL32"><a title="lib.common.defines.SHELL32" class="py-name" href="#" onclick="return doclink('link-4', 'SHELL32', 'link-4');">SHELL32</a></tt>  <tt class="py-op">=</tt> <tt class="py-name">windll</tt><tt class="py-op">.</tt><tt class="py-name">shell32</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable lib.common.defines.BYTE=lib.common.defines-module.html#BYTE"><a title="lib.common.defines.BYTE" class="py-name" href="#" onclick="return doclink('link-5', 'BYTE', 'link-5');">BYTE</a></tt>      <tt class="py-op">=</tt> <tt class="py-name">c_ubyte</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable lib.common.defines.WORD=lib.common.defines-module.html#WORD"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-6', 'WORD', 'link-6');">WORD</a></tt>      <tt class="py-op">=</tt> <tt class="py-name">c_ushort</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable lib.common.defines.DWORD=lib.common.defines-module.html#DWORD"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-7', 'DWORD', 'link-7');">DWORD</a></tt>     <tt class="py-op">=</tt> <tt class="py-name">c_ulong</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable lib.common.defines.LONG=lib.common.defines-module.html#LONG"><a title="lib.common.defines.LONG" class="py-name" href="#" onclick="return doclink('link-8', 'LONG', 'link-8');">LONG</a></tt>      <tt class="py-op">=</tt> <tt class="py-name">c_ulong</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable lib.common.defines.LPBYTE=lib.common.defines-module.html#LPBYTE"><a title="lib.common.defines.LPBYTE" class="py-name" href="#" onclick="return doclink('link-9', 'LPBYTE', 'link-9');">LPBYTE</a></tt>    <tt class="py-op">=</tt> <tt class="py-name">POINTER</tt><tt class="py-op">(</tt><tt class="py-name">c_ubyte</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable lib.common.defines.LPTSTR=lib.common.defines-module.html#LPTSTR"><a title="lib.common.defines.LPTSTR" class="py-name" href="#" onclick="return doclink('link-10', 'LPTSTR', 'link-10');">LPTSTR</a></tt>    <tt class="py-op">=</tt> <tt class="py-name">POINTER</tt><tt class="py-op">(</tt><tt class="py-name">c_char</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt id="link-11" class="py-name" targets="Variable lib.common.defines.HANDLE=lib.common.defines-module.html#HANDLE"><a title="lib.common.defines.HANDLE" class="py-name" href="#" onclick="return doclink('link-11', 'HANDLE', 'link-11');">HANDLE</a></tt>    <tt class="py-op">=</tt> <tt class="py-name">c_void_p</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt id="link-12" class="py-name" targets="Variable lib.common.defines.PVOID=lib.common.defines-module.html#PVOID"><a title="lib.common.defines.PVOID" class="py-name" href="#" onclick="return doclink('link-12', 'PVOID', 'link-12');">PVOID</a></tt>     <tt class="py-op">=</tt> <tt class="py-name">c_void_p</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt id="link-13" class="py-name" targets="Variable lib.common.defines.LPVOID=lib.common.defines-module.html#LPVOID"><a title="lib.common.defines.LPVOID" class="py-name" href="#" onclick="return doclink('link-13', 'LPVOID', 'link-13');">LPVOID</a></tt>    <tt class="py-op">=</tt> <tt class="py-name">c_void_p</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt id="link-14" class="py-name" targets="Variable lib.common.defines.UINT_PTR=lib.common.defines-module.html#UINT_PTR"><a title="lib.common.defines.UINT_PTR" class="py-name" href="#" onclick="return doclink('link-14', 'UINT_PTR', 'link-14');">UINT_PTR</a></tt>  <tt class="py-op">=</tt> <tt class="py-name">c_ulong</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt id="link-15" class="py-name" targets="Variable lib.common.defines.SIZE_T=lib.common.defines-module.html#SIZE_T"><a title="lib.common.defines.SIZE_T" class="py-name" href="#" onclick="return doclink('link-15', 'SIZE_T', 'link-15');">SIZE_T</a></tt>    <tt class="py-op">=</tt> <tt class="py-name">c_ulong</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt id="link-16" class="py-name" targets="Variable lib.common.defines.HMODULE=lib.common.defines-module.html#HMODULE"><a title="lib.common.defines.HMODULE" class="py-name" href="#" onclick="return doclink('link-16', 'HMODULE', 'link-16');">HMODULE</a></tt>   <tt class="py-op">=</tt> <tt class="py-name">c_void_p</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt id="link-17" class="py-name" targets="Variable lib.common.defines.NULL=lib.common.defines-module.html#NULL"><a title="lib.common.defines.NULL" class="py-name" href="#" onclick="return doclink('link-17', 'NULL', 'link-17');">NULL</a></tt>      <tt class="py-op">=</tt> <tt class="py-name">c_int</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt id="link-18" class="py-name" targets="Variable lib.common.defines.DEBUG_PROCESS=lib.common.defines-module.html#DEBUG_PROCESS"><a title="lib.common.defines.DEBUG_PROCESS" class="py-name" href="#" onclick="return doclink('link-18', 'DEBUG_PROCESS', 'link-18');">DEBUG_PROCESS</a></tt>             <tt class="py-op">=</tt> <tt class="py-number">0x00000001</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt id="link-19" class="py-name" targets="Variable lib.common.defines.CREATE_NEW_CONSOLE=lib.common.defines-module.html#CREATE_NEW_CONSOLE"><a title="lib.common.defines.CREATE_NEW_CONSOLE" class="py-name" href="#" onclick="return doclink('link-19', 'CREATE_NEW_CONSOLE', 'link-19');">CREATE_NEW_CONSOLE</a></tt>        <tt class="py-op">=</tt> <tt class="py-number">0x00000010</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt id="link-20" class="py-name" targets="Variable lib.common.defines.CREATE_SUSPENDED=lib.common.defines-module.html#CREATE_SUSPENDED"><a title="lib.common.defines.CREATE_SUSPENDED" class="py-name" href="#" onclick="return doclink('link-20', 'CREATE_SUSPENDED', 'link-20');">CREATE_SUSPENDED</a></tt>          <tt class="py-op">=</tt> <tt class="py-number">0x00000004</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt id="link-21" class="py-name" targets="Variable lib.common.defines.DBG_CONTINUE=lib.common.defines-module.html#DBG_CONTINUE"><a title="lib.common.defines.DBG_CONTINUE" class="py-name" href="#" onclick="return doclink('link-21', 'DBG_CONTINUE', 'link-21');">DBG_CONTINUE</a></tt>              <tt class="py-op">=</tt> <tt class="py-number">0x00010002</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt id="link-22" class="py-name" targets="Variable lib.common.defines.INFINITE=lib.common.defines-module.html#INFINITE"><a title="lib.common.defines.INFINITE" class="py-name" href="#" onclick="return doclink('link-22', 'INFINITE', 'link-22');">INFINITE</a></tt>                  <tt class="py-op">=</tt> <tt class="py-number">0xFFFFFFFF</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt id="link-23" class="py-name" targets="Variable lib.common.defines.PROCESS_ALL_ACCESS=lib.common.defines-module.html#PROCESS_ALL_ACCESS"><a title="lib.common.defines.PROCESS_ALL_ACCESS" class="py-name" href="#" onclick="return doclink('link-23', 'PROCESS_ALL_ACCESS', 'link-23');">PROCESS_ALL_ACCESS</a></tt>        <tt class="py-op">=</tt> <tt class="py-number">0x001F0FFF</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt id="link-24" class="py-name" targets="Variable lib.common.defines.THREAD_ALL_ACCESS=lib.common.defines-module.html#THREAD_ALL_ACCESS"><a title="lib.common.defines.THREAD_ALL_ACCESS" class="py-name" href="#" onclick="return doclink('link-24', 'THREAD_ALL_ACCESS', 'link-24');">THREAD_ALL_ACCESS</a></tt>         <tt class="py-op">=</tt> <tt class="py-number">0x001f03ff</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt id="link-25" class="py-name" targets="Variable lib.common.defines.TOKEN_ALL_ACCESS=lib.common.defines-module.html#TOKEN_ALL_ACCESS"><a title="lib.common.defines.TOKEN_ALL_ACCESS" class="py-name" href="#" onclick="return doclink('link-25', 'TOKEN_ALL_ACCESS', 'link-25');">TOKEN_ALL_ACCESS</a></tt>          <tt class="py-op">=</tt> <tt class="py-number">0x000F01FF</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt id="link-26" class="py-name" targets="Variable lib.common.defines.SE_PRIVILEGE_ENABLED=lib.common.defines-module.html#SE_PRIVILEGE_ENABLED"><a title="lib.common.defines.SE_PRIVILEGE_ENABLED" class="py-name" href="#" onclick="return doclink('link-26', 'SE_PRIVILEGE_ENABLED', 'link-26');">SE_PRIVILEGE_ENABLED</a></tt>      <tt class="py-op">=</tt> <tt class="py-number">0x00000002</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt id="link-27" class="py-name" targets="Variable lib.common.defines.STILL_ACTIVE=lib.common.defines-module.html#STILL_ACTIVE"><a title="lib.common.defines.STILL_ACTIVE" class="py-name" href="#" onclick="return doclink('link-27', 'STILL_ACTIVE', 'link-27');">STILL_ACTIVE</a></tt>              <tt class="py-op">=</tt> <tt class="py-number">0x00000103</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt id="link-28" class="py-name" targets="Variable lib.common.defines.PAGE_EXECUTE_READWRITE=lib.common.defines-module.html#PAGE_EXECUTE_READWRITE"><a title="lib.common.defines.PAGE_EXECUTE_READWRITE" class="py-name" href="#" onclick="return doclink('link-28', 'PAGE_EXECUTE_READWRITE', 'link-28');">PAGE_EXECUTE_READWRITE</a></tt>    <tt class="py-op">=</tt> <tt class="py-number">0x00000040</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt id="link-29" class="py-name" targets="Variable lib.common.defines.PAGE_EXECUTE=lib.common.defines-module.html#PAGE_EXECUTE"><a title="lib.common.defines.PAGE_EXECUTE" class="py-name" href="#" onclick="return doclink('link-29', 'PAGE_EXECUTE', 'link-29');">PAGE_EXECUTE</a></tt>              <tt class="py-op">=</tt> <tt class="py-number">0x00000010</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt id="link-30" class="py-name" targets="Variable lib.common.defines.PAGE_EXECUTE_READ=lib.common.defines-module.html#PAGE_EXECUTE_READ"><a title="lib.common.defines.PAGE_EXECUTE_READ" class="py-name" href="#" onclick="return doclink('link-30', 'PAGE_EXECUTE_READ', 'link-30');">PAGE_EXECUTE_READ</a></tt>         <tt class="py-op">=</tt> <tt class="py-number">0x00000020</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt id="link-31" class="py-name" targets="Variable lib.common.defines.PAGE_READONLY=lib.common.defines-module.html#PAGE_READONLY"><a title="lib.common.defines.PAGE_READONLY" class="py-name" href="#" onclick="return doclink('link-31', 'PAGE_READONLY', 'link-31');">PAGE_READONLY</a></tt>             <tt class="py-op">=</tt> <tt class="py-number">0x00000002</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt id="link-32" class="py-name" targets="Variable lib.common.defines.PAGE_READWRITE=lib.common.defines-module.html#PAGE_READWRITE"><a title="lib.common.defines.PAGE_READWRITE" class="py-name" href="#" onclick="return doclink('link-32', 'PAGE_READWRITE', 'link-32');">PAGE_READWRITE</a></tt>            <tt class="py-op">=</tt> <tt class="py-number">0x00000004</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt id="link-33" class="py-name" targets="Variable lib.common.defines.MEM_COMMIT=lib.common.defines-module.html#MEM_COMMIT"><a title="lib.common.defines.MEM_COMMIT" class="py-name" href="#" onclick="return doclink('link-33', 'MEM_COMMIT', 'link-33');">MEM_COMMIT</a></tt>                <tt class="py-op">=</tt> <tt class="py-number">0x00001000</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt id="link-34" class="py-name" targets="Variable lib.common.defines.MEM_RESERVE=lib.common.defines-module.html#MEM_RESERVE"><a title="lib.common.defines.MEM_RESERVE" class="py-name" href="#" onclick="return doclink('link-34', 'MEM_RESERVE', 'link-34');">MEM_RESERVE</a></tt>               <tt class="py-op">=</tt> <tt class="py-number">0x00002000</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"><tt id="link-35" class="py-name" targets="Variable lib.common.defines.MEM_DECOMMIT=lib.common.defines-module.html#MEM_DECOMMIT"><a title="lib.common.defines.MEM_DECOMMIT" class="py-name" href="#" onclick="return doclink('link-35', 'MEM_DECOMMIT', 'link-35');">MEM_DECOMMIT</a></tt>              <tt class="py-op">=</tt> <tt class="py-number">0x00004000</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt id="link-36" class="py-name" targets="Variable lib.common.defines.MEM_RELEASE=lib.common.defines-module.html#MEM_RELEASE"><a title="lib.common.defines.MEM_RELEASE" class="py-name" href="#" onclick="return doclink('link-36', 'MEM_RELEASE', 'link-36');">MEM_RELEASE</a></tt>               <tt class="py-op">=</tt> <tt class="py-number">0x00008000</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt id="link-37" class="py-name" targets="Variable lib.common.defines.MEM_RESET=lib.common.defines-module.html#MEM_RESET"><a title="lib.common.defines.MEM_RESET" class="py-name" href="#" onclick="return doclink('link-37', 'MEM_RESET', 'link-37');">MEM_RESET</a></tt>                 <tt class="py-op">=</tt> <tt class="py-number">0x00080000</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt id="link-38" class="py-name" targets="Variable lib.common.defines.MEM_IMAGE=lib.common.defines-module.html#MEM_IMAGE"><a title="lib.common.defines.MEM_IMAGE" class="py-name" href="#" onclick="return doclink('link-38', 'MEM_IMAGE', 'link-38');">MEM_IMAGE</a></tt>                 <tt class="py-op">=</tt> <tt class="py-number">0x01000000</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"><tt id="link-39" class="py-name" targets="Variable lib.common.defines.MEM_MAPPED=lib.common.defines-module.html#MEM_MAPPED"><a title="lib.common.defines.MEM_MAPPED" class="py-name" href="#" onclick="return doclink('link-39', 'MEM_MAPPED', 'link-39');">MEM_MAPPED</a></tt>                <tt class="py-op">=</tt> <tt class="py-number">0x00040000</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt id="link-40" class="py-name" targets="Variable lib.common.defines.MEM_PRIVATE=lib.common.defines-module.html#MEM_PRIVATE"><a title="lib.common.defines.MEM_PRIVATE" class="py-name" href="#" onclick="return doclink('link-40', 'MEM_PRIVATE', 'link-40');">MEM_PRIVATE</a></tt>               <tt class="py-op">=</tt> <tt class="py-number">0x00020000</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt id="link-41" class="py-name" targets="Variable lib.common.defines.PAGE_NOACCESS=lib.common.defines-module.html#PAGE_NOACCESS"><a title="lib.common.defines.PAGE_NOACCESS" class="py-name" href="#" onclick="return doclink('link-41', 'PAGE_NOACCESS', 'link-41');">PAGE_NOACCESS</a></tt>             <tt class="py-op">=</tt> <tt class="py-number">0x00000001</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt id="link-42" class="py-name"><a title="lib.common.defines.PAGE_READONLY" class="py-name" href="#" onclick="return doclink('link-42', 'PAGE_READONLY', 'link-31');">PAGE_READONLY</a></tt>             <tt class="py-op">=</tt> <tt class="py-number">0x00000002</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt id="link-43" class="py-name"><a title="lib.common.defines.PAGE_READWRITE" class="py-name" href="#" onclick="return doclink('link-43', 'PAGE_READWRITE', 'link-32');">PAGE_READWRITE</a></tt>            <tt class="py-op">=</tt> <tt class="py-number">0x00000004</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt id="link-44" class="py-name" targets="Variable lib.common.defines.PAGE_WRITECOPY=lib.common.defines-module.html#PAGE_WRITECOPY"><a title="lib.common.defines.PAGE_WRITECOPY" class="py-name" href="#" onclick="return doclink('link-44', 'PAGE_WRITECOPY', 'link-44');">PAGE_WRITECOPY</a></tt>            <tt class="py-op">=</tt> <tt class="py-number">0x00000008</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt id="link-45" class="py-name"><a title="lib.common.defines.PAGE_EXECUTE" class="py-name" href="#" onclick="return doclink('link-45', 'PAGE_EXECUTE', 'link-29');">PAGE_EXECUTE</a></tt>              <tt class="py-op">=</tt> <tt class="py-number">0x00000010</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt id="link-46" class="py-name"><a title="lib.common.defines.PAGE_EXECUTE_READ" class="py-name" href="#" onclick="return doclink('link-46', 'PAGE_EXECUTE_READ', 'link-30');">PAGE_EXECUTE_READ</a></tt>         <tt class="py-op">=</tt> <tt class="py-number">0x00000020</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt id="link-47" class="py-name"><a title="lib.common.defines.PAGE_EXECUTE_READWRITE" class="py-name" href="#" onclick="return doclink('link-47', 'PAGE_EXECUTE_READWRITE', 'link-28');">PAGE_EXECUTE_READWRITE</a></tt>    <tt class="py-op">=</tt> <tt class="py-number">0x00000040</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt id="link-48" class="py-name" targets="Variable lib.common.defines.PAGE_EXECUTE_WRITECOPY=lib.common.defines-module.html#PAGE_EXECUTE_WRITECOPY"><a title="lib.common.defines.PAGE_EXECUTE_WRITECOPY" class="py-name" href="#" onclick="return doclink('link-48', 'PAGE_EXECUTE_WRITECOPY', 'link-48');">PAGE_EXECUTE_WRITECOPY</a></tt>    <tt class="py-op">=</tt> <tt class="py-number">0x00000080</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt id="link-49" class="py-name" targets="Variable lib.common.defines.PAGE_GUARD=lib.common.defines-module.html#PAGE_GUARD"><a title="lib.common.defines.PAGE_GUARD" class="py-name" href="#" onclick="return doclink('link-49', 'PAGE_GUARD', 'link-49');">PAGE_GUARD</a></tt>                <tt class="py-op">=</tt> <tt class="py-number">0x00000100</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"><tt id="link-50" class="py-name" targets="Variable lib.common.defines.PAGE_NOCACHE=lib.common.defines-module.html#PAGE_NOCACHE"><a title="lib.common.defines.PAGE_NOCACHE" class="py-name" href="#" onclick="return doclink('link-50', 'PAGE_NOCACHE', 'link-50');">PAGE_NOCACHE</a></tt>              <tt class="py-op">=</tt> <tt class="py-number">0x00000200</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt id="link-51" class="py-name" targets="Variable lib.common.defines.PAGE_WRITECOMBINE=lib.common.defines-module.html#PAGE_WRITECOMBINE"><a title="lib.common.defines.PAGE_WRITECOMBINE" class="py-name" href="#" onclick="return doclink('link-51', 'PAGE_WRITECOMBINE', 'link-51');">PAGE_WRITECOMBINE</a></tt>         <tt class="py-op">=</tt> <tt class="py-number">0x00000400</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt id="link-52" class="py-name" targets="Variable lib.common.defines.PIPE_ACCESS_INBOUND=lib.common.defines-module.html#PIPE_ACCESS_INBOUND"><a title="lib.common.defines.PIPE_ACCESS_INBOUND" class="py-name" href="#" onclick="return doclink('link-52', 'PIPE_ACCESS_INBOUND', 'link-52');">PIPE_ACCESS_INBOUND</a></tt>       <tt class="py-op">=</tt> <tt class="py-number">0x00000001</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"><tt id="link-53" class="py-name" targets="Variable lib.common.defines.PIPE_ACCESS_DUPLEX=lib.common.defines-module.html#PIPE_ACCESS_DUPLEX"><a title="lib.common.defines.PIPE_ACCESS_DUPLEX" class="py-name" href="#" onclick="return doclink('link-53', 'PIPE_ACCESS_DUPLEX', 'link-53');">PIPE_ACCESS_DUPLEX</a></tt>        <tt class="py-op">=</tt> <tt class="py-number">0x00000003</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt id="link-54" class="py-name" targets="Variable lib.common.defines.PIPE_TYPE_MESSAGE=lib.common.defines-module.html#PIPE_TYPE_MESSAGE"><a title="lib.common.defines.PIPE_TYPE_MESSAGE" class="py-name" href="#" onclick="return doclink('link-54', 'PIPE_TYPE_MESSAGE', 'link-54');">PIPE_TYPE_MESSAGE</a></tt>         <tt class="py-op">=</tt> <tt class="py-number">0x00000004</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt id="link-55" class="py-name" targets="Variable lib.common.defines.PIPE_READMODE_MESSAGE=lib.common.defines-module.html#PIPE_READMODE_MESSAGE"><a title="lib.common.defines.PIPE_READMODE_MESSAGE" class="py-name" href="#" onclick="return doclink('link-55', 'PIPE_READMODE_MESSAGE', 'link-55');">PIPE_READMODE_MESSAGE</a></tt>     <tt class="py-op">=</tt> <tt class="py-number">0x00000002</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt id="link-56" class="py-name" targets="Variable lib.common.defines.PIPE_WAIT=lib.common.defines-module.html#PIPE_WAIT"><a title="lib.common.defines.PIPE_WAIT" class="py-name" href="#" onclick="return doclink('link-56', 'PIPE_WAIT', 'link-56');">PIPE_WAIT</a></tt>                 <tt class="py-op">=</tt> <tt class="py-number">0x00000000</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt id="link-57" class="py-name" targets="Variable lib.common.defines.PIPE_UNLIMITED_INSTANCES=lib.common.defines-module.html#PIPE_UNLIMITED_INSTANCES"><a title="lib.common.defines.PIPE_UNLIMITED_INSTANCES" class="py-name" href="#" onclick="return doclink('link-57', 'PIPE_UNLIMITED_INSTANCES', 'link-57');">PIPE_UNLIMITED_INSTANCES</a></tt>  <tt class="py-op">=</tt> <tt class="py-number">0x000000ff</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt id="link-58" class="py-name" targets="Variable lib.common.defines.PIPE_TYPE_BYTE=lib.common.defines-module.html#PIPE_TYPE_BYTE"><a title="lib.common.defines.PIPE_TYPE_BYTE" class="py-name" href="#" onclick="return doclink('link-58', 'PIPE_TYPE_BYTE', 'link-58');">PIPE_TYPE_BYTE</a></tt>            <tt class="py-op">=</tt> <tt class="py-number">0x00000000</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt id="link-59" class="py-name" targets="Variable lib.common.defines.PIPE_READMODE_BYTE=lib.common.defines-module.html#PIPE_READMODE_BYTE"><a title="lib.common.defines.PIPE_READMODE_BYTE" class="py-name" href="#" onclick="return doclink('link-59', 'PIPE_READMODE_BYTE', 'link-59');">PIPE_READMODE_BYTE</a></tt>        <tt class="py-op">=</tt> <tt class="py-number">0x00000000</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt id="link-60" class="py-name" targets="Variable lib.common.defines.FILE_FLAG_WRITE_THROUGH=lib.common.defines-module.html#FILE_FLAG_WRITE_THROUGH"><a title="lib.common.defines.FILE_FLAG_WRITE_THROUGH" class="py-name" href="#" onclick="return doclink('link-60', 'FILE_FLAG_WRITE_THROUGH', 'link-60');">FILE_FLAG_WRITE_THROUGH</a></tt>   <tt class="py-op">=</tt> <tt class="py-number">0x80000000</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt id="link-61" class="py-name" targets="Variable lib.common.defines.INVALID_HANDLE_VALUE=lib.common.defines-module.html#INVALID_HANDLE_VALUE"><a title="lib.common.defines.INVALID_HANDLE_VALUE" class="py-name" href="#" onclick="return doclink('link-61', 'INVALID_HANDLE_VALUE', 'link-61');">INVALID_HANDLE_VALUE</a></tt>      <tt class="py-op">=</tt> <tt class="py-number">0xffffffff</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt id="link-62" class="py-name" targets="Variable lib.common.defines.ERROR_BROKEN_PIPE=lib.common.defines-module.html#ERROR_BROKEN_PIPE"><a title="lib.common.defines.ERROR_BROKEN_PIPE" class="py-name" href="#" onclick="return doclink('link-62', 'ERROR_BROKEN_PIPE', 'link-62');">ERROR_BROKEN_PIPE</a></tt>         <tt class="py-op">=</tt> <tt class="py-number">0x0000006d</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt id="link-63" class="py-name" targets="Variable lib.common.defines.ERROR_MORE_DATA=lib.common.defines-module.html#ERROR_MORE_DATA"><a title="lib.common.defines.ERROR_MORE_DATA" class="py-name" href="#" onclick="return doclink('link-63', 'ERROR_MORE_DATA', 'link-63');">ERROR_MORE_DATA</a></tt>           <tt class="py-op">=</tt> <tt class="py-number">0x000000EA</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt id="link-64" class="py-name" targets="Variable lib.common.defines.ERROR_PIPE_CONNECTED=lib.common.defines-module.html#ERROR_PIPE_CONNECTED"><a title="lib.common.defines.ERROR_PIPE_CONNECTED" class="py-name" href="#" onclick="return doclink('link-64', 'ERROR_PIPE_CONNECTED', 'link-64');">ERROR_PIPE_CONNECTED</a></tt>      <tt class="py-op">=</tt> <tt class="py-number">0x00000217</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt id="link-65" class="py-name" targets="Variable lib.common.defines.WAIT_TIMEOUT=lib.common.defines-module.html#WAIT_TIMEOUT"><a title="lib.common.defines.WAIT_TIMEOUT" class="py-name" href="#" onclick="return doclink('link-65', 'WAIT_TIMEOUT', 'link-65');">WAIT_TIMEOUT</a></tt>              <tt class="py-op">=</tt> <tt class="py-number">0x00000102</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt id="link-66" class="py-name" targets="Variable lib.common.defines.FILE_ATTRIBUTE_HIDDEN=lib.common.defines-module.html#FILE_ATTRIBUTE_HIDDEN"><a title="lib.common.defines.FILE_ATTRIBUTE_HIDDEN" class="py-name" href="#" onclick="return doclink('link-66', 'FILE_ATTRIBUTE_HIDDEN', 'link-66');">FILE_ATTRIBUTE_HIDDEN</a></tt>     <tt class="py-op">=</tt> <tt class="py-number">0x00000002</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"><tt id="link-67" class="py-name" targets="Variable lib.common.defines.WM_GETTEXT=lib.common.defines-module.html#WM_GETTEXT"><a title="lib.common.defines.WM_GETTEXT" class="py-name" href="#" onclick="return doclink('link-67', 'WM_GETTEXT', 'link-67');">WM_GETTEXT</a></tt>                <tt class="py-op">=</tt> <tt class="py-number">0x0000000D</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"><tt id="link-68" class="py-name" targets="Variable lib.common.defines.WM_GETTEXTLENGTH=lib.common.defines-module.html#WM_GETTEXTLENGTH"><a title="lib.common.defines.WM_GETTEXTLENGTH" class="py-name" href="#" onclick="return doclink('link-68', 'WM_GETTEXTLENGTH', 'link-68');">WM_GETTEXTLENGTH</a></tt>          <tt class="py-op">=</tt> <tt class="py-number">0x0000000E</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt id="link-69" class="py-name" targets="Variable lib.common.defines.BM_CLICK=lib.common.defines-module.html#BM_CLICK"><a title="lib.common.defines.BM_CLICK" class="py-name" href="#" onclick="return doclink('link-69', 'BM_CLICK', 'link-69');">BM_CLICK</a></tt>                  <tt class="py-op">=</tt> <tt class="py-number">0x000000F5</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt id="link-70" class="py-name" targets="Variable lib.common.defines.SHARD_PATHA=lib.common.defines-module.html#SHARD_PATHA"><a title="lib.common.defines.SHARD_PATHA" class="py-name" href="#" onclick="return doclink('link-70', 'SHARD_PATHA', 'link-70');">SHARD_PATHA</a></tt>               <tt class="py-op">=</tt> <tt class="py-number">0x00000002</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"> </tt>
+<a name="STARTUPINFO"></a><div id="STARTUPINFO-def"><a name="L91"></a><tt class="py-lineno"> 91</tt> <a class="py-toggle" href="#" id="STARTUPINFO-toggle" onclick="return toggle('STARTUPINFO');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.defines.STARTUPINFO-class.html">STARTUPINFO</a><tt class="py-op">(</tt><tt class="py-base-class">Structure</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="STARTUPINFO-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="STARTUPINFO-expanded"><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">    <tt id="link-71" class="py-name" targets="Variable lib.common.defines.LUID._fields_=lib.common.defines.LUID-class.html#_fields_,Variable lib.common.defines.LUID_AND_ATTRIBUTES._fields_=lib.common.defines.LUID_AND_ATTRIBUTES-class.html#_fields_,Variable lib.common.defines.MEMORY_BASIC_INFORMATION._fields_=lib.common.defines.MEMORY_BASIC_INFORMATION-class.html#_fields_,Variable lib.common.defines.PROCESS_INFORMATION._fields_=lib.common.defines.PROCESS_INFORMATION-class.html#_fields_,Variable lib.common.defines.PROC_STRUCT._fields_=lib.common.defines.PROC_STRUCT-class.html#_fields_,Variable lib.common.defines.STARTUPINFO._fields_=lib.common.defines.STARTUPINFO-class.html#_fields_,Variable lib.common.defines.SYSTEMTIME._fields_=lib.common.defines.SYSTEMTIME-class.html#_fields_,Variable lib.common.defines.SYSTEM_INFO._fields_=lib.common.defines.SYSTEM_INFO-class.html#_fields_,Variable lib.common.defines.SYSTEM_INFO_UNION._fields_=lib.common.defines.SYSTEM_INFO_UNION-class.html#_fields_,Variable lib.common.defines.TOKEN_PRIVILEGES._fields_=lib.common.defines.TOKEN_PRIVILEGES-class.html#_fields_,Variable lib.common.registry.UNICODE_STRING._fields_=lib.common.registry.UNICODE_STRING-class.html#_fields_"><a title="lib.common.defines.LUID._fields_
+lib.common.defines.LUID_AND_ATTRIBUTES._fields_
+lib.common.defines.MEMORY_BASIC_INFORMATION._fields_
+lib.common.defines.PROCESS_INFORMATION._fields_
+lib.common.defines.PROC_STRUCT._fields_
+lib.common.defines.STARTUPINFO._fields_
+lib.common.defines.SYSTEMTIME._fields_
+lib.common.defines.SYSTEM_INFO._fields_
+lib.common.defines.SYSTEM_INFO_UNION._fields_
+lib.common.defines.TOKEN_PRIVILEGES._fields_
+lib.common.registry.UNICODE_STRING._fields_" class="py-name" href="#" onclick="return doclink('link-71', '_fields_', 'link-71');">_fields_</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"cb"</tt><tt class="py-op">,</tt>            <tt id="link-72" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-72', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"lpReserved"</tt><tt class="py-op">,</tt>    <tt id="link-73" class="py-name"><a title="lib.common.defines.LPTSTR" class="py-name" href="#" onclick="return doclink('link-73', 'LPTSTR', 'link-10');">LPTSTR</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"lpDesktop"</tt><tt class="py-op">,</tt>     <tt id="link-74" class="py-name"><a title="lib.common.defines.LPTSTR" class="py-name" href="#" onclick="return doclink('link-74', 'LPTSTR', 'link-10');">LPTSTR</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"lpTitle"</tt><tt class="py-op">,</tt>       <tt id="link-75" class="py-name"><a title="lib.common.defines.LPTSTR" class="py-name" href="#" onclick="return doclink('link-75', 'LPTSTR', 'link-10');">LPTSTR</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwX"</tt><tt class="py-op">,</tt>           <tt id="link-76" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-76', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwY"</tt><tt class="py-op">,</tt>           <tt id="link-77" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-77', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwXSize"</tt><tt class="py-op">,</tt>       <tt id="link-78" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-78', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwYSize"</tt><tt class="py-op">,</tt>       <tt id="link-79" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-79', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwXCountChars"</tt><tt class="py-op">,</tt> <tt id="link-80" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-80', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwYCountChars"</tt><tt class="py-op">,</tt> <tt id="link-81" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-81', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwFillAttribute"</tt><tt class="py-op">,</tt><tt id="link-82" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-82', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwFlags"</tt><tt class="py-op">,</tt>       <tt id="link-83" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-83', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"wShowWindow"</tt><tt class="py-op">,</tt>   <tt id="link-84" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-84', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"cbReserved2"</tt><tt class="py-op">,</tt>   <tt id="link-85" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-85', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"lpReserved2"</tt><tt class="py-op">,</tt>   <tt id="link-86" class="py-name"><a title="lib.common.defines.LPBYTE" class="py-name" href="#" onclick="return doclink('link-86', 'LPBYTE', 'link-9');">LPBYTE</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"hStdInput"</tt><tt class="py-op">,</tt>     <tt id="link-87" class="py-name"><a title="lib.common.defines.HANDLE" class="py-name" href="#" onclick="return doclink('link-87', 'HANDLE', 'link-11');">HANDLE</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"hStdOutput"</tt><tt class="py-op">,</tt>    <tt id="link-88" class="py-name"><a title="lib.common.defines.HANDLE" class="py-name" href="#" onclick="return doclink('link-88', 'HANDLE', 'link-11');">HANDLE</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"hStdError"</tt><tt class="py-op">,</tt>     <tt id="link-89" class="py-name"><a title="lib.common.defines.HANDLE" class="py-name" href="#" onclick="return doclink('link-89', 'HANDLE', 'link-11');">HANDLE</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+</div><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"> </tt>
+<a name="PROCESS_INFORMATION"></a><div id="PROCESS_INFORMATION-def"><a name="L113"></a><tt class="py-lineno">113</tt> <a class="py-toggle" href="#" id="PROCESS_INFORMATION-toggle" onclick="return toggle('PROCESS_INFORMATION');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.defines.PROCESS_INFORMATION-class.html">PROCESS_INFORMATION</a><tt class="py-op">(</tt><tt class="py-base-class">Structure</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PROCESS_INFORMATION-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="PROCESS_INFORMATION-expanded"><a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt id="link-90" class="py-name"><a title="lib.common.defines.LUID._fields_
+lib.common.defines.LUID_AND_ATTRIBUTES._fields_
+lib.common.defines.MEMORY_BASIC_INFORMATION._fields_
+lib.common.defines.PROCESS_INFORMATION._fields_
+lib.common.defines.PROC_STRUCT._fields_
+lib.common.defines.STARTUPINFO._fields_
+lib.common.defines.SYSTEMTIME._fields_
+lib.common.defines.SYSTEM_INFO._fields_
+lib.common.defines.SYSTEM_INFO_UNION._fields_
+lib.common.defines.TOKEN_PRIVILEGES._fields_
+lib.common.registry.UNICODE_STRING._fields_" class="py-name" href="#" onclick="return doclink('link-90', '_fields_', 'link-71');">_fields_</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"hProcess"</tt><tt class="py-op">,</tt>    <tt id="link-91" class="py-name"><a title="lib.common.defines.HANDLE" class="py-name" href="#" onclick="return doclink('link-91', 'HANDLE', 'link-11');">HANDLE</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"hThread"</tt><tt class="py-op">,</tt>     <tt id="link-92" class="py-name"><a title="lib.common.defines.HANDLE" class="py-name" href="#" onclick="return doclink('link-92', 'HANDLE', 'link-11');">HANDLE</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwProcessId"</tt><tt class="py-op">,</tt> <tt id="link-93" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-93', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwThreadId"</tt><tt class="py-op">,</tt>  <tt id="link-94" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-94', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+</div><a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt>
+<a name="LUID"></a><div id="LUID-def"><a name="L121"></a><tt class="py-lineno">121</tt> <a class="py-toggle" href="#" id="LUID-toggle" onclick="return toggle('LUID');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.defines.LUID-class.html">LUID</a><tt class="py-op">(</tt><tt class="py-base-class">Structure</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LUID-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="LUID-expanded"><a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">    <tt id="link-95" class="py-name"><a title="lib.common.defines.LUID._fields_
+lib.common.defines.LUID_AND_ATTRIBUTES._fields_
+lib.common.defines.MEMORY_BASIC_INFORMATION._fields_
+lib.common.defines.PROCESS_INFORMATION._fields_
+lib.common.defines.PROC_STRUCT._fields_
+lib.common.defines.STARTUPINFO._fields_
+lib.common.defines.SYSTEMTIME._fields_
+lib.common.defines.SYSTEM_INFO._fields_
+lib.common.defines.SYSTEM_INFO_UNION._fields_
+lib.common.defines.TOKEN_PRIVILEGES._fields_
+lib.common.registry.UNICODE_STRING._fields_" class="py-name" href="#" onclick="return doclink('link-95', '_fields_', 'link-71');">_fields_</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"LowPart"</tt><tt class="py-op">,</tt> <tt id="link-96" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-96', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"HighPart"</tt><tt class="py-op">,</tt> <tt id="link-97" class="py-name"><a title="lib.common.defines.LONG" class="py-name" href="#" onclick="return doclink('link-97', 'LONG', 'link-8');">LONG</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+</div><a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"> </tt>
+<a name="LUID_AND_ATTRIBUTES"></a><div id="LUID_AND_ATTRIBUTES-def"><a name="L127"></a><tt class="py-lineno">127</tt> <a class="py-toggle" href="#" id="LUID_AND_ATTRIBUTES-toggle" onclick="return toggle('LUID_AND_ATTRIBUTES');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.defines.LUID_AND_ATTRIBUTES-class.html">LUID_AND_ATTRIBUTES</a><tt class="py-op">(</tt><tt class="py-base-class">Structure</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LUID_AND_ATTRIBUTES-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="LUID_AND_ATTRIBUTES-expanded"><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">    <tt id="link-98" class="py-name"><a title="lib.common.defines.LUID._fields_
+lib.common.defines.LUID_AND_ATTRIBUTES._fields_
+lib.common.defines.MEMORY_BASIC_INFORMATION._fields_
+lib.common.defines.PROCESS_INFORMATION._fields_
+lib.common.defines.PROC_STRUCT._fields_
+lib.common.defines.STARTUPINFO._fields_
+lib.common.defines.SYSTEMTIME._fields_
+lib.common.defines.SYSTEM_INFO._fields_
+lib.common.defines.SYSTEM_INFO_UNION._fields_
+lib.common.defines.TOKEN_PRIVILEGES._fields_
+lib.common.registry.UNICODE_STRING._fields_" class="py-name" href="#" onclick="return doclink('link-98', '_fields_', 'link-71');">_fields_</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"Luid"</tt><tt class="py-op">,</tt> <tt id="link-99" class="py-name" targets="Class lib.common.defines.LUID=lib.common.defines.LUID-class.html"><a title="lib.common.defines.LUID" class="py-name" href="#" onclick="return doclink('link-99', 'LUID', 'link-99');">LUID</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"Attributes"</tt><tt class="py-op">,</tt> <tt id="link-100" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-100', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+</div><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"> </tt>
+<a name="TOKEN_PRIVILEGES"></a><div id="TOKEN_PRIVILEGES-def"><a name="L133"></a><tt class="py-lineno">133</tt> <a class="py-toggle" href="#" id="TOKEN_PRIVILEGES-toggle" onclick="return toggle('TOKEN_PRIVILEGES');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.defines.TOKEN_PRIVILEGES-class.html">TOKEN_PRIVILEGES</a><tt class="py-op">(</tt><tt class="py-base-class">Structure</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="TOKEN_PRIVILEGES-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="TOKEN_PRIVILEGES-expanded"><a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">    <tt id="link-101" class="py-name"><a title="lib.common.defines.LUID._fields_
+lib.common.defines.LUID_AND_ATTRIBUTES._fields_
+lib.common.defines.MEMORY_BASIC_INFORMATION._fields_
+lib.common.defines.PROCESS_INFORMATION._fields_
+lib.common.defines.PROC_STRUCT._fields_
+lib.common.defines.STARTUPINFO._fields_
+lib.common.defines.SYSTEMTIME._fields_
+lib.common.defines.SYSTEM_INFO._fields_
+lib.common.defines.SYSTEM_INFO_UNION._fields_
+lib.common.defines.TOKEN_PRIVILEGES._fields_
+lib.common.registry.UNICODE_STRING._fields_" class="py-name" href="#" onclick="return doclink('link-101', '_fields_', 'link-71');">_fields_</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"PrivilegeCount"</tt><tt class="py-op">,</tt> <tt id="link-102" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-102', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"Privileges"</tt><tt class="py-op">,</tt> <tt id="link-103" class="py-name" targets="Class lib.common.defines.LUID_AND_ATTRIBUTES=lib.common.defines.LUID_AND_ATTRIBUTES-class.html"><a title="lib.common.defines.LUID_AND_ATTRIBUTES" class="py-name" href="#" onclick="return doclink('link-103', 'LUID_AND_ATTRIBUTES', 'link-103');">LUID_AND_ATTRIBUTES</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+</div><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"> </tt>
+<a name="MEMORY_BASIC_INFORMATION"></a><div id="MEMORY_BASIC_INFORMATION-def"><a name="L139"></a><tt class="py-lineno">139</tt> <a class="py-toggle" href="#" id="MEMORY_BASIC_INFORMATION-toggle" onclick="return toggle('MEMORY_BASIC_INFORMATION');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.defines.MEMORY_BASIC_INFORMATION-class.html">MEMORY_BASIC_INFORMATION</a><tt class="py-op">(</tt><tt class="py-base-class">Structure</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="MEMORY_BASIC_INFORMATION-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="MEMORY_BASIC_INFORMATION-expanded"><a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">    <tt id="link-104" class="py-name"><a title="lib.common.defines.LUID._fields_
+lib.common.defines.LUID_AND_ATTRIBUTES._fields_
+lib.common.defines.MEMORY_BASIC_INFORMATION._fields_
+lib.common.defines.PROCESS_INFORMATION._fields_
+lib.common.defines.PROC_STRUCT._fields_
+lib.common.defines.STARTUPINFO._fields_
+lib.common.defines.SYSTEMTIME._fields_
+lib.common.defines.SYSTEM_INFO._fields_
+lib.common.defines.SYSTEM_INFO_UNION._fields_
+lib.common.defines.TOKEN_PRIVILEGES._fields_
+lib.common.registry.UNICODE_STRING._fields_" class="py-name" href="#" onclick="return doclink('link-104', '_fields_', 'link-71');">_fields_</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"BaseAddress"</tt><tt class="py-op">,</tt> <tt id="link-105" class="py-name"><a title="lib.common.defines.PVOID" class="py-name" href="#" onclick="return doclink('link-105', 'PVOID', 'link-12');">PVOID</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"AllocationBase"</tt><tt class="py-op">,</tt> <tt id="link-106" class="py-name"><a title="lib.common.defines.PVOID" class="py-name" href="#" onclick="return doclink('link-106', 'PVOID', 'link-12');">PVOID</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"AllocationProtect"</tt><tt class="py-op">,</tt> <tt id="link-107" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-107', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"RegionSize"</tt><tt class="py-op">,</tt> <tt id="link-108" class="py-name"><a title="lib.common.defines.SIZE_T" class="py-name" href="#" onclick="return doclink('link-108', 'SIZE_T', 'link-15');">SIZE_T</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"State"</tt><tt class="py-op">,</tt> <tt id="link-109" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-109', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"Protect"</tt><tt class="py-op">,</tt> <tt id="link-110" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-110', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"Type"</tt><tt class="py-op">,</tt> <tt id="link-111" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-111', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+</div><a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"> </tt>
+<a name="PROC_STRUCT"></a><div id="PROC_STRUCT-def"><a name="L150"></a><tt class="py-lineno">150</tt> <a class="py-toggle" href="#" id="PROC_STRUCT-toggle" onclick="return toggle('PROC_STRUCT');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.defines.PROC_STRUCT-class.html">PROC_STRUCT</a><tt class="py-op">(</tt><tt class="py-base-class">Structure</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PROC_STRUCT-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="PROC_STRUCT-expanded"><a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">    <tt id="link-112" class="py-name"><a title="lib.common.defines.LUID._fields_
+lib.common.defines.LUID_AND_ATTRIBUTES._fields_
+lib.common.defines.MEMORY_BASIC_INFORMATION._fields_
+lib.common.defines.PROCESS_INFORMATION._fields_
+lib.common.defines.PROC_STRUCT._fields_
+lib.common.defines.STARTUPINFO._fields_
+lib.common.defines.SYSTEMTIME._fields_
+lib.common.defines.SYSTEM_INFO._fields_
+lib.common.defines.SYSTEM_INFO_UNION._fields_
+lib.common.defines.TOKEN_PRIVILEGES._fields_
+lib.common.registry.UNICODE_STRING._fields_" class="py-name" href="#" onclick="return doclink('link-112', '_fields_', 'link-71');">_fields_</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"wProcessorArchitecture"</tt><tt class="py-op">,</tt> <tt id="link-113" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-113', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"wReserved"</tt><tt class="py-op">,</tt> <tt id="link-114" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-114', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+</div><a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"> </tt>
+<a name="SYSTEM_INFO_UNION"></a><div id="SYSTEM_INFO_UNION-def"><a name="L156"></a><tt class="py-lineno">156</tt> <a class="py-toggle" href="#" id="SYSTEM_INFO_UNION-toggle" onclick="return toggle('SYSTEM_INFO_UNION');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.defines.SYSTEM_INFO_UNION-class.html">SYSTEM_INFO_UNION</a><tt class="py-op">(</tt><tt class="py-base-class">Union</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SYSTEM_INFO_UNION-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SYSTEM_INFO_UNION-expanded"><a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">    <tt id="link-115" class="py-name"><a title="lib.common.defines.LUID._fields_
+lib.common.defines.LUID_AND_ATTRIBUTES._fields_
+lib.common.defines.MEMORY_BASIC_INFORMATION._fields_
+lib.common.defines.PROCESS_INFORMATION._fields_
+lib.common.defines.PROC_STRUCT._fields_
+lib.common.defines.STARTUPINFO._fields_
+lib.common.defines.SYSTEMTIME._fields_
+lib.common.defines.SYSTEM_INFO._fields_
+lib.common.defines.SYSTEM_INFO_UNION._fields_
+lib.common.defines.TOKEN_PRIVILEGES._fields_
+lib.common.registry.UNICODE_STRING._fields_" class="py-name" href="#" onclick="return doclink('link-115', '_fields_', 'link-71');">_fields_</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwOemId"</tt><tt class="py-op">,</tt> <tt id="link-116" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-116', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"sProcStruc"</tt><tt class="py-op">,</tt> <tt id="link-117" class="py-name" targets="Class lib.common.defines.PROC_STRUCT=lib.common.defines.PROC_STRUCT-class.html"><a title="lib.common.defines.PROC_STRUCT" class="py-name" href="#" onclick="return doclink('link-117', 'PROC_STRUCT', 'link-117');">PROC_STRUCT</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+</div><a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line"> </tt>
+<a name="SYSTEM_INFO"></a><div id="SYSTEM_INFO-def"><a name="L162"></a><tt class="py-lineno">162</tt> <a class="py-toggle" href="#" id="SYSTEM_INFO-toggle" onclick="return toggle('SYSTEM_INFO');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.defines.SYSTEM_INFO-class.html">SYSTEM_INFO</a><tt class="py-op">(</tt><tt class="py-base-class">Structure</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SYSTEM_INFO-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SYSTEM_INFO-expanded"><a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">    <tt id="link-118" class="py-name"><a title="lib.common.defines.LUID._fields_
+lib.common.defines.LUID_AND_ATTRIBUTES._fields_
+lib.common.defines.MEMORY_BASIC_INFORMATION._fields_
+lib.common.defines.PROCESS_INFORMATION._fields_
+lib.common.defines.PROC_STRUCT._fields_
+lib.common.defines.STARTUPINFO._fields_
+lib.common.defines.SYSTEMTIME._fields_
+lib.common.defines.SYSTEM_INFO._fields_
+lib.common.defines.SYSTEM_INFO_UNION._fields_
+lib.common.defines.TOKEN_PRIVILEGES._fields_
+lib.common.registry.UNICODE_STRING._fields_" class="py-name" href="#" onclick="return doclink('link-118', '_fields_', 'link-71');">_fields_</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"uSysInfo"</tt><tt class="py-op">,</tt> <tt id="link-119" class="py-name" targets="Class lib.common.defines.SYSTEM_INFO_UNION=lib.common.defines.SYSTEM_INFO_UNION-class.html"><a title="lib.common.defines.SYSTEM_INFO_UNION" class="py-name" href="#" onclick="return doclink('link-119', 'SYSTEM_INFO_UNION', 'link-119');">SYSTEM_INFO_UNION</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwPageSize"</tt><tt class="py-op">,</tt> <tt id="link-120" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-120', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"lpMinimumApplicationAddress"</tt><tt class="py-op">,</tt> <tt id="link-121" class="py-name"><a title="lib.common.defines.LPVOID" class="py-name" href="#" onclick="return doclink('link-121', 'LPVOID', 'link-13');">LPVOID</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"lpMaximumApplicationAddress"</tt><tt class="py-op">,</tt> <tt id="link-122" class="py-name"><a title="lib.common.defines.LPVOID" class="py-name" href="#" onclick="return doclink('link-122', 'LPVOID', 'link-13');">LPVOID</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwActiveProcessorMask"</tt><tt class="py-op">,</tt> <tt id="link-123" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-123', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwNumberOfProcessors"</tt><tt class="py-op">,</tt> <tt id="link-124" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-124', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwProcessorType"</tt><tt class="py-op">,</tt> <tt id="link-125" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-125', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"dwAllocationGranularity"</tt><tt class="py-op">,</tt> <tt id="link-126" class="py-name"><a title="lib.common.defines.DWORD" class="py-name" href="#" onclick="return doclink('link-126', 'DWORD', 'link-7');">DWORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"wProcessorLevel"</tt><tt class="py-op">,</tt> <tt id="link-127" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-127', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"wProcessorRevision"</tt><tt class="py-op">,</tt> <tt id="link-128" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-128', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+</div><a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"> </tt>
+<a name="SYSTEMTIME"></a><div id="SYSTEMTIME-def"><a name="L176"></a><tt class="py-lineno">176</tt> <a class="py-toggle" href="#" id="SYSTEMTIME-toggle" onclick="return toggle('SYSTEMTIME');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.defines.SYSTEMTIME-class.html">SYSTEMTIME</a><tt class="py-op">(</tt><tt class="py-base-class">Structure</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SYSTEMTIME-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SYSTEMTIME-expanded"><a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">    <tt id="link-129" class="py-name" targets="Variable lib.common.defines.SYSTEMTIME._pack_=lib.common.defines.SYSTEMTIME-class.html#_pack_"><a title="lib.common.defines.SYSTEMTIME._pack_" class="py-name" href="#" onclick="return doclink('link-129', '_pack_', 'link-129');">_pack_</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">    <tt id="link-130" class="py-name"><a title="lib.common.defines.LUID._fields_
+lib.common.defines.LUID_AND_ATTRIBUTES._fields_
+lib.common.defines.MEMORY_BASIC_INFORMATION._fields_
+lib.common.defines.PROCESS_INFORMATION._fields_
+lib.common.defines.PROC_STRUCT._fields_
+lib.common.defines.STARTUPINFO._fields_
+lib.common.defines.SYSTEMTIME._fields_
+lib.common.defines.SYSTEM_INFO._fields_
+lib.common.defines.SYSTEM_INFO_UNION._fields_
+lib.common.defines.TOKEN_PRIVILEGES._fields_
+lib.common.registry.UNICODE_STRING._fields_" class="py-name" href="#" onclick="return doclink('link-130', '_fields_', 'link-71');">_fields_</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"wYear"</tt><tt class="py-op">,</tt> <tt id="link-131" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-131', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"wMonth"</tt><tt class="py-op">,</tt> <tt id="link-132" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-132', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"wDayOfWeek"</tt><tt class="py-op">,</tt> <tt id="link-133" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-133', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"wDay"</tt><tt class="py-op">,</tt> <tt id="link-134" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-134', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"wHour"</tt><tt class="py-op">,</tt> <tt id="link-135" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-135', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"wMinute"</tt><tt class="py-op">,</tt> <tt id="link-136" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-136', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"wSecond"</tt><tt class="py-op">,</tt> <tt id="link-137" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-137', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"wMilliseconds"</tt><tt class="py-op">,</tt> <tt id="link-138" class="py-name"><a title="lib.common.defines.WORD" class="py-name" href="#" onclick="return doclink('link-138', 'WORD', 'link-6');">WORD</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+</div><a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:04 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>FAQ &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../index.html" />
+    <link rel="next" title="Introduction" href="../introduction/index.html" />
+    <link rel="prev" title="Cuckoo Sandbox Book" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../introduction/index.html" title="Introduction"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Cuckoo Sandbox Book"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="faq">
+<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
+<p>Frequently Asked Questions:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#analyze-urls"><span class="std std-ref">Can I analyze URLs with Cuckoo?</span></a></li>
+<li><a class="reference internal" href="#general-volatility"><span class="std std-ref">Can I use Volatility with Cuckoo?</span></a></li>
+<li><a class="reference internal" href="#esxi-reqs"><span class="std std-ref">What do I need to use Cuckoo with VMware ESXi?</span></a></li>
+<li><a class="reference internal" href="#troubles-upgrade"><span class="std std-ref">After upgrade Cuckoo stops to work</span></a></li>
+<li><a class="reference internal" href="#troubles-problem"><span class="std std-ref">Cuckoo stumbles and produces some error I don&#8217;t understand</span></a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="general-questions">
+<h2>General Questions<a class="headerlink" href="#general-questions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="can-i-analyze-urls-with-cuckoo">
+<span id="analyze-urls"></span><h3>Can I analyze URLs with Cuckoo?<a class="headerlink" href="#can-i-analyze-urls-with-cuckoo" title="Permalink to this headline">¶</a></h3>
+<p>Yes you can. Since version 0.5 URLs are natively supported by Cuckoo.
+Additional details on how URL submissions is documented <span class="xref doc">../usage/submit.html#submission-utility</span>.</p>
+<blockquote>
+<div>$ ./utils/submit.py &#8211;url <a class="reference external" href="http://www.example.com">http://www.example.com</a></div></blockquote>
+</div>
+<div class="section" id="can-i-use-volatility-with-cuckoo">
+<span id="general-volatility"></span><h3>Can I use Volatility with Cuckoo?<a class="headerlink" href="#can-i-use-volatility-with-cuckoo" title="Permalink to this headline">¶</a></h3>
+<p>Cuckoo 0.5 introduces support for optional full memory dumps, which are created at
+the end of the analysis process. You can use these memory dumps to perform additional
+memory forensic analysis with <a class="reference external" href="http://code.google.com/p/volatility/">Volatility</a>.</p>
+<p>Please also consider that we don&#8217;t particularly encourage this: since Cuckoo employs
+some rootkit-like technologies to perform its operations, the results of a forensic
+analysis would be polluted by the sandbox&#8217;s components.</p>
+</div>
+<div class="section" id="what-do-i-need-to-use-cuckoo-with-vmware-esxi">
+<span id="esxi-reqs"></span><h3>What do I need to use Cuckoo with VMware ESXi?<a class="headerlink" href="#what-do-i-need-to-use-cuckoo-with-vmware-esxi" title="Permalink to this headline">¶</a></h3>
+<p>To run with VMware vSphere Hypervisor (or ESXi) Cuckoo leverages libvirt.
+Libivirt is currently using the VMware API to take control over virtual machines,
+though these APIs are available only in the licensed version.
+In VMware vSphere free edition, these APIs are read only, so you are unable
+to use Cuckoo with it.
+For the minimum license needed, please have a look at VMware website.</p>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="after-upgrade-cuckoo-stops-to-work">
+<span id="troubles-upgrade"></span><h3>After upgrade Cuckoo stops to work<a class="headerlink" href="#after-upgrade-cuckoo-stops-to-work" title="Permalink to this headline">¶</a></h3>
+<p>Probably you upgraded it in a wrong way.
+It&#8217;s not a good practice to rewrite the files due to Cuckoo&#8217;s complexity and
+quick evolution.</p>
+<p>Please follow the upgrade steps described in <a class="reference internal" href="../installation/upgrade.html"><span class="doc">Upgrade from a previous release</span></a>.</p>
+</div>
+<div class="section" id="cuckoo-stumbles-and-produces-some-error-i-don-t-understand">
+<span id="troubles-problem"></span><h3>Cuckoo stumbles and produces some error I don&#8217;t understand<a class="headerlink" href="#cuckoo-stumbles-and-produces-some-error-i-don-t-understand" title="Permalink to this headline">¶</a></h3>
+<p>Cuckoo is a mature but always evolving project, it&#8217;s possible that
+you encounter some problems while running it, but before you rush into
+sending emails to everyone make sure you read what follows.</p>
+<p>Cuckoo is not meant to be a point-and-click tool: it&#8217;s designed to be a highly
+customizable and configurable solution for somewhat experienced users and
+malware analysts.</p>
+<p>It requires you to have a decent understanding of your operating systems, Python,
+the concepts behind virtualization and sandboxing.
+We try to make it as easy to use as possible, but you have to keep in mind that
+it&#8217;s not a technology meant to be accessible to just anyone.</p>
+<p>That being said, if a problem occurs you have to make sure that you did everything
+you could before asking for time and effort from our developers and users.
+We just can&#8217;t help everyone, we have limited time and it has to be dedicated to
+the development and fixing of actual bugs.</p>
+<blockquote>
+<div><ul class="simple">
+<li>We have extensive documentation, read it carefully. You can&#8217;t just skip parts
+of it.</li>
+<li>We have a mailing list archive, search through it for previous threads where
+your same problem could have been already addressed and solved.</li>
+<li>We have a <a class="reference external" href="https://community.cuckoosandbox.org">Community</a> platform for asking questions, use it.</li>
+<li>We have lot of users producing content on Internet, <a class="reference external" href="http://www.google.com">Google</a> it.</li>
+<li>Spend some of your own time trying fixing the issues before asking ours, you
+might even get to learn and understand Cuckoo better.</li>
+</ul>
+</div></blockquote>
+<p>Long story short: use the existing resources, put some efforts into it and don&#8217;t
+abuse people.</p>
+<p>If you still can&#8217;t figure out your problem, you can ask help on our online communities
+(see <a class="reference internal" href="../finalremarks/index.html"><span class="doc">Final Remarks</span></a>).
+Make sure when you ask for help to:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Use a clear and explicit title for your emails: &#8220;I have a problem&#8221;, &#8220;Help me&#8221; or
+&#8220;Cuckoo error&#8221; are <strong>NOT</strong> good titles.</li>
+<li>Explain <strong>in details</strong> what you&#8217;re experiencing. Try to reproduce several
+times your issue and write down all steps to achieve that.</li>
+<li>Use no-paste services and link your logs, configuration files and details on your
+setup.</li>
+<li>Eventually provide a copy of the analysis that generated the problem.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="check-and-restore-current-snapshot-with-kvm">
+<h3>Check and restore current snapshot with KVM<a class="headerlink" href="#check-and-restore-current-snapshot-with-kvm" title="Permalink to this headline">¶</a></h3>
+<p>If something goes wrong with virtual machine it&#8217;s best practice to check current snapshot
+status.
+You can do that with the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ virsh snapshot-current &quot;&lt;Name of VM&gt;&quot;
+</pre></div>
+</div>
+<p>If you got a long XML as output your current snapshot is configured and you can skip
+the rest of this chapter; anyway if you got an error like the following your current
+snapshot is broken:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ virsh snapshot-current &quot;&lt;Name of VM&gt;&quot;
+error: domain &#39;&lt;Name of VM&gt;&#39; has no current snapshot
+</pre></div>
+</div>
+<p>To fix and create a current snapshot first list all machine&#8217;s snapshots:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ virsh snapshot-list &quot;&lt;Name of VM&gt;&quot;
+ Name                 Creation Time             State
+ ------------------------------------------------------------
+ 1339506531           2012-06-12 15:08:51 +0200 running
+</pre></div>
+</div>
+<p>Choose one snapshot name and set it as current:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ snapshot-current &quot;&lt;Name of VM&gt;&quot; --snapshotname 1339506531
+Snapshot 1339506531 set as current
+</pre></div>
+</div>
+<p>Now the virtual machine state is fixed.</p>
+</div>
+<div class="section" id="check-and-restore-current-snapshot-with-virtualbox">
+<h3>Check and restore current snapshot with VirtualBox<a class="headerlink" href="#check-and-restore-current-snapshot-with-virtualbox" title="Permalink to this headline">¶</a></h3>
+<p>If something goes wrong with virtual it&#8217;s best practice to check the virtual machine
+status and the current snapshot.
+First of all check the virtual machine status with the following:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ VBoxManage showvminfo &quot;&lt;Name of VM&gt;&quot; | grep State
+State:           powered off (since 2012-06-27T22:03:57.000000000)
+</pre></div>
+</div>
+<p>If the state is &#8220;powered off&#8221; you can go ahead with the next check, if the state is
+&#8220;aborted&#8221; or something else you have to restore it to &#8220;powered off&#8221; before:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ VBoxManage controlvm &quot;&lt;Name of VM&gt;&quot; poweroff
+</pre></div>
+</div>
+<p>With the following check the current snapshots state:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ VBoxManage snapshot &quot;&lt;Name of VM&gt;&quot; list --details
+Name: s1 (UUID: 90828a77-72f4-4a5e-b9d3-bb1fdd4cef5f)
+Name: s2 (UUID: 97838e37-9ca4-4194-a041-5e9a40d6c205) *
+</pre></div>
+</div>
+<p>If you have a snapshot marked with a star &#8220;*&#8221; your snapshot is ready, anyway
+you have to restore the current snapshot:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ VBoxManage snapshot &quot;&lt;Name of VM&gt;&quot; restorecurrent
+</pre></div>
+</div>
+</div>
+<div class="section" id="unable-to-bind-result-server-error">
+<h3>Unable to bind result server error<a class="headerlink" href="#unable-to-bind-result-server-error" title="Permalink to this headline">¶</a></h3>
+<p>At Cuckoo startup if you get an error message like this one:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">2014</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">07</span> <span class="mi">18</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="mi">686</span> <span class="p">[</span><span class="n">root</span><span class="p">]</span> <span class="n">CRITICAL</span><span class="p">:</span> <span class="n">CuckooCriticalError</span><span class="p">:</span> <span class="n">Unable</span> <span class="n">to</span> <span class="n">bind</span> <span class="n">result</span> <span class="n">server</span> <span class="n">on</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">56.1</span><span class="p">:</span><span class="mi">2042</span><span class="p">:</span> <span class="p">[</span><span class="n">Errno</span> <span class="mi">99</span><span class="p">]</span> <span class="n">Cannot</span> <span class="n">assign</span> <span class="n">requested</span> <span class="n">address</span>
+</pre></div>
+</div>
+<p>It means that Cuckoo is unable to start the result server on the IP address written
+in cuckoo.conf (or in machinery.conf if you are using the resultserver_ip option inside).
+This usually happen when you start Cuckoo without bringing up the virtual interface associated
+with the result server IP address.
+You can bring it up manually, it depends from one virtualization software to another, but
+if you don&#8217;t know how to do, a good trick is to manually start and stop an analysis virtual
+machine, this will bring virtual networking up.</p>
+<p>In the case of VirtualBox the hostonly interface <cite>vboxnet0</cite> can be created as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span># If the hostonly interface vboxnet0 does not exist already.
+$ VBoxManage hostonlyif create
+
+# Configure vboxnet0.
+$ VBoxManage hostonlyif ipconfig vboxnet0 --ip 192.168.56.1 --netmask 255.255.255.0
+</pre></div>
+</div>
+</div>
+<div class="section" id="error-during-template-rendering">
+<h3>Error during template rendering<a class="headerlink" href="#error-during-template-rendering" title="Permalink to this headline">¶</a></h3>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.0-rc1.</span></p>
+</div>
+<p>In our 2.0-rc1 release a bug was introduced that looks as follows in the
+screenshot below. In order to resolve this issue in your local setup, please
+open the <code class="docutils literal"><span class="pre">web/analysis/urls.py</span></code> file and modify the 21st line by adding an
+underscore as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span>        <span class="s2">&quot;/(?P&lt;ip&gt;[\d\.]+)?/(?P&lt;host&gt;[a-zA-Z0-9-\.]+)?&quot;</span>
+<span class="o">+</span>        <span class="s2">&quot;/(?P&lt;ip&gt;[\d\.]+)?/(?P&lt;host&gt;[ a-zA-Z0-9-_\.]+)?&quot;</span>
+</pre></div>
+</div>
+<p>The official fixes for this issue can be found in the <a class="reference external" href="https://github.com/cuckoosandbox/cuckoo/commit/9c704f50e70227ed21ae1b79ba90540c3087fc57">following</a> <a class="reference external" href="https://github.com/cuckoosandbox/cuckoo/commit/558ded1787bc3377c404ac14a0b3fdce37b49bf4">commits</a>.</p>
+<img alt="../_images/error_template_rendering.png" src="../_images/error_template_rendering.png" />
+</div>
+<div class="section" id="unsupported-method-get">
+<h3>501 Unsupported Method (&#8216;GET&#8217;)<a class="headerlink" href="#unsupported-method-get" title="Permalink to this headline">¶</a></h3>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 2.0-rc1.</span></p>
+</div>
+<p>Since 2.0-rc1 Cuckoo supports both the <a class="reference external" href="https://github.com/cuckoosandbox/cuckoo/blob/master/agent/agent.py">legacy Cuckoo Agent</a> as well as a
+<a class="reference external" href="https://github.com/jbremer/agent/blob/master/agent.py">new, REST API-based, Cuckoo Agent</a> for communication between the Guest and
+the Host machine. The new <code class="docutils literal"><span class="pre">Cuckoo</span> <span class="pre">Agent</span></code> is an improved Agent in the sense
+that it also allows usage outside of Cuckoo. As an example, it is used
+extensively by <a class="reference external" href="https://github.com/jbremer/vmcloak">VMCloak</a> in order to automatically create, configure, and
+cloak Virtual Machines.</p>
+<p>Now in order to determine whether the Cuckoo Host is talking to the legacy or
+new <code class="docutils literal"><span class="pre">Cuckoo</span> <span class="pre">Agent</span></code> it does a <code class="docutils literal"><span class="pre">HTTP</span> <span class="pre">GET</span></code> request to the root path (<code class="docutils literal"><span class="pre">/</span></code>).
+The legacy Cuckoo Agent, which is based on <code class="docutils literal"><span class="pre">xmlrpc</span></code>, doesn&#8217;t handle that
+specific route and therefore returns an error, <code class="docutils literal"><span class="pre">501</span> <span class="pre">Unsupported</span> <span class="pre">method</span></code>.</p>
+<p>Having said that, the message is not actually an error, it is simply Cuckoo
+trying to determine to which version of the <code class="docutils literal"><span class="pre">Cuckoo</span> <span class="pre">Agent</span></code> it is talking.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It should be noted that even though there is a new <code class="docutils literal"><span class="pre">Cuckoo</span> <span class="pre">Agent</span></code>
+available, backwards compatibility for the legacy <code class="docutils literal"><span class="pre">Cuckoo</span> <span class="pre">Agent</span></code> is
+still available and working properly.</p>
+</div>
+<img alt="../_images/unsupported_method.png" src="../_images/unsupported_method.png" />
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">FAQ</a><ul>
+<li><a class="reference internal" href="#general-questions">General Questions</a><ul>
+<li><a class="reference internal" href="#can-i-analyze-urls-with-cuckoo">Can I analyze URLs with Cuckoo?</a></li>
+<li><a class="reference internal" href="#can-i-use-volatility-with-cuckoo">Can I use Volatility with Cuckoo?</a></li>
+<li><a class="reference internal" href="#what-do-i-need-to-use-cuckoo-with-vmware-esxi">What do I need to use Cuckoo with VMware ESXi?</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#after-upgrade-cuckoo-stops-to-work">After upgrade Cuckoo stops to work</a></li>
+<li><a class="reference internal" href="#cuckoo-stumbles-and-produces-some-error-i-don-t-understand">Cuckoo stumbles and produces some error I don&#8217;t understand</a></li>
+<li><a class="reference internal" href="#check-and-restore-current-snapshot-with-kvm">Check and restore current snapshot with KVM</a></li>
+<li><a class="reference internal" href="#check-and-restore-current-snapshot-with-virtualbox">Check and restore current snapshot with VirtualBox</a></li>
+<li><a class="reference internal" href="#unable-to-bind-result-server-error">Unable to bind result server error</a></li>
+<li><a class="reference internal" href="#error-during-template-rendering">Error during template rendering</a></li>
+<li><a class="reference internal" href="#unsupported-method-get">501 Unsupported Method (&#8216;GET&#8217;)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Cuckoo Sandbox Book</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../introduction/index.html"
+                        title="next chapter">Introduction</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/faq/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../introduction/index.html" title="Introduction"
+             >next</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Cuckoo Sandbox Book"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

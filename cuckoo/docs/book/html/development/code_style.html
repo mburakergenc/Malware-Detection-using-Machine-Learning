@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Coding Style &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../index.html" />
+    <link rel="up" title="Development" href="index.html" />
+    <link rel="next" title="Final Remarks" href="../finalremarks/index.html" />
+    <link rel="prev" title="Development Notes" href="development_notes.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../finalremarks/index.html" title="Final Remarks"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="development_notes.html" title="Development Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Development</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="coding-style">
+<h1>Coding Style<a class="headerlink" href="#coding-style" title="Permalink to this headline">¶</a></h1>
+<p>In order to contribute code to the project, you must diligently follow the
+style rules describe in this chapter. Having a clean and structured code is
+very important for our development lifecycle, and not compliant code will
+most likely be rejected.</p>
+<p>Essentially Cuckoo&#8217;s code style is based on <a class="reference external" href="http://www.python.org/dev/peps/pep-0008/">PEP 8 - Style Guide for Python Code</a> and <a class="reference external" href="http://www.python.org/dev/peps/pep-0257/">PEP 257 &#8211; Docstring
+Conventions</a>.</p>
+<div class="section" id="formatting">
+<h2>Formatting<a class="headerlink" href="#formatting" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="copyright-header">
+<h3>Copyright header<a class="headerlink" href="#copyright-header" title="Permalink to this headline">¶</a></h3>
+<p>All source code files must start with the following copyright header:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Copyright (C) 2010-2013 Claudio Guarnieri.</span>
+<span class="c1"># Copyright (C) 2014-2016 Cuckoo Foundation.</span>
+<span class="c1"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</span>
+<span class="c1"># See the file &#39;docs/LICENSE&#39; for copying permission.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="indentation">
+<h3>Indentation<a class="headerlink" href="#indentation" title="Permalink to this headline">¶</a></h3>
+<p>The code must have a 4-spaces-tabs indentation.
+Since Python enforce the indentation, make sure to configure your editor
+properly or your code might cause malfunctioning.</p>
+</div>
+<div class="section" id="maximum-line-length">
+<h3>Maximum Line Length<a class="headerlink" href="#maximum-line-length" title="Permalink to this headline">¶</a></h3>
+<p>Limit all lines to a maximum of 79 characters.</p>
+</div>
+<div class="section" id="blank-lines">
+<h3>Blank Lines<a class="headerlink" href="#blank-lines" title="Permalink to this headline">¶</a></h3>
+<p>Separate the class definition and the top level function with one blank line.
+Methods definitions inside a class are separated by a single blank line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyClass</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Doing something.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">do_it</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">what</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Do it.</span>
+<span class="sd">        @param what: do what.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Use blank lines in functions, sparingly, to isolate logic sections.
+Import blocks are separated by a single blank line, import blocks are separated
+from classes by one blank line.</p>
+</div>
+<div class="section" id="imports">
+<h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
+<p>Imports must be on separate lines. If you&#8217;re importing multiple objects from a
+package, use a single line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lib</span> <span class="k">import</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span>
+</pre></div>
+</div>
+<p><strong>NOT</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lib</span> <span class="k">import</span> <span class="n">a</span>
+<span class="kn">from</span> <span class="nn">lib</span> <span class="k">import</span> <span class="n">b</span>
+<span class="kn">from</span> <span class="nn">lib</span> <span class="k">import</span> <span class="n">c</span>
+</pre></div>
+</div>
+<p>Always specify explicitly the objects to import:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lib</span> <span class="k">import</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span>
+</pre></div>
+</div>
+<p><strong>NOT</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lib</span> <span class="k">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="strings">
+<h3>Strings<a class="headerlink" href="#strings" title="Permalink to this headline">¶</a></h3>
+<p>Strings must be delimited by double quotes (&#8221;).</p>
+</div>
+<div class="section" id="printing-and-logging">
+<h3>Printing and Logging<a class="headerlink" href="#printing-and-logging" title="Permalink to this headline">¶</a></h3>
+<p>We discourage the use of <code class="docutils literal"><span class="pre">print()</span></code>: if you need to log an event please use
+Python&#8217;s <code class="docutils literal"><span class="pre">logging</span></code> which is already initialized by Cuckoo.</p>
+<p>In your module add:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And use the <code class="docutils literal"><span class="pre">log</span></code> handle, for more details refer to the Python documentation.</p>
+<p>In case you really need to print a string to standard output, use the
+<code class="docutils literal"><span class="pre">print()</span></code> function:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>NOT</strong> the statement:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="s2">&quot;foo&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="checking-for-keys-in-data-structures">
+<h3>Checking for keys in data structures<a class="headerlink" href="#checking-for-keys-in-data-structures" title="Permalink to this headline">¶</a></h3>
+<p>When checking for a key in a data structure use the clause &#8220;in&#8221; instead of
+methods like &#8220;has_key()&#8221;, for example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s2">&quot;bar&quot;</span> <span class="ow">in</span> <span class="n">foo</span><span class="p">:</span>
+    <span class="n">do_something</span><span class="p">(</span><span class="n">foo</span><span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
+<p>Custom exceptions must be defined in the <em>lib/cuckoo/common/exceptions.py</em> file
+or in the local module if the exception should not be global.</p>
+<p>The following is the current Cuckoo exceptions chain:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>.-- CuckooCriticalError
+|   |-- CuckooStartupError
+|   |-- CuckooDatabaseError
+|   |-- CuckooMachineError
+|   `-- CuckooDependencyError
+|-- CuckooOperationalError
+|   |-- CuckooAnalysisError
+|   |-- CuckooProcessingError
+|   `-- CuckooReportError
+`-- CuckooGuestError
+</pre></div>
+</div>
+<p>Beware that the use of <code class="docutils literal"><span class="pre">CuckooCriticalError</span></code> and its child exceptions will
+cause Cuckoo to terminate.</p>
+<div class="section" id="naming">
+<h3>Naming<a class="headerlink" href="#naming" title="Permalink to this headline">¶</a></h3>
+<p>Custom exception names must start with &#8220;Cuckoo&#8221; and end with &#8220;Error&#8221; if it
+represents an unexpected malfunction.</p>
+</div>
+<div class="section" id="exception-handling">
+<h3>Exception handling<a class="headerlink" href="#exception-handling" title="Permalink to this headline">¶</a></h3>
+<p>When catching an exception and accessing its handle, use <code class="docutils literal"><span class="pre">as</span> <span class="pre">e</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">foo</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>NOT</strong>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">foo</span><span class="p">()</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">something</span><span class="p">:</span>
+    <span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It&#8217;s a good practice use &#8220;e&#8221; instead of &#8220;e.message&#8221;.</p>
+</div>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>All code must be documented in docstring format, see <a class="reference external" href="http://www.python.org/dev/peps/pep-0257/">PEP 257 &#8211; Docstring
+Conventions</a>.
+Additional comments may be added in logical blocks to make the code easier to understand.</p>
+</div>
+<div class="section" id="automated-testing">
+<h2>Automated testing<a class="headerlink" href="#automated-testing" title="Permalink to this headline">¶</a></h2>
+<p>We believe in automated testing to provide high quality code and avoid dumb
+bugs.
+When possible, all code must be committed with proper unit tests. Particular
+attention must be placed when fixing bugs: it&#8217;s good practice to write unit
+tests to reproduce the bug.
+All unit tests and fixtures are placed in the tests folder in the Cuckoo
+root.
+We adopted <a class="reference external" href="http://nose.readthedocs.org/en/latest/">Nose</a> as unit testing framework.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Coding Style</a><ul>
+<li><a class="reference internal" href="#formatting">Formatting</a><ul>
+<li><a class="reference internal" href="#copyright-header">Copyright header</a></li>
+<li><a class="reference internal" href="#indentation">Indentation</a></li>
+<li><a class="reference internal" href="#maximum-line-length">Maximum Line Length</a></li>
+<li><a class="reference internal" href="#blank-lines">Blank Lines</a></li>
+<li><a class="reference internal" href="#imports">Imports</a></li>
+<li><a class="reference internal" href="#strings">Strings</a></li>
+<li><a class="reference internal" href="#printing-and-logging">Printing and Logging</a></li>
+<li><a class="reference internal" href="#checking-for-keys-in-data-structures">Checking for keys in data structures</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a><ul>
+<li><a class="reference internal" href="#naming">Naming</a></li>
+<li><a class="reference internal" href="#exception-handling">Exception handling</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#automated-testing">Automated testing</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="development_notes.html"
+                        title="previous chapter">Development Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../finalremarks/index.html"
+                        title="next chapter">Final Remarks</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/development/code_style.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../finalremarks/index.html" title="Final Remarks"
+             >next</a></li>
+        <li class="right" >
+          <a href="development_notes.html" title="Development Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Development</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

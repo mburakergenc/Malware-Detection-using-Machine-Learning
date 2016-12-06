@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lib.cuckoo.core.scheduler.AnalysisManager</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lib-module.html">Package&nbsp;lib</a> ::
+        <a href="lib.cuckoo-module.html">Package&nbsp;cuckoo</a> ::
+        <a href="lib.cuckoo.core-module.html">Package&nbsp;core</a> ::
+        <a href="lib.cuckoo.core.scheduler-module.html">Module&nbsp;scheduler</a> ::
+        Class&nbsp;AnalysisManager
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lib.cuckoo.core.scheduler.AnalysisManager-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class AnalysisManager</h1><p class="nomargin-top"><span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+        object --+        
+                 |        
+threading._Verbose --+    
+                     |    
+      threading.Thread --+
+                         |
+                        <strong class="uidshort">AnalysisManager</strong>
+</pre>
+
+<hr />
+<p>Analysis Manager.</p>
+  <p>This class handles the full analysis process for a given task. It 
+  takes care of selecting the analysis machine, preparing the configuration
+  and interacting with the guest agent and analyzer components to launch 
+  and complete the analysis and store, process and report its results.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lib.cuckoo.core.scheduler.AnalysisManager-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">task_id</span>,
+        <span class="summary-sig-arg">error_queue</span>)</span><br />
+      This constructor should always be called with keyword arguments.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="init_storage"></a><span class="summary-sig-name">init_storage</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Initialize analysis storage folder.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.init_storage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="check_permissions"></a><span class="summary-sig-name">check_permissions</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Checks if we have permissions to access the file to be analyzed.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.check_permissions">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="check_file"></a><span class="summary-sig-name">check_file</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Checks the integrity of the file to be analyzed.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.check_file">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="store_file"></a><span class="summary-sig-name">store_file</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Store a copy of the file being analyzed.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.store_file">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="store_task_info"></a><span class="summary-sig-name">store_task_info</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      grab latest task from db (if available) and update self.task</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.store_task_info">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="acquire_machine"></a><span class="summary-sig-name">acquire_machine</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Acquire an analysis machine from the pool of available ones.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.acquire_machine">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lib.cuckoo.core.scheduler.AnalysisManager-class.html#build_options" class="summary-sig-name">build_options</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Generate analysis options.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.build_options">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="route_network"></a><span class="summary-sig-name">route_network</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Enable network routing if desired.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.route_network">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="unroute_network"></a><span class="summary-sig-name">unroute_network</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.unroute_network">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lib.cuckoo.core.scheduler.AnalysisManager-class.html#wait_finish" class="summary-sig-name">wait_finish</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Some VMs don't have an actual agent.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.wait_finish">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="guest_manage"></a><span class="summary-sig-name">guest_manage</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">options</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.guest_manage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="launch_analysis"></a><span class="summary-sig-name">launch_analysis</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Start analysis.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.launch_analysis">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="process_results"></a><span class="summary-sig-name">process_results</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Process the analysis results and generate the enabled reports.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.process_results">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="lib.cuckoo.core.scheduler.AnalysisManager-class.html#run" class="summary-sig-name">run</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Run manager thread.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.run">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>threading.Thread</code></b>:
+      <code>__repr__</code>,
+      <code>daemon</code>,
+      <code>getName</code>,
+      <code>ident</code>,
+      <code>isAlive</code>,
+      <code>isDaemon</code>,
+      <code>is_alive</code>,
+      <code>join</code>,
+      <code>name</code>,
+      <code>setDaemon</code>,
+      <code>setName</code>,
+      <code>start</code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>threading.Thread</code></b> (private):
+      <code>_block</code>,
+      <code>_reset_internal_locks</code>,
+      <code>_set_daemon</code>,
+      <code>_set_ident</code>
+      </p></div>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code>threading._Verbose</code></b> (private):
+      <code>_note</code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="__init__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">task_id</span>,
+        <span class="sig-arg">error_queue</span>)</span>
+    <br /><em class="fname">(Constructor)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.__init__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This constructor should always be called with keyword arguments. 
+  Arguments are:</p>
+  <p>*group* should be None; reserved for future extension when a 
+  ThreadGroup class is implemented.</p>
+  <p>*target* is the callable object to be invoked by the run() method. 
+  Defaults to None, meaning nothing is called.</p>
+  <p>*name* is the thread name. By default, a unique name is constructed of
+  the form &quot;Thread-N&quot; where N is a small decimal number.</p>
+  <p>*args* is the argument tuple for the target invocation. Defaults to 
+  ().</p>
+  <p>*kwargs* is a dictionary of keyword arguments for the target 
+  invocation. Defaults to {}.</p>
+  <p>If a subclass overrides the constructor, it must make sure to invoke 
+  the base class constructor (Thread.__init__()) before doing anything else
+  to the thread.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>task</code></strong> - task object containing the details for the analysis.</li>
+    </ul></dd>
+    <dt>Overrides:
+        object.__init__
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="build_options"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">build_options</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.build_options">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Generate analysis options.</p>
+  <dl class="fields">
+    <dt>Returns:</dt>
+        <dd>options dict.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="wait_finish"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">wait_finish</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.wait_finish">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Some VMs don't have an actual agent. Mainly those that are used as 
+  assistance for an analysis through the services auxiliary module. This 
+  method just waits until the analysis is finished rather than actively 
+  trying to engage with the Cuckoo Agent.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="run"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">run</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="lib.cuckoo.core.scheduler-pysrc.html#AnalysisManager.run">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Run manager thread.</p>
+  <dl class="fields">
+    <dt>Overrides:
+        threading.Thread.run
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:21:58 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.auxiliary.reboot</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.auxiliary-module.html">Package&nbsp;auxiliary</a> ::
+        Module&nbsp;reboot
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.auxiliary.reboot-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.auxiliary.reboot-module.html">Module modules.auxiliary.reboot</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2016 Cuckoo Foundation.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">json</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.common=lib.common-module.html"><a title="lib.common" class="py-name" href="#" onclick="return doclink('link-1', 'common', 'link-1');">common</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module lib.common.abstracts=lib.common.abstracts-module.html"><a title="lib.common.abstracts" class="py-name" href="#" onclick="return doclink('link-2', 'abstracts', 'link-2');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class lib.common.abstracts.Auxiliary=lib.common.abstracts.Auxiliary-class.html"><a title="lib.common.abstracts.Auxiliary" class="py-name" href="#" onclick="return doclink('link-3', 'Auxiliary', 'link-3');">Auxiliary</a></tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-4', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name"><a title="lib.common" class="py-name" href="#" onclick="return doclink('link-5', 'common', 'link-1');">common</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module lib.common.registry=lib.common.registry-module.html"><a title="lib.common.registry" class="py-name" href="#" onclick="return doclink('link-6', 'registry', 'link-6');">registry</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Function lib.common.registry.set_regkey_full()=lib.common.registry-module.html#set_regkey_full"><a title="lib.common.registry.set_regkey_full" class="py-name" href="#" onclick="return doclink('link-7', 'set_regkey_full', 'link-7');">set_regkey_full</a></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable lib.api.process.log=lib.api.process-module.html#log,Variable lib.common.registry.log=lib.common.registry-module.html#log,Variable lib.common.results.log=lib.common.results-module.html#log,Variable lib.core.pipe.log=lib.core.pipe-module.html#log,Variable lib.core.startup.log=lib.core.startup-module.html#log,Variable modules.auxiliary.disguise.log=modules.auxiliary.disguise-module.html#log,Variable modules.auxiliary.human.log=modules.auxiliary.human-module.html#log,Variable modules.auxiliary.installcert.log=modules.auxiliary.installcert-module.html#log,Variable modules.auxiliary.reboot.log=modules.auxiliary.reboot-module.html#log,Variable modules.auxiliary.recentfiles.log=modules.auxiliary.recentfiles-module.html#log,Variable modules.auxiliary.screenshots.log=modules.auxiliary.screenshots-module.html#log,Variable modules.packages.ie.log=modules.packages.ie-module.html#log,Variable modules.packages.js.log=modules.packages.js-module.html#log,Variable modules.packages.pdf.log=modules.packages.pdf-module.html#log,Variable modules.packages.reboot.log=modules.packages.reboot-module.html#log,Variable modules.packages.wsf.log=modules.packages.wsf-module.html#log,Variable modules.packages.zip.log=modules.packages.zip-module.html#log"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-8', 'log', 'link-8');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-name">__name__</tt><tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="Reboot"></a><div id="Reboot-def"><a name="L14"></a><tt class="py-lineno">14</tt> <a class="py-toggle" href="#" id="Reboot-toggle" onclick="return toggle('Reboot');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.auxiliary.reboot.Reboot-class.html">Reboot</a><tt class="py-op">(</tt><tt class="py-base-class">Auxiliary</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Reboot-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Reboot-expanded"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">    <tt class="py-docstring">"""Prepares the environment to behave as if the VM has been rebooted."""</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="Reboot.start"></a><div id="Reboot.start-def"><a name="L17"></a><tt class="py-lineno">17</tt> <a class="py-toggle" href="#" id="Reboot.start-toggle" onclick="return toggle('Reboot.start');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.auxiliary.reboot.Reboot-class.html#start">start</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Reboot.start-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Reboot.start-expanded"><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">analyzer</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Variable lib.api.process.Process.config=lib.api.process.Process-class.html#config,Module lib.core.config=lib.core.config-module.html"><a title="lib.api.process.Process.config
+lib.core.config" class="py-name" href="#" onclick="return doclink('link-9', 'config', 'link-9');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">package</tt> <tt class="py-op">!=</tt> <tt class="py-string">"reboot"</tt><tt class="py-op">:</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">reboot_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">analyzer</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">,</tt> <tt class="py-string">"reboot.json"</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">line</tt> <tt class="py-keyword">in</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">reboot_path</tt><tt class="py-op">,</tt> <tt class="py-string">"rb"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">            <tt class="py-name">event</tt> <tt class="py-op">=</tt> <tt class="py-name">json</tt><tt class="py-op">.</tt><tt class="py-name">loads</tt><tt class="py-op">(</tt><tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">hasattr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-string">"_handle_%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">event</tt><tt class="py-op">[</tt><tt class="py-string">"category"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                <tt id="link-10" class="py-name"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-10', 'log', 'link-8');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">                    <tt class="py-string">"Unable to handle reboot event with name %s as it has "</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                    <tt class="py-string">"not yet been implemented."</tt><tt class="py-op">,</tt> <tt class="py-name">event</tt><tt class="py-op">[</tt><tt class="py-string">"category"</tt><tt class="py-op">]</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">                <tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">                <tt class="py-keyword">continue</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">            <tt class="py-name">getattr</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-string">"_handle_%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">event</tt><tt class="py-op">[</tt><tt class="py-string">"category"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt class="py-name">event</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"> </tt>
+<a name="Reboot._handle_regkey_written"></a><div id="Reboot._handle_regkey_written-def"><a name="L34"></a><tt class="py-lineno">34</tt> <a class="py-toggle" href="#" id="Reboot._handle_regkey_written-toggle" onclick="return toggle('Reboot._handle_regkey_written');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.auxiliary.reboot.Reboot-class.html#_handle_regkey_written">_handle_regkey_written</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Reboot._handle_regkey_written-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Reboot._handle_regkey_written-expanded"><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-name">regkey</tt><tt class="py-op">,</tt> <tt class="py-name">type_</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">event</tt><tt class="py-op">[</tt><tt class="py-string">"args"</tt><tt class="py-op">]</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt id="link-11" class="py-name"><a title="lib.common.registry.set_regkey_full" class="py-name" href="#" onclick="return doclink('link-11', 'set_regkey_full', 'link-7');">set_regkey_full</a></tt><tt class="py-op">(</tt><tt class="py-name">regkey</tt><tt class="py-op">,</tt> <tt class="py-name">type_</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="Reboot._handle_create_process"></a><div id="Reboot._handle_create_process-def"><a name="L38"></a><tt class="py-lineno">38</tt> <a class="py-toggle" href="#" id="Reboot._handle_create_process-toggle" onclick="return toggle('Reboot._handle_create_process');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.auxiliary.reboot.Reboot-class.html#_handle_create_process">_handle_create_process</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">event</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Reboot._handle_create_process-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Reboot._handle_create_process-expanded"><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">analyzer</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Module modules.auxiliary.reboot=modules.auxiliary.reboot-module.html,Module modules.packages.reboot=modules.packages.reboot-module.html"><a title="modules.auxiliary.reboot
+modules.packages.reboot" class="py-name" href="#" onclick="return doclink('link-12', 'reboot', 'link-12');">reboot</a></tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">event</tt><tt class="py-op">[</tt><tt class="py-string">"category"</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">event</tt><tt class="py-op">[</tt><tt class="py-string">"args"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:04 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

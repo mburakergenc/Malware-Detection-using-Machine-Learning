@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lib.common.rand</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lib-module.html">Package&nbsp;lib</a> ::
+        <a href="lib.common-module.html">Package&nbsp;common</a> ::
+        Module&nbsp;rand
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lib.common.rand-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lib.common.rand-module.html">Module lib.common.rand</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">random</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">string</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
+<a name="random_string"></a><div id="random_string-def"><a name="L4"></a><tt class="py-lineno"> 4</tt> <a class="py-toggle" href="#" id="random_string-toggle" onclick="return toggle('random_string');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.rand-module.html#random_string">random_string</a><tt class="py-op">(</tt><tt class="py-param">minimum</tt><tt class="py-op">,</tt> <tt class="py-param">maximum</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="random_string-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="random_string-expanded"><a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">maximum</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line">        <tt class="py-name">maximum</tt> <tt class="py-op">=</tt> <tt class="py-name">minimum</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">    <tt class="py-name">count</tt> <tt class="py-op">=</tt> <tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">randint</tt><tt class="py-op">(</tt><tt class="py-name">minimum</tt><tt class="py-op">,</tt> <tt class="py-name">maximum</tt><tt class="py-op">)</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">""</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">choice</tt><tt class="py-op">(</tt><tt class="py-name">string</tt><tt class="py-op">.</tt><tt class="py-name">ascii_letters</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt class="py-name">xrange</tt><tt class="py-op">(</tt><tt class="py-name">count</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"> </tt>
+<a name="random_integer"></a><div id="random_integer-def"><a name="L11"></a><tt class="py-lineno">11</tt> <a class="py-toggle" href="#" id="random_integer-toggle" onclick="return toggle('random_integer');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.rand-module.html#random_integer">random_integer</a><tt class="py-op">(</tt><tt class="py-param">digits</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="random_integer-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="random_integer-expanded"><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt id="link-0" class="py-name" targets="Method lib.common.abstracts.Package.start()=lib.common.abstracts.Package-class.html#start,Method modules.auxiliary.disguise.Disguise.start()=modules.auxiliary.disguise.Disguise-class.html#start,Method modules.auxiliary.dumptls.DumpTLSMasterSecrets.start()=modules.auxiliary.dumptls.DumpTLSMasterSecrets-class.html#start,Method modules.auxiliary.installcert.InstallCertificate.start()=modules.auxiliary.installcert.InstallCertificate-class.html#start,Method modules.auxiliary.procmon.Procmon.start()=modules.auxiliary.procmon.Procmon-class.html#start,Method modules.auxiliary.reboot.Reboot.start()=modules.auxiliary.reboot.Reboot-class.html#start,Method modules.auxiliary.recentfiles.RecentFiles.start()=modules.auxiliary.recentfiles.RecentFiles-class.html#start,Method modules.packages.applet.Applet.start()=modules.packages.applet.Applet-class.html#start,Method modules.packages.bin.Shellcode.start()=modules.packages.bin.Shellcode-class.html#start,Method modules.packages.com.ComDll.start()=modules.packages.com.ComDll-class.html#start,Method modules.packages.cpl.CPL.start()=modules.packages.cpl.CPL-class.html#start,Method modules.packages.dll.Dll.start()=modules.packages.dll.Dll-class.html#start,Method modules.packages.doc.DOC.start()=modules.packages.doc.DOC-class.html#start,Method modules.packages.exe.Exe.start()=modules.packages.exe.Exe-class.html#start,Method modules.packages.ff.Firefox.start()=modules.packages.ff.Firefox-class.html#start,Method modules.packages.generic.Generic.start()=modules.packages.generic.Generic-class.html#start,Method modules.packages.ie.IE.start()=modules.packages.ie.IE-class.html#start,Method modules.packages.jar.Jar.start()=modules.packages.jar.Jar-class.html#start,Method modules.packages.js.Javascript.start()=modules.packages.js.Javascript-class.html#start,Method modules.packages.msi.Msi.start()=modules.packages.msi.Msi-class.html#start,Method modules.packages.pdf.PDF.start()=modules.packages.pdf.PDF-class.html#start,Method modules.packages.ppt.PPT.start()=modules.packages.ppt.PPT-class.html#start,Method modules.packages.ps1.PS1.start()=modules.packages.ps1.PS1-class.html#start,Method modules.packages.pub.PUB.start()=modules.packages.pub.PUB-class.html#start,Method modules.packages.python.Python.start()=modules.packages.python.Python-class.html#start,Method modules.packages.reboot.Reboot.start()=modules.packages.reboot.Reboot-class.html#start,Method modules.packages.vbs.VBS.start()=modules.packages.vbs.VBS-class.html#start,Method modules.packages.wsf.WSF.start()=modules.packages.wsf.WSF-class.html#start,Method modules.packages.xls.XLS.start()=modules.packages.xls.XLS-class.html#start,Method modules.packages.zip.Zip.start()=modules.packages.zip.Zip-class.html#start"><a title="lib.common.abstracts.Package.start
+modules.auxiliary.disguise.Disguise.start
+modules.auxiliary.dumptls.DumpTLSMasterSecrets.start
+modules.auxiliary.installcert.InstallCertificate.start
+modules.auxiliary.procmon.Procmon.start
+modules.auxiliary.reboot.Reboot.start
+modules.auxiliary.recentfiles.RecentFiles.start
+modules.packages.applet.Applet.start
+modules.packages.bin.Shellcode.start
+modules.packages.com.ComDll.start
+modules.packages.cpl.CPL.start
+modules.packages.dll.Dll.start
+modules.packages.doc.DOC.start
+modules.packages.exe.Exe.start
+modules.packages.ff.Firefox.start
+modules.packages.generic.Generic.start
+modules.packages.ie.IE.start
+modules.packages.jar.Jar.start
+modules.packages.js.Javascript.start
+modules.packages.msi.Msi.start
+modules.packages.pdf.PDF.start
+modules.packages.ppt.PPT.start
+modules.packages.ps1.PS1.start
+modules.packages.pub.PUB.start
+modules.packages.python.Python.start
+modules.packages.reboot.Reboot.start
+modules.packages.vbs.VBS.start
+modules.packages.wsf.WSF.start
+modules.packages.xls.XLS.start
+modules.packages.zip.Zip.start" class="py-name" href="#" onclick="return doclink('link-0', 'start', 'link-0');">start</a></tt> <tt class="py-op">=</tt> <tt class="py-number">10</tt> <tt class="py-op">**</tt> <tt class="py-op">(</tt><tt class="py-name">digits</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">    <tt class="py-name">end</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-number">10</tt> <tt class="py-op">**</tt> <tt class="py-name">digits</tt><tt class="py-op">)</tt> <tt class="py-op">-</tt> <tt class="py-number">1</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">random</tt><tt class="py-op">.</tt><tt class="py-name">randint</tt><tt class="py-op">(</tt><tt id="link-1" class="py-name"><a title="lib.common.abstracts.Package.start
+modules.auxiliary.disguise.Disguise.start
+modules.auxiliary.dumptls.DumpTLSMasterSecrets.start
+modules.auxiliary.installcert.InstallCertificate.start
+modules.auxiliary.procmon.Procmon.start
+modules.auxiliary.reboot.Reboot.start
+modules.auxiliary.recentfiles.RecentFiles.start
+modules.packages.applet.Applet.start
+modules.packages.bin.Shellcode.start
+modules.packages.com.ComDll.start
+modules.packages.cpl.CPL.start
+modules.packages.dll.Dll.start
+modules.packages.doc.DOC.start
+modules.packages.exe.Exe.start
+modules.packages.ff.Firefox.start
+modules.packages.generic.Generic.start
+modules.packages.ie.IE.start
+modules.packages.jar.Jar.start
+modules.packages.js.Javascript.start
+modules.packages.msi.Msi.start
+modules.packages.pdf.PDF.start
+modules.packages.ppt.PPT.start
+modules.packages.ps1.PS1.start
+modules.packages.pub.PUB.start
+modules.packages.python.Python.start
+modules.packages.reboot.Reboot.start
+modules.packages.vbs.VBS.start
+modules.packages.wsf.WSF.start
+modules.packages.xls.XLS.start
+modules.packages.zip.Zip.start" class="py-name" href="#" onclick="return doclink('link-1', 'start', 'link-0');">start</a></tt><tt class="py-op">,</tt> <tt class="py-name">end</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:05 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

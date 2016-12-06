@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.processing.procmon</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.processing-module.html">Package&nbsp;processing</a> ::
+        Module&nbsp;procmon
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.processing.procmon-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.processing.procmon-module.html">Module modules.processing.procmon</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2016 Cuckoo Foundation.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.cuckoo=lib.cuckoo-module.html"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-1', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package lib.cuckoo.common=lib.cuckoo.common-module.html"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-2', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module lib.cuckoo.common.abstracts=lib.cuckoo.common.abstracts-module.html"><a title="lib.cuckoo.common.abstracts" class="py-name" href="#" onclick="return doclink('link-3', 'abstracts', 'link-3');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class lib.cuckoo.common.abstracts.Processing=lib.cuckoo.common.abstracts.Processing-class.html"><a title="lib.cuckoo.common.abstracts.Processing" class="py-name" href="#" onclick="return doclink('link-4', 'Processing', 'link-4');">Processing</a></tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">lxml</tt><tt class="py-op">.</tt><tt class="py-name">etree</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt id="link-5" class="py-name" targets="Variable modules.processing.procmon.HAVE_LXML=modules.processing.procmon-module.html#HAVE_LXML"><a title="modules.processing.procmon.HAVE_LXML" class="py-name" href="#" onclick="return doclink('link-5', 'HAVE_LXML', 'link-5');">HAVE_LXML</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">    <tt id="link-6" class="py-name"><a title="modules.processing.procmon.HAVE_LXML" class="py-name" href="#" onclick="return doclink('link-6', 'HAVE_LXML', 'link-5');">HAVE_LXML</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="ProcmonLog"></a><div id="ProcmonLog-def"><a name="L15"></a><tt class="py-lineno">15</tt> <a class="py-toggle" href="#" id="ProcmonLog-toggle" onclick="return toggle('ProcmonLog');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.processing.procmon.ProcmonLog-class.html">ProcmonLog</a><tt class="py-op">(</tt><tt class="py-base-class">list</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ProcmonLog-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="ProcmonLog-expanded"><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt class="py-docstring">"""Yields each API call event to the parent handler."""</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"> </tt>
+<a name="ProcmonLog.__init__"></a><div id="ProcmonLog.__init__-def"><a name="L18"></a><tt class="py-lineno">18</tt> <a class="py-toggle" href="#" id="ProcmonLog.__init__-toggle" onclick="return toggle('ProcmonLog.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.procmon.ProcmonLog-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">filepath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ProcmonLog.__init__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ProcmonLog.__init__-expanded"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filepath</tt> <tt class="py-op">=</tt> <tt class="py-name">filepath</tt> </tt>
+</div><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="ProcmonLog.__iter__"></a><div id="ProcmonLog.__iter__-def"><a name="L21"></a><tt class="py-lineno">21</tt> <a class="py-toggle" href="#" id="ProcmonLog.__iter__-toggle" onclick="return toggle('ProcmonLog.__iter__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.procmon.ProcmonLog-class.html#__iter__">__iter__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ProcmonLog.__iter__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ProcmonLog.__iter__-expanded"><a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt id="link-7" class="py-name" targets="Module modules.processing.procmon=modules.processing.procmon-module.html"><a title="modules.processing.procmon" class="py-name" href="#" onclick="return doclink('link-7', 'procmon', 'link-7');">procmon</a></tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filepath</tt><tt class="py-op">,</tt> <tt class="py-string">"rb"</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">_</tt><tt class="py-op">,</tt> <tt class="py-name">element</tt> <tt class="py-keyword">in</tt> <tt class="py-name">lxml</tt><tt class="py-op">.</tt><tt class="py-name">etree</tt><tt class="py-op">.</tt><tt class="py-name">iterparse</tt><tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="modules.processing.procmon" class="py-name" href="#" onclick="return doclink('link-8', 'procmon', 'link-7');">procmon</a></tt><tt class="py-op">,</tt> <tt class="py-name">tag</tt><tt class="py-op">=</tt><tt class="py-string">"event"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">            <tt class="py-name">entry</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">child</tt> <tt class="py-keyword">in</tt> <tt class="py-name">element</tt><tt class="py-op">.</tt><tt class="py-name">getchildren</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                <tt class="py-name">entry</tt><tt class="py-op">[</tt><tt class="py-name">child</tt><tt class="py-op">.</tt><tt class="py-name">tag</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">child</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">            <tt class="py-keyword">yield</tt> <tt class="py-name">entry</tt> </tt>
+</div><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="ProcmonLog.__nonzero__"></a><div id="ProcmonLog.__nonzero__-def"><a name="L29"></a><tt class="py-lineno">29</tt> <a class="py-toggle" href="#" id="ProcmonLog.__nonzero__-toggle" onclick="return toggle('ProcmonLog.__nonzero__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.procmon.ProcmonLog-class.html#__nonzero__">__nonzero__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ProcmonLog.__nonzero__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ProcmonLog.__nonzero__-expanded"><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-comment"># For documentation on this please refer to MonitorProcessLog.</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+</div></div><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"> </tt>
+<a name="Procmon"></a><div id="Procmon-def"><a name="L33"></a><tt class="py-lineno">33</tt> <a class="py-toggle" href="#" id="Procmon-toggle" onclick="return toggle('Procmon');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.processing.procmon.Procmon-class.html">Procmon</a><tt class="py-op">(</tt><tt class="py-base-class">Processing</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Procmon-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Procmon-expanded"><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">    <tt class="py-docstring">"""Extracts events from procmon.exe output."""</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt id="link-9" class="py-name" targets="Variable lib.cuckoo.common.abstracts.BehaviorHandler.key=lib.cuckoo.common.abstracts.BehaviorHandler-class.html#key,Variable modules.processing.behavior.Anomaly.key=modules.processing.behavior.Anomaly-class.html#key,Variable modules.processing.behavior.ApiStats.key=modules.processing.behavior.ApiStats-class.html#key,Variable modules.processing.behavior.BehaviorAnalysis.key=modules.processing.behavior.BehaviorAnalysis-class.html#key,Variable modules.processing.behavior.GenericBehavior.key=modules.processing.behavior.GenericBehavior-class.html#key,Variable modules.processing.behavior.ProcessTree.key=modules.processing.behavior.ProcessTree-class.html#key,Variable modules.processing.behavior.Summary.key=modules.processing.behavior.Summary-class.html#key,Variable modules.processing.dumptls.TLSMasterSecrets.key=modules.processing.dumptls.TLSMasterSecrets-class.html#key,Variable modules.processing.network.NetworkAnalysis.key=modules.processing.network.NetworkAnalysis-class.html#key,Variable modules.processing.platform.linux.LinuxSystemTap.key=modules.processing.platform.linux.LinuxSystemTap-class.html#key,Variable modules.processing.platform.windows.WindowsMonitor.key=modules.processing.platform.windows.WindowsMonitor-class.html#key,Variable modules.processing.procmon.Procmon.key=modules.processing.procmon.Procmon-class.html#key"><a title="lib.cuckoo.common.abstracts.BehaviorHandler.key
+modules.processing.behavior.Anomaly.key
+modules.processing.behavior.ApiStats.key
+modules.processing.behavior.BehaviorAnalysis.key
+modules.processing.behavior.GenericBehavior.key
+modules.processing.behavior.ProcessTree.key
+modules.processing.behavior.Summary.key
+modules.processing.dumptls.TLSMasterSecrets.key
+modules.processing.network.NetworkAnalysis.key
+modules.processing.platform.linux.LinuxSystemTap.key
+modules.processing.platform.windows.WindowsMonitor.key
+modules.processing.procmon.Procmon.key" class="py-name" href="#" onclick="return doclink('link-9', 'key', 'link-9');">key</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"procmon"</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt>
+<a name="Procmon.run"></a><div id="Procmon.run-def"><a name="L38"></a><tt class="py-lineno">38</tt> <a class="py-toggle" href="#" id="Procmon.run-toggle" onclick="return toggle('Procmon.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.procmon.Procmon-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Procmon.run-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Procmon.run-expanded"><a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-name">procmon_xml</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">logs_path</tt><tt class="py-op">,</tt> <tt class="py-string">"procmon.xml"</tt><tt class="py-op">)</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">procmon_xml</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-10" class="py-name" targets="Class modules.processing.procmon.ProcmonLog=modules.processing.procmon.ProcmonLog-class.html"><a title="modules.processing.procmon.ProcmonLog" class="py-name" href="#" onclick="return doclink('link-10', 'ProcmonLog', 'link-10');">ProcmonLog</a></tt><tt class="py-op">(</tt><tt class="py-name">procmon_xml</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:01 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

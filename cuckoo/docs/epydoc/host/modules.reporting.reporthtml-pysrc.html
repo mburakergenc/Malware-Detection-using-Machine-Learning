@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.reporting.reporthtml</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.reporting-module.html">Package&nbsp;reporting</a> ::
+        Module&nbsp;reporthtml
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.reporting.reporthtml-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.reporting.reporthtml-module.html">Module modules.reporting.reporthtml</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">codecs</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">base64</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.cuckoo=lib.cuckoo-module.html"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-1', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package lib.cuckoo.common=lib.cuckoo.common-module.html"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-2', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module lib.cuckoo.common.abstracts=lib.cuckoo.common.abstracts-module.html"><a title="lib.cuckoo.common.abstracts" class="py-name" href="#" onclick="return doclink('link-3', 'abstracts', 'link-3');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class lib.cuckoo.common.abstracts.Report=lib.cuckoo.common.abstracts.Report-class.html"><a title="lib.cuckoo.common.abstracts.Report" class="py-name" href="#" onclick="return doclink('link-4', 'Report', 'link-4');">Report</a></tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-5', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-6', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-7', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module lib.cuckoo.common.constants=lib.cuckoo.common.constants-module.html"><a title="lib.cuckoo.common.constants" class="py-name" href="#" onclick="return doclink('link-8', 'constants', 'link-8');">constants</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Variable lib.cuckoo.common.constants.CUCKOO_ROOT=lib.cuckoo.common.constants-module.html#CUCKOO_ROOT"><a title="lib.cuckoo.common.constants.CUCKOO_ROOT" class="py-name" href="#" onclick="return doclink('link-9', 'CUCKOO_ROOT', 'link-9');">CUCKOO_ROOT</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-10', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-11', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-12', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Module lib.cuckoo.common.exceptions=lib.cuckoo.common.exceptions-module.html"><a title="lib.cuckoo.common.exceptions" class="py-name" href="#" onclick="return doclink('link-13', 'exceptions', 'link-13');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-14" class="py-name" targets="Class lib.cuckoo.common.exceptions.CuckooReportError=lib.cuckoo.common.exceptions.CuckooReportError-class.html"><a title="lib.cuckoo.common.exceptions.CuckooReportError" class="py-name" href="#" onclick="return doclink('link-14', 'CuckooReportError', 'link-14');">CuckooReportError</a></tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-15" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-15', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-16', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-17', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Module lib.cuckoo.common.objects=lib.cuckoo.common.objects-module.html"><a title="lib.cuckoo.common.objects" class="py-name" href="#" onclick="return doclink('link-18', 'objects', 'link-18');">objects</a></tt> <tt class="py-keyword">import</tt> <tt id="link-19" class="py-name" targets="Class lib.cuckoo.common.objects.File=lib.cuckoo.common.objects.File-class.html"><a title="lib.cuckoo.common.objects.File" class="py-name" href="#" onclick="return doclink('link-19', 'File', 'link-19');">File</a></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">jinja2</tt><tt class="py-op">.</tt><tt class="py-name">environment</tt> <tt class="py-keyword">import</tt> <tt class="py-name">Environment</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">jinja2</tt><tt class="py-op">.</tt><tt class="py-name">loaders</tt> <tt class="py-keyword">import</tt> <tt class="py-name">FileSystemLoader</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt id="link-20" class="py-name" targets="Variable modules.reporting.reporthtml.HAVE_JINJA2=modules.reporting.reporthtml-module.html#HAVE_JINJA2"><a title="modules.reporting.reporthtml.HAVE_JINJA2" class="py-name" href="#" onclick="return doclink('link-20', 'HAVE_JINJA2', 'link-20');">HAVE_JINJA2</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt id="link-21" class="py-name"><a title="modules.reporting.reporthtml.HAVE_JINJA2" class="py-name" href="#" onclick="return doclink('link-21', 'HAVE_JINJA2', 'link-20');">HAVE_JINJA2</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="ReportHTML"></a><div id="ReportHTML-def"><a name="L22"></a><tt class="py-lineno"> 22</tt> <a class="py-toggle" href="#" id="ReportHTML-toggle" onclick="return toggle('ReportHTML');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.reporting.reporthtml.ReportHTML-class.html">ReportHTML</a><tt class="py-op">(</tt><tt class="py-base-class">Report</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ReportHTML-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ReportHTML-expanded"><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">    <tt class="py-docstring">"""Stores report in HTML format."""</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="ReportHTML.run"></a><div id="ReportHTML.run-def"><a name="L25"></a><tt class="py-lineno"> 25</tt> <a class="py-toggle" href="#" id="ReportHTML.run-toggle" onclick="return toggle('ReportHTML.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.reporting.reporthtml.ReportHTML-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">results</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ReportHTML.run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ReportHTML.run-expanded"><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">        <tt class="py-docstring">"""Writes report.</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">        @param results: Cuckoo results dict.</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">        @raise CuckooReportError: if fails to write report.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-22" class="py-name"><a title="modules.reporting.reporthtml.HAVE_JINJA2" class="py-name" href="#" onclick="return doclink('link-22', 'HAVE_JINJA2', 'link-20');">HAVE_JINJA2</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-23" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooReportError" class="py-name" href="#" onclick="return doclink('link-23', 'CuckooReportError', 'link-14');">CuckooReportError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">                <tt class="py-string">"Failed to generate HTML report: Jinja2 library is not "</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">                <tt class="py-string">"installed (install `pip install jinja2`)"</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-name">shots_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">analysis_path</tt><tt class="py-op">,</tt> <tt class="py-string">"shots"</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">shots_path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">            <tt class="py-name">shots</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">            <tt class="py-name">counter</tt> <tt class="py-op">=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">shot_name</tt> <tt class="py-keyword">in</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">listdir</tt><tt class="py-op">(</tt><tt class="py-name">shots_path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">shot_name</tt><tt class="py-op">.</tt><tt class="py-name">endswith</tt><tt class="py-op">(</tt><tt class="py-string">".jpg"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">                    <tt class="py-keyword">continue</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">                <tt class="py-name">shot_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">shots_path</tt><tt class="py-op">,</tt> <tt class="py-name">shot_name</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">getsize</tt><tt class="py-op">(</tt><tt class="py-name">shot_path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">                    <tt class="py-keyword">continue</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                <tt class="py-name">shot</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">                <tt class="py-name">shot</tt><tt class="py-op">[</tt><tt class="py-string">"id"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">splitext</tt><tt class="py-op">(</tt><tt id="link-24" class="py-name"><a title="lib.cuckoo.common.objects.File" class="py-name" href="#" onclick="return doclink('link-24', 'File', 'link-19');">File</a></tt><tt class="py-op">(</tt><tt class="py-name">shot_path</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Method lib.cuckoo.common.objects.File.get_name()=lib.cuckoo.common.objects.File-class.html#get_name"><a title="lib.cuckoo.common.objects.File.get_name" class="py-name" href="#" onclick="return doclink('link-25', 'get_name', 'link-25');">get_name</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                <tt class="py-name">shot</tt><tt class="py-op">[</tt><tt class="py-string">"data"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">base64</tt><tt class="py-op">.</tt><tt class="py-name">b64encode</tt><tt class="py-op">(</tt><tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">shot_path</tt><tt class="py-op">,</tt> <tt class="py-string">"rb"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method lib.cuckoo.core.resultserver.ResultHandler.read()=lib.cuckoo.core.resultserver.ResultHandler-class.html#read"><a title="lib.cuckoo.core.resultserver.ResultHandler.read" class="py-name" href="#" onclick="return doclink('link-26', 'read', 'link-26');">read</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                <tt class="py-name">shots</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">shot</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">                <tt class="py-name">counter</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">            <tt class="py-name">shots</tt><tt class="py-op">.</tt><tt class="py-name">sort</tt><tt class="py-op">(</tt><tt id="link-27" class="py-name" targets="Variable lib.cuckoo.common.abstracts.BehaviorHandler.key=lib.cuckoo.common.abstracts.BehaviorHandler-class.html#key,Variable modules.processing.behavior.Anomaly.key=modules.processing.behavior.Anomaly-class.html#key,Variable modules.processing.behavior.ApiStats.key=modules.processing.behavior.ApiStats-class.html#key,Variable modules.processing.behavior.BehaviorAnalysis.key=modules.processing.behavior.BehaviorAnalysis-class.html#key,Variable modules.processing.behavior.GenericBehavior.key=modules.processing.behavior.GenericBehavior-class.html#key,Variable modules.processing.behavior.ProcessTree.key=modules.processing.behavior.ProcessTree-class.html#key,Variable modules.processing.behavior.Summary.key=modules.processing.behavior.Summary-class.html#key,Variable modules.processing.dumptls.TLSMasterSecrets.key=modules.processing.dumptls.TLSMasterSecrets-class.html#key,Variable modules.processing.network.NetworkAnalysis.key=modules.processing.network.NetworkAnalysis-class.html#key,Variable modules.processing.platform.linux.LinuxSystemTap.key=modules.processing.platform.linux.LinuxSystemTap-class.html#key,Variable modules.processing.platform.windows.WindowsMonitor.key=modules.processing.platform.windows.WindowsMonitor-class.html#key,Variable modules.processing.procmon.Procmon.key=modules.processing.procmon.Procmon-class.html#key"><a title="lib.cuckoo.common.abstracts.BehaviorHandler.key
+modules.processing.behavior.Anomaly.key
+modules.processing.behavior.ApiStats.key
+modules.processing.behavior.BehaviorAnalysis.key
+modules.processing.behavior.GenericBehavior.key
+modules.processing.behavior.ProcessTree.key
+modules.processing.behavior.Summary.key
+modules.processing.dumptls.TLSMasterSecrets.key
+modules.processing.network.NetworkAnalysis.key
+modules.processing.platform.linux.LinuxSystemTap.key
+modules.processing.platform.windows.WindowsMonitor.key
+modules.processing.procmon.Procmon.key" class="py-name" href="#" onclick="return doclink('link-27', 'key', 'link-27');">key</a></tt><tt class="py-op">=</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">shot</tt><tt class="py-op">:</tt> <tt class="py-name">shot</tt><tt class="py-op">[</tt><tt class="py-string">"id"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">            <tt id="link-28" class="py-name" targets="Method lib.cuckoo.common.abstracts.Signature.results()=lib.cuckoo.common.abstracts.Signature-class.html#results"><a title="lib.cuckoo.common.abstracts.Signature.results" class="py-name" href="#" onclick="return doclink('link-28', 'results', 'link-28');">results</a></tt><tt class="py-op">[</tt><tt class="py-string">"screenshots"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">shots</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">            <tt id="link-29" class="py-name"><a title="lib.cuckoo.common.abstracts.Signature.results" class="py-name" href="#" onclick="return doclink('link-29', 'results', 'link-28');">results</a></tt><tt class="py-op">[</tt><tt class="py-string">"screenshots"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-name">env</tt> <tt class="py-op">=</tt> <tt class="py-name">Environment</tt><tt class="py-op">(</tt><tt class="py-name">autoescape</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">env</tt><tt class="py-op">.</tt><tt class="py-name">loader</tt> <tt class="py-op">=</tt> <tt class="py-name">FileSystemLoader</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt id="link-30" class="py-name"><a title="lib.cuckoo.common.constants.CUCKOO_ROOT" class="py-name" href="#" onclick="return doclink('link-30', 'CUCKOO_ROOT', 'link-9');">CUCKOO_ROOT</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">                                                   <tt class="py-string">"data"</tt><tt class="py-op">,</tt> <tt class="py-string">"html"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-name">processed</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">mapping</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"file_read"</tt><tt class="py-op">,</tt> <tt class="py-string">"File"</tt><tt class="py-op">,</tt> <tt class="py-string">"Read"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"file_written"</tt><tt class="py-op">,</tt> <tt class="py-string">"File"</tt><tt class="py-op">,</tt> <tt class="py-string">"Written"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"file_deleted"</tt><tt class="py-op">,</tt> <tt class="py-string">"File"</tt><tt class="py-op">,</tt> <tt class="py-string">"Deleted"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"file_opened"</tt><tt class="py-op">,</tt> <tt class="py-string">"File"</tt><tt class="py-op">,</tt> <tt class="py-string">"Opened"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"file_copied"</tt><tt class="py-op">,</tt> <tt class="py-string">"File"</tt><tt class="py-op">,</tt> <tt class="py-string">"Copied"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"file_moved"</tt><tt class="py-op">,</tt> <tt class="py-string">"File"</tt><tt class="py-op">,</tt> <tt class="py-string">"Moved"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"connects_ip"</tt><tt class="py-op">,</tt> <tt class="py-string">"Network"</tt><tt class="py-op">,</tt> <tt class="py-string">"Connects IP"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"resolves_url"</tt><tt class="py-op">,</tt> <tt class="py-string">"Network"</tt><tt class="py-op">,</tt> <tt class="py-string">"Resolves URL"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"fetches_url"</tt><tt class="py-op">,</tt> <tt class="py-string">"Network"</tt><tt class="py-op">,</tt> <tt class="py-string">"Fetches URL"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"connects_host"</tt><tt class="py-op">,</tt> <tt class="py-string">"Network"</tt><tt class="py-op">,</tt> <tt class="py-string">"Connects Host"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"downloads_file_url"</tt><tt class="py-op">,</tt> <tt class="py-string">"Network"</tt><tt class="py-op">,</tt> <tt class="py-string">"Downloads File URL"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"directory_created"</tt><tt class="py-op">,</tt> <tt class="py-string">"Directory"</tt><tt class="py-op">,</tt> <tt class="py-string">"Created"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"directory_removed"</tt><tt class="py-op">,</tt> <tt class="py-string">"Directory"</tt><tt class="py-op">,</tt> <tt class="py-string">"Removed"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"directory_enumerated"</tt><tt class="py-op">,</tt> <tt class="py-string">"Directory"</tt><tt class="py-op">,</tt> <tt class="py-string">"Enumerated"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"regkey_opened"</tt><tt class="py-op">,</tt> <tt class="py-string">"Registry Key"</tt><tt class="py-op">,</tt> <tt class="py-string">"Opened"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"regkey_deleted"</tt><tt class="py-op">,</tt> <tt class="py-string">"Registry Key"</tt><tt class="py-op">,</tt> <tt class="py-string">"Deleted"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"regkey_read"</tt><tt class="py-op">,</tt> <tt class="py-string">"Registry Key"</tt><tt class="py-op">,</tt> <tt class="py-string">"Read"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"regkey_written"</tt><tt class="py-op">,</tt> <tt class="py-string">"Registry Key"</tt><tt class="py-op">,</tt> <tt class="py-string">"Written"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-string">"mutex"</tt><tt class="py-op">,</tt> <tt class="py-string">"Mutex"</tt><tt class="py-op">,</tt> <tt class="py-string">"Accessed"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-op">]</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-name">processed</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">proc</tt> <tt class="py-keyword">in</tt> <tt id="link-31" class="py-name"><a title="lib.cuckoo.common.abstracts.Signature.results" class="py-name" href="#" onclick="return doclink('link-31', 'results', 'link-28');">results</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Method lib.cuckoo.common.config.Config.get()=lib.cuckoo.common.config.Config-class.html#get,Method lib.cuckoo.core.guest.GuestManager.get()=lib.cuckoo.core.guest.GuestManager-class.html#get"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-32', 'get', 'link-32');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"behavior"</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-33', 'get', 'link-32');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"generic"</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">orig</tt><tt class="py-op">,</tt> <tt class="py-name">cat</tt><tt class="py-op">,</tt> <tt class="py-name">subcat</tt> <tt class="py-keyword">in</tt> <tt class="py-name">mapping</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">cat</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">processed</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                    <tt class="py-name">processed</tt><tt class="py-op">[</tt><tt class="py-name">cat</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">subcat</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">processed</tt><tt class="py-op">[</tt><tt class="py-name">cat</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                    <tt class="py-name">processed</tt><tt class="py-op">[</tt><tt class="py-name">cat</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">subcat</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                <tt class="py-comment"># Special handling required for file moved/copied.</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">orig</tt> <tt class="py-op">==</tt> <tt class="py-string">"file_moved"</tt> <tt class="py-keyword">or</tt> <tt class="py-name">orig</tt> <tt class="py-op">==</tt> <tt class="py-string">"file_copied"</tt><tt class="py-op">:</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                    <tt class="py-keyword">for</tt> <tt class="py-name">src</tt><tt class="py-op">,</tt> <tt class="py-name">dst</tt> <tt class="py-keyword">in</tt> <tt class="py-name">proc</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-34', 'get', 'link-32');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"summary"</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-35', 'get', 'link-32');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">orig</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                        <tt class="py-name">entry</tt> <tt class="py-op">=</tt> <tt class="py-string">"%s -&gt; %s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">src</tt><tt class="py-op">,</tt> <tt class="py-name">dst</tt><tt class="py-op">)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">                        <tt class="py-name">processed</tt><tt class="py-op">[</tt><tt class="py-name">cat</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">subcat</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">entry</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">                    <tt class="py-keyword">continue</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-string">"summary"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">proc</tt> <tt class="py-keyword">and</tt> <tt class="py-name">orig</tt> <tt class="py-keyword">in</tt> <tt class="py-name">proc</tt><tt class="py-op">[</tt><tt class="py-string">"summary"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">                    <tt class="py-keyword">for</tt> <tt class="py-name">content</tt> <tt class="py-keyword">in</tt> <tt class="py-name">proc</tt><tt class="py-op">[</tt><tt class="py-string">"summary"</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">orig</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                        <tt class="py-name">processed</tt><tt class="py-op">[</tt><tt class="py-name">cat</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">subcat</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">content</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">            <tt class="py-name">tpl</tt> <tt class="py-op">=</tt> <tt class="py-name">env</tt><tt class="py-op">.</tt><tt class="py-name">get_template</tt><tt class="py-op">(</tt><tt class="py-string">"report.html"</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">            <tt class="py-name">html</tt> <tt class="py-op">=</tt> <tt class="py-name">tpl</tt><tt class="py-op">.</tt><tt class="py-name">render</tt><tt class="py-op">(</tt><tt class="py-op">{</tt><tt class="py-string">"results"</tt><tt class="py-op">:</tt> <tt id="link-36" class="py-name"><a title="lib.cuckoo.common.abstracts.Signature.results" class="py-name" href="#" onclick="return doclink('link-36', 'results', 'link-28');">results</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">                               <tt class="py-string">"processed"</tt><tt class="py-op">:</tt> <tt class="py-name">processed</tt><tt class="py-op">,</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">                               <tt class="py-string">"mapping"</tt><tt class="py-op">:</tt> <tt class="py-name">mapping</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-37" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooReportError" class="py-name" href="#" onclick="return doclink('link-37', 'CuckooReportError', 'link-14');">CuckooReportError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Failed to generate HTML report: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">            <tt class="py-name">report_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">reports_path</tt><tt class="py-op">,</tt> <tt class="py-string">"report.html"</tt><tt class="py-op">)</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">            <tt class="py-keyword">with</tt> <tt class="py-name">codecs</tt><tt class="py-op">.</tt><tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">report_path</tt><tt class="py-op">,</tt> <tt class="py-string">"w"</tt><tt class="py-op">,</tt> <tt id="link-38" class="py-name" targets="Variable modules.processing.static.WindowsScriptFile.encoding=modules.processing.static.WindowsScriptFile-class.html#encoding"><a title="modules.processing.static.WindowsScriptFile.encoding" class="py-name" href="#" onclick="return doclink('link-38', 'encoding', 'link-38');">encoding</a></tt><tt class="py-op">=</tt><tt class="py-string">"utf-8"</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">report</tt><tt class="py-op">:</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">                <tt class="py-name">report</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Method modules.processing.network.SortCap.write()=modules.processing.network.SortCap-class.html#write"><a title="modules.processing.network.SortCap.write" class="py-name" href="#" onclick="return doclink('link-39', 'write', 'link-39');">write</a></tt><tt class="py-op">(</tt><tt class="py-name">html</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-op">(</tt><tt class="py-name">TypeError</tt><tt class="py-op">,</tt> <tt class="py-name">IOError</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-40" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooReportError" class="py-name" href="#" onclick="return doclink('link-40', 'CuckooReportError', 'link-14');">CuckooReportError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Failed to write HTML report: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+</div></div><a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:21:59 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

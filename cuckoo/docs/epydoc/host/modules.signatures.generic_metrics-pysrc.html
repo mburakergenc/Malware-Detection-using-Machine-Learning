@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.signatures.generic_metrics</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.signatures-module.html">Package&nbsp;signatures</a> ::
+        Module&nbsp;generic_metrics
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.signatures.generic_metrics-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.signatures.generic_metrics-module.html">Module modules.signatures.generic_metrics</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.cuckoo=lib.cuckoo-module.html"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-1', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package lib.cuckoo.common=lib.cuckoo.common-module.html"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-2', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module lib.cuckoo.common.abstracts=lib.cuckoo.common.abstracts-module.html"><a title="lib.cuckoo.common.abstracts" class="py-name" href="#" onclick="return doclink('link-3', 'abstracts', 'link-3');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class lib.cuckoo.common.abstracts.Signature=lib.cuckoo.common.abstracts.Signature-class.html"><a title="lib.cuckoo.common.abstracts.Signature" class="py-name" href="#" onclick="return doclink('link-4', 'Signature', 'link-4');">Signature</a></tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="SystemMetrics"></a><div id="SystemMetrics-def"><a name="L8"></a><tt class="py-lineno"> 8</tt> <a class="py-toggle" href="#" id="SystemMetrics-toggle" onclick="return toggle('SystemMetrics');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.signatures.generic_metrics.SystemMetrics-class.html">SystemMetrics</a><tt class="py-op">(</tt><tt class="py-base-class">Signature</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SystemMetrics-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="SystemMetrics-expanded"><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">    <tt id="link-5" class="py-name" targets="Variable lib.cuckoo.common.abstracts.Signature.name=lib.cuckoo.common.abstracts.Signature-class.html#name,Variable lib.cuckoo.core.database.Guest.name=lib.cuckoo.core.database.Guest-class.html#name,Variable lib.cuckoo.core.database.Machine.name=lib.cuckoo.core.database.Machine-class.html#name,Variable lib.cuckoo.core.database.Tag.name=lib.cuckoo.core.database.Tag-class.html#name,Variable modules.signatures.creates_exe.CreatesExe.name=modules.signatures.creates_exe.CreatesExe-class.html#name,Variable modules.signatures.generic_metrics.SystemMetrics.name=modules.signatures.generic_metrics.SystemMetrics-class.html#name"><a title="lib.cuckoo.common.abstracts.Signature.name
+lib.cuckoo.core.database.Guest.name
+lib.cuckoo.core.database.Machine.name
+lib.cuckoo.core.database.Tag.name
+modules.signatures.creates_exe.CreatesExe.name
+modules.signatures.generic_metrics.SystemMetrics.name" class="py-name" href="#" onclick="return doclink('link-5', 'name', 'link-5');">name</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"generic_metrics"</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">    <tt id="link-6" class="py-name" targets="Variable lib.cuckoo.common.abstracts.Signature.description=lib.cuckoo.common.abstracts.Signature-class.html#description,Variable modules.signatures.creates_exe.CreatesExe.description=modules.signatures.creates_exe.CreatesExe-class.html#description,Variable modules.signatures.generic_metrics.SystemMetrics.description=modules.signatures.generic_metrics.SystemMetrics-class.html#description"><a title="lib.cuckoo.common.abstracts.Signature.description
+modules.signatures.creates_exe.CreatesExe.description
+modules.signatures.generic_metrics.SystemMetrics.description" class="py-name" href="#" onclick="return doclink('link-6', 'description', 'link-6');">description</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Uses GetSystemMetrics"</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt id="link-7" class="py-name" targets="Variable lib.cuckoo.common.abstracts.Signature.severity=lib.cuckoo.common.abstracts.Signature-class.html#severity,Variable modules.signatures.creates_exe.CreatesExe.severity=modules.signatures.creates_exe.CreatesExe-class.html#severity,Variable modules.signatures.generic_metrics.SystemMetrics.severity=modules.signatures.generic_metrics.SystemMetrics-class.html#severity"><a title="lib.cuckoo.common.abstracts.Signature.severity
+modules.signatures.creates_exe.CreatesExe.severity
+modules.signatures.generic_metrics.SystemMetrics.severity" class="py-name" href="#" onclick="return doclink('link-7', 'severity', 'link-7');">severity</a></tt> <tt class="py-op">=</tt> <tt class="py-number">2</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt id="link-8" class="py-name" targets="Variable lib.cuckoo.common.abstracts.Signature.categories=lib.cuckoo.common.abstracts.Signature-class.html#categories,Variable modules.signatures.creates_exe.CreatesExe.categories=modules.signatures.creates_exe.CreatesExe-class.html#categories,Variable modules.signatures.generic_metrics.SystemMetrics.categories=modules.signatures.generic_metrics.SystemMetrics-class.html#categories"><a title="lib.cuckoo.common.abstracts.Signature.categories
+modules.signatures.creates_exe.CreatesExe.categories
+modules.signatures.generic_metrics.SystemMetrics.categories" class="py-name" href="#" onclick="return doclink('link-8', 'categories', 'link-8');">categories</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">"generic"</tt><tt class="py-op">]</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">    <tt id="link-9" class="py-name" targets="Variable lib.cuckoo.common.abstracts.Signature.authors=lib.cuckoo.common.abstracts.Signature-class.html#authors,Variable modules.signatures.creates_exe.CreatesExe.authors=modules.signatures.creates_exe.CreatesExe-class.html#authors,Variable modules.signatures.generic_metrics.SystemMetrics.authors=modules.signatures.generic_metrics.SystemMetrics-class.html#authors"><a title="lib.cuckoo.common.abstracts.Signature.authors
+modules.signatures.creates_exe.CreatesExe.authors
+modules.signatures.generic_metrics.SystemMetrics.authors" class="py-name" href="#" onclick="return doclink('link-9', 'authors', 'link-9');">authors</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">"Cuckoo Developers"</tt><tt class="py-op">]</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt id="link-10" class="py-name" targets="Variable lib.cuckoo.common.abstracts.Signature.minimum=lib.cuckoo.common.abstracts.Signature-class.html#minimum,Variable modules.signatures.creates_exe.CreatesExe.minimum=modules.signatures.creates_exe.CreatesExe-class.html#minimum,Variable modules.signatures.generic_metrics.SystemMetrics.minimum=modules.signatures.generic_metrics.SystemMetrics-class.html#minimum"><a title="lib.cuckoo.common.abstracts.Signature.minimum
+modules.signatures.creates_exe.CreatesExe.minimum
+modules.signatures.generic_metrics.SystemMetrics.minimum" class="py-name" href="#" onclick="return doclink('link-10', 'minimum', 'link-10');">minimum</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"2.0"</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt class="py-comment"># Evented signatures can specify filters that reduce the amount of</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-comment"># API calls that are streamed in. One can filter Process name, API</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">    <tt class="py-comment"># name/identifier and category.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">    <tt id="link-11" class="py-name" targets="Variable modules.signatures.generic_metrics.SystemMetrics.filter_processnames=modules.signatures.generic_metrics.SystemMetrics-class.html#filter_processnames"><a title="modules.signatures.generic_metrics.SystemMetrics.filter_processnames" class="py-name" href="#" onclick="return doclink('link-11', 'filter_processnames', 'link-11');">filter_processnames</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">    <tt id="link-12" class="py-name" targets="Variable lib.cuckoo.common.abstracts.Signature.filter_apinames=lib.cuckoo.common.abstracts.Signature-class.html#filter_apinames,Variable modules.signatures.generic_metrics.SystemMetrics.filter_apinames=modules.signatures.generic_metrics.SystemMetrics-class.html#filter_apinames"><a title="lib.cuckoo.common.abstracts.Signature.filter_apinames
+modules.signatures.generic_metrics.SystemMetrics.filter_apinames" class="py-name" href="#" onclick="return doclink('link-12', 'filter_apinames', 'link-12');">filter_apinames</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"GetSystemMetrics"</tt><tt class="py-op">,</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">    <tt id="link-13" class="py-name" targets="Variable lib.cuckoo.common.abstracts.Signature.filter_categories=lib.cuckoo.common.abstracts.Signature-class.html#filter_categories,Variable modules.signatures.generic_metrics.SystemMetrics.filter_categories=modules.signatures.generic_metrics.SystemMetrics-class.html#filter_categories"><a title="lib.cuckoo.common.abstracts.Signature.filter_categories
+modules.signatures.generic_metrics.SystemMetrics.filter_categories" class="py-name" href="#" onclick="return doclink('link-13', 'filter_categories', 'link-13');">filter_categories</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt class="py-comment"># This is a signature template. It should be used as a skeleton for</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">    <tt class="py-comment"># creating custom signatures, therefore is disabled by default.</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt class="py-comment"># The on_call function is used in "evented" signatures.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">    <tt class="py-comment"># These use a more efficient way of processing logged API calls.</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">    <tt id="link-14" class="py-name" targets="Variable lib.cuckoo.common.abstracts.Processing.enabled=lib.cuckoo.common.abstracts.Processing-class.html#enabled,Variable lib.cuckoo.common.abstracts.Signature.enabled=lib.cuckoo.common.abstracts.Signature-class.html#enabled,Variable modules.signatures.creates_exe.CreatesExe.enabled=modules.signatures.creates_exe.CreatesExe-class.html#enabled,Variable modules.signatures.generic_metrics.SystemMetrics.enabled=modules.signatures.generic_metrics.SystemMetrics-class.html#enabled"><a title="lib.cuckoo.common.abstracts.Processing.enabled
+lib.cuckoo.common.abstracts.Signature.enabled
+modules.signatures.creates_exe.CreatesExe.enabled
+modules.signatures.generic_metrics.SystemMetrics.enabled" class="py-name" href="#" onclick="return doclink('link-14', 'enabled', 'link-14');">enabled</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="SystemMetrics.stop"></a><div id="SystemMetrics.stop-def"><a name="L29"></a><tt class="py-lineno">29</tt> <a class="py-toggle" href="#" id="SystemMetrics.stop-toggle" onclick="return toggle('SystemMetrics.stop');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.signatures.generic_metrics.SystemMetrics-class.html#stop">stop</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SystemMetrics.stop-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="SystemMetrics.stop-expanded"><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-comment"># In the stop method one can implement any cleanup code and</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-comment">#  decide one last time if this signature matches or not.</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-comment">#  Return True in case it matches.</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">    <tt class="py-comment"># This method will be called for every logged API call by the loop</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt class="py-comment"># in the RunSignatures plugin. The return value determines the "state"</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">    <tt class="py-comment"># of this signature. True means the signature matched and False means</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">    <tt class="py-comment"># it can't match anymore. Both of which stop streaming in API calls.</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">    <tt class="py-comment"># Returning None keeps the signature active and will continue.</tt> </tt>
+<a name="SystemMetrics.on_call"></a><div id="SystemMetrics.on_call-def"><a name="L40"></a><tt class="py-lineno">40</tt> <a class="py-toggle" href="#" id="SystemMetrics.on_call-toggle" onclick="return toggle('SystemMetrics.on_call');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.signatures.generic_metrics.SystemMetrics-class.html#on_call">on_call</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">call</tt><tt class="py-op">,</tt> <tt class="py-param">pid</tt><tt class="py-op">,</tt> <tt class="py-param">tid</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SystemMetrics.on_call-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="SystemMetrics.on_call-expanded"><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-comment"># This check would in reality not be needed as we already make use</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-comment"># of filter_apinames above.</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">call</tt><tt class="py-op">[</tt><tt class="py-string">"api"</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">"GetSystemMetrics"</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">            <tt class="py-comment"># Signature matched, return True.</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-comment"># continue</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div></div><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:21:59 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

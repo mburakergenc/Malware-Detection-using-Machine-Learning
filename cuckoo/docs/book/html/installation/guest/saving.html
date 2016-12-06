@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Saving the Virtual Machine &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../../index.html" />
+    <link rel="up" title="Preparing the Guest" href="index.html" />
+    <link rel="next" title="Cloning the Virtual Machine" href="cloning.html" />
+    <link rel="prev" title="Installing the Agent" href="agent.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="cloning.html" title="Cloning the Virtual Machine"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="agent.html" title="Installing the Agent"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Installation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Preparing the Guest</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="saving-the-virtual-machine">
+<h1>Saving the Virtual Machine<a class="headerlink" href="#saving-the-virtual-machine" title="Permalink to this headline">¶</a></h1>
+<p>Now you should be ready to save the virtual machine to a snapshot state.</p>
+<p>Before doing this <strong>make sure you rebooted it softly and that it&#8217;s currently
+running, with Cuckoo&#8217;s agent running and with Windows fully booted</strong>.</p>
+<p>Now you can proceed saving the machine. The way to do it obviously depends on
+the virtualization software you decided to use.</p>
+<p>If you follow all the below steps properly, your virtual machine should be ready
+to be used by Cuckoo.</p>
+<div class="section" id="virtualbox">
+<h2>VirtualBox<a class="headerlink" href="#virtualbox" title="Permalink to this headline">¶</a></h2>
+<p>If you are going for VirtualBox you can take the snapshot from the graphical user
+interface or from the command line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ VBoxManage snapshot &quot;&lt;Name of VM&gt;&quot; take &quot;&lt;Name of snapshot&gt;&quot; --pause
+</pre></div>
+</div>
+<p>After the snapshot creation is completed, you can power off the machine and
+restore it:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ VBoxManage controlvm &quot;&lt;Name of VM&gt;&quot; poweroff
+$ VBoxManage snapshot &quot;&lt;Name of VM&gt;&quot; restorecurrent
+</pre></div>
+</div>
+</div>
+<div class="section" id="kvm">
+<h2>KVM<a class="headerlink" href="#kvm" title="Permalink to this headline">¶</a></h2>
+<p>If decided to adopt KVM, you must first of all be sure to use a disk format for
+your virtual machines which supports snapshots.
+By default libvirt tools create RAW virtual disks, and since we need snapshots
+you&#8217;ll either have to use QCOW2 or LVM. For the scope of this guide we adopt QCOW2,
+which is easier to setup than LVM.</p>
+<p>The easiest way to create such a virtual disk correctly is using the tools
+provided by the libvirt suite. You can either use <code class="docutils literal"><span class="pre">virsh</span></code> if you prefer
+command-line interfaces or <code class="docutils literal"><span class="pre">virt-manager</span></code> for a nice GUI.
+You should be able to directly create it in QCOW2 format, but in case you have
+a RAW disk you can convert it like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ cd /your/disk/image/path
+$ qemu-img convert -O qcow2 your_disk.raw your_disk.qcow2
+</pre></div>
+</div>
+<p>Now you have to edit your VM definition as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ virsh edit &quot;&lt;Name of VM&gt;&quot;
+</pre></div>
+</div>
+<p>Find the disk section, it looks like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">disk</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;disk&#39;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">driver</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;qemu&#39;</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;raw&#39;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="n">source</span> <span class="n">file</span><span class="o">=</span><span class="s1">&#39;/your/disk/image/path/your_disk.raw&#39;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="n">target</span> <span class="n">dev</span><span class="o">=</span><span class="s1">&#39;hda&#39;</span> <span class="n">bus</span><span class="o">=</span><span class="s1">&#39;ide&#39;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="n">address</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;drive&#39;</span> <span class="n">controller</span><span class="o">=</span><span class="s1">&#39;0&#39;</span> <span class="n">bus</span><span class="o">=</span><span class="s1">&#39;0&#39;</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="n">disk</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>And change &#8220;type&#8221; to qcow2 and &#8220;source file&#8221; to your qcow2 disk image, like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">disk</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;file&#39;</span> <span class="n">device</span><span class="o">=</span><span class="s1">&#39;disk&#39;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">driver</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;qemu&#39;</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;qcow2&#39;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="n">source</span> <span class="n">file</span><span class="o">=</span><span class="s1">&#39;/your/disk/image/path/your_disk.qcow2&#39;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="n">target</span> <span class="n">dev</span><span class="o">=</span><span class="s1">&#39;hda&#39;</span> <span class="n">bus</span><span class="o">=</span><span class="s1">&#39;ide&#39;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="n">address</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;drive&#39;</span> <span class="n">controller</span><span class="o">=</span><span class="s1">&#39;0&#39;</span> <span class="n">bus</span><span class="o">=</span><span class="s1">&#39;0&#39;</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="n">disk</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Now test your virtual machine, if everything works prepare it for snapshotting while
+running Cuckoo&#8217;s agent. This means the virtual machine needs to be running
+while you are taking the snapshot. Then you can shut it down.
+You can finally take a snapshot with the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ virsh snapshot-create &quot;&lt;Name of VM&gt;&quot;
+</pre></div>
+</div>
+<p>Having multiple snapshots can cause errors:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">ERROR</span><span class="p">:</span> <span class="n">No</span> <span class="n">snapshot</span> <span class="n">found</span> <span class="k">for</span> <span class="n">virtual</span> <span class="n">machine</span> <span class="n">VM</span><span class="o">-</span><span class="n">Name</span>
+</pre></div>
+</div>
+<p>VM snapshots can be managed using the following commands:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ virsh snapshot-list &quot;VM-Name&quot;
+$ virsh snapshot-delete &quot;VM-Name&quot; 1234567890
+</pre></div>
+</div>
+</div>
+<div class="section" id="vmware-workstation">
+<h2>VMware Workstation<a class="headerlink" href="#vmware-workstation" title="Permalink to this headline">¶</a></h2>
+<p>If you decided to adopt VMware Workstation, you can take the snapshot from the graphical user
+interface or from the command line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ vmrun snapshot &quot;/your/disk/image/path/wmware_image_name.vmx&quot; your_snapshot_name
+</pre></div>
+</div>
+<p>Where your_snapshot_name is the name you choose for the snapshot.
+After that power off the machine from the GUI or from the command line:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ vmrun stop &quot;/your/disk/image/path/wmware_image_name.vmx&quot; hard
+</pre></div>
+</div>
+</div>
+<div class="section" id="xenserver">
+<h2>XenServer<a class="headerlink" href="#xenserver" title="Permalink to this headline">¶</a></h2>
+<p>If you decided to adopt XenServer, the XenServer machinery supports starting
+virtual machines from either disk or a memory snapshot. Creating and reverting
+memory snapshots require that the Xen guest tools be installed in the
+virtual machine. The recommended method of booting XenServer virtual machines is
+through memory snapshots because they can greatly reduce the boot time of
+virtual machines during analysis. If, however, the option of installing the
+guest tools is not available, the virtual machine can be configured to have its
+disks reset on boot. Resetting the disk ensures that malware samples cannot
+permanently modify the virtual machine.</p>
+<div class="section" id="memory-snapshots">
+<h3>Memory Snapshots<a class="headerlink" href="#memory-snapshots" title="Permalink to this headline">¶</a></h3>
+<p>The Xen guest tools can be installed from the XenCenter application that ships
+with XenServer. Once installed, restart the virtual machine and ensure that the
+Cuckoo agent is running.</p>
+<p>Snapshots can be taken through the XenCenter application and the command line
+interface on the control domain (Dom0). When creating the snapshot from
+XenCenter, ensure that the &#8220;Snapshot disk and memory&#8221; is checked. Once created,
+right-click on the snapshot and note the snapshot UUID.</p>
+<p>To snapshot from the command line interface, run the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ xe vm-checkpoint vm=&quot;vm_uuid_or_name&quot; new-name-label=&quot;Snapshot Name/Description&quot;
+</pre></div>
+</div>
+<p>The snapshot UUID is printed to the screen once the command completes.</p>
+<p>Regardless of how the snapshot was created, save the UUID in the virtual
+machine&#8217;s configuration section. Once the snapshot has been created, you can
+shutdown the virtual machine.</p>
+</div>
+<div class="section" id="booting-from-disk">
+<h3>Booting from Disk<a class="headerlink" href="#booting-from-disk" title="Permalink to this headline">¶</a></h3>
+<p>If you can&#8217;t install the Xen guest tools or if you don&#8217;t need to use memory
+snapshots, you will need to ensure that the virtual machine&#8217;s disks are reset on
+boot and that the Cuckoo agent is set to run at boot time.</p>
+<p>Running the agent at boot time can be configured in Windows by adding a startup
+item for the agent.</p>
+<p>The following commands must be run while the virtual machine is powered off.</p>
+<p>To set the virtual machine&#8217;s disks to reset on boot, you&#8217;ll first need to list
+all the attached disks for the virtual machine. To list all attached disks, run
+the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ xe vm-disk-list vm=&quot;vm_name_or_uuid&quot;
+</pre></div>
+</div>
+<p>Ignoring all CD-ROM and read-only disks, run the following command for each
+remaining disk to change it&#8217;s behavior to reset on boot:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ xe vdi-param-set uuid=&quot;vdi_uuid&quot; on-boot=reset
+</pre></div>
+</div>
+<p>After the disk is set to reset on boot, no permanent changes can be made to the
+virtual machine&#8217;s disk. Modifications that occur while a virtual machine is
+running will not persist past shutdown.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Saving the Virtual Machine</a><ul>
+<li><a class="reference internal" href="#virtualbox">VirtualBox</a></li>
+<li><a class="reference internal" href="#kvm">KVM</a></li>
+<li><a class="reference internal" href="#vmware-workstation">VMware Workstation</a></li>
+<li><a class="reference internal" href="#xenserver">XenServer</a><ul>
+<li><a class="reference internal" href="#memory-snapshots">Memory Snapshots</a></li>
+<li><a class="reference internal" href="#booting-from-disk">Booting from Disk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="agent.html"
+                        title="previous chapter">Installing the Agent</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="cloning.html"
+                        title="next chapter">Cloning the Virtual Machine</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/installation/guest/saving.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="cloning.html" title="Cloning the Virtual Machine"
+             >next</a></li>
+        <li class="right" >
+          <a href="agent.html" title="Installing the Agent"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Installation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Preparing the Guest</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

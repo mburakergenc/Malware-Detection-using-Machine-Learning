@@ -1,0 +1,638 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configuration &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../../index.html" />
+    <link rel="up" title="Preparing the Host" href="index.html" />
+    <link rel="next" title="Configuration (Android Analysis)" href="configuration_android.html" />
+    <link rel="prev" title="Installing Cuckoo" href="installation.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="configuration_android.html" title="Configuration (Android Analysis)"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Installing Cuckoo"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Installation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Preparing the Host</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>Cuckoo relies on six main configuration files:</p>
+<blockquote>
+<div><ul>
+<li><p class="first"><a class="reference internal" href="#cuckoo-conf"><span class="std std-ref">cuckoo.conf</span></a>: for configuring general behavior and analysis options.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="#auxiliary-conf"><span class="std std-ref">auxiliary.conf</span></a>: for enabling and configuring auxiliary modules.</p>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#machinery-conf"><span class="std std-ref">&lt;machinery&gt;.conf</span></a>: for defining the options for your virtualization software</dt>
+<dd><p class="first last">(the file has the same name of the machinery module you choose in cuckoo.conf).</p>
+</dd>
+</dl>
+</li>
+<li><p class="first"><a class="reference internal" href="#memory-conf"><span class="std std-ref">memory.conf</span></a>: Volatility configuration.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="#processing-conf"><span class="std std-ref">processing.conf</span></a>: for enabling and configuring processing modules.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="#reporting-conf"><span class="std std-ref">reporting.conf</span></a>: for enabling or disabling report formats.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>To get Cuckoo working you have to edit <a class="reference internal" href="#auxiliary-conf"><span class="std std-ref">auxiliary.conf</span></a>:, <a class="reference internal" href="#cuckoo-conf"><span class="std std-ref">cuckoo.conf</span></a> and <a class="reference internal" href="#machinery-conf"><span class="std std-ref">&lt;machinery&gt;.conf</span></a> at least.</p>
+<div class="section" id="cuckoo-conf">
+<span id="id1"></span><h2>cuckoo.conf<a class="headerlink" href="#cuckoo-conf" title="Permalink to this headline">¶</a></h2>
+<p>The first file to edit is <em>conf/cuckoo.conf</em>, it contains the generic configuration
+options that you might want to verify before launching Cuckoo.</p>
+<p>The file is largely commented and self-explaining, but some of the options you might
+want to pay more attention to are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">machinery</span></code> in <code class="docutils literal"><span class="pre">[cuckoo]</span></code>: this defines which Machinery module you want Cuckoo to use to interact with your analysis machines. The value must be the name of the module without extension.</li>
+<li><code class="docutils literal"><span class="pre">ip</span></code> and <code class="docutils literal"><span class="pre">port</span></code> in <code class="docutils literal"><span class="pre">[resultserver]</span></code>: defines the local IP address and port that Cuckoo is going to use to bind the result server on. Make sure this matches the network configuration of your analysis machines, or they won&#8217;t be able to return the collected results.</li>
+<li><code class="docutils literal"><span class="pre">connection</span></code> in <code class="docutils literal"><span class="pre">[database]</span></code>: defines how to connect to the internal database. You can use any DBMS supported by <a class="reference external" href="http://www.sqlalchemy.org/">SQLAlchemy</a> using a valid <a class="reference external" href="http://docs.sqlalchemy.org/en/latest/core/engines.html#database-urls">Database Urls</a> syntax.</li>
+</ul>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Check your interface for resultserver IP! Some virtualization software (for example Virtualbox)
+don&#8217;t bring up the virtual networking interfaces until a virtual machine is started.
+Cuckoo needs to have the interface where you bind the resultserver up before the start, so please
+check your network setup. If you are not sure about how to get the interface up, a good trick is to manually start
+and stop an analysis virtual machine, this will bring virtual networking up.
+If you are using NAT/PAT in your network, you can set up the resultserver IP
+to 0.0.0.0 to listen on all interfaces, then use the specific options <cite>resultserver_ip</cite> and <cite>resultserver_port</cite>
+in <em>&lt;machinery&gt;.conf</em> to specify the address and port as every machine sees them. Note that if you set
+resultserver IP to 0.0.0.0 in cuckoo.conf you have to set <cite>resultserver_ip</cite> for all your virtual machines.</p>
+</div>
+</div>
+<div class="section" id="auxiliary-conf">
+<span id="id2"></span><h2>auxiliary.conf<a class="headerlink" href="#auxiliary-conf" title="Permalink to this headline">¶</a></h2>
+<p>Auxiliary modules are scripts that run concurrently with malware analysis, this file defines
+their options.</p>
+<p>Following is the default <em>conf/auxiliary.conf</em> file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">sniffer</span><span class="p">]</span>
+<span class="c1"># Enable or disable the use of an external sniffer (tcpdump) [yes/no].</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+
+<span class="c1"># Specify the path to your local installation of tcpdump. Make sure this</span>
+<span class="c1"># path is correct.</span>
+<span class="n">tcpdump</span> <span class="o">=</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">tcpdump</span>
+
+<span class="c1"># We used to define the network interface to capture on in auxiliary.conf, but</span>
+<span class="c1"># this has been moved to the &quot;interface&quot; field of each Virtual Machinery</span>
+<span class="c1"># configuration.</span>
+
+<span class="c1"># Specify a Berkeley packet filter to pass to tcpdump.</span>
+<span class="c1"># Note: packer filtering is not possible when using &quot;nictrace&quot; functionality</span>
+<span class="c1"># from VirtualBox (for example dumping inter-VM traffic).</span>
+<span class="c1"># bpf = not arp</span>
+
+<span class="p">[</span><span class="n">mitm</span><span class="p">]</span>
+<span class="c1"># Enable man in the middle proxying (mitmdump) [yes/no].</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+
+<span class="c1"># Specify the path to your local installation of mitmdump. Make sure this</span>
+<span class="c1"># path is correct.</span>
+<span class="n">mitmdump</span> <span class="o">=</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mitmdump</span>
+
+<span class="c1"># Listen port base. Each virtual machine will use its own port to be</span>
+<span class="c1"># able to make a good distinction between the various running analyses.</span>
+<span class="c1"># Generally port 50000 should be fine, in this case port 50001, 50002, etc</span>
+<span class="c1"># will also be used - again, one port per analyses.</span>
+<span class="n">port_base</span> <span class="o">=</span> <span class="mi">50000</span>
+
+<span class="c1"># Script file to interact with the network traffic. Please refer to the</span>
+<span class="c1"># documentation of mitmproxy/mitmdump to get an understand of their internal</span>
+<span class="c1"># workings. (https://mitmproxy.org/doc/scripting/inlinescripts.html)</span>
+<span class="n">script</span> <span class="o">=</span> <span class="n">data</span><span class="o">/</span><span class="n">mitm</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># Path to the certificate to be used by mitmdump. This file will be</span>
+<span class="c1"># automatically generated for you if you run mitmdump once. It&#39;s just that</span>
+<span class="c1"># you have to copy it from ~/.mitmproxy/mitmproxy-ca-cert.p12 to somewhere</span>
+<span class="c1"># in the analyzer/windows/ directory. Recommended is to write the certificate</span>
+<span class="c1"># to analyzer/windows/bin/cert.p12, in that case the following option should</span>
+<span class="c1"># be set to bin/cert.p12.</span>
+<span class="n">certificate</span> <span class="o">=</span> <span class="nb">bin</span><span class="o">/</span><span class="n">cert</span><span class="o">.</span><span class="n">p12</span>
+
+<span class="p">[</span><span class="n">services</span><span class="p">]</span>
+<span class="c1"># Provide extra services accessible through the network of the analysis VM</span>
+<span class="c1"># provided in separate, standalone, Virtual Machines [yes/no].</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+
+<span class="c1"># Comma-separated list with each Virtual Machine containing said service(s).</span>
+<span class="n">services</span> <span class="o">=</span> <span class="n">honeyd</span>
+
+<span class="c1"># Time in seconds required to boot these virtual machines. E.g., some services</span>
+<span class="c1"># will only get online after a minute because initialization takes a while.</span>
+<span class="n">timeout</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="machinery-conf">
+<span id="id3"></span><h2>&lt;machinery&gt;.conf<a class="headerlink" href="#machinery-conf" title="Permalink to this headline">¶</a></h2>
+<p>Machinery modules are scripts that define how Cuckoo should interact with
+your virtualization software of choice.</p>
+<p>Every module should have a dedicated configuration file which defines the
+details on the available machines. For example, if you created a <em>vmware.py</em>
+machinery module, you should specify <em>vmware</em> in <em>conf/cuckoo.conf</em>
+and have a <em>conf/vmware.conf</em> file.</p>
+<p>Cuckoo provides some modules by default and for the sake of this guide, we&#8217;ll
+assume you&#8217;re going to use VirtualBox.</p>
+<p>Following is the default <em>conf/virtualbox.conf</em> file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">virtualbox</span><span class="p">]</span>
+<span class="c1"># Specify which VirtualBox mode you want to run your machines on.</span>
+<span class="c1"># Can be &quot;gui&quot;, &quot;sdl&quot; or &quot;headless&quot;. Refer to VirtualBox&#39;s official</span>
+<span class="c1"># documentation to understand the differences.</span>
+<span class="n">mode</span> <span class="o">=</span> <span class="n">headless</span>
+
+<span class="c1"># Path to the local installation of the VBoxManage utility.</span>
+<span class="n">path</span> <span class="o">=</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">VBoxManage</span>
+
+<span class="c1"># Default network interface.</span>
+<span class="n">interface</span> <span class="o">=</span> <span class="n">vboxnet0</span>
+
+<span class="c1"># Specify a comma-separated list of available machines to be used. For each</span>
+<span class="c1"># specified ID you have to define a dedicated section containing the details</span>
+<span class="c1"># on the respective machine. (E.g. cuckoo1,cuckoo2,cuckoo3)</span>
+<span class="n">machines</span> <span class="o">=</span> <span class="n">cuckoo1</span>
+
+<span class="p">[</span><span class="n">cuckoo1</span><span class="p">]</span>
+<span class="c1"># Specify the label name of the current machine as specified in your</span>
+<span class="c1"># VirtualBox configuration.</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">cuckoo1</span>
+
+<span class="c1"># Specify the operating system platform used by current machine</span>
+<span class="c1"># [windows/darwin/linux].</span>
+<span class="n">platform</span> <span class="o">=</span> <span class="n">windows</span>
+
+<span class="c1"># Specify the IP address of the current virtual machine. Make sure that the</span>
+<span class="c1"># IP address is valid and that the host machine is able to reach it. If not,</span>
+<span class="c1"># the analysis will fail.</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">56.101</span>
+
+<span class="c1"># (Optional) Specify the snapshot name to use. If you do not specify a snapshot</span>
+<span class="c1"># name, the VirtualBox MachineManager will use the current snapshot.</span>
+<span class="c1"># Example (Snapshot1 is the snapshot name):</span>
+<span class="c1"># snapshot = Snapshot1</span>
+
+<span class="c1"># (Optional) Specify the name of the network interface that should be used</span>
+<span class="c1"># when dumping network traffic from this machine with tcpdump. If specified,</span>
+<span class="c1"># overrides the default interface specified in auxiliary.conf</span>
+<span class="c1"># Example (vboxnet0 is the interface name):</span>
+<span class="c1"># interface = vboxnet0</span>
+
+<span class="c1"># (Optional) Specify the IP of the Result Server, as your virtual machine sees it.</span>
+<span class="c1"># The Result Server will always bind to the address and port specified in cuckoo.conf,</span>
+<span class="c1"># however you could set up your virtual network to use NAT/PAT, so you can specify here</span>
+<span class="c1"># the IP address for the Result Server as your machine sees it. If you don&#39;t specify an</span>
+<span class="c1"># address here, the machine will use the default value from cuckoo.conf.</span>
+<span class="c1"># NOTE: if you set this option you have to set result server IP to 0.0.0.0 in cuckoo.conf.</span>
+<span class="c1"># Example:</span>
+<span class="c1"># resultserver_ip = 192.168.56.1</span>
+
+<span class="c1"># (Optional) Specify the port for the Result Server, as your virtual machine sees it.</span>
+<span class="c1"># The Result Server will always bind to the address and port specified in cuckoo.conf,</span>
+<span class="c1"># however you could set up your virtual network to use NAT/PAT, so you can specify here</span>
+<span class="c1"># the port for the Result Server as your machine sees it. If you don&#39;t specify a port</span>
+<span class="c1"># here, the machine will use the default value from cuckoo.conf.</span>
+<span class="c1"># Example:</span>
+<span class="c1"># resultserver_port = 2042</span>
+
+<span class="c1"># (Optional) Set your own tags. These are comma separated and help to identify</span>
+<span class="c1"># specific VMs. You can run samples on VMs with tag you require.</span>
+<span class="c1"># tags = windows_xp_sp3,32_bit,acrobat_reader_6</span>
+
+<span class="p">[</span><span class="n">honeyd</span><span class="p">]</span>
+<span class="c1"># For more information on this VM please refer to the &quot;services&quot; section of</span>
+<span class="c1"># the conf/auxiliary.conf configuration file. This machine is a bit special</span>
+<span class="c1"># in the way that its used as an additional VM for an analysis.</span>
+<span class="c1"># *NOTE* that if this functionality is used, the VM should be registered in</span>
+<span class="c1"># the &quot;machines&quot; list in the beginning of this file.</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">honeyd</span>
+<span class="n">platform</span> <span class="o">=</span> <span class="n">linux</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">56.102</span>
+<span class="c1"># The tags should at least contain &quot;service&quot; and the name of this service.</span>
+<span class="c1"># This way the services auxiliary module knows how to find this particular VM.</span>
+<span class="n">tags</span> <span class="o">=</span> <span class="n">service</span><span class="p">,</span> <span class="n">honeyd</span>
+<span class="c1"># Not all services actually have a Cuckoo Agent running in the VM, for those</span>
+<span class="c1"># services one can specify the &quot;noagent&quot; option so Cuckoo will just wait until</span>
+<span class="c1"># the end of the analysis instead of trying to connect to the non-existing</span>
+<span class="c1"># Cuckoo Agent. We can&#39;t really intercept any inter-VM communication from the</span>
+<span class="c1"># host / gateway so in order to dump traffic between VMs we have to use a</span>
+<span class="c1"># different network dumping approach. For this machine we use the &quot;nictrace&quot;</span>
+<span class="c1"># functionality from VirtualBox (which is basically their internal tcpdump)</span>
+<span class="c1"># and thus properly dumps inter-VM traffic.</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">nictrace</span> <span class="n">noagent</span>
+</pre></div>
+</div>
+<p>You can use this same configuration structure for any other machinery module, although
+existing ones might have some variations or additional configuration options.</p>
+<p>The comments for the options are self-explainatory.</p>
+<p>Following is the default <em>conf/kvm.conf</em> file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">kvm</span><span class="p">]</span>
+<span class="c1"># Specify a comma-separated list of available machines to be used. For each</span>
+<span class="c1"># specified ID you have to define a dedicated section containing the details</span>
+<span class="c1"># on the respective machine. (E.g. cuckoo1,cuckoo2,cuckoo3)</span>
+<span class="n">machines</span> <span class="o">=</span> <span class="n">cuckoo1</span>
+
+<span class="c1"># Specify the name of the default network interface that will be used</span>
+<span class="c1"># when dumping network traffic with tcpdump.</span>
+<span class="c1"># Example (virbr0 is the interface name):</span>
+<span class="n">interface</span> <span class="o">=</span> <span class="n">virbr0</span>
+
+<span class="p">[</span><span class="n">cuckoo1</span><span class="p">]</span>
+<span class="c1"># Specify the label name of the current machine as specified in your</span>
+<span class="c1"># libvirt configuration.</span>
+<span class="n">label</span> <span class="o">=</span> <span class="n">cuckoo1</span>
+
+<span class="c1"># Specify the operating system platform used by current machine</span>
+<span class="c1"># [windows/darwin/linux].</span>
+<span class="n">platform</span> <span class="o">=</span> <span class="n">windows</span>
+
+<span class="c1"># Specify the IP address of the current virtual machine. Make sure that the</span>
+<span class="c1"># IP address is valid and that the host machine is able to reach it. If not,</span>
+<span class="c1"># the analysis will fail. You may want to configure your network settings in</span>
+<span class="c1"># /etc/libvirt/&lt;hypervisor&gt;/networks/</span>
+<span class="n">ip</span> <span class="o">=</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">122.105</span>
+
+<span class="c1"># (Optional) Specify the snapshot name to use. If you do not specify a snapshot</span>
+<span class="c1"># name, the KVM MachineManager will use the current snapshot.</span>
+<span class="c1"># Example (Snapshot1 is the snapshot name):</span>
+<span class="c1"># snapshot = Snapshot1</span>
+
+<span class="c1"># (Optional) Specify the name of the network interface that should be used</span>
+<span class="c1"># when dumping network traffic from this machine with tcpdump.</span>
+<span class="c1"># Example (virbr0 is the interface name):</span>
+<span class="c1"># interface = virbr0</span>
+
+<span class="c1"># (Optional) Specify the IP of the Result Server, as your virtual machine sees it.</span>
+<span class="c1"># The Result Server will always bind to the address and port specified in cuckoo.conf,</span>
+<span class="c1"># however you could set up your virtual network to use NAT/PAT, so you can specify here</span>
+<span class="c1"># the IP address for the Result Server as your machine sees it. If you don&#39;t specify an</span>
+<span class="c1"># address here, the machine will use the default value from cuckoo.conf.</span>
+<span class="c1"># NOTE: if you set this option you have to set result server IP to 0.0.0.0 in cuckoo.conf.</span>
+<span class="c1"># Example:</span>
+<span class="c1"># resultserver_ip = 192.168.122.101</span>
+
+<span class="c1"># (Optional) Specify the port for the Result Server, as your virtual machine sees it.</span>
+<span class="c1"># The Result Server will always bind to the address and port specified in cuckoo.conf,</span>
+<span class="c1"># however you could set up your virtual network to use NAT/PAT, so you can specify here</span>
+<span class="c1"># the port for the Result Server as your machine sees it. If you don&#39;t specify a port</span>
+<span class="c1"># here, the machine will use the default value from cuckoo.conf.</span>
+<span class="c1"># Example:</span>
+<span class="c1"># resultserver_port = 2042</span>
+
+<span class="c1"># (Optional) Set your own tags. These are comma separated and help to identify</span>
+<span class="c1"># specific VMs. You can run samples on VMs with tag you require.</span>
+<span class="c1"># tags = windows_xp_sp3,32_bit,acrobat_reader_6</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="memory-conf">
+<span id="id4"></span><h2>memory.conf<a class="headerlink" href="#memory-conf" title="Permalink to this headline">¶</a></h2>
+<p>The Volatility tool offers a large set of plugins for memory dump analysis. Some of them are quite slow.
+In volatility.conf lets you to enable or disable the plugins of your choice.
+To use Volatility you have to follow two steps:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Enable it before in processing.conf</li>
+<li>Enable memory_dump in cuckoo.conf</li>
+</ul>
+</div></blockquote>
+<p>In the memory.conf&#8217;s basic section you can configure the Volatility profile and
+the deletion of memory dumps after processing:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Basic settings</span>
+<span class="p">[</span><span class="n">basic</span><span class="p">]</span>
+<span class="c1"># Profile to avoid wasting time identifying it</span>
+<span class="n">guest_profile</span> <span class="o">=</span> <span class="n">WinXPSP2x86</span>
+<span class="c1"># Delete memory dump after volatility processing.</span>
+<span class="n">delete_memdump</span> <span class="o">=</span> <span class="n">no</span>
+</pre></div>
+</div>
+<p>After that every plugin has an own section for configuration:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Scans for hidden/injected code and dlls</span>
+<span class="c1"># http://code.google.com/p/volatility/wiki/CommandReference#malfind</span>
+<span class="p">[</span><span class="n">malfind</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">on</span>
+<span class="nb">filter</span> <span class="o">=</span> <span class="n">on</span>
+
+<span class="c1"># Lists hooked api in user mode and kernel space</span>
+<span class="c1"># Expect it to be very slow when enabled</span>
+<span class="c1"># http://code.google.com/p/volatility/wiki/CommandReference#apihooks</span>
+<span class="p">[</span><span class="n">apihooks</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">off</span>
+<span class="nb">filter</span> <span class="o">=</span> <span class="n">on</span>
+</pre></div>
+</div>
+<p>The filter configuration helps you to remove known clean data from the resulting
+report. It can be configured separately for every plugin.</p>
+<p>The filter itself is configured in the [mask] section.
+You can enter a list of pids in pid_generic to filter out processes:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Masks. Data that should not be logged</span>
+<span class="c1"># Just get this information from your plain VM Snapshot (without running malware)</span>
+<span class="c1"># This will filter out unwanted information in the logs</span>
+<span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="c1"># pid_generic: a list of process ids that already existed on the machine before the malware was started.</span>
+<span class="n">pid_generic</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">680</span><span class="p">,</span> <span class="mi">752</span><span class="p">,</span> <span class="mi">776</span><span class="p">,</span> <span class="mi">828</span><span class="p">,</span> <span class="mi">840</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1052</span><span class="p">,</span> <span class="mi">1168</span><span class="p">,</span> <span class="mi">1364</span><span class="p">,</span> <span class="mi">1428</span><span class="p">,</span> <span class="mi">1476</span><span class="p">,</span> <span class="mi">1808</span><span class="p">,</span> <span class="mi">452</span><span class="p">,</span> <span class="mi">580</span><span class="p">,</span> <span class="mi">652</span><span class="p">,</span> <span class="mi">248</span><span class="p">,</span> <span class="mi">1992</span><span class="p">,</span> <span class="mi">1696</span><span class="p">,</span> <span class="mi">1260</span><span class="p">,</span> <span class="mi">1656</span><span class="p">,</span> <span class="mi">1156</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="processing-conf">
+<span id="id5"></span><h2>processing.conf<a class="headerlink" href="#processing-conf" title="Permalink to this headline">¶</a></h2>
+<p>This file allows you to enable, disable and configure all processing modules.
+These modules are located under <cite>modules/processing/</cite> and define how to digest
+the raw data collected during the analysis.</p>
+<p>You will find a section for each processing module:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Enable or disable the available processing modules [on/off].</span>
+<span class="c1"># If you add a custom processing module to your Cuckoo setup, you have to add</span>
+<span class="c1"># a dedicated entry in this file, or it won&#39;t be executed.</span>
+<span class="c1"># You can also add additional options under the section of your module and</span>
+<span class="c1"># they will be available in your Python class.</span>
+
+<span class="p">[</span><span class="n">analysisinfo</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+
+<span class="p">[</span><span class="n">apkinfo</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+<span class="c1"># Decompiling dex files with androguard in a heavy operation. For large dex</span>
+<span class="c1"># files it can really take quite a while - it is recommended to limit to a</span>
+<span class="c1"># certain filesize.</span>
+<span class="c1"># decompilation_threshold=5000000</span>
+
+<span class="p">[</span><span class="n">baseline</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+
+<span class="p">[</span><span class="n">behavior</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+
+<span class="p">[</span><span class="n">buffer</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+
+<span class="p">[</span><span class="n">debug</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+
+<span class="p">[</span><span class="n">droidmon</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+
+<span class="p">[</span><span class="n">dropped</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+
+<span class="p">[</span><span class="n">dumptls</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+
+<span class="p">[</span><span class="n">googleplay</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+<span class="n">android_id</span> <span class="o">=</span>
+<span class="n">google_login</span> <span class="o">=</span>
+<span class="n">google_password</span> <span class="o">=</span>
+
+<span class="p">[</span><span class="n">memory</span><span class="p">]</span>
+<span class="c1"># Create a memory dump of the entire Virtual Machine. This memory dump will</span>
+<span class="c1"># then be analyzed using Volatility to locate interesting events that can be</span>
+<span class="c1"># extracted from memory.</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+
+<span class="p">[</span><span class="n">network</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+
+<span class="p">[</span><span class="n">procmemory</span><span class="p">]</span>
+<span class="c1"># Enables the creation of process memory dumps for each analyzed process right</span>
+<span class="c1"># before they terminate themselves or right before the analysis finishes.</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+<span class="c1"># It is possible to load these process memory dumps in IDA Pro through the</span>
+<span class="c1"># generation of IDA Python-based script files. Although currently symbols and</span>
+<span class="c1"># such are not properly recovered, it is still nice to get a quick look at</span>
+<span class="c1"># specific memory addresses of a process.</span>
+<span class="n">idapro</span> <span class="o">=</span> <span class="n">no</span>
+
+<span class="p">[</span><span class="n">screenshots</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+<span class="n">tesseract</span> <span class="o">=</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">tesseract</span>
+
+<span class="p">[</span><span class="n">snort</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+<span class="c1"># Following are various configurable settings. When in use of a recent 2.9.x.y</span>
+<span class="c1"># version of Snort there is no need to change any of the following settings as</span>
+<span class="c1"># they represent the defaults.</span>
+<span class="c1">#</span>
+<span class="c1"># snort = /usr/local/bin/snort</span>
+<span class="c1"># conf = /etc/snort/snort.conf</span>
+
+<span class="p">[</span><span class="n">static</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+
+<span class="p">[</span><span class="n">strings</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+
+<span class="p">[</span><span class="n">suricata</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+<span class="c1"># Following are various configurable settings. When in use of a recent version</span>
+<span class="c1"># of Suricata there is no need to change any of the following settings as they</span>
+<span class="c1"># represent the defaults.</span>
+<span class="c1">#</span>
+<span class="c1"># suricata = /usr/bin/suricata</span>
+<span class="c1"># conf = /etc/suricata/suricata.yaml</span>
+<span class="c1"># eve_log = eve.json</span>
+<span class="c1"># files_log = files-json.log</span>
+<span class="c1"># files_dir = files</span>
+<span class="c1">#</span>
+<span class="c1"># Uncommenting the following line makes our processing module use the socket</span>
+<span class="c1"># mode in Suricata. This is quite the performance improvement as instead of</span>
+<span class="c1"># having to load all the Suricata rules for each time the processing module is</span>
+<span class="c1"># ran (i.e., for every task), the rules are only loaded once and then we talk</span>
+<span class="c1"># to its API. This does require running Suricata as follows or similar;</span>
+<span class="c1"># &quot;suricata --unix-socket -D&quot;.</span>
+<span class="c1"># (Please find more information in utils/suricata.sh for now).</span>
+<span class="c1"># socket = /var/run/suricata/cuckoo.socket</span>
+
+<span class="p">[</span><span class="n">targetinfo</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+
+<span class="p">[</span><span class="n">virustotal</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+<span class="c1"># How much time we can wait to establish VirusTotal connection and get the</span>
+<span class="c1"># report.</span>
+<span class="n">timeout</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="c1"># Enable this option if you want to submit files to VirusTotal not yet available</span>
+<span class="c1"># in their database.</span>
+<span class="c1"># NOTE: if you are dealing with sensitive stuff, enabling this option you could</span>
+<span class="c1"># leak some files to VirusTotal.</span>
+<span class="n">scan</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># Add your VirusTotal API key here. The default API key, kindly provided</span>
+<span class="c1"># by the VirusTotal team, should enable you with a sufficient throughput</span>
+<span class="c1"># and while being shared with all our users, it shouldn&#39;t affect your use.</span>
+<span class="n">key</span> <span class="o">=</span> <span class="n">a0283a2c3d55728300d064874239b5346fb991317e8449fe43c902879d758088</span>
+</pre></div>
+</div>
+<p>You might want to configure the <a class="reference external" href="http://www.virustotal.com">VirusTotal</a> key if you have an account of your own.</p>
+</div>
+<div class="section" id="reporting-conf">
+<span id="id6"></span><h2>reporting.conf<a class="headerlink" href="#reporting-conf" title="Permalink to this headline">¶</a></h2>
+<p>The <em>conf/reporting.conf</em> file contains information on the automated reports
+generation.</p>
+<p>It contains the following sections:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Enable or disable the available reporting modules [on/off].</span>
+<span class="c1"># If you add a custom reporting module to your Cuckoo setup, you have to add</span>
+<span class="c1"># a dedicated entry in this file, or it won&#39;t be executed.</span>
+<span class="c1"># You can also add additional options under the section of your module and</span>
+<span class="c1"># they will be available in your Python class.</span>
+
+<span class="p">[</span><span class="n">jsondump</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">yes</span>
+<span class="n">indent</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">encoding</span> <span class="o">=</span> <span class="n">latin</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">calls</span> <span class="o">=</span> <span class="n">yes</span>
+
+<span class="p">[</span><span class="n">reporthtml</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+
+<span class="p">[</span><span class="n">mongodb</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+<span class="n">host</span> <span class="o">=</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+<span class="n">port</span> <span class="o">=</span> <span class="mi">27017</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">cuckoo</span>
+<span class="n">store_memdump</span> <span class="o">=</span> <span class="n">yes</span>
+<span class="n">paginate</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="p">[</span><span class="n">elasticsearch</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+<span class="c1"># Comma-separated list of ElasticSearch hosts.</span>
+<span class="n">hosts</span> <span class="o">=</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+<span class="c1"># Set to yes if we want to be able to search every API call instead of just</span>
+<span class="c1"># through the behavioral summary.</span>
+<span class="n">calls</span> <span class="o">=</span> <span class="n">no</span>
+<span class="c1"># Index of this Cuckoo instance. If multiple Cuckoo instances connect to the</span>
+<span class="c1"># same ElasticSearch host then this index (in Moloch called &quot;instance&quot;) should</span>
+<span class="c1"># be unique for each Cuckoo instance.</span>
+<span class="c1">#</span>
+<span class="c1"># index = cuckoo</span>
+<span class="c1">#</span>
+<span class="c1"># Just in case we will have report updates in Cuckoo one will be able to</span>
+<span class="c1"># update to a new scheme by modifying the ElasticSearch document type.</span>
+<span class="c1">#</span>
+<span class="c1"># type = cuckoo</span>
+
+<span class="p">[</span><span class="n">moloch</span><span class="p">]</span>
+<span class="n">enabled</span> <span class="o">=</span> <span class="n">no</span>
+<span class="c1"># If the Moloch web interface is hosted on a different IP address than the</span>
+<span class="c1"># Cuckoo Web Interface then you&#39;ll want to override the IP address here.</span>
+<span class="c1"># host = 127.0.0.1</span>
+<span class="c1">#</span>
+<span class="c1"># Following are various configurable settings. When in use of a recent version</span>
+<span class="c1"># of Moloch there is no need to change any of the following settings as they</span>
+<span class="c1"># represent the defaults.</span>
+<span class="c1">#</span>
+<span class="c1"># moloch_capture = /data/moloch/bin/moloch-capture</span>
+<span class="c1"># conf = /data/moloch/etc/config.ini</span>
+<span class="c1"># instance = cuckoo</span>
+</pre></div>
+</div>
+<p>By setting those option to <em>on</em> or <em>off</em> you enable or disable the generation
+of such reports.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuration</a><ul>
+<li><a class="reference internal" href="#cuckoo-conf">cuckoo.conf</a></li>
+<li><a class="reference internal" href="#auxiliary-conf">auxiliary.conf</a></li>
+<li><a class="reference internal" href="#machinery-conf">&lt;machinery&gt;.conf</a></li>
+<li><a class="reference internal" href="#memory-conf">memory.conf</a></li>
+<li><a class="reference internal" href="#processing-conf">processing.conf</a></li>
+<li><a class="reference internal" href="#reporting-conf">reporting.conf</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Installing Cuckoo</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="configuration_android.html"
+                        title="next chapter">Configuration (Android Analysis)</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/installation/host/configuration.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="configuration_android.html" title="Configuration (Android Analysis)"
+             >next</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Installing Cuckoo"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Installation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Preparing the Host</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

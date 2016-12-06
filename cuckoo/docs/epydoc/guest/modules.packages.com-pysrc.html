@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.packages.com</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.packages-module.html">Package&nbsp;packages</a> ::
+        Module&nbsp;com
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.packages.com-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.packages.com-module.html">Module modules.packages.com</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.common=lib.common-module.html"><a title="lib.common" class="py-name" href="#" onclick="return doclink('link-1', 'common', 'link-1');">common</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module lib.common.abstracts=lib.common.abstracts-module.html"><a title="lib.common.abstracts" class="py-name" href="#" onclick="return doclink('link-2', 'abstracts', 'link-2');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class lib.common.abstracts.Package=lib.common.abstracts.Package-class.html"><a title="lib.common.abstracts.Package" class="py-name" href="#" onclick="return doclink('link-3', 'Package', 'link-3');">Package</a></tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="ComDll"></a><div id="ComDll-def"><a name="L10"></a><tt class="py-lineno">10</tt> <a class="py-toggle" href="#" id="ComDll-toggle" onclick="return toggle('ComDll');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.packages.com.ComDll-class.html">ComDll</a><tt class="py-op">(</tt><tt class="py-base-class">Package</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ComDll-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="ComDll-expanded"><a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt class="py-docstring">"""COM analysis package."""</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">    <tt id="link-4" class="py-name" targets="Variable lib.common.abstracts.Package.PATHS=lib.common.abstracts.Package-class.html#PATHS,Variable modules.packages.applet.Applet.PATHS=modules.packages.applet.Applet-class.html#PATHS,Variable modules.packages.com.ComDll.PATHS=modules.packages.com.ComDll-class.html#PATHS,Variable modules.packages.cpl.CPL.PATHS=modules.packages.cpl.CPL-class.html#PATHS,Variable modules.packages.dll.Dll.PATHS=modules.packages.dll.Dll-class.html#PATHS,Variable modules.packages.doc.DOC.PATHS=modules.packages.doc.DOC-class.html#PATHS,Variable modules.packages.ff.Firefox.PATHS=modules.packages.ff.Firefox-class.html#PATHS,Variable modules.packages.generic.Generic.PATHS=modules.packages.generic.Generic-class.html#PATHS,Variable modules.packages.ie.IE.PATHS=modules.packages.ie.IE-class.html#PATHS,Variable modules.packages.jar.Jar.PATHS=modules.packages.jar.Jar-class.html#PATHS,Variable modules.packages.js.Javascript.PATHS=modules.packages.js.Javascript-class.html#PATHS,Variable modules.packages.msi.Msi.PATHS=modules.packages.msi.Msi-class.html#PATHS,Variable modules.packages.pdf.PDF.PATHS=modules.packages.pdf.PDF-class.html#PATHS,Variable modules.packages.ppt.PPT.PATHS=modules.packages.ppt.PPT-class.html#PATHS,Variable modules.packages.ps1.PS1.PATHS=modules.packages.ps1.PS1-class.html#PATHS,Variable modules.packages.pub.PUB.PATHS=modules.packages.pub.PUB-class.html#PATHS,Variable modules.packages.python.Python.PATHS=modules.packages.python.Python-class.html#PATHS,Variable modules.packages.vbs.VBS.PATHS=modules.packages.vbs.VBS-class.html#PATHS,Variable modules.packages.wsf.WSF.PATHS=modules.packages.wsf.WSF-class.html#PATHS,Variable modules.packages.xls.XLS.PATHS=modules.packages.xls.XLS-class.html#PATHS"><a title="lib.common.abstracts.Package.PATHS
+modules.packages.applet.Applet.PATHS
+modules.packages.com.ComDll.PATHS
+modules.packages.cpl.CPL.PATHS
+modules.packages.dll.Dll.PATHS
+modules.packages.doc.DOC.PATHS
+modules.packages.ff.Firefox.PATHS
+modules.packages.generic.Generic.PATHS
+modules.packages.ie.IE.PATHS
+modules.packages.jar.Jar.PATHS
+modules.packages.js.Javascript.PATHS
+modules.packages.msi.Msi.PATHS
+modules.packages.pdf.PDF.PATHS
+modules.packages.ppt.PPT.PATHS
+modules.packages.ps1.PS1.PATHS
+modules.packages.pub.PUB.PATHS
+modules.packages.python.Python.PATHS
+modules.packages.vbs.VBS.PATHS
+modules.packages.wsf.WSF.PATHS
+modules.packages.xls.XLS.PATHS" class="py-name" href="#" onclick="return doclink('link-4', 'PATHS', 'link-4');">PATHS</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"System32"</tt><tt class="py-op">,</tt> <tt class="py-string">"regsvr32.exe"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="ComDll.start"></a><div id="ComDll.start-def"><a name="L16"></a><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="ComDll.start-toggle" onclick="return toggle('ComDll.start');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.packages.com.ComDll-class.html#start">start</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ComDll.start-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ComDll.start-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-name">regsvr32</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method lib.common.abstracts.Package.get_path()=lib.common.abstracts.Package-class.html#get_path"><a title="lib.common.abstracts.Package.get_path" class="py-name" href="#" onclick="return doclink('link-5', 'get_path', 'link-5');">get_path</a></tt><tt class="py-op">(</tt><tt class="py-string">"regsvr32"</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">        <tt class="py-name">arguments</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">"arguments"</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-comment"># Check file extension.</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">ext</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">splitext</tt><tt class="py-op">(</tt><tt class="py-name">path</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-comment"># If the file doesn't have the proper .dll extension force it</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-comment"># and rename it. This is needed for regsvr32 to execute correctly.</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-comment"># See ticket #354 for details.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">ext</tt> <tt class="py-op">!=</tt> <tt class="py-string">".dll"</tt><tt class="py-op">:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">            <tt class="py-name">new_path</tt> <tt class="py-op">=</tt> <tt class="py-name">path</tt> <tt class="py-op">+</tt> <tt class="py-string">".dll"</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">            <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">rename</tt><tt class="py-op">(</tt><tt class="py-name">path</tt><tt class="py-op">,</tt> <tt class="py-name">new_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">            <tt class="py-name">path</tt> <tt class="py-op">=</tt> <tt class="py-name">new_path</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">path</tt><tt class="py-op">]</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">arguments</tt><tt class="py-op">:</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">            <tt class="py-name">args</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">arguments</tt><tt class="py-op">)</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method lib.api.process.Process.execute()=lib.api.process.Process-class.html#execute,Method lib.common.abstracts.Package.execute()=lib.common.abstracts.Package-class.html#execute"><a title="lib.api.process.Process.execute
+lib.common.abstracts.Package.execute" class="py-name" href="#" onclick="return doclink('link-6', 'execute', 'link-6');">execute</a></tt><tt class="py-op">(</tt><tt class="py-name">regsvr32</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">=</tt><tt class="py-name">args</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:04 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

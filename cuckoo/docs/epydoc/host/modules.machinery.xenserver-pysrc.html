@@ -1,0 +1,861 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.machinery.xenserver</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.machinery-module.html">Package&nbsp;machinery</a> ::
+        Module&nbsp;xenserver
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.machinery.xenserver-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.machinery.xenserver-module.html">Module modules.machinery.xenserver</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">XenServer machinery.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">threading</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.cuckoo=lib.cuckoo-module.html"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-1', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package lib.cuckoo.common=lib.cuckoo.common-module.html"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-2', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module lib.cuckoo.common.abstracts=lib.cuckoo.common.abstracts-module.html"><a title="lib.cuckoo.common.abstracts" class="py-name" href="#" onclick="return doclink('link-3', 'abstracts', 'link-3');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class lib.cuckoo.common.abstracts.Machinery=lib.cuckoo.common.abstracts.Machinery-class.html"><a title="lib.cuckoo.common.abstracts.Machinery" class="py-name" href="#" onclick="return doclink('link-4', 'Machinery', 'link-4');">Machinery</a></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-5', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-6', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-7', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module lib.cuckoo.common.exceptions=lib.cuckoo.common.exceptions-module.html"><a title="lib.cuckoo.common.exceptions" class="py-name" href="#" onclick="return doclink('link-8', 'exceptions', 'link-8');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Class lib.cuckoo.common.exceptions.CuckooMachineError=lib.cuckoo.common.exceptions.CuckooMachineError-class.html"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-9', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-10', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-11', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-12', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="lib.cuckoo.common.exceptions" class="py-name" href="#" onclick="return doclink('link-13', 'exceptions', 'link-8');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-14" class="py-name" targets="Class lib.cuckoo.common.exceptions.CuckooDependencyError=lib.cuckoo.common.exceptions.CuckooDependencyError-class.html"><a title="lib.cuckoo.common.exceptions.CuckooDependencyError" class="py-name" href="#" onclick="return doclink('link-14', 'CuckooDependencyError', 'link-14');">CuckooDependencyError</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">XenAPI</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt id="link-15" class="py-name" targets="Variable modules.machinery.xenserver.HAVE_XENAPI=modules.machinery.xenserver-module.html#HAVE_XENAPI"><a title="modules.machinery.xenserver.HAVE_XENAPI" class="py-name" href="#" onclick="return doclink('link-15', 'HAVE_XENAPI', 'link-15');">HAVE_XENAPI</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt id="link-16" class="py-name"><a title="modules.machinery.xenserver.HAVE_XENAPI" class="py-name" href="#" onclick="return doclink('link-16', 'HAVE_XENAPI', 'link-15');">HAVE_XENAPI</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt id="link-17" class="py-name" targets="Variable lib.cuckoo.common.abstracts.log=lib.cuckoo.common.abstracts-module.html#log,Variable lib.cuckoo.common.irc.log=lib.cuckoo.common.irc-module.html#log,Variable lib.cuckoo.common.netlog.log=lib.cuckoo.common.netlog-module.html#log,Variable lib.cuckoo.common.objects.log=lib.cuckoo.common.objects-module.html#log,Variable lib.cuckoo.common.utils.log=lib.cuckoo.common.utils-module.html#log,Variable lib.cuckoo.core.database.log=lib.cuckoo.core.database-module.html#log,Variable lib.cuckoo.core.guest.log=lib.cuckoo.core.guest-module.html#log,Module lib.cuckoo.core.log=lib.cuckoo.core.log-module.html,Variable lib.cuckoo.core.plugins.log=lib.cuckoo.core.plugins-module.html#log,Variable lib.cuckoo.core.resultserver.log=lib.cuckoo.core.resultserver-module.html#log,Variable lib.cuckoo.core.rooter.log=lib.cuckoo.core.rooter-module.html#log,Variable lib.cuckoo.core.scheduler.log=lib.cuckoo.core.scheduler-module.html#log,Variable lib.cuckoo.core.startup.log=lib.cuckoo.core.startup-module.html#log,Variable modules.auxiliary.mitm.log=modules.auxiliary.mitm-module.html#log,Variable modules.auxiliary.reboot.log=modules.auxiliary.reboot-module.html#log,Variable modules.auxiliary.services.log=modules.auxiliary.services-module.html#log,Variable modules.auxiliary.sniffer.log=modules.auxiliary.sniffer-module.html#log,Variable modules.machinery.avd.log=modules.machinery.avd-module.html#log,Variable modules.machinery.physical.log=modules.machinery.physical-module.html#log,Variable modules.machinery.qemu.log=modules.machinery.qemu-module.html#log,Variable modules.machinery.virtualbox.log=modules.machinery.virtualbox-module.html#log,Variable modules.machinery.vmware.log=modules.machinery.vmware-module.html#log,Variable modules.machinery.vsphere.log=modules.machinery.vsphere-module.html#log,Variable modules.machinery.xenserver.log=modules.machinery.xenserver-module.html#log,Variable modules.processing.analysisinfo.log=modules.processing.analysisinfo-module.html#log,Variable modules.processing.apkinfo.log=modules.processing.apkinfo-module.html#log,Variable modules.processing.baseline.log=modules.processing.baseline-module.html#log,Variable modules.processing.behavior.log=modules.processing.behavior-module.html#log,Variable modules.processing.debug.log=modules.processing.debug-module.html#log,Variable modules.processing.droidmon.log=modules.processing.droidmon-module.html#log,Variable modules.processing.dumptls.log=modules.processing.dumptls-module.html#log,Variable modules.processing.googleplay.log=modules.processing.googleplay-module.html#log,Variable modules.processing.irma.log=modules.processing.irma-module.html#log,Variable modules.processing.memory.log=modules.processing.memory-module.html#log,Variable modules.processing.misp.log=modules.processing.misp-module.html#log,Variable modules.processing.network.log=modules.processing.network-module.html#log,Variable modules.processing.platform.linux.log=modules.processing.platform.linux-module.html#log,Variable modules.processing.platform.windows.log=modules.processing.platform.windows-module.html#log,Variable modules.processing.procmemory.log=modules.processing.procmemory-module.html#log,Variable modules.processing.screenshots.log=modules.processing.screenshots-module.html#log,Variable modules.processing.snort.log=modules.processing.snort-module.html#log,Variable modules.processing.static.log=modules.processing.static-module.html#log,Variable modules.processing.suricata.log=modules.processing.suricata-module.html#log,Variable modules.processing.virustotal.log=modules.processing.virustotal-module.html#log,Variable modules.reporting.elasticsearch.log=modules.reporting.elasticsearch-module.html#log,Variable modules.reporting.moloch.log=modules.reporting.moloch-module.html#log"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-17', 'log', 'link-17');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-name">__name__</tt><tt class="py-op">)</tt> </tt>
+<a name="XenServerMachinery"></a><div id="XenServerMachinery-def"><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt> <a class="py-toggle" href="#" id="XenServerMachinery-toggle" onclick="return toggle('XenServerMachinery');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html">XenServerMachinery</a><tt class="py-op">(</tt><tt class="py-base-class">Machinery</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="XenServerMachinery-expanded"><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt class="py-docstring">"""Virtualization layer for XenServer using the XenAPI XML-RPC interface."""</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt id="link-18" class="py-name" targets="Variable lib.cuckoo.common.abstracts.Machinery.LABEL=lib.cuckoo.common.abstracts.Machinery-class.html#LABEL,Variable modules.machinery.vmware.VMware.LABEL=modules.machinery.vmware.VMware-class.html#LABEL,Variable modules.machinery.xenserver.XenServerMachinery.LABEL=modules.machinery.xenserver.XenServerMachinery-class.html#LABEL"><a title="lib.cuckoo.common.abstracts.Machinery.LABEL
+modules.machinery.vmware.VMware.LABEL
+modules.machinery.xenserver.XenServerMachinery.LABEL" class="py-name" href="#" onclick="return doclink('link-18', 'LABEL', 'link-18');">LABEL</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"uuid"</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-comment"># Power States.</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">    <tt id="link-19" class="py-name" targets="Variable lib.cuckoo.common.abstracts.LibVirtMachinery.RUNNING=lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#RUNNING,Variable modules.machinery.physical.Physical.RUNNING=modules.machinery.physical.Physical-class.html#RUNNING,Variable modules.machinery.qemu.QEMU.RUNNING=modules.machinery.qemu.QEMU-class.html#RUNNING,Variable modules.machinery.virtualbox.VirtualBox.RUNNING=modules.machinery.virtualbox.VirtualBox-class.html#RUNNING,Variable modules.machinery.vsphere.vSphere.RUNNING=modules.machinery.vsphere.vSphere-class.html#RUNNING,Variable modules.machinery.xenserver.XenServerMachinery.RUNNING=modules.machinery.xenserver.XenServerMachinery-class.html#RUNNING"><a title="lib.cuckoo.common.abstracts.LibVirtMachinery.RUNNING
+modules.machinery.physical.Physical.RUNNING
+modules.machinery.qemu.QEMU.RUNNING
+modules.machinery.virtualbox.VirtualBox.RUNNING
+modules.machinery.vsphere.vSphere.RUNNING
+modules.machinery.xenserver.XenServerMachinery.RUNNING" class="py-name" href="#" onclick="return doclink('link-19', 'RUNNING', 'link-19');">RUNNING</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Running"</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">    <tt id="link-20" class="py-name" targets="Variable lib.cuckoo.common.abstracts.LibVirtMachinery.PAUSED=lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#PAUSED,Variable modules.machinery.xenserver.XenServerMachinery.PAUSED=modules.machinery.xenserver.XenServerMachinery-class.html#PAUSED"><a title="lib.cuckoo.common.abstracts.LibVirtMachinery.PAUSED
+modules.machinery.xenserver.XenServerMachinery.PAUSED" class="py-name" href="#" onclick="return doclink('link-20', 'PAUSED', 'link-20');">PAUSED</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Paused"</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">    <tt id="link-21" class="py-name" targets="Variable lib.cuckoo.common.abstracts.LibVirtMachinery.POWEROFF=lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#POWEROFF,Variable modules.machinery.virtualbox.VirtualBox.POWEROFF=modules.machinery.virtualbox.VirtualBox-class.html#POWEROFF,Variable modules.machinery.vsphere.vSphere.POWEROFF=modules.machinery.vsphere.vSphere-class.html#POWEROFF,Variable modules.machinery.xenserver.XenServerMachinery.POWEROFF=modules.machinery.xenserver.XenServerMachinery-class.html#POWEROFF"><a title="lib.cuckoo.common.abstracts.LibVirtMachinery.POWEROFF
+modules.machinery.virtualbox.VirtualBox.POWEROFF
+modules.machinery.vsphere.vSphere.POWEROFF
+modules.machinery.xenserver.XenServerMachinery.POWEROFF" class="py-name" href="#" onclick="return doclink('link-21', 'POWEROFF', 'link-21');">POWEROFF</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Halted"</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">    <tt id="link-22" class="py-name" targets="Variable lib.cuckoo.common.abstracts.LibVirtMachinery.ABORTED=lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#ABORTED,Variable modules.machinery.virtualbox.VirtualBox.ABORTED=modules.machinery.virtualbox.VirtualBox-class.html#ABORTED,Variable modules.machinery.vsphere.vSphere.ABORTED=modules.machinery.vsphere.vSphere-class.html#ABORTED,Variable modules.machinery.xenserver.XenServerMachinery.ABORTED=modules.machinery.xenserver.XenServerMachinery-class.html#ABORTED"><a title="lib.cuckoo.common.abstracts.LibVirtMachinery.ABORTED
+modules.machinery.virtualbox.VirtualBox.ABORTED
+modules.machinery.vsphere.vSphere.ABORTED
+modules.machinery.xenserver.XenServerMachinery.ABORTED" class="py-name" href="#" onclick="return doclink('link-22', 'ABORTED', 'link-22');">ABORTED</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"Suspended"</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery._initialize_check"></a><div id="XenServerMachinery._initialize_check-def"><a name="L36"></a><tt class="py-lineno"> 36</tt> <a class="py-toggle" href="#" id="XenServerMachinery._initialize_check-toggle" onclick="return toggle('XenServerMachinery._initialize_check');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#_initialize_check">_initialize_check</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery._initialize_check-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery._initialize_check-expanded"><a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-docstring">"""Check XenServer configuration, initialize a Xen API connection, and</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"><tt class="py-docstring">        verify machine validity.</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_sessions</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-23" class="py-name"><a title="modules.machinery.xenserver.HAVE_XENAPI" class="py-name" href="#" onclick="return doclink('link-23', 'HAVE_XENAPI', 'link-15');">HAVE_XENAPI</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-24" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooDependencyError" class="py-name" href="#" onclick="return doclink('link-24', 'CuckooDependencyError', 'link-14');">CuckooDependencyError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Unable to import XenAPI"</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Variable lib.cuckoo.core.database.Machine.options=lib.cuckoo.core.database.Machine-class.html#options,Method lib.cuckoo.core.database.Task.options()=lib.cuckoo.core.database.Task-class.html#options"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-25', 'options', 'link-25');">options</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Module modules.machinery.xenserver=modules.machinery.xenserver-module.html"><a title="modules.machinery.xenserver" class="py-name" href="#" onclick="return doclink('link-26', 'xenserver', 'link-26');">xenserver</a></tt><tt class="py-op">.</tt><tt class="py-name">user</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-27" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-27', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"XenServer username missing, please add "</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                                     <tt class="py-string">"it to xenserver.conf."</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-28', 'options', 'link-25');">options</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="modules.machinery.xenserver" class="py-name" href="#" onclick="return doclink('link-29', 'xenserver', 'link-26');">xenserver</a></tt><tt class="py-op">.</tt><tt class="py-name">password</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-30" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-30', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"XenServer password missing, please add "</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                                     <tt class="py-string">"it to xenserver.conf"</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-31', 'options', 'link-25');">options</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="modules.machinery.xenserver" class="py-name" href="#" onclick="return doclink('link-32', 'xenserver', 'link-26');">xenserver</a></tt><tt class="py-op">.</tt><tt class="py-name">url</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-33" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-33', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"XenServer url missing, please add it to "</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                                     <tt class="py-string">"xenserver.conf"</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Method modules.machinery.xenserver.XenServerMachinery._make_xenapi_session()=modules.machinery.xenserver.XenServerMachinery-class.html#_make_xenapi_session"><a title="modules.machinery.xenserver.XenServerMachinery._make_xenapi_session" class="py-name" href="#" onclick="return doclink('link-34', '_make_xenapi_session', 'link-34');">_make_xenapi_session</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-35" class="py-name" targets="Variable lib.cuckoo.core.database.Task.machine=lib.cuckoo.core.database.Task-class.html#machine"><a title="lib.cuckoo.core.database.Task.machine" class="py-name" href="#" onclick="return doclink('link-35', 'machine', 'link-35');">machine</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Method lib.cuckoo.common.abstracts.Machinery.machines()=lib.cuckoo.common.abstracts.Machinery-class.html#machines"><a title="lib.cuckoo.common.abstracts.Machinery.machines" class="py-name" href="#" onclick="return doclink('link-36', 'machines', 'link-36');">machines</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">            <tt class="py-name">uuid</tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name"><a title="lib.cuckoo.core.database.Task.machine" class="py-name" href="#" onclick="return doclink('link-37', 'machine', 'link-35');">machine</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Variable lib.cuckoo.core.database.Guest.label=lib.cuckoo.core.database.Guest-class.html#label,Variable lib.cuckoo.core.database.Machine.label=lib.cuckoo.core.database.Machine-class.html#label"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-38', 'label', 'link-38');">label</a></tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">            <tt class="py-op">(</tt><tt class="py-name">ref</tt><tt class="py-op">,</tt> <tt class="py-name">vm</tt><tt class="py-op">)</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name" targets="Method modules.machinery.xenserver.XenServerMachinery._check_vm()=modules.machinery.xenserver.XenServerMachinery-class.html#_check_vm"><a title="modules.machinery.xenserver.XenServerMachinery._check_vm" class="py-name" href="#" onclick="return doclink('link-39', '_check_vm', 'link-39');">_check_vm</a></tt><tt class="py-op">(</tt><tt class="py-name">uuid</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-40" class="py-name"><a title="lib.cuckoo.core.database.Task.machine" class="py-name" href="#" onclick="return doclink('link-40', 'machine', 'link-35');">machine</a></tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Variable lib.cuckoo.core.database.Machine.snapshot=lib.cuckoo.core.database.Machine-class.html#snapshot"><a title="lib.cuckoo.core.database.Machine.snapshot" class="py-name" href="#" onclick="return doclink('link-41', 'snapshot', 'link-41');">snapshot</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name" targets="Method modules.machinery.vmware.VMware._check_snapshot()=modules.machinery.vmware.VMware-class.html#_check_snapshot,Method modules.machinery.xenserver.XenServerMachinery._check_snapshot()=modules.machinery.xenserver.XenServerMachinery-class.html#_check_snapshot"><a title="modules.machinery.vmware.VMware._check_snapshot
+modules.machinery.xenserver.XenServerMachinery._check_snapshot" class="py-name" href="#" onclick="return doclink('link-42', '_check_snapshot', 'link-42');">_check_snapshot</a></tt><tt class="py-op">(</tt><tt class="py-name">uuid</tt><tt class="py-op">,</tt> <tt id="link-43" class="py-name"><a title="lib.cuckoo.core.database.Task.machine" class="py-name" href="#" onclick="return doclink('link-43', 'machine', 'link-35');">machine</a></tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="lib.cuckoo.core.database.Machine.snapshot" class="py-name" href="#" onclick="return doclink('link-44', 'snapshot', 'link-41');">snapshot</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Method modules.machinery.xenserver.XenServerMachinery._check_disks_reset()=modules.machinery.xenserver.XenServerMachinery-class.html#_check_disks_reset"><a title="modules.machinery.xenserver.XenServerMachinery._check_disks_reset" class="py-name" href="#" onclick="return doclink('link-45', '_check_disks_reset', 'link-45');">_check_disks_reset</a></tt><tt class="py-op">(</tt><tt class="py-name">vm</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-46" class="py-name" targets="Class modules.machinery.xenserver.XenServerMachinery=modules.machinery.xenserver.XenServerMachinery-class.html"><a title="modules.machinery.xenserver.XenServerMachinery" class="py-name" href="#" onclick="return doclink('link-46', 'XenServerMachinery', 'link-46');">XenServerMachinery</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Method lib.cuckoo.common.abstracts.LibVirtMachinery._initialize_check()=lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#_initialize_check,Method lib.cuckoo.common.abstracts.Machinery._initialize_check()=lib.cuckoo.common.abstracts.Machinery-class.html#_initialize_check,Method modules.machinery.avd.Avd._initialize_check()=modules.machinery.avd.Avd-class.html#_initialize_check,Method modules.machinery.esx.ESX._initialize_check()=modules.machinery.esx.ESX-class.html#_initialize_check,Method modules.machinery.physical.Physical._initialize_check()=modules.machinery.physical.Physical-class.html#_initialize_check,Method modules.machinery.qemu.QEMU._initialize_check()=modules.machinery.qemu.QEMU-class.html#_initialize_check,Method modules.machinery.virtualbox.VirtualBox._initialize_check()=modules.machinery.virtualbox.VirtualBox-class.html#_initialize_check,Method modules.machinery.vmware.VMware._initialize_check()=modules.machinery.vmware.VMware-class.html#_initialize_check,Method modules.machinery.vsphere.vSphere._initialize_check()=modules.machinery.vsphere.vSphere-class.html#_initialize_check,Method modules.machinery.xenserver.XenServerMachinery._initialize_check()=modules.machinery.xenserver.XenServerMachinery-class.html#_initialize_check"><a title="lib.cuckoo.common.abstracts.LibVirtMachinery._initialize_check
+lib.cuckoo.common.abstracts.Machinery._initialize_check
+modules.machinery.avd.Avd._initialize_check
+modules.machinery.esx.ESX._initialize_check
+modules.machinery.physical.Physical._initialize_check
+modules.machinery.qemu.QEMU._initialize_check
+modules.machinery.virtualbox.VirtualBox._initialize_check
+modules.machinery.vmware.VMware._initialize_check
+modules.machinery.vsphere.vSphere._initialize_check
+modules.machinery.xenserver.XenServerMachinery._initialize_check" class="py-name" href="#" onclick="return doclink('link-47', '_initialize_check', 'link-47');">_initialize_check</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="XenServerMachinery.session"></a><div id="XenServerMachinery.session-def"><a name="L71"></a><tt class="py-lineno"> 71</tt> <a class="py-toggle" href="#" id="XenServerMachinery.session-toggle" onclick="return toggle('XenServerMachinery.session');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#session">session</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery.session-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery.session-expanded"><a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-name">tid</tt> <tt class="py-op">=</tt> <tt class="py-name">threading</tt><tt class="py-op">.</tt><tt class="py-name">current_thread</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">ident</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-name">sess</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_sessions</tt><tt class="py-op">.</tt><tt id="link-48" class="py-name" targets="Method lib.cuckoo.common.config.Config.get()=lib.cuckoo.common.config.Config-class.html#get,Method lib.cuckoo.core.guest.GuestManager.get()=lib.cuckoo.core.guest.GuestManager-class.html#get"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-48', 'get', 'link-48');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">tid</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">sess</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">            <tt class="py-name">sess</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery._make_xenapi_session" class="py-name" href="#" onclick="return doclink('link-49', '_make_xenapi_session', 'link-34');">_make_xenapi_session</a></tt><tt class="py-op">(</tt><tt class="py-name">tid</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">sess</tt> </tt>
+</div><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery._make_xenapi_session"></a><div id="XenServerMachinery._make_xenapi_session-def"><a name="L78"></a><tt class="py-lineno"> 78</tt> <a class="py-toggle" href="#" id="XenServerMachinery._make_xenapi_session-toggle" onclick="return toggle('XenServerMachinery._make_xenapi_session');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#_make_xenapi_session">_make_xenapi_session</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">tid</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery._make_xenapi_session-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery._make_xenapi_session-expanded"><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-name">tid</tt> <tt class="py-op">=</tt> <tt class="py-name">tid</tt> <tt class="py-keyword">or</tt> <tt class="py-name">threading</tt><tt class="py-op">.</tt><tt class="py-name">current_thread</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">ident</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">            <tt class="py-name">sess</tt> <tt class="py-op">=</tt> <tt class="py-name">XenAPI</tt><tt class="py-op">.</tt><tt class="py-name">Session</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-50', 'options', 'link-25');">options</a></tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="modules.machinery.xenserver" class="py-name" href="#" onclick="return doclink('link-51', 'xenserver', 'link-26');">xenserver</a></tt><tt class="py-op">.</tt><tt class="py-name">url</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-52" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-52', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Could not connect to XenServer: invalid "</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">                                     <tt class="py-string">"or incorrect url, please ensure the url "</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                                     <tt class="py-string">"is correct in xenserver.conf"</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">            <tt class="py-name">sess</tt><tt class="py-op">.</tt><tt class="py-name">xenapi</tt><tt class="py-op">.</tt><tt class="py-name">login_with_password</tt><tt class="py-op">(</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-53', 'options', 'link-25');">options</a></tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="modules.machinery.xenserver" class="py-name" href="#" onclick="return doclink('link-54', 'xenserver', 'link-26');">xenserver</a></tt><tt class="py-op">.</tt><tt class="py-name">user</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-55', 'options', 'link-25');">options</a></tt><tt class="py-op">.</tt><tt id="link-56" class="py-name"><a title="modules.machinery.xenserver" class="py-name" href="#" onclick="return doclink('link-56', 'xenserver', 'link-26');">xenserver</a></tt><tt class="py-op">.</tt><tt class="py-name">password</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">            <tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-57" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-57', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Could not connect to XenServer: "</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                                     <tt class="py-string">"incorrect credentials, please ensure "</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                                     <tt class="py-string">"the user and password are correct in "</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                                     <tt class="py-string">"xenserver.conf"</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_sessions</tt><tt class="py-op">[</tt><tt class="py-name">tid</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">sess</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">sess</tt> </tt>
+</div><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery._get_vm_ref"></a><div id="XenServerMachinery._get_vm_ref-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="XenServerMachinery._get_vm_ref-toggle" onclick="return toggle('XenServerMachinery._get_vm_ref');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#_get_vm_ref">_get_vm_ref</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">uuid</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery._get_vm_ref-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery._get_vm_ref-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-docstring">"""Get a virtual machine reference.</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">        @param uuid: vm uuid</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-58" class="py-name" targets="Method modules.machinery.xenserver.XenServerMachinery.session()=modules.machinery.xenserver.XenServerMachinery-class.html#session"><a title="modules.machinery.xenserver.XenServerMachinery.session" class="py-name" href="#" onclick="return doclink('link-58', 'session', 'link-58');">session</a></tt><tt class="py-op">.</tt><tt class="py-name">xenapi</tt><tt class="py-op">.</tt><tt class="py-name">VM</tt><tt class="py-op">.</tt><tt class="py-name">get_by_uuid</tt><tt class="py-op">(</tt><tt class="py-name">uuid</tt><tt class="py-op">.</tt><tt class="py-name">lower</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery._get_vm_record"></a><div id="XenServerMachinery._get_vm_record-def"><a name="L105"></a><tt class="py-lineno">105</tt> <a class="py-toggle" href="#" id="XenServerMachinery._get_vm_record-toggle" onclick="return toggle('XenServerMachinery._get_vm_record');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#_get_vm_record">_get_vm_record</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">ref</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery._get_vm_record-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery._get_vm_record-expanded"><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-docstring">"""Get the virtual machine record.</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">        @param ref: vm reference</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery.session" class="py-name" href="#" onclick="return doclink('link-59', 'session', 'link-58');">session</a></tt><tt class="py-op">.</tt><tt class="py-name">xenapi</tt><tt class="py-op">.</tt><tt class="py-name">VM</tt><tt class="py-op">.</tt><tt class="py-name">get_record</tt><tt class="py-op">(</tt><tt class="py-name">ref</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery._get_vm_power_state"></a><div id="XenServerMachinery._get_vm_power_state-def"><a name="L111"></a><tt class="py-lineno">111</tt> <a class="py-toggle" href="#" id="XenServerMachinery._get_vm_power_state-toggle" onclick="return toggle('XenServerMachinery._get_vm_power_state');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#_get_vm_power_state">_get_vm_power_state</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">ref</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery._get_vm_power_state-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery._get_vm_power_state-expanded"><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-docstring">"""Get the virtual machine power state.</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">        @param ref: vm reference</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery.session" class="py-name" href="#" onclick="return doclink('link-60', 'session', 'link-58');">session</a></tt><tt class="py-op">.</tt><tt class="py-name">xenapi</tt><tt class="py-op">.</tt><tt class="py-name">VM</tt><tt class="py-op">.</tt><tt class="py-name">get_power_state</tt><tt class="py-op">(</tt><tt class="py-name">ref</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery._check_vm"></a><div id="XenServerMachinery._check_vm-def"><a name="L117"></a><tt class="py-lineno">117</tt> <a class="py-toggle" href="#" id="XenServerMachinery._check_vm-toggle" onclick="return toggle('XenServerMachinery._check_vm');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#_check_vm">_check_vm</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">uuid</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery._check_vm-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery._check_vm-expanded"><a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-docstring">"""Check vm existence and validity.</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">        @param uuid: vm uuid</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">            <tt class="py-name">ref</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-61" class="py-name" targets="Method modules.machinery.xenserver.XenServerMachinery._get_vm_ref()=modules.machinery.xenserver.XenServerMachinery-class.html#_get_vm_ref"><a title="modules.machinery.xenserver.XenServerMachinery._get_vm_ref" class="py-name" href="#" onclick="return doclink('link-61', '_get_vm_ref', 'link-61');">_get_vm_ref</a></tt><tt class="py-op">(</tt><tt class="py-name">uuid</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">            <tt class="py-name">vm</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name" targets="Method modules.machinery.xenserver.XenServerMachinery._get_vm_record()=modules.machinery.xenserver.XenServerMachinery-class.html#_get_vm_record"><a title="modules.machinery.xenserver.XenServerMachinery._get_vm_record" class="py-name" href="#" onclick="return doclink('link-62', '_get_vm_record', 'link-62');">_get_vm_record</a></tt><tt class="py-op">(</tt><tt class="py-name">ref</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">XenAPI</tt><tt class="py-op">.</tt><tt class="py-name">Failure</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-63" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-63', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Vm not found: %s: %s"</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">                                     <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">uuid</tt><tt class="py-op">,</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt class="py-name">details</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">vm</tt><tt class="py-op">[</tt><tt class="py-string">"is_a_snapshot"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-64" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-64', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Vm is a snapshot: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">uuid</tt><tt class="py-op">)</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">vm</tt><tt class="py-op">[</tt><tt class="py-string">"is_a_template"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-65" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-65', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Vm is a template: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">uuid</tt><tt class="py-op">)</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">vm</tt><tt class="py-op">[</tt><tt class="py-string">"is_control_domain"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-66" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-66', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Vm is a control domain: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">uuid</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">(</tt><tt class="py-name">ref</tt><tt class="py-op">,</tt> <tt class="py-name">vm</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery._check_snapshot"></a><div id="XenServerMachinery._check_snapshot-def"><a name="L139"></a><tt class="py-lineno">139</tt> <a class="py-toggle" href="#" id="XenServerMachinery._check_snapshot-toggle" onclick="return toggle('XenServerMachinery._check_snapshot');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#_check_snapshot">_check_snapshot</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">vm_uuid</tt><tt class="py-op">,</tt> <tt class="py-param">snapshot_uuid</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery._check_snapshot-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery._check_snapshot-expanded"><a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-docstring">"""Check snapshot existence and that the snapshot is of the specified</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">        vm uuid.</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-docstring">        @param vm_uuid: vm uuid</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-docstring">        @param snapshot_uuid: snapshot uuid</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">            <tt class="py-name">snapshot_ref</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-67" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery._get_vm_ref" class="py-name" href="#" onclick="return doclink('link-67', '_get_vm_ref', 'link-61');">_get_vm_ref</a></tt><tt class="py-op">(</tt><tt class="py-name">snapshot_uuid</tt><tt class="py-op">)</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">            <tt id="link-68" class="py-name"><a title="lib.cuckoo.core.database.Machine.snapshot" class="py-name" href="#" onclick="return doclink('link-68', 'snapshot', 'link-41');">snapshot</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-69" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery._get_vm_record" class="py-name" href="#" onclick="return doclink('link-69', '_get_vm_record', 'link-62');">_get_vm_record</a></tt><tt class="py-op">(</tt><tt class="py-name">snapshot_ref</tt><tt class="py-op">)</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-70" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-70', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Snapshot not found: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">snapshot_uuid</tt><tt class="py-op">)</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-71" class="py-name"><a title="lib.cuckoo.core.database.Machine.snapshot" class="py-name" href="#" onclick="return doclink('link-71', 'snapshot', 'link-41');">snapshot</a></tt><tt class="py-op">[</tt><tt class="py-string">"is_a_snapshot"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-72" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-72', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Invalid snapshot: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">snapshot_uuid</tt><tt class="py-op">)</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line"> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">            <tt class="py-name">parent</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-73" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery._get_vm_record" class="py-name" href="#" onclick="return doclink('link-73', '_get_vm_record', 'link-62');">_get_vm_record</a></tt><tt class="py-op">(</tt><tt id="link-74" class="py-name"><a title="lib.cuckoo.core.database.Machine.snapshot" class="py-name" href="#" onclick="return doclink('link-74', 'snapshot', 'link-41');">snapshot</a></tt><tt class="py-op">[</tt><tt class="py-string">"snapshot_of"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-75" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-75', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Invalid snapshot: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">snapshot_uuid</tt><tt class="py-op">)</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">        <tt class="py-name">parent_uuid</tt> <tt class="py-op">=</tt> <tt class="py-name">parent</tt><tt class="py-op">[</tt><tt class="py-string">"uuid"</tt><tt class="py-op">]</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">parent_uuid</tt> <tt class="py-op">!=</tt> <tt class="py-name">vm_uuid</tt><tt class="py-op">:</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-76" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-76', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Snapshot does not belong to specified "</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">                                     <tt class="py-string">"vm: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">snapshot_uuid</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery._check_disks_reset"></a><div id="XenServerMachinery._check_disks_reset-def"><a name="L164"></a><tt class="py-lineno">164</tt> <a class="py-toggle" href="#" id="XenServerMachinery._check_disks_reset-toggle" onclick="return toggle('XenServerMachinery._check_disks_reset');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#_check_disks_reset">_check_disks_reset</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">vm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery._check_disks_reset-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery._check_disks_reset-expanded"><a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">        <tt class="py-docstring">"""Check whether each attached disk is set to reset on boot.</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">        @param vm: vm record</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">ref</tt> <tt class="py-keyword">in</tt> <tt class="py-name">vm</tt><tt class="py-op">[</tt><tt class="py-string">"VBDs"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">                <tt class="py-name">vbd</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-77" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery.session" class="py-name" href="#" onclick="return doclink('link-77', 'session', 'link-58');">session</a></tt><tt class="py-op">.</tt><tt class="py-name">xenapi</tt><tt class="py-op">.</tt><tt class="py-name">VBD</tt><tt class="py-op">.</tt><tt class="py-name">get_record</tt><tt class="py-op">(</tt><tt class="py-name">ref</tt><tt class="py-op">)</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">                <tt id="link-78" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-78', 'log', 'link-17');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"Invalid VBD for vm %s: %s"</tt><tt class="py-op">,</tt> <tt class="py-name">vm</tt><tt class="py-op">[</tt><tt class="py-string">"uuid"</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">ref</tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">                <tt class="py-keyword">continue</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">vbd</tt><tt class="py-op">[</tt><tt class="py-string">"type"</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">"Disk"</tt><tt class="py-op">:</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">                <tt class="py-name">vdi_ref</tt> <tt class="py-op">=</tt> <tt class="py-name">vbd</tt><tt class="py-op">[</tt><tt class="py-string">"VDI"</tt><tt class="py-op">]</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">                <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">                    <tt class="py-name">vdi</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-79" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery.session" class="py-name" href="#" onclick="return doclink('link-79', 'session', 'link-58');">session</a></tt><tt class="py-op">.</tt><tt class="py-name">xenapi</tt><tt class="py-op">.</tt><tt class="py-name">VDI</tt><tt class="py-op">.</tt><tt class="py-name">get_record</tt><tt class="py-op">(</tt><tt class="py-name">vdi_ref</tt><tt class="py-op">)</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">                <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">                    <tt id="link-80" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-80', 'log', 'link-17');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"Invalid VDI for vm %s: %s"</tt><tt class="py-op">,</tt> <tt class="py-name">vm</tt><tt class="py-op">[</tt><tt class="py-string">"uuid"</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">                                <tt class="py-name">vdi_ref</tt><tt class="py-op">)</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">                    <tt class="py-keyword">continue</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">vdi</tt><tt class="py-op">[</tt><tt class="py-string">"on_boot"</tt><tt class="py-op">]</tt> <tt class="py-op">!=</tt> <tt class="py-string">"reset"</tt> <tt class="py-keyword">and</tt> <tt class="py-name">vdi</tt><tt class="py-op">[</tt><tt class="py-string">"read_only"</tt><tt class="py-op">]</tt> <tt class="py-keyword">is</tt> <tt class="py-name">False</tt><tt class="py-op">:</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">                    <tt class="py-keyword">raise</tt> <tt id="link-81" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-81', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">                        <tt class="py-string">"Vm %s contains invalid VDI %s: disk is not reset on "</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">                        <tt class="py-string">"boot. Please set the on-boot parameter to 'reset'."</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">                        <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">vm</tt><tt class="py-op">[</tt><tt class="py-string">"uuid"</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">vdi</tt><tt class="py-op">[</tt><tt class="py-string">"uuid"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery._snapshot_from_vm_uuid"></a><div id="XenServerMachinery._snapshot_from_vm_uuid-def"><a name="L190"></a><tt class="py-lineno">190</tt> <a class="py-toggle" href="#" id="XenServerMachinery._snapshot_from_vm_uuid-toggle" onclick="return toggle('XenServerMachinery._snapshot_from_vm_uuid');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#_snapshot_from_vm_uuid">_snapshot_from_vm_uuid</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">uuid</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery._snapshot_from_vm_uuid-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery._snapshot_from_vm_uuid-expanded"><a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">        <tt class="py-docstring">"""Get the snapshot uuid from a virtual machine.</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line"><tt class="py-docstring">        @param uuid: vm uuid</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">        <tt id="link-82" class="py-name"><a title="lib.cuckoo.core.database.Task.machine" class="py-name" href="#" onclick="return doclink('link-82', 'machine', 'link-35');">machine</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-83" class="py-name" targets="Variable lib.cuckoo.core.guest.db=lib.cuckoo.core.guest-module.html#db,Variable modules.auxiliary.services.db=modules.auxiliary.services-module.html#db"><a title="lib.cuckoo.core.guest.db
+modules.auxiliary.services.db" class="py-name" href="#" onclick="return doclink('link-83', 'db', 'link-83');">db</a></tt><tt class="py-op">.</tt><tt id="link-84" class="py-name" targets="Method lib.cuckoo.core.database.Database.view_machine_by_label()=lib.cuckoo.core.database.Database-class.html#view_machine_by_label"><a title="lib.cuckoo.core.database.Database.view_machine_by_label" class="py-name" href="#" onclick="return doclink('link-84', 'view_machine_by_label', 'link-84');">view_machine_by_label</a></tt><tt class="py-op">(</tt><tt class="py-name">uuid</tt><tt class="py-op">)</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-85" class="py-name"><a title="lib.cuckoo.core.database.Task.machine" class="py-name" href="#" onclick="return doclink('link-85', 'machine', 'link-35');">machine</a></tt><tt class="py-op">.</tt><tt id="link-86" class="py-name"><a title="lib.cuckoo.core.database.Machine.snapshot" class="py-name" href="#" onclick="return doclink('link-86', 'snapshot', 'link-41');">snapshot</a></tt> </tt>
+</div><a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery._is_halted"></a><div id="XenServerMachinery._is_halted-def"><a name="L197"></a><tt class="py-lineno">197</tt> <a class="py-toggle" href="#" id="XenServerMachinery._is_halted-toggle" onclick="return toggle('XenServerMachinery._is_halted');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#_is_halted">_is_halted</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">vm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery._is_halted-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery._is_halted-expanded"><a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">        <tt class="py-docstring">"""Checks if the virtual machine is running.</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line"><tt class="py-docstring">        @param uuid: vm uuid</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">vm</tt><tt class="py-op">[</tt><tt class="py-string">"power_state"</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">"Halted"</tt> </tt>
+</div><a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery.start"></a><div id="XenServerMachinery.start-def"><a name="L203"></a><tt class="py-lineno">203</tt> <a class="py-toggle" href="#" id="XenServerMachinery.start-toggle" onclick="return toggle('XenServerMachinery.start');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#start">start</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">,</tt> <tt class="py-param">task</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery.start-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery.start-expanded"><a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">        <tt class="py-docstring">"""Start a virtual machine.</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"><tt class="py-docstring">        @param label: vm uuid</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"><tt class="py-docstring">        @param task: task object.</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">        <tt class="py-name">vm_ref</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-87" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery._get_vm_ref" class="py-name" href="#" onclick="return doclink('link-87', '_get_vm_ref', 'link-61');">_get_vm_ref</a></tt><tt class="py-op">(</tt><tt id="link-88" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-88', 'label', 'link-38');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">        <tt class="py-name">vm</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery._get_vm_record" class="py-name" href="#" onclick="return doclink('link-89', '_get_vm_record', 'link-62');">_get_vm_record</a></tt><tt class="py-op">(</tt><tt class="py-name">vm_ref</tt><tt class="py-op">)</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-90" class="py-name" targets="Method modules.machinery.xenserver.XenServerMachinery._is_halted()=modules.machinery.xenserver.XenServerMachinery-class.html#_is_halted"><a title="modules.machinery.xenserver.XenServerMachinery._is_halted" class="py-name" href="#" onclick="return doclink('link-90', '_is_halted', 'link-90');">_is_halted</a></tt><tt class="py-op">(</tt><tt class="py-name">vm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-91" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-91', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Vm is already running: %s"</tt><tt class="py-op">,</tt> <tt id="link-92" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-92', 'label', 'link-38');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line"> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">        <tt id="link-93" class="py-name"><a title="lib.cuckoo.core.database.Machine.snapshot" class="py-name" href="#" onclick="return doclink('link-93', 'snapshot', 'link-41');">snapshot</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-94" class="py-name" targets="Method modules.machinery.xenserver.XenServerMachinery._snapshot_from_vm_uuid()=modules.machinery.xenserver.XenServerMachinery-class.html#_snapshot_from_vm_uuid"><a title="modules.machinery.xenserver.XenServerMachinery._snapshot_from_vm_uuid" class="py-name" href="#" onclick="return doclink('link-94', '_snapshot_from_vm_uuid', 'link-94');">_snapshot_from_vm_uuid</a></tt><tt class="py-op">(</tt><tt id="link-95" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-95', 'label', 'link-38');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-96" class="py-name"><a title="lib.cuckoo.core.database.Machine.snapshot" class="py-name" href="#" onclick="return doclink('link-96', 'snapshot', 'link-41');">snapshot</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">            <tt class="py-name">snapshot_ref</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-97" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery._get_vm_ref" class="py-name" href="#" onclick="return doclink('link-97', '_get_vm_ref', 'link-61');">_get_vm_ref</a></tt><tt class="py-op">(</tt><tt id="link-98" class="py-name"><a title="lib.cuckoo.core.database.Machine.snapshot" class="py-name" href="#" onclick="return doclink('link-98', 'snapshot', 'link-41');">snapshot</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">                <tt id="link-99" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-99', 'log', 'link-17');">log</a></tt><tt class="py-op">.</tt><tt id="link-100" class="py-name" targets="Module modules.processing.debug=modules.processing.debug-module.html"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-100', 'debug', 'link-100');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Reverting vm %s to snapshot %s"</tt><tt class="py-op">,</tt> <tt id="link-101" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-101', 'label', 'link-38');">label</a></tt><tt class="py-op">,</tt> <tt id="link-102" class="py-name"><a title="lib.cuckoo.core.database.Machine.snapshot" class="py-name" href="#" onclick="return doclink('link-102', 'snapshot', 'link-41');">snapshot</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-103" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery.session" class="py-name" href="#" onclick="return doclink('link-103', 'session', 'link-58');">session</a></tt><tt class="py-op">.</tt><tt class="py-name">xenapi</tt><tt class="py-op">.</tt><tt class="py-name">VM</tt><tt class="py-op">.</tt><tt class="py-name">revert</tt><tt class="py-op">(</tt><tt class="py-name">snapshot_ref</tt><tt class="py-op">)</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">                <tt id="link-104" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-104', 'log', 'link-17');">log</a></tt><tt class="py-op">.</tt><tt id="link-105" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-105', 'debug', 'link-100');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Revert completed for vm %s"</tt><tt class="py-op">,</tt> <tt id="link-106" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-106', 'label', 'link-38');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">XenAPI</tt><tt class="py-op">.</tt><tt class="py-name">Failure</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt id="link-107" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-107', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Unable to revert vm %s: %s"</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">                                         <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-108" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-108', 'label', 'link-38');">label</a></tt><tt class="py-op">,</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt class="py-name">details</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line"> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">                <tt id="link-109" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-109', 'log', 'link-17');">log</a></tt><tt class="py-op">.</tt><tt id="link-110" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-110', 'debug', 'link-100');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Resuming reverted vm %s"</tt><tt class="py-op">,</tt> <tt id="link-111" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-111', 'label', 'link-38');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-112" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery.session" class="py-name" href="#" onclick="return doclink('link-112', 'session', 'link-58');">session</a></tt><tt class="py-op">.</tt><tt class="py-name">xenapi</tt><tt class="py-op">.</tt><tt class="py-name">VM</tt><tt class="py-op">.</tt><tt class="py-name">resume</tt><tt class="py-op">(</tt><tt class="py-name">vm_ref</tt><tt class="py-op">,</tt> <tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">XenAPI</tt><tt class="py-op">.</tt><tt class="py-name">Failure</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt id="link-113" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-113', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Unable to resume vm %s: %s"</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">                                         <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-114" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-114', 'label', 'link-38');">label</a></tt><tt class="py-op">,</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt class="py-name">details</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">            <tt id="link-115" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-115', 'log', 'link-17');">log</a></tt><tt class="py-op">.</tt><tt id="link-116" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-116', 'debug', 'link-100');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"No snapshot found for vm, booting: %s"</tt><tt class="py-op">,</tt> <tt id="link-117" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-117', 'label', 'link-38');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-118" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery.session" class="py-name" href="#" onclick="return doclink('link-118', 'session', 'link-58');">session</a></tt><tt class="py-op">.</tt><tt class="py-name">xenapi</tt><tt class="py-op">.</tt><tt class="py-name">VM</tt><tt class="py-op">.</tt><tt id="link-119" class="py-name" targets="Method lib.cuckoo.common.abstracts.Auxiliary.start()=lib.cuckoo.common.abstracts.Auxiliary-class.html#start,Method lib.cuckoo.common.abstracts.LibVirtMachinery.start()=lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#start,Method lib.cuckoo.common.abstracts.Machinery.start()=lib.cuckoo.common.abstracts.Machinery-class.html#start,Method lib.cuckoo.core.plugins.RunAuxiliary.start()=lib.cuckoo.core.plugins.RunAuxiliary-class.html#start,Method lib.cuckoo.core.scheduler.Scheduler.start()=lib.cuckoo.core.scheduler.Scheduler-class.html#start,Method modules.auxiliary.mitm.MITM.start()=modules.auxiliary.mitm.MITM-class.html#start,Method modules.auxiliary.reboot.Reboot.start()=modules.auxiliary.reboot.Reboot-class.html#start,Method modules.auxiliary.services.Services.start()=modules.auxiliary.services.Services-class.html#start,Method modules.auxiliary.sniffer.Sniffer.start()=modules.auxiliary.sniffer.Sniffer-class.html#start,Method modules.machinery.avd.Avd.start()=modules.machinery.avd.Avd-class.html#start,Method modules.machinery.physical.Physical.start()=modules.machinery.physical.Physical-class.html#start,Method modules.machinery.qemu.QEMU.start()=modules.machinery.qemu.QEMU-class.html#start,Method modules.machinery.virtualbox.VirtualBox.start()=modules.machinery.virtualbox.VirtualBox-class.html#start,Method modules.machinery.vmware.VMware.start()=modules.machinery.vmware.VMware-class.html#start,Method modules.machinery.vsphere.vSphere.start()=modules.machinery.vsphere.vSphere-class.html#start,Method modules.machinery.xenserver.XenServerMachinery.start()=modules.machinery.xenserver.XenServerMachinery-class.html#start"><a title="lib.cuckoo.common.abstracts.Auxiliary.start
+lib.cuckoo.common.abstracts.LibVirtMachinery.start
+lib.cuckoo.common.abstracts.Machinery.start
+lib.cuckoo.core.plugins.RunAuxiliary.start
+lib.cuckoo.core.scheduler.Scheduler.start
+modules.auxiliary.mitm.MITM.start
+modules.auxiliary.reboot.Reboot.start
+modules.auxiliary.services.Services.start
+modules.auxiliary.sniffer.Sniffer.start
+modules.machinery.avd.Avd.start
+modules.machinery.physical.Physical.start
+modules.machinery.qemu.QEMU.start
+modules.machinery.virtualbox.VirtualBox.start
+modules.machinery.vmware.VMware.start
+modules.machinery.vsphere.vSphere.start
+modules.machinery.xenserver.XenServerMachinery.start" class="py-name" href="#" onclick="return doclink('link-119', 'start', 'link-119');">start</a></tt><tt class="py-op">(</tt><tt class="py-name">vm_ref</tt><tt class="py-op">,</tt> <tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">XenAPI</tt><tt class="py-op">.</tt><tt class="py-name">Failure</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt id="link-120" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-120', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Unable to start vm %s: %s"</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">                                         <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-121" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-121', 'label', 'link-38');">label</a></tt><tt class="py-op">,</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt class="py-name">details</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line"> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">        <tt id="link-122" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-122', 'log', 'link-17');">log</a></tt><tt class="py-op">.</tt><tt id="link-123" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-123', 'debug', 'link-100');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Started vm: %s"</tt><tt class="py-op">,</tt> <tt id="link-124" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-124', 'label', 'link-38');">label</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery.stop"></a><div id="XenServerMachinery.stop-def"><a name="L241"></a><tt class="py-lineno">241</tt> <a class="py-toggle" href="#" id="XenServerMachinery.stop-toggle" onclick="return toggle('XenServerMachinery.stop');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#stop">stop</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery.stop-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery.stop-expanded"><a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">        <tt class="py-docstring">"""Stop a virtual machine.</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line"><tt class="py-docstring">        @param label: vm uuid</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">        <tt class="py-name">ref</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-125" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery._get_vm_ref" class="py-name" href="#" onclick="return doclink('link-125', '_get_vm_ref', 'link-61');">_get_vm_ref</a></tt><tt class="py-op">(</tt><tt id="link-126" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-126', 'label', 'link-38');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">        <tt class="py-name">vm</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-127" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery._get_vm_record" class="py-name" href="#" onclick="return doclink('link-127', '_get_vm_record', 'link-62');">_get_vm_record</a></tt><tt class="py-op">(</tt><tt class="py-name">ref</tt><tt class="py-op">)</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-128" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery._is_halted" class="py-name" href="#" onclick="return doclink('link-128', '_is_halted', 'link-90');">_is_halted</a></tt><tt class="py-op">(</tt><tt class="py-name">vm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">            <tt id="link-129" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-129', 'log', 'link-17');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"Trying to stop an already stopped machine: %s"</tt><tt class="py-op">,</tt> <tt id="link-130" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-130', 'label', 'link-38');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-131" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery.session" class="py-name" href="#" onclick="return doclink('link-131', 'session', 'link-58');">session</a></tt><tt class="py-op">.</tt><tt class="py-name">xenapi</tt><tt class="py-op">.</tt><tt class="py-name">VM</tt><tt class="py-op">.</tt><tt class="py-name">hard_shutdown</tt><tt class="py-op">(</tt><tt class="py-name">ref</tt><tt class="py-op">)</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">XenAPI</tt><tt class="py-op">.</tt><tt class="py-name">Failure</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt id="link-132" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-132', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Error shutting down virtual machine:"</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">                                         <tt class="py-string">" %s: %s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-133" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-133', 'label', 'link-38');">label</a></tt><tt class="py-op">,</tt> <tt class="py-name">e</tt><tt class="py-op">.</tt><tt class="py-name">details</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery._list"></a><div id="XenServerMachinery._list-def"><a name="L256"></a><tt class="py-lineno">256</tt> <a class="py-toggle" href="#" id="XenServerMachinery._list-toggle" onclick="return toggle('XenServerMachinery._list');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#_list">_list</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery._list-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery._list-expanded"><a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">        <tt class="py-docstring">"""List available virtual machines.</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line"><tt class="py-docstring">        @raise CuckooMachineError: if unable to list virtual machines.</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">            <tt class="py-name">vm_list</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">ref</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-134" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery.session" class="py-name" href="#" onclick="return doclink('link-134', 'session', 'link-58');">session</a></tt><tt class="py-op">.</tt><tt class="py-name">xenapi</tt><tt class="py-op">.</tt><tt class="py-name">VM</tt><tt class="py-op">.</tt><tt id="link-135" class="py-name" targets="Method lib.cuckoo.common.objects.File.get_all()=lib.cuckoo.common.objects.File-class.html#get_all"><a title="lib.cuckoo.common.objects.File.get_all" class="py-name" href="#" onclick="return doclink('link-135', 'get_all', 'link-135');">get_all</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">                <tt class="py-name">vm</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-136" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery._get_vm_record" class="py-name" href="#" onclick="return doclink('link-136', '_get_vm_record', 'link-62');">_get_vm_record</a></tt><tt class="py-op">(</tt><tt class="py-name">ref</tt><tt class="py-op">)</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line">                <tt class="py-name">vm_list</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">vm</tt><tt class="py-op">[</tt><tt class="py-string">'uuid'</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt><tt class="py-op">:</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-137" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-137', 'CuckooMachineError', 'link-9');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Cannot list domains"</tt><tt class="py-op">)</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">vm_list</tt> </tt>
+</div><a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line"> </tt>
+<a name="XenServerMachinery._status"></a><div id="XenServerMachinery._status-def"><a name="L270"></a><tt class="py-lineno">270</tt> <a class="py-toggle" href="#" id="XenServerMachinery._status-toggle" onclick="return toggle('XenServerMachinery._status');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.xenserver.XenServerMachinery-class.html#_status">_status</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="XenServerMachinery._status-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="XenServerMachinery._status-expanded"><a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">        <tt class="py-docstring">"""Gets current status of a vm.</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line"><tt class="py-docstring">        @param label: virtual machine uuid</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line"><tt class="py-docstring">        @return: status string.</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">        <tt class="py-name">ref</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-138" class="py-name"><a title="modules.machinery.xenserver.XenServerMachinery._get_vm_ref" class="py-name" href="#" onclick="return doclink('link-138', '_get_vm_ref', 'link-61');">_get_vm_ref</a></tt><tt class="py-op">(</tt><tt id="link-139" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-139', 'label', 'link-38');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">        <tt class="py-name">state</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-140" class="py-name" targets="Method modules.machinery.xenserver.XenServerMachinery._get_vm_power_state()=modules.machinery.xenserver.XenServerMachinery-class.html#_get_vm_power_state"><a title="modules.machinery.xenserver.XenServerMachinery._get_vm_power_state" class="py-name" href="#" onclick="return doclink('link-140', '_get_vm_power_state', 'link-140');">_get_vm_power_state</a></tt><tt class="py-op">(</tt><tt class="py-name">ref</tt><tt class="py-op">)</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">state</tt> </tt>
+</div></div><a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:00 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

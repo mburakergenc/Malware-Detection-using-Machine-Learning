@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Development Notes &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../index.html" />
+    <link rel="up" title="Development" href="index.html" />
+    <link rel="next" title="Coding Style" href="code_style.html" />
+    <link rel="prev" title="Development" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="code_style.html" title="Coding Style"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Development"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Development</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="development-notes">
+<h1>Development Notes<a class="headerlink" href="#development-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="git-branches">
+<h2>Git branches<a class="headerlink" href="#git-branches" title="Permalink to this headline">¶</a></h2>
+<p>Cuckoo Sandbox source code is available in our <a class="reference external" href="https://github.com/cuckoosandbox/cuckoo">official git repository</a>.</p>
+<p>Up until version 1.0 we used to coordinate all ongoing development in a
+dedicated &#8220;development&#8221; branch and we&#8217;ve been exclusively merging pull requests
+in such branch.
+Since version 1.1 we moved development to the traditional &#8220;master&#8221; branch and we
+make use of GitHub&#8217;s tags and release system to reference development milestones
+in time.</p>
+</div>
+<div class="section" id="release-versioning">
+<h2>Release Versioning<a class="headerlink" href="#release-versioning" title="Permalink to this headline">¶</a></h2>
+<p>Cuckoo releases are named using three numbers separated by dots, such as 1.2.3,
+where the first number is the release, the second number is the major version,
+the third number is the bugfix version.
+The testing stage from git ends with &#8220;-beta&#8221; and development stage with &#8220;-dev&#8221;.</p>
+<blockquote>
+<div><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you are using a &#8220;beta&#8221; or &#8220;dev&#8221; stage, please consider that it&#8217;s not
+meant to be an official release, therefore we don&#8217;t guarantee its functioning
+and we don&#8217;t generally provide support.
+If you think you encountered a bug there, make sure that the nature of the
+problem is not related to your own misconfiguration and collect all the details
+to be notified to our developers. Make sure to specify which exact version you
+are using, eventually with your current git commit id.</p>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="ticketing-system">
+<h2>Ticketing system<a class="headerlink" href="#ticketing-system" title="Permalink to this headline">¶</a></h2>
+<p>To submit bug reports or feature requests, please use GitHub&#8217;s <a class="reference external" href="https://github.com/cuckoosandbox/cuckoo/issues">Issue</a> tracking
+system.</p>
+</div>
+<div class="section" id="contribute">
+<h2>Contribute<a class="headerlink" href="#contribute" title="Permalink to this headline">¶</a></h2>
+<p>To submit your patch just create a Pull Request from your GitHub fork.
+If you don&#8217;t now how to create a Pull Request take a look to <a class="reference external" href="https://help.github.com/articles/using-pull-requests/">GitHub help</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Development Notes</a><ul>
+<li><a class="reference internal" href="#git-branches">Git branches</a></li>
+<li><a class="reference internal" href="#release-versioning">Release Versioning</a></li>
+<li><a class="reference internal" href="#ticketing-system">Ticketing system</a></li>
+<li><a class="reference internal" href="#contribute">Contribute</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Development</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="code_style.html"
+                        title="next chapter">Coding Style</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/development/development_notes.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="code_style.html" title="Coding Style"
+             >next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Development"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Development</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

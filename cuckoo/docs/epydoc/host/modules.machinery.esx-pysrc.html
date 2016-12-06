@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.machinery.esx</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.machinery-module.html">Package&nbsp;machinery</a> ::
+        Module&nbsp;esx
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.machinery.esx-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.machinery.esx-module.html">Module modules.machinery.esx</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2013 Christopher Schmitt &lt;cschmitt@tankbusta.net&gt;</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">libvirt</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.cuckoo=lib.cuckoo-module.html"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-1', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package lib.cuckoo.common=lib.cuckoo.common-module.html"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-2', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module lib.cuckoo.common.abstracts=lib.cuckoo.common.abstracts-module.html"><a title="lib.cuckoo.common.abstracts" class="py-name" href="#" onclick="return doclink('link-3', 'abstracts', 'link-3');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class lib.cuckoo.common.abstracts.LibVirtMachinery=lib.cuckoo.common.abstracts.LibVirtMachinery-class.html"><a title="lib.cuckoo.common.abstracts.LibVirtMachinery" class="py-name" href="#" onclick="return doclink('link-4', 'LibVirtMachinery', 'link-4');">LibVirtMachinery</a></tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-5', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-6', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-7', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module lib.cuckoo.common.exceptions=lib.cuckoo.common.exceptions-module.html"><a title="lib.cuckoo.common.exceptions" class="py-name" href="#" onclick="return doclink('link-8', 'exceptions', 'link-8');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Class lib.cuckoo.common.exceptions.CuckooCriticalError=lib.cuckoo.common.exceptions.CuckooCriticalError-class.html"><a title="lib.cuckoo.common.exceptions.CuckooCriticalError" class="py-name" href="#" onclick="return doclink('link-9', 'CuckooCriticalError', 'link-9');">CuckooCriticalError</a></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-10', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-11', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-12', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="lib.cuckoo.common.exceptions" class="py-name" href="#" onclick="return doclink('link-13', 'exceptions', 'link-8');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-14" class="py-name" targets="Class lib.cuckoo.common.exceptions.CuckooMachineError=lib.cuckoo.common.exceptions.CuckooMachineError-class.html"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-14', 'CuckooMachineError', 'link-14');">CuckooMachineError</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="ESX"></a><div id="ESX-def"><a name="L13"></a><tt class="py-lineno">13</tt> <a class="py-toggle" href="#" id="ESX-toggle" onclick="return toggle('ESX');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.machinery.esx.ESX-class.html">ESX</a><tt class="py-op">(</tt><tt class="py-base-class">LibVirtMachinery</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ESX-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="ESX-expanded"><a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">    <tt class="py-docstring">"""Virtualization layer for ESXi/ESX based on python-libvirt."""</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"> </tt>
+<a name="ESX._initialize_check"></a><div id="ESX._initialize_check-def"><a name="L16"></a><tt class="py-lineno">16</tt> <a class="py-toggle" href="#" id="ESX._initialize_check-toggle" onclick="return toggle('ESX._initialize_check');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.esx.ESX-class.html#_initialize_check">_initialize_check</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ESX._initialize_check-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ESX._initialize_check-expanded"><a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">        <tt class="py-docstring">"""Runs all checks when a machine manager is initialized.</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">        @raise CuckooMachineError: if configuration is invalid</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Variable lib.cuckoo.core.database.Machine.options=lib.cuckoo.core.database.Machine-class.html#options,Method lib.cuckoo.core.database.Task.options()=lib.cuckoo.core.database.Task-class.html#options"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-15', 'options', 'link-15');">options</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Module modules.machinery.esx=modules.machinery.esx-module.html"><a title="modules.machinery.esx" class="py-name" href="#" onclick="return doclink('link-16', 'esx', 'link-16');">esx</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Variable modules.machinery.kvm.KVM.dsn=modules.machinery.kvm.KVM-class.html#dsn"><a title="modules.machinery.kvm.KVM.dsn" class="py-name" href="#" onclick="return doclink('link-17', 'dsn', 'link-17');">dsn</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-18" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-18', 'CuckooMachineError', 'link-14');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"ESX(i) DSN is missing, please add it to the config file"</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-19', 'options', 'link-15');">options</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="modules.machinery.esx" class="py-name" href="#" onclick="return doclink('link-20', 'esx', 'link-16');">esx</a></tt><tt class="py-op">.</tt><tt class="py-name">username</tt><tt class="py-op">:</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-21" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-21', 'CuckooMachineError', 'link-14');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"ESX(i) username is missing, please add it to the config file"</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-22', 'options', 'link-15');">options</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="modules.machinery.esx" class="py-name" href="#" onclick="return doclink('link-23', 'esx', 'link-16');">esx</a></tt><tt class="py-op">.</tt><tt class="py-name">password</tt><tt class="py-op">:</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-24" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooMachineError" class="py-name" href="#" onclick="return doclink('link-24', 'CuckooMachineError', 'link-14');">CuckooMachineError</a></tt><tt class="py-op">(</tt><tt class="py-string">"ESX(i) password is missing, please add it to the config file"</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="modules.machinery.kvm.KVM.dsn" class="py-name" href="#" onclick="return doclink('link-25', 'dsn', 'link-17');">dsn</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-26', 'options', 'link-15');">options</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="modules.machinery.esx" class="py-name" href="#" onclick="return doclink('link-27', 'esx', 'link-16');">esx</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="modules.machinery.kvm.KVM.dsn" class="py-name" href="#" onclick="return doclink('link-28', 'dsn', 'link-17');">dsn</a></tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">global_conn</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method modules.machinery.esx.ESX._global_connect()=modules.machinery.esx.ESX-class.html#_global_connect"><a title="modules.machinery.esx.ESX._global_connect" class="py-name" href="#" onclick="return doclink('link-29', '_global_connect', 'link-29');">_global_connect</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-30" class="py-name" targets="Class modules.machinery.esx.ESX=modules.machinery.esx.ESX-class.html"><a title="modules.machinery.esx.ESX" class="py-name" href="#" onclick="return doclink('link-30', 'ESX', 'link-30');">ESX</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Method lib.cuckoo.common.abstracts.LibVirtMachinery._initialize_check()=lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#_initialize_check,Method lib.cuckoo.common.abstracts.Machinery._initialize_check()=lib.cuckoo.common.abstracts.Machinery-class.html#_initialize_check,Method modules.machinery.avd.Avd._initialize_check()=modules.machinery.avd.Avd-class.html#_initialize_check,Method modules.machinery.esx.ESX._initialize_check()=modules.machinery.esx.ESX-class.html#_initialize_check,Method modules.machinery.physical.Physical._initialize_check()=modules.machinery.physical.Physical-class.html#_initialize_check,Method modules.machinery.qemu.QEMU._initialize_check()=modules.machinery.qemu.QEMU-class.html#_initialize_check,Method modules.machinery.virtualbox.VirtualBox._initialize_check()=modules.machinery.virtualbox.VirtualBox-class.html#_initialize_check,Method modules.machinery.vmware.VMware._initialize_check()=modules.machinery.vmware.VMware-class.html#_initialize_check,Method modules.machinery.vsphere.vSphere._initialize_check()=modules.machinery.vsphere.vSphere-class.html#_initialize_check,Method modules.machinery.xenserver.XenServerMachinery._initialize_check()=modules.machinery.xenserver.XenServerMachinery-class.html#_initialize_check"><a title="lib.cuckoo.common.abstracts.LibVirtMachinery._initialize_check
+lib.cuckoo.common.abstracts.Machinery._initialize_check
+modules.machinery.avd.Avd._initialize_check
+modules.machinery.esx.ESX._initialize_check
+modules.machinery.physical.Physical._initialize_check
+modules.machinery.qemu.QEMU._initialize_check
+modules.machinery.virtualbox.VirtualBox._initialize_check
+modules.machinery.vmware.VMware._initialize_check
+modules.machinery.vsphere.vSphere._initialize_check
+modules.machinery.xenserver.XenServerMachinery._initialize_check" class="py-name" href="#" onclick="return doclink('link-31', '_initialize_check', 'link-31');">_initialize_check</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="ESX._auth_callback"></a><div id="ESX._auth_callback-def"><a name="L31"></a><tt class="py-lineno">31</tt> <a class="py-toggle" href="#" id="ESX._auth_callback-toggle" onclick="return toggle('ESX._auth_callback');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.esx.ESX-class.html#_auth_callback">_auth_callback</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">credentials</tt><tt class="py-op">,</tt> <tt class="py-param">user_data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ESX._auth_callback-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ESX._auth_callback-expanded"><a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">credential</tt> <tt class="py-keyword">in</tt> <tt class="py-name">credentials</tt><tt class="py-op">:</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">credential</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-name">libvirt</tt><tt class="py-op">.</tt><tt class="py-name">VIR_CRED_AUTHNAME</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">                <tt class="py-name">credential</tt><tt class="py-op">[</tt><tt class="py-number">4</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-32', 'options', 'link-15');">options</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="modules.machinery.esx" class="py-name" href="#" onclick="return doclink('link-33', 'esx', 'link-16');">esx</a></tt><tt class="py-op">.</tt><tt class="py-name">username</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">credential</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-name">libvirt</tt><tt class="py-op">.</tt><tt class="py-name">VIR_CRED_NOECHOPROMPT</tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">                <tt class="py-name">credential</tt><tt class="py-op">[</tt><tt class="py-number">4</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-34', 'options', 'link-15');">options</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="modules.machinery.esx" class="py-name" href="#" onclick="return doclink('link-35', 'esx', 'link-16');">esx</a></tt><tt class="py-op">.</tt><tt class="py-name">password</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt id="link-36" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooCriticalError" class="py-name" href="#" onclick="return doclink('link-36', 'CuckooCriticalError', 'link-9');">CuckooCriticalError</a></tt><tt class="py-op">(</tt><tt class="py-string">"ESX machinery did not recieve an object to inject a username or password into"</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line"> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-number">0</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="ESX._connect"></a><div id="ESX._connect-def"><a name="L42"></a><tt class="py-lineno">42</tt> <a class="py-toggle" href="#" id="ESX._connect-toggle" onclick="return toggle('ESX._connect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.esx.ESX-class.html#_connect">_connect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ESX._connect-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ESX._connect-expanded"><a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-docstring">"""Return the already-connected single connection handle if set, otherwise set it."""</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">global_conn</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">global_conn</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="modules.machinery.esx.ESX._global_connect" class="py-name" href="#" onclick="return doclink('link-37', '_global_connect', 'link-29');">_global_connect</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">global_conn</tt> </tt>
+</div><a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line"> </tt>
+<a name="ESX._global_connect"></a><div id="ESX._global_connect-def"><a name="L48"></a><tt class="py-lineno">48</tt> <a class="py-toggle" href="#" id="ESX._global_connect-toggle" onclick="return toggle('ESX._global_connect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.esx.ESX-class.html#_global_connect">_global_connect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ESX._global_connect-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ESX._global_connect-expanded"><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">        <tt class="py-docstring">"""Set the single connection handle."""</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">auth</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">[</tt><tt class="py-name">libvirt</tt><tt class="py-op">.</tt><tt class="py-name">VIR_CRED_AUTHNAME</tt><tt class="py-op">,</tt> <tt class="py-name">libvirt</tt><tt class="py-op">.</tt><tt class="py-name">VIR_CRED_NOECHOPROMPT</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Method modules.machinery.esx.ESX._auth_callback()=modules.machinery.esx.ESX-class.html#_auth_callback"><a title="modules.machinery.esx.ESX._auth_callback" class="py-name" href="#" onclick="return doclink('link-38', '_auth_callback', 'link-38');">_auth_callback</a></tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">]</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">libvirt</tt><tt class="py-op">.</tt><tt class="py-name">openAuth</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="modules.machinery.kvm.KVM.dsn" class="py-name" href="#" onclick="return doclink('link-39', 'dsn', 'link-17');">dsn</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">auth</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">libvirt</tt><tt class="py-op">.</tt><tt class="py-name">libvirtError</tt> <tt class="py-keyword">as</tt> <tt class="py-name">libvex</tt><tt class="py-op">:</tt> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-40" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooCriticalError" class="py-name" href="#" onclick="return doclink('link-40', 'CuckooCriticalError', 'link-9');">CuckooCriticalError</a></tt><tt class="py-op">(</tt><tt class="py-string">"libvirt returned an exception on connection: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">libvex</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line"> </tt>
+<a name="ESX._disconnect"></a><div id="ESX._disconnect-def"><a name="L56"></a><tt class="py-lineno">56</tt> <a class="py-toggle" href="#" id="ESX._disconnect-toggle" onclick="return toggle('ESX._disconnect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.esx.ESX-class.html#_disconnect">_disconnect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">conn</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ESX._disconnect-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ESX._disconnect-expanded"><a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">        <tt class="py-docstring">"""Using one global connection we now disconnect in the destructor, ignore requests to disconnect."""</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line"> </tt>
+<a name="ESX.__del__"></a><div id="ESX.__del__-def"><a name="L60"></a><tt class="py-lineno">60</tt> <a class="py-toggle" href="#" id="ESX.__del__-toggle" onclick="return toggle('ESX.__del__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.esx.ESX-class.html#__del__">__del__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ESX.__del__-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="ESX.__del__-expanded"><a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">global_conn</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name" targets="Method lib.cuckoo.common.abstracts.ProtocolHandler.close()=lib.cuckoo.common.abstracts.ProtocolHandler-class.html#close,Method lib.cuckoo.core.resultserver.FileUpload.close()=lib.cuckoo.core.resultserver.FileUpload-class.html#close,Method lib.cuckoo.core.resultserver.LogHandler.close()=lib.cuckoo.core.resultserver.LogHandler-class.html#close,Method modules.processing.network.SortCap.close()=modules.processing.network.SortCap-class.html#close"><a title="lib.cuckoo.common.abstracts.ProtocolHandler.close
+lib.cuckoo.core.resultserver.FileUpload.close
+lib.cuckoo.core.resultserver.LogHandler.close
+modules.processing.network.SortCap.close" class="py-name" href="#" onclick="return doclink('link-41', 'close', 'link-41');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:01 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

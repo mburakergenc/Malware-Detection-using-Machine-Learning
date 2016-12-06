@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lib.core.pipe</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lib-module.html">Package&nbsp;lib</a> ::
+        <a href="lib.core-module.html">Package&nbsp;core</a> ::
+        Module&nbsp;pipe
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lib.core.pipe-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lib.core.pipe-module.html">Module lib.core.pipe</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">socket</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">threading</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">ctypes</tt> <tt class="py-keyword">import</tt> <tt class="py-name">create_string_buffer</tt><tt class="py-op">,</tt> <tt class="py-name">c_uint</tt><tt class="py-op">,</tt> <tt class="py-name">byref</tt><tt class="py-op">,</tt> <tt class="py-name">sizeof</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.common=lib.common-module.html"><a title="lib.common" class="py-name" href="#" onclick="return doclink('link-1', 'common', 'link-1');">common</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module lib.common.defines=lib.common.defines-module.html"><a title="lib.common.defines" class="py-name" href="#" onclick="return doclink('link-2', 'defines', 'link-2');">defines</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Variable lib.common.defines.KERNEL32=lib.common.defines-module.html#KERNEL32"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-3', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Variable lib.common.defines.PIPE_ACCESS_INBOUND=lib.common.defines-module.html#PIPE_ACCESS_INBOUND"><a title="lib.common.defines.PIPE_ACCESS_INBOUND" class="py-name" href="#" onclick="return doclink('link-4', 'PIPE_ACCESS_INBOUND', 'link-4');">PIPE_ACCESS_INBOUND</a></tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name" targets="Variable lib.common.defines.ERROR_MORE_DATA=lib.common.defines-module.html#ERROR_MORE_DATA"><a title="lib.common.defines.ERROR_MORE_DATA" class="py-name" href="#" onclick="return doclink('link-5', 'ERROR_MORE_DATA', 'link-5');">ERROR_MORE_DATA</a></tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-6" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-6', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="lib.common" class="py-name" href="#" onclick="return doclink('link-7', 'common', 'link-1');">common</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="lib.common.defines" class="py-name" href="#" onclick="return doclink('link-8', 'defines', 'link-2');">defines</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Variable lib.common.defines.PIPE_TYPE_BYTE=lib.common.defines-module.html#PIPE_TYPE_BYTE"><a title="lib.common.defines.PIPE_TYPE_BYTE" class="py-name" href="#" onclick="return doclink('link-9', 'PIPE_TYPE_BYTE', 'link-9');">PIPE_TYPE_BYTE</a></tt><tt class="py-op">,</tt> <tt id="link-10" class="py-name" targets="Variable lib.common.defines.PIPE_WAIT=lib.common.defines-module.html#PIPE_WAIT"><a title="lib.common.defines.PIPE_WAIT" class="py-name" href="#" onclick="return doclink('link-10', 'PIPE_WAIT', 'link-10');">PIPE_WAIT</a></tt><tt class="py-op">,</tt> <tt id="link-11" class="py-name" targets="Variable lib.common.defines.ERROR_PIPE_CONNECTED=lib.common.defines-module.html#ERROR_PIPE_CONNECTED"><a title="lib.common.defines.ERROR_PIPE_CONNECTED" class="py-name" href="#" onclick="return doclink('link-11', 'ERROR_PIPE_CONNECTED', 'link-11');">ERROR_PIPE_CONNECTED</a></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-12" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-12', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="lib.common" class="py-name" href="#" onclick="return doclink('link-13', 'common', 'link-1');">common</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="lib.common.defines" class="py-name" href="#" onclick="return doclink('link-14', 'defines', 'link-2');">defines</a></tt> <tt class="py-keyword">import</tt> <tt id="link-15" class="py-name" targets="Variable lib.common.defines.PIPE_UNLIMITED_INSTANCES=lib.common.defines-module.html#PIPE_UNLIMITED_INSTANCES"><a title="lib.common.defines.PIPE_UNLIMITED_INSTANCES" class="py-name" href="#" onclick="return doclink('link-15', 'PIPE_UNLIMITED_INSTANCES', 'link-15');">PIPE_UNLIMITED_INSTANCES</a></tt><tt class="py-op">,</tt> <tt id="link-16" class="py-name" targets="Variable lib.common.defines.INVALID_HANDLE_VALUE=lib.common.defines-module.html#INVALID_HANDLE_VALUE"><a title="lib.common.defines.INVALID_HANDLE_VALUE" class="py-name" href="#" onclick="return doclink('link-16', 'INVALID_HANDLE_VALUE', 'link-16');">INVALID_HANDLE_VALUE</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-17" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-17', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="lib.common" class="py-name" href="#" onclick="return doclink('link-18', 'common', 'link-1');">common</a></tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="lib.common.defines" class="py-name" href="#" onclick="return doclink('link-19', 'defines', 'link-2');">defines</a></tt> <tt class="py-keyword">import</tt> <tt id="link-20" class="py-name" targets="Variable lib.common.defines.FILE_FLAG_WRITE_THROUGH=lib.common.defines-module.html#FILE_FLAG_WRITE_THROUGH"><a title="lib.common.defines.FILE_FLAG_WRITE_THROUGH" class="py-name" href="#" onclick="return doclink('link-20', 'FILE_FLAG_WRITE_THROUGH', 'link-20');">FILE_FLAG_WRITE_THROUGH</a></tt><tt class="py-op">,</tt> <tt id="link-21" class="py-name" targets="Variable lib.common.defines.PIPE_READMODE_BYTE=lib.common.defines-module.html#PIPE_READMODE_BYTE"><a title="lib.common.defines.PIPE_READMODE_BYTE" class="py-name" href="#" onclick="return doclink('link-21', 'PIPE_READMODE_BYTE', 'link-21');">PIPE_READMODE_BYTE</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-22" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-22', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="lib.common" class="py-name" href="#" onclick="return doclink('link-23', 'common', 'link-1');">common</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="lib.common.defines" class="py-name" href="#" onclick="return doclink('link-24', 'defines', 'link-2');">defines</a></tt> <tt class="py-keyword">import</tt> <tt id="link-25" class="py-name" targets="Variable lib.common.defines.ERROR_BROKEN_PIPE=lib.common.defines-module.html#ERROR_BROKEN_PIPE"><a title="lib.common.defines.ERROR_BROKEN_PIPE" class="py-name" href="#" onclick="return doclink('link-25', 'ERROR_BROKEN_PIPE', 'link-25');">ERROR_BROKEN_PIPE</a></tt><tt class="py-op">,</tt> <tt id="link-26" class="py-name" targets="Variable lib.common.defines.PIPE_TYPE_MESSAGE=lib.common.defines-module.html#PIPE_TYPE_MESSAGE"><a title="lib.common.defines.PIPE_TYPE_MESSAGE" class="py-name" href="#" onclick="return doclink('link-26', 'PIPE_TYPE_MESSAGE', 'link-26');">PIPE_TYPE_MESSAGE</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-27" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-27', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="lib.common" class="py-name" href="#" onclick="return doclink('link-28', 'common', 'link-1');">common</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="lib.common.defines" class="py-name" href="#" onclick="return doclink('link-29', 'defines', 'link-2');">defines</a></tt> <tt class="py-keyword">import</tt> <tt id="link-30" class="py-name" targets="Variable lib.common.defines.PIPE_ACCESS_DUPLEX=lib.common.defines-module.html#PIPE_ACCESS_DUPLEX"><a title="lib.common.defines.PIPE_ACCESS_DUPLEX" class="py-name" href="#" onclick="return doclink('link-30', 'PIPE_ACCESS_DUPLEX', 'link-30');">PIPE_ACCESS_DUPLEX</a></tt><tt class="py-op">,</tt> <tt id="link-31" class="py-name" targets="Variable lib.common.defines.PIPE_READMODE_MESSAGE=lib.common.defines-module.html#PIPE_READMODE_MESSAGE"><a title="lib.common.defines.PIPE_READMODE_MESSAGE" class="py-name" href="#" onclick="return doclink('link-31', 'PIPE_READMODE_MESSAGE', 'link-31');">PIPE_READMODE_MESSAGE</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt id="link-32" class="py-name" targets="Variable lib.api.process.log=lib.api.process-module.html#log,Variable lib.common.registry.log=lib.common.registry-module.html#log,Variable lib.common.results.log=lib.common.results-module.html#log,Variable lib.core.pipe.log=lib.core.pipe-module.html#log,Variable lib.core.startup.log=lib.core.startup-module.html#log,Variable modules.auxiliary.disguise.log=modules.auxiliary.disguise-module.html#log,Variable modules.auxiliary.human.log=modules.auxiliary.human-module.html#log,Variable modules.auxiliary.installcert.log=modules.auxiliary.installcert-module.html#log,Variable modules.auxiliary.reboot.log=modules.auxiliary.reboot-module.html#log,Variable modules.auxiliary.recentfiles.log=modules.auxiliary.recentfiles-module.html#log,Variable modules.auxiliary.screenshots.log=modules.auxiliary.screenshots-module.html#log,Variable modules.packages.ie.log=modules.packages.ie-module.html#log,Variable modules.packages.js.log=modules.packages.js-module.html#log,Variable modules.packages.pdf.log=modules.packages.pdf-module.html#log,Variable modules.packages.reboot.log=modules.packages.reboot-module.html#log,Variable modules.packages.wsf.log=modules.packages.wsf-module.html#log,Variable modules.packages.zip.log=modules.packages.zip-module.html#log"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-32', 'log', 'link-32');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-name">__name__</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt id="link-33" class="py-name" targets="Variable lib.common.hashing.BUFSIZE=lib.common.hashing-module.html#BUFSIZE,Variable lib.common.results.BUFSIZE=lib.common.results-module.html#BUFSIZE,Variable lib.core.pipe.BUFSIZE=lib.core.pipe-module.html#BUFSIZE"><a title="lib.common.hashing.BUFSIZE
+lib.common.results.BUFSIZE
+lib.core.pipe.BUFSIZE" class="py-name" href="#" onclick="return doclink('link-33', 'BUFSIZE', 'link-33');">BUFSIZE</a></tt> <tt class="py-op">=</tt> <tt class="py-number">0x10000</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="PipeForwarder"></a><div id="PipeForwarder-def"><a name="L23"></a><tt class="py-lineno"> 23</tt> <a class="py-toggle" href="#" id="PipeForwarder-toggle" onclick="return toggle('PipeForwarder');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.pipe.PipeForwarder-class.html">PipeForwarder</a><tt class="py-op">(</tt><tt class="py-base-class">threading</tt><tt class="py-op">.</tt><tt class="py-base-class">Thread</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PipeForwarder-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="PipeForwarder-expanded"><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt class="py-docstring">"""The Pipe Forwarder forwards all data received from a local pipe to</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">    the Cuckoo server through a socket."""</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">    <tt id="link-34" class="py-name" targets="Variable lib.core.pipe.PipeForwarder.sockets=lib.core.pipe.PipeForwarder-class.html#sockets"><a title="lib.core.pipe.PipeForwarder.sockets" class="py-name" href="#" onclick="return doclink('link-34', 'sockets', 'link-34');">sockets</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt id="link-35" class="py-name" targets="Variable lib.core.pipe.PipeForwarder.active=lib.core.pipe.PipeForwarder-class.html#active"><a title="lib.core.pipe.PipeForwarder.active" class="py-name" href="#" onclick="return doclink('link-35', 'active', 'link-35');">active</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="PipeForwarder.__init__"></a><div id="PipeForwarder.__init__-def"><a name="L29"></a><tt class="py-lineno"> 29</tt> <a class="py-toggle" href="#" id="PipeForwarder.__init__-toggle" onclick="return toggle('PipeForwarder.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.pipe.PipeForwarder-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">pipe_handle</tt><tt class="py-op">,</tt> <tt class="py-param">destination</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PipeForwarder.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PipeForwarder.__init__-expanded"><a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">        <tt class="py-name">threading</tt><tt class="py-op">.</tt><tt class="py-name">Thread</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Method lib.api.process.Process.__init__()=lib.api.process.Process-class.html#__init__,Method lib.common.abstracts.Auxiliary.__init__()=lib.common.abstracts.Auxiliary-class.html#__init__,Method lib.common.abstracts.Package.__init__()=lib.common.abstracts.Package-class.html#__init__,Method lib.common.results.NetlogConnection.__init__()=lib.common.results.NetlogConnection-class.html#__init__,Method lib.common.results.NetlogHandler.__init__()=lib.common.results.NetlogHandler-class.html#__init__,Method lib.core.config.Config.__init__()=lib.core.config.Config-class.html#__init__,Method lib.core.pipe.PipeDispatcher.__init__()=lib.core.pipe.PipeDispatcher-class.html#__init__,Method lib.core.pipe.PipeForwarder.__init__()=lib.core.pipe.PipeForwarder-class.html#__init__,Method lib.core.pipe.PipeServer.__init__()=lib.core.pipe.PipeServer-class.html#__init__,Method modules.auxiliary.human.Human.__init__()=modules.auxiliary.human.Human-class.html#__init__,Method modules.auxiliary.screenshots.Screenshots.__init__()=modules.auxiliary.screenshots.Screenshots-class.html#__init__"><a title="lib.api.process.Process.__init__
+lib.common.abstracts.Auxiliary.__init__
+lib.common.abstracts.Package.__init__
+lib.common.results.NetlogConnection.__init__
+lib.common.results.NetlogHandler.__init__
+lib.core.config.Config.__init__
+lib.core.pipe.PipeDispatcher.__init__
+lib.core.pipe.PipeForwarder.__init__
+lib.core.pipe.PipeServer.__init__
+modules.auxiliary.human.Human.__init__
+modules.auxiliary.screenshots.Screenshots.__init__" class="py-name" href="#" onclick="return doclink('link-36', '__init__', 'link-36');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_handle</tt> <tt class="py-op">=</tt> <tt class="py-name">pipe_handle</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">destination</tt> <tt class="py-op">=</tt> <tt class="py-name">destination</tt> </tt>
+</div><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="PipeForwarder.run"></a><div id="PipeForwarder.run-def"><a name="L34"></a><tt class="py-lineno"> 34</tt> <a class="py-toggle" href="#" id="PipeForwarder.run-toggle" onclick="return toggle('PipeForwarder.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.pipe.PipeForwarder-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PipeForwarder.run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PipeForwarder.run-expanded"><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-name">buf</tt> <tt class="py-op">=</tt> <tt class="py-name">create_string_buffer</tt><tt class="py-op">(</tt><tt id="link-37" class="py-name"><a title="lib.common.hashing.BUFSIZE
+lib.common.results.BUFSIZE
+lib.core.pipe.BUFSIZE" class="py-name" href="#" onclick="return doclink('link-37', 'BUFSIZE', 'link-33');">BUFSIZE</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">        <tt class="py-name">bytes_read</tt> <tt class="py-op">=</tt> <tt class="py-name">c_uint</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">        <tt class="py-name">pid</tt> <tt class="py-op">=</tt> <tt class="py-name">c_uint</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-comment"># The first four bytes indicate the process identifier. In case the</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-comment"># pipe handle is closed in an unknown way, reopening one and</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-comment"># specifying the same process identifier will reuse the same socket,</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-comment"># thus making it look like as if it was never closed in the first</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-comment"># place.</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-name">success</tt> <tt class="py-op">=</tt> <tt id="link-38" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-38', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">ReadFile</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_handle</tt><tt class="py-op">,</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">                                    <tt class="py-name">byref</tt><tt class="py-op">(</tt><tt class="py-name">pid</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">sizeof</tt><tt class="py-op">(</tt><tt class="py-name">pid</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                                    <tt class="py-name">byref</tt><tt class="py-op">(</tt><tt class="py-name">bytes_read</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">success</tt> <tt class="py-keyword">or</tt> <tt class="py-name">bytes_read</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> <tt class="py-op">!=</tt> <tt class="py-name">sizeof</tt><tt class="py-op">(</tt><tt class="py-name">pid</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">            <tt id="link-39" class="py-name"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-39', 'log', 'link-32');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"Unable to read the process identifier of this "</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                        <tt class="py-string">"log pipe instance."</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">            <tt id="link-40" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-40', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">CloseHandle</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_handle</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="lib.core.pipe.PipeForwarder.active" class="py-name" href="#" onclick="return doclink('link-41', 'active', 'link-35');">active</a></tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">pid</tt><tt class="py-op">.</tt><tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">            <tt id="link-42" class="py-name"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-42', 'log', 'link-32');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"A second log pipe handler for an active process is "</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">                        <tt class="py-string">"being requested, denying request."</tt><tt class="py-op">)</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">            <tt id="link-43" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-43', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">CloseHandle</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_handle</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">pid</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="lib.core.pipe.PipeForwarder.sockets" class="py-name" href="#" onclick="return doclink('link-44', 'sockets', 'link-34');">sockets</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="lib.core.pipe.PipeForwarder.sockets" class="py-name" href="#" onclick="return doclink('link-45', 'sockets', 'link-34');">sockets</a></tt><tt class="py-op">[</tt><tt class="py-name">pid</tt><tt class="py-op">.</tt><tt class="py-name">value</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">                <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">create_connection</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">destination</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">sock</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="lib.core.pipe.PipeForwarder.sockets" class="py-name" href="#" onclick="return doclink('link-46', 'sockets', 'link-34');">sockets</a></tt><tt class="py-op">[</tt><tt class="py-name">pid</tt><tt class="py-op">.</tt><tt class="py-name">value</tt><tt class="py-op">]</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="lib.core.pipe.PipeForwarder.active" class="py-name" href="#" onclick="return doclink('link-47', 'active', 'link-35');">active</a></tt><tt class="py-op">[</tt><tt class="py-name">pid</tt><tt class="py-op">.</tt><tt class="py-name">value</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-name">True</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">            <tt class="py-name">success</tt> <tt class="py-op">=</tt> <tt id="link-48" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-48', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">ReadFile</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_handle</tt><tt class="py-op">,</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                                        <tt class="py-name">byref</tt><tt class="py-op">(</tt><tt class="py-name">buf</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">sizeof</tt><tt class="py-op">(</tt><tt class="py-name">buf</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">                                        <tt class="py-name">byref</tt><tt class="py-op">(</tt><tt class="py-name">bytes_read</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">success</tt> <tt class="py-keyword">or</tt> <tt id="link-49" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-49', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">GetLastError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt id="link-50" class="py-name"><a title="lib.common.defines.ERROR_MORE_DATA" class="py-name" href="#" onclick="return doclink('link-50', 'ERROR_MORE_DATA', 'link-5');">ERROR_MORE_DATA</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                <tt class="py-name">sock</tt><tt class="py-op">.</tt><tt class="py-name">sendall</tt><tt class="py-op">(</tt><tt class="py-name">buf</tt><tt class="py-op">.</tt><tt class="py-name">raw</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-name">bytes_read</tt><tt class="py-op">.</tt><tt class="py-name">value</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">            <tt class="py-comment"># If we get the broken pipe error then this pipe connection has</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">            <tt class="py-comment"># been terminated for one reason or another. So break from the</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">            <tt class="py-comment"># loop and make the socket "inactive", that is, another pipe</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">            <tt class="py-comment"># connection can in theory pick it up. (This will only happen in</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">            <tt class="py-comment"># cases where malware for some reason broke our pipe connection).</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt id="link-51" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-51', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">GetLastError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt id="link-52" class="py-name"><a title="lib.common.defines.ERROR_BROKEN_PIPE" class="py-name" href="#" onclick="return doclink('link-52', 'ERROR_BROKEN_PIPE', 'link-25');">ERROR_BROKEN_PIPE</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                <tt class="py-keyword">break</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                <tt id="link-53" class="py-name"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-53', 'log', 'link-32');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"The log pipe handler has failed, last error %d."</tt><tt class="py-op">,</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                            <tt id="link-54" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-54', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">GetLastError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">                <tt class="py-keyword">break</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line"> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name"><a title="lib.core.pipe.PipeForwarder.active" class="py-name" href="#" onclick="return doclink('link-55', 'active', 'link-35');">active</a></tt><tt class="py-op">[</tt><tt class="py-name">pid</tt><tt class="py-op">.</tt><tt class="py-name">value</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+</div></div><a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"> </tt>
+<a name="PipeDispatcher"></a><div id="PipeDispatcher-def"><a name="L88"></a><tt class="py-lineno"> 88</tt> <a class="py-toggle" href="#" id="PipeDispatcher-toggle" onclick="return toggle('PipeDispatcher');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.pipe.PipeDispatcher-class.html">PipeDispatcher</a><tt class="py-op">(</tt><tt class="py-base-class">threading</tt><tt class="py-op">.</tt><tt class="py-base-class">Thread</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PipeDispatcher-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="PipeDispatcher-expanded"><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">    <tt class="py-docstring">"""Receives commands through a local pipe, forwards them to the</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">    dispatcher, and returns the response."""</tt> </tt>
+<a name="PipeDispatcher.__init__"></a><div id="PipeDispatcher.__init__-def"><a name="L91"></a><tt class="py-lineno"> 91</tt> <a class="py-toggle" href="#" id="PipeDispatcher.__init__-toggle" onclick="return toggle('PipeDispatcher.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.pipe.PipeDispatcher-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">pipe_handle</tt><tt class="py-op">,</tt> <tt class="py-param">dispatcher</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PipeDispatcher.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PipeDispatcher.__init__-expanded"><a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-name">threading</tt><tt class="py-op">.</tt><tt class="py-name">Thread</tt><tt class="py-op">.</tt><tt id="link-56" class="py-name"><a title="lib.api.process.Process.__init__
+lib.common.abstracts.Auxiliary.__init__
+lib.common.abstracts.Package.__init__
+lib.common.results.NetlogConnection.__init__
+lib.common.results.NetlogHandler.__init__
+lib.core.config.Config.__init__
+lib.core.pipe.PipeDispatcher.__init__
+lib.core.pipe.PipeForwarder.__init__
+lib.core.pipe.PipeServer.__init__
+modules.auxiliary.human.Human.__init__
+modules.auxiliary.screenshots.Screenshots.__init__" class="py-name" href="#" onclick="return doclink('link-56', '__init__', 'link-36');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_handle</tt> <tt class="py-op">=</tt> <tt class="py-name">pipe_handle</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dispatcher</tt> <tt class="py-op">=</tt> <tt class="py-name">dispatcher</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">do_run</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="PipeDispatcher._read_message"></a><div id="PipeDispatcher._read_message-def"><a name="L97"></a><tt class="py-lineno"> 97</tt> <a class="py-toggle" href="#" id="PipeDispatcher._read_message-toggle" onclick="return toggle('PipeDispatcher._read_message');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.pipe.PipeDispatcher-class.html#_read_message">_read_message</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">buf</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PipeDispatcher._read_message-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PipeDispatcher._read_message-expanded"><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-docstring">"""Reads a message."""</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-name">bytes_read</tt> <tt class="py-op">=</tt> <tt class="py-name">c_uint</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-name">ret</tt> <tt class="py-op">=</tt> <tt class="py-string">""</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-name">True</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">            <tt class="py-name">success</tt> <tt class="py-op">=</tt> <tt id="link-57" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-57', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">ReadFile</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_handle</tt><tt class="py-op">,</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                                        <tt class="py-name">byref</tt><tt class="py-op">(</tt><tt class="py-name">buf</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">sizeof</tt><tt class="py-op">(</tt><tt class="py-name">buf</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                                        <tt class="py-name">byref</tt><tt class="py-op">(</tt><tt class="py-name">bytes_read</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-58" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-58', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">GetLastError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt id="link-59" class="py-name"><a title="lib.common.defines.ERROR_MORE_DATA" class="py-name" href="#" onclick="return doclink('link-59', 'ERROR_MORE_DATA', 'link-5');">ERROR_MORE_DATA</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">                <tt class="py-name">ret</tt> <tt class="py-op">+=</tt> <tt class="py-name">buf</tt><tt class="py-op">.</tt><tt class="py-name">raw</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-name">bytes_read</tt><tt class="py-op">.</tt><tt class="py-name">value</tt><tt class="py-op">]</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">success</tt><tt class="py-op">:</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">ret</tt> <tt class="py-op">+</tt> <tt class="py-name">buf</tt><tt class="py-op">.</tt><tt class="py-name">raw</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-name">bytes_read</tt><tt class="py-op">.</tt><tt class="py-name">value</tt><tt class="py-op">]</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> </tt>
+</div><a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="PipeDispatcher.run"></a><div id="PipeDispatcher.run-def"><a name="L114"></a><tt class="py-lineno">114</tt> <a class="py-toggle" href="#" id="PipeDispatcher.run-toggle" onclick="return toggle('PipeDispatcher.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.pipe.PipeDispatcher-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PipeDispatcher.run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PipeDispatcher.run-expanded"><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-docstring">"""Run the pipe dispatcher."""</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-name">buf</tt> <tt class="py-op">=</tt> <tt class="py-name">create_string_buffer</tt><tt class="py-op">(</tt><tt id="link-60" class="py-name"><a title="lib.common.hashing.BUFSIZE
+lib.common.results.BUFSIZE
+lib.core.pipe.BUFSIZE" class="py-name" href="#" onclick="return doclink('link-60', 'BUFSIZE', 'link-33');">BUFSIZE</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-name">bytes_written</tt> <tt class="py-op">=</tt> <tt class="py-name">c_uint</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">do_run</tt><tt class="py-op">:</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">            <tt class="py-name">message</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-61" class="py-name" targets="Method lib.core.pipe.PipeDispatcher._read_message()=lib.core.pipe.PipeDispatcher-class.html#_read_message"><a title="lib.core.pipe.PipeDispatcher._read_message" class="py-name" href="#" onclick="return doclink('link-61', '_read_message', 'link-61');">_read_message</a></tt><tt class="py-op">(</tt><tt class="py-name">buf</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">message</tt><tt class="py-op">:</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">                <tt class="py-keyword">break</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">            <tt class="py-name">response</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">dispatcher</tt><tt class="py-op">.</tt><tt class="py-name">dispatch</tt><tt class="py-op">(</tt><tt class="py-name">message</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt class="py-string">"OK"</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">            <tt id="link-62" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-62', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">WriteFile</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_handle</tt><tt class="py-op">,</tt> <tt class="py-name">response</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">response</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">                               <tt class="py-name">byref</tt><tt class="py-op">(</tt><tt class="py-name">bytes_written</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt id="link-63" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-63', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">CloseHandle</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_handle</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="PipeServer"></a><div id="PipeServer-def"><a name="L131"></a><tt class="py-lineno">131</tt> <a class="py-toggle" href="#" id="PipeServer-toggle" onclick="return toggle('PipeServer');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.core.pipe.PipeServer-class.html">PipeServer</a><tt class="py-op">(</tt><tt class="py-base-class">threading</tt><tt class="py-op">.</tt><tt class="py-base-class">Thread</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PipeServer-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="PipeServer-expanded"><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">    <tt class="py-docstring">"""The Pipe Server accepts incoming pipe handlers and initializes</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">    them in a new thread."""</tt> </tt>
+<a name="PipeServer.__init__"></a><div id="PipeServer.__init__-def"><a name="L134"></a><tt class="py-lineno">134</tt> <a class="py-toggle" href="#" id="PipeServer.__init__-toggle" onclick="return toggle('PipeServer.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.pipe.PipeServer-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">pipe_handler</tt><tt class="py-op">,</tt> <tt class="py-param">pipe_name</tt><tt class="py-op">,</tt> <tt class="py-param">message</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PipeServer.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PipeServer.__init__-expanded"><a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">        <tt class="py-name">threading</tt><tt class="py-op">.</tt><tt class="py-name">Thread</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="lib.api.process.Process.__init__
+lib.common.abstracts.Auxiliary.__init__
+lib.common.abstracts.Package.__init__
+lib.common.results.NetlogConnection.__init__
+lib.common.results.NetlogHandler.__init__
+lib.core.config.Config.__init__
+lib.core.pipe.PipeDispatcher.__init__
+lib.core.pipe.PipeForwarder.__init__
+lib.core.pipe.PipeServer.__init__
+modules.auxiliary.human.Human.__init__
+modules.auxiliary.screenshots.Screenshots.__init__" class="py-name" href="#" onclick="return doclink('link-64', '__init__', 'link-36');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_handler</tt> <tt class="py-op">=</tt> <tt class="py-name">pipe_handler</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_name</tt> <tt class="py-op">=</tt> <tt class="py-name">pipe_name</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">message</tt> <tt class="py-op">=</tt> <tt class="py-name">message</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">kwargs</tt> <tt class="py-op">=</tt> <tt class="py-name">kwargs</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">do_run</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"> </tt>
+<a name="PipeServer.run"></a><div id="PipeServer.run-def"><a name="L142"></a><tt class="py-lineno">142</tt> <a class="py-toggle" href="#" id="PipeServer.run-toggle" onclick="return toggle('PipeServer.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.pipe.PipeServer-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PipeServer.run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PipeServer.run-expanded"><a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">do_run</tt><tt class="py-op">:</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">            <tt class="py-name">flags</tt> <tt class="py-op">=</tt> <tt id="link-65" class="py-name"><a title="lib.common.defines.FILE_FLAG_WRITE_THROUGH" class="py-name" href="#" onclick="return doclink('link-65', 'FILE_FLAG_WRITE_THROUGH', 'link-20');">FILE_FLAG_WRITE_THROUGH</a></tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">message</tt><tt class="py-op">:</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">                <tt class="py-name">pipe_handle</tt> <tt class="py-op">=</tt> <tt id="link-66" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-66', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">CreateNamedPipeA</tt><tt class="py-op">(</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_name</tt><tt class="py-op">,</tt> <tt id="link-67" class="py-name"><a title="lib.common.defines.PIPE_ACCESS_DUPLEX" class="py-name" href="#" onclick="return doclink('link-67', 'PIPE_ACCESS_DUPLEX', 'link-30');">PIPE_ACCESS_DUPLEX</a></tt> <tt class="py-op">|</tt> <tt class="py-name">flags</tt><tt class="py-op">,</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">                    <tt id="link-68" class="py-name"><a title="lib.common.defines.PIPE_TYPE_MESSAGE" class="py-name" href="#" onclick="return doclink('link-68', 'PIPE_TYPE_MESSAGE', 'link-26');">PIPE_TYPE_MESSAGE</a></tt> <tt class="py-op">|</tt> <tt id="link-69" class="py-name"><a title="lib.common.defines.PIPE_READMODE_MESSAGE" class="py-name" href="#" onclick="return doclink('link-69', 'PIPE_READMODE_MESSAGE', 'link-31');">PIPE_READMODE_MESSAGE</a></tt> <tt class="py-op">|</tt> <tt id="link-70" class="py-name"><a title="lib.common.defines.PIPE_WAIT" class="py-name" href="#" onclick="return doclink('link-70', 'PIPE_WAIT', 'link-10');">PIPE_WAIT</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">                    <tt id="link-71" class="py-name"><a title="lib.common.defines.PIPE_UNLIMITED_INSTANCES" class="py-name" href="#" onclick="return doclink('link-71', 'PIPE_UNLIMITED_INSTANCES', 'link-15');">PIPE_UNLIMITED_INSTANCES</a></tt><tt class="py-op">,</tt> <tt id="link-72" class="py-name"><a title="lib.common.hashing.BUFSIZE
+lib.common.results.BUFSIZE
+lib.core.pipe.BUFSIZE" class="py-name" href="#" onclick="return doclink('link-72', 'BUFSIZE', 'link-33');">BUFSIZE</a></tt><tt class="py-op">,</tt> <tt id="link-73" class="py-name"><a title="lib.common.hashing.BUFSIZE
+lib.common.results.BUFSIZE
+lib.core.pipe.BUFSIZE" class="py-name" href="#" onclick="return doclink('link-73', 'BUFSIZE', 'link-33');">BUFSIZE</a></tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">                <tt class="py-name">pipe_handle</tt> <tt class="py-op">=</tt> <tt id="link-74" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-74', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">CreateNamedPipeA</tt><tt class="py-op">(</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_name</tt><tt class="py-op">,</tt> <tt id="link-75" class="py-name"><a title="lib.common.defines.PIPE_ACCESS_INBOUND" class="py-name" href="#" onclick="return doclink('link-75', 'PIPE_ACCESS_INBOUND', 'link-4');">PIPE_ACCESS_INBOUND</a></tt> <tt class="py-op">|</tt> <tt class="py-name">flags</tt><tt class="py-op">,</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">                    <tt id="link-76" class="py-name"><a title="lib.common.defines.PIPE_TYPE_BYTE" class="py-name" href="#" onclick="return doclink('link-76', 'PIPE_TYPE_BYTE', 'link-9');">PIPE_TYPE_BYTE</a></tt> <tt class="py-op">|</tt> <tt id="link-77" class="py-name"><a title="lib.common.defines.PIPE_READMODE_BYTE" class="py-name" href="#" onclick="return doclink('link-77', 'PIPE_READMODE_BYTE', 'link-21');">PIPE_READMODE_BYTE</a></tt> <tt class="py-op">|</tt> <tt id="link-78" class="py-name"><a title="lib.common.defines.PIPE_WAIT" class="py-name" href="#" onclick="return doclink('link-78', 'PIPE_WAIT', 'link-10');">PIPE_WAIT</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">                    <tt id="link-79" class="py-name"><a title="lib.common.defines.PIPE_UNLIMITED_INSTANCES" class="py-name" href="#" onclick="return doclink('link-79', 'PIPE_UNLIMITED_INSTANCES', 'link-15');">PIPE_UNLIMITED_INSTANCES</a></tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt id="link-80" class="py-name"><a title="lib.common.hashing.BUFSIZE
+lib.common.results.BUFSIZE
+lib.core.pipe.BUFSIZE" class="py-name" href="#" onclick="return doclink('link-80', 'BUFSIZE', 'link-33');">BUFSIZE</a></tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">pipe_handle</tt> <tt class="py-op">==</tt> <tt id="link-81" class="py-name"><a title="lib.common.defines.INVALID_HANDLE_VALUE" class="py-name" href="#" onclick="return doclink('link-81', 'INVALID_HANDLE_VALUE', 'link-16');">INVALID_HANDLE_VALUE</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">                <tt id="link-82" class="py-name"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-82', 'log', 'link-32');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"Error opening logging pipe server."</tt><tt class="py-op">)</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">                <tt class="py-keyword">continue</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-83" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-83', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">ConnectNamedPipe</tt><tt class="py-op">(</tt><tt class="py-name">pipe_handle</tt><tt class="py-op">,</tt> <tt class="py-name">None</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> \ </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">                    <tt id="link-84" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-84', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">GetLastError</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt id="link-85" class="py-name"><a title="lib.common.defines.ERROR_PIPE_CONNECTED" class="py-name" href="#" onclick="return doclink('link-85', 'ERROR_PIPE_CONNECTED', 'link-11');">ERROR_PIPE_CONNECTED</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">                <tt class="py-name">handler</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pipe_handler</tt><tt class="py-op">(</tt><tt class="py-name">pipe_handle</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">                <tt class="py-name">handler</tt><tt class="py-op">.</tt><tt class="py-name">daemon</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line">                <tt class="py-name">handler</tt><tt class="py-op">.</tt><tt id="link-86" class="py-name" targets="Method lib.common.abstracts.Package.start()=lib.common.abstracts.Package-class.html#start,Method modules.auxiliary.disguise.Disguise.start()=modules.auxiliary.disguise.Disguise-class.html#start,Method modules.auxiliary.dumptls.DumpTLSMasterSecrets.start()=modules.auxiliary.dumptls.DumpTLSMasterSecrets-class.html#start,Method modules.auxiliary.installcert.InstallCertificate.start()=modules.auxiliary.installcert.InstallCertificate-class.html#start,Method modules.auxiliary.procmon.Procmon.start()=modules.auxiliary.procmon.Procmon-class.html#start,Method modules.auxiliary.reboot.Reboot.start()=modules.auxiliary.reboot.Reboot-class.html#start,Method modules.auxiliary.recentfiles.RecentFiles.start()=modules.auxiliary.recentfiles.RecentFiles-class.html#start,Method modules.packages.applet.Applet.start()=modules.packages.applet.Applet-class.html#start,Method modules.packages.bin.Shellcode.start()=modules.packages.bin.Shellcode-class.html#start,Method modules.packages.com.ComDll.start()=modules.packages.com.ComDll-class.html#start,Method modules.packages.cpl.CPL.start()=modules.packages.cpl.CPL-class.html#start,Method modules.packages.dll.Dll.start()=modules.packages.dll.Dll-class.html#start,Method modules.packages.doc.DOC.start()=modules.packages.doc.DOC-class.html#start,Method modules.packages.exe.Exe.start()=modules.packages.exe.Exe-class.html#start,Method modules.packages.ff.Firefox.start()=modules.packages.ff.Firefox-class.html#start,Method modules.packages.generic.Generic.start()=modules.packages.generic.Generic-class.html#start,Method modules.packages.ie.IE.start()=modules.packages.ie.IE-class.html#start,Method modules.packages.jar.Jar.start()=modules.packages.jar.Jar-class.html#start,Method modules.packages.js.Javascript.start()=modules.packages.js.Javascript-class.html#start,Method modules.packages.msi.Msi.start()=modules.packages.msi.Msi-class.html#start,Method modules.packages.pdf.PDF.start()=modules.packages.pdf.PDF-class.html#start,Method modules.packages.ppt.PPT.start()=modules.packages.ppt.PPT-class.html#start,Method modules.packages.ps1.PS1.start()=modules.packages.ps1.PS1-class.html#start,Method modules.packages.pub.PUB.start()=modules.packages.pub.PUB-class.html#start,Method modules.packages.python.Python.start()=modules.packages.python.Python-class.html#start,Method modules.packages.reboot.Reboot.start()=modules.packages.reboot.Reboot-class.html#start,Method modules.packages.vbs.VBS.start()=modules.packages.vbs.VBS-class.html#start,Method modules.packages.wsf.WSF.start()=modules.packages.wsf.WSF-class.html#start,Method modules.packages.xls.XLS.start()=modules.packages.xls.XLS-class.html#start,Method modules.packages.zip.Zip.start()=modules.packages.zip.Zip-class.html#start"><a title="lib.common.abstracts.Package.start
+modules.auxiliary.disguise.Disguise.start
+modules.auxiliary.dumptls.DumpTLSMasterSecrets.start
+modules.auxiliary.installcert.InstallCertificate.start
+modules.auxiliary.procmon.Procmon.start
+modules.auxiliary.reboot.Reboot.start
+modules.auxiliary.recentfiles.RecentFiles.start
+modules.packages.applet.Applet.start
+modules.packages.bin.Shellcode.start
+modules.packages.com.ComDll.start
+modules.packages.cpl.CPL.start
+modules.packages.dll.Dll.start
+modules.packages.doc.DOC.start
+modules.packages.exe.Exe.start
+modules.packages.ff.Firefox.start
+modules.packages.generic.Generic.start
+modules.packages.ie.IE.start
+modules.packages.jar.Jar.start
+modules.packages.js.Javascript.start
+modules.packages.msi.Msi.start
+modules.packages.pdf.PDF.start
+modules.packages.ppt.PPT.start
+modules.packages.ps1.PS1.start
+modules.packages.pub.PUB.start
+modules.packages.python.Python.start
+modules.packages.reboot.Reboot.start
+modules.packages.vbs.VBS.start
+modules.packages.wsf.WSF.start
+modules.packages.xls.XLS.start
+modules.packages.zip.Zip.start" class="py-name" href="#" onclick="return doclink('link-86', 'start', 'link-86');">start</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">                <tt id="link-87" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-87', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">CloseHandle</tt><tt class="py-op">(</tt><tt class="py-name">pipe_handle</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"> </tt>
+<a name="PipeServer.stop"></a><div id="PipeServer.stop-def"><a name="L168"></a><tt class="py-lineno">168</tt> <a class="py-toggle" href="#" id="PipeServer.stop-toggle" onclick="return toggle('PipeServer.stop');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.pipe.PipeServer-class.html#stop">stop</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="PipeServer.stop-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="PipeServer.stop-expanded"><a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">do_run</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+</div></div><a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:05 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

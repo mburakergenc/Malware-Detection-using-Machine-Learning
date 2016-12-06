@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Clean all Tasks and Samples &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../index.html" />
+    <link rel="up" title="Usage" href="index.html" />
+    <link rel="next" title="Utilities" href="utilities.html" />
+    <link rel="prev" title="Analysis Results" href="results.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="utilities.html" title="Utilities"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="results.html" title="Analysis Results"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Usage</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="clean-all-tasks-and-samples">
+<span id="cuckoo-clean"></span><h1>Clean all Tasks and Samples<a class="headerlink" href="#clean-all-tasks-and-samples" title="Permalink to this headline">¶</a></h1>
+<p>Since Cuckoo 1.2 a built-in <strong>&#8211;clean</strong> feature has been added, it
+drops all associated information of the tasks and samples in the
+database. If you submit a task after running
+<strong>&#8211;clean</strong> then you&#8217;ll start with <code class="docutils literal"><span class="pre">Task</span> <span class="pre">#1</span></code> again.</p>
+<p>To clean your setup, run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./cuckoo.py --clean
+</pre></div>
+</div>
+<p>To sum up, this command does the following:</p>
+<ul class="simple">
+<li>Delete analysis results.</li>
+<li>Delete submitted binaries.</li>
+<li>Delete all associated information of the tasks and samples in the configured database.</li>
+<li>Delete all data in the configured MongoDB (if configured and enabled in reporting.conf).</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you use this command you will delete permanently all data stored by Cuckoo in all
+storages: file system, SQL database and MongoDB database. Use it only if you are sure
+you would clean up all the data.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="results.html"
+                        title="previous chapter">Analysis Results</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="utilities.html"
+                        title="next chapter">Utilities</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usage/clean.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="utilities.html" title="Utilities"
+             >next</a></li>
+        <li class="right" >
+          <a href="results.html" title="Analysis Results"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Usage</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

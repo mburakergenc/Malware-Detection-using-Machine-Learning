@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Utilities &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../index.html" />
+    <link rel="up" title="Usage" href="index.html" />
+    <link rel="next" title="Customization" href="../customization/index.html" />
+    <link rel="prev" title="Clean all Tasks and Samples" href="clean.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../customization/index.html" title="Customization"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="clean.html" title="Clean all Tasks and Samples"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Usage</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="utilities">
+<h1>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h1>
+<p>Cuckoo comes with a set of pre-built utilities to automate several common
+tasks.
+You can find them under the &#8220;utils&#8221; folder.</p>
+<div class="section" id="submission-utility">
+<h2>Submission Utility<a class="headerlink" href="#submission-utility" title="Permalink to this headline">¶</a></h2>
+<p>Submits samples to analysis. This tool is already described in <a class="reference internal" href="submit.html"><span class="doc">Submit an Analysis</span></a>.</p>
+</div>
+<div class="section" id="web-utility">
+<h2>Web Utility<a class="headerlink" href="#web-utility" title="Permalink to this headline">¶</a></h2>
+<p>Cuckoo&#8217;s web interface. This tool is already described in <a class="reference internal" href="submit.html"><span class="doc">Submit an Analysis</span></a>.</p>
+</div>
+<div class="section" id="processing-utility">
+<h2>Processing Utility<a class="headerlink" href="#processing-utility" title="Permalink to this headline">¶</a></h2>
+<p>Run the results processing engine and optionally the reporting engine (run
+all reports) on an already available analysis folder, in order to not re-run
+the analysis if you want to re-generate the reports for it.
+This is used mainly in debugging and developing Cuckoo.
+For example if you want run again the report engine for analysis number 1:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/process.py 1
+</pre></div>
+</div>
+<p>If you want to re-generate the reports:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/process.py --report 1
+</pre></div>
+</div>
+<p>Following are the usage options:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/process.py -h
+usage: process.py [-h] [-d] [-r] [-p PARALLEL] [-u USER] [-m MODULES] id
+
+positional arguments:
+  id                    ID of the analysis to process (auto for continuous
+                        processing of unprocessed tasks).
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Display debug messages
+  -r, --report          Re-generate report
+  -p PARALLEL, --parallel PARALLEL
+                        Number of parallel threads to use (auto mode only).
+  -u USER, --user USER  Drop user privileges to this user
+  -m MODULES, --modules MODULES
+                        Path to signature and reporting modules - overrides
+                        default modules path.
+</pre></div>
+</div>
+<p>As best practice we suggest to adopt the following configuration if you are
+running Cuckoo with many virtual machines:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Run a stand alone process.py in auto mode (you choose the number of parallel threads)</li>
+<li>Disable Cuckoo reporting in cuckoo.conf (set process_results to off)</li>
+</ul>
+</div></blockquote>
+<p>This could increase the performance of your system because the reporting is not
+yet demanded to Cuckoo.</p>
+<p>With Cuckoo 2 a new processing utility was introduced, it is more stable and
+with better performance. It is dubbed <em>process2.py</em>, following are the usage
+options:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/process2.py -h
+usage: process2.py [-h] [-d] [-u USER] [-m MODULES] instance
+
+positional arguments:
+  instance              Task processing instance.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Display debug messages
+  -u USER, --user USER  Drop user privileges to this user
+  -m MODULES, --modules MODULES
+                        Path to signature and reporting modules - overrides
+                        default modules path.
+</pre></div>
+</div>
+</div>
+<div class="section" id="community-download-utility">
+<h2>Community Download Utility<a class="headerlink" href="#community-download-utility" title="Permalink to this headline">¶</a></h2>
+<p>This utility downloads signatures from <a class="reference external" href="https://github.com/cuckoosandbox/community">Cuckoo Community Repository</a> and installs
+specific additional modules in your local setup and for example update it with
+all the latest available signatures.
+Following are the usage options:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/community.py -h
+
+usage: community.py [-h] [-a] [-s] [-p] [-m] [-r] [-f] [-w] [-b BRANCH]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -a, --all             Download everything
+  -s, --signatures      Download Cuckoo signatures
+  -p, --processing      Download processing modules
+  -m, --machinery       Download machine managers
+  -n, --analyzer        Download analyzer modules
+  -g, --agent           Download agent modules
+  -r, --reporting       Download reporting modules
+  -f, --force           Install files without confirmation
+  -w, --rewrite         Rewrite existing files
+  -b BRANCH, --branch BRANCH
+                        Specify a different branch
+</pre></div>
+</div>
+<p><em>Example</em>: install all available signatures:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/community.py --signatures --force
+</pre></div>
+</div>
+</div>
+<div class="section" id="database-migration-utility">
+<h2>Database migration utility<a class="headerlink" href="#database-migration-utility" title="Permalink to this headline">¶</a></h2>
+<p>This utility is developed to migrate your data between Cuckoo&#8217;s release.
+It&#8217;s developed on top of the <a class="reference external" href="http://alembic.readthedocs.org/en/latest/">Alembic</a> framework and it should provide data
+migration for both SQL database and Mongo database.
+This tool is already described in <a class="reference internal" href="../installation/upgrade.html"><span class="doc">Upgrade from a previous release</span></a>.</p>
+</div>
+<div class="section" id="stats-utility">
+<h2>Stats utility<a class="headerlink" href="#stats-utility" title="Permalink to this headline">¶</a></h2>
+<p>This is a really simple utility which prints some statistics about processed
+samples:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/stats.py
+
+1 samples in db
+1 tasks in db
+pending 0 tasks
+running 0 tasks
+completed 0 tasks
+recovered 0 tasks
+reported 1 tasks
+failed_analysis 0 tasks
+failed_processing 0 tasks
+roughly 32 tasks an hour
+roughly 778 tasks a day
+</pre></div>
+</div>
+</div>
+<div class="section" id="machine-utility">
+<h2>Machine utility<a class="headerlink" href="#machine-utility" title="Permalink to this headline">¶</a></h2>
+<p>The machine.py utility is designed to help you automatize the configuration of
+virtual machines in Cuckoo.
+It takes a list of machine details as arguments and write them in the specified
+configuration file of the machinery module enabled in <em>cuckoo.conf</em>.
+Following are the available options:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/machine.py -h
+usage: machine.py [-h] [--debug] [--add] [--delete] [--ip IP]
+                  [--platform PLATFORM] [--tags TAGS] [--interface INTERFACE]
+                  [--snapshot SNAPSHOT] [--resultserver RESULTSERVER]
+                  vmname
+
+positional arguments:
+  vmname                Name of the Virtual Machine.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --debug               Debug log in case of errors.
+  --add                 Add a Virtual Machine.
+  --delete              Delete a Virtual Machine.
+  --ip IP               Static IP Address.
+  --platform PLATFORM   Guest Operating System.
+  --tags TAGS           Tags for this Virtual Machine.
+  --interface INTERFACE
+                        Sniffer interface for this machine.
+  --snapshot SNAPSHOT   Specific Virtual Machine Snapshot to use.
+  --resultserver RESULTSERVER
+                        IP:Port of the Result Server.
+</pre></div>
+</div>
+</div>
+<div class="section" id="distributed-scripts">
+<h2>Distributed scripts<a class="headerlink" href="#distributed-scripts" title="Permalink to this headline">¶</a></h2>
+<p>There are a couple of shell scripts used to automate distributed utility:</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#8220;start-distributed&#8221; is used to start distributed Cuckoo</li>
+<li>&#8220;stop-distributed&#8221; is used to stop distributed Cuckoo</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="mac-os-x-bootstrap-scripts">
+<h2>Mac OS X Bootstrap scripts<a class="headerlink" href="#mac-os-x-bootstrap-scripts" title="Permalink to this headline">¶</a></h2>
+<p>A couple of bootstrap scripts used for Mac OS X analysis are located in
+<em>utils/darwin</em> folder, they are used to bootstrap the guest and host system for
+Mac OS X malware analysis.
+Some settings are defined as constants inside them, so it is suggested to have a
+look at them and configure them for your needs.</p>
+</div>
+<div class="section" id="smtp-sinkhole">
+<h2>SMTP Sinkhole<a class="headerlink" href="#smtp-sinkhole" title="Permalink to this headline">¶</a></h2>
+<p>The smtp_sinkhole.py utility is designed to provide an easy to use SMTP sinkhole
+to catch all the emails going out of virtual machines network.
+This is typically used to dump all emails when you run an analysis of sample
+used for spam purposes. You can use it also to prevent sending spam on
+internet.
+Following are the available options:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/smtp_sinkhole.py -h
+usage: smtp_sinkhole.py [host [port]]
+
+SMTP Sinkhole
+
+positional arguments:
+  host
+  port
+
+optional arguments:
+  -h, --help  show this help message and exit
+  --dir DIR   Directory used to dump emails.
+</pre></div>
+</div>
+<p>By default, if you run it without arguments, it will listen for incoming mails
+on localhost port 1025.
+Yoy can bind it on different address and port, as in the following example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/smtp_sinkhole.py 192.168.56.1 1025
+</pre></div>
+</div>
+<p>If you want to save the dumped emails to disk, just use the <em>&#8211;dir</em> argument and
+specify an existent directory where save them, as in the following example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/smtp_sinkhole.py --dir /home/dumpmail
+</pre></div>
+</div>
+<p>You have to use iptables to route all mails generated from your analysis virtual
+machine network to the sinkhole script, for example if 192.168.56.0/24 is the
+address of your virtual network and smtp_sinkhole.py is listening on
+192.168.56.1 port 1025 you can use the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo iptables -t nat -A PREROUTING -i vboxnet0 -p tcp -m tcp --dport 25 -j REDIRECT --to-ports 1025
+</pre></div>
+</div>
+</div>
+<div class="section" id="setup-script">
+<h2>Setup script<a class="headerlink" href="#setup-script" title="Permalink to this headline">¶</a></h2>
+<p>Cuckoo setup script is a tool to setup a whole Cuckoo environment on a Debian
+based OS (i.e. Ubuntu or Debian).
+Actually it is a working in progress, but it is suggested to give it a try!
+It is located in <em>utils/setup.sh</em> and it is configured by some constants, so
+you should edit it if you want to customize the behaviour.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Utilities</a><ul>
+<li><a class="reference internal" href="#submission-utility">Submission Utility</a></li>
+<li><a class="reference internal" href="#web-utility">Web Utility</a></li>
+<li><a class="reference internal" href="#processing-utility">Processing Utility</a></li>
+<li><a class="reference internal" href="#community-download-utility">Community Download Utility</a></li>
+<li><a class="reference internal" href="#database-migration-utility">Database migration utility</a></li>
+<li><a class="reference internal" href="#stats-utility">Stats utility</a></li>
+<li><a class="reference internal" href="#machine-utility">Machine utility</a></li>
+<li><a class="reference internal" href="#distributed-scripts">Distributed scripts</a></li>
+<li><a class="reference internal" href="#mac-os-x-bootstrap-scripts">Mac OS X Bootstrap scripts</a></li>
+<li><a class="reference internal" href="#smtp-sinkhole">SMTP Sinkhole</a></li>
+<li><a class="reference internal" href="#setup-script">Setup script</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="clean.html"
+                        title="previous chapter">Clean all Tasks and Samples</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../customization/index.html"
+                        title="next chapter">Customization</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usage/utilities.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../customization/index.html" title="Customization"
+             >next</a></li>
+        <li class="right" >
+          <a href="clean.html" title="Clean all Tasks and Samples"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Usage</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

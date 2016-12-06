@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Submit an Analysis &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../index.html" />
+    <link rel="up" title="Usage" href="index.html" />
+    <link rel="next" title="Web interface" href="web.html" />
+    <link rel="prev" title="Starting Cuckoo" href="start.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="web.html" title="Web interface"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="start.html" title="Starting Cuckoo"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Usage</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="submit-an-analysis">
+<h1>Submit an Analysis<a class="headerlink" href="#submit-an-analysis" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#submitpy"><span class="std std-ref">Submission Utility</span></a></li>
+<li><a class="reference internal" href="#apipy"><span class="std std-ref">API</span></a></li>
+<li><a class="reference internal" href="#distpy"><span class="std std-ref">Distributed Cuckoo</span></a></li>
+<li><a class="reference internal" href="#python"><span class="std std-ref">Python Functions</span></a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="submission-utility">
+<span id="submitpy"></span><h2>Submission Utility<a class="headerlink" href="#submission-utility" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to submit an analysis is to use the provided <em>submit.py</em>
+command-line utility. It currently has the following options available:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">submit</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">remote</span> <span class="n">REMOTE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">url</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">package</span> <span class="n">PACKAGE</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">--</span><span class="n">custom</span> <span class="n">CUSTOM</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">owner</span> <span class="n">OWNER</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">timeout</span> <span class="n">TIMEOUT</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">OPTIONS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">priority</span> <span class="n">PRIORITY</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">machine</span> <span class="n">MACHINE</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">--</span><span class="n">platform</span> <span class="n">PLATFORM</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">memory</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">enforce</span><span class="o">-</span><span class="n">timeout</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">--</span><span class="n">clock</span> <span class="n">CLOCK</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">tags</span> <span class="n">TAGS</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="nb">max</span> <span class="n">MAX</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">pattern</span> <span class="n">PATTERN</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">--</span><span class="n">shuffle</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">unique</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">quiet</span><span class="p">]</span>
+                 <span class="n">target</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="n">target</span>                <span class="n">URL</span><span class="p">,</span> <span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">file</span> <span class="ow">or</span> <span class="n">folder</span> <span class="n">to</span> <span class="n">analyze</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="o">--</span><span class="n">debug</span>           <span class="n">Enable</span> <span class="n">debug</span> <span class="n">logging</span>
+  <span class="o">--</span><span class="n">remote</span> <span class="n">REMOTE</span>       <span class="n">Specify</span> <span class="n">IP</span><span class="p">:</span><span class="n">port</span> <span class="n">to</span> <span class="n">a</span> <span class="n">Cuckoo</span> <span class="n">API</span> <span class="n">server</span> <span class="n">to</span> <span class="n">submit</span>
+                        <span class="n">remotely</span>
+  <span class="o">--</span><span class="n">url</span>                 <span class="n">Specify</span> <span class="n">whether</span> <span class="n">the</span> <span class="n">target</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">URL</span>
+  <span class="o">--</span><span class="n">package</span> <span class="n">PACKAGE</span>     <span class="n">Specify</span> <span class="n">an</span> <span class="n">analysis</span> <span class="n">package</span>
+  <span class="o">--</span><span class="n">custom</span> <span class="n">CUSTOM</span>       <span class="n">Specify</span> <span class="nb">any</span> <span class="n">custom</span> <span class="n">value</span>
+  <span class="o">--</span><span class="n">owner</span> <span class="n">OWNER</span>         <span class="n">Specify</span> <span class="n">the</span> <span class="n">task</span> <span class="n">owner</span>
+  <span class="o">--</span><span class="n">timeout</span> <span class="n">TIMEOUT</span>     <span class="n">Specify</span> <span class="n">an</span> <span class="n">analysis</span> <span class="n">timeout</span>
+  <span class="o">-</span><span class="n">o</span> <span class="n">OPTIONS</span><span class="p">,</span> <span class="o">--</span><span class="n">options</span> <span class="n">OPTIONS</span>
+                        <span class="n">Specify</span> <span class="n">options</span> <span class="k">for</span> <span class="n">the</span> <span class="n">analysis</span> <span class="n">package</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span>
+                        <span class="s2">&quot;name=value,name2=value2&quot;</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">priority</span> <span class="n">PRIORITY</span>   <span class="n">Specify</span> <span class="n">a</span> <span class="n">priority</span> <span class="k">for</span> <span class="n">the</span> <span class="n">analysis</span> <span class="n">represented</span> <span class="n">by</span> <span class="n">an</span>
+                        <span class="n">integer</span>
+  <span class="o">--</span><span class="n">machine</span> <span class="n">MACHINE</span>     <span class="n">Specify</span> <span class="n">the</span> <span class="n">identifier</span> <span class="n">of</span> <span class="n">a</span> <span class="n">machine</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">use</span>
+  <span class="o">--</span><span class="n">platform</span> <span class="n">PLATFORM</span>   <span class="n">Specify</span> <span class="n">the</span> <span class="n">operating</span> <span class="n">system</span> <span class="n">platform</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">use</span>
+                        <span class="p">(</span><span class="n">windows</span><span class="o">/</span><span class="n">darwin</span><span class="o">/</span><span class="n">linux</span><span class="p">)</span>
+  <span class="o">--</span><span class="n">memory</span>              <span class="n">Enable</span> <span class="n">to</span> <span class="n">take</span> <span class="n">a</span> <span class="n">memory</span> <span class="n">dump</span> <span class="n">of</span> <span class="n">the</span> <span class="n">analysis</span> <span class="n">machine</span>
+  <span class="o">--</span><span class="n">enforce</span><span class="o">-</span><span class="n">timeout</span>     <span class="n">Enable</span> <span class="n">to</span> <span class="n">force</span> <span class="n">the</span> <span class="n">analysis</span> <span class="n">to</span> <span class="n">run</span> <span class="k">for</span> <span class="n">the</span> <span class="n">full</span>
+                        <span class="n">timeout</span> <span class="n">period</span>
+  <span class="o">--</span><span class="n">clock</span> <span class="n">CLOCK</span>         <span class="n">Set</span> <span class="n">virtual</span> <span class="n">machine</span> <span class="n">clock</span>
+  <span class="o">--</span><span class="n">tags</span> <span class="n">TAGS</span>           <span class="n">Specify</span> <span class="n">tags</span> <span class="n">identifier</span> <span class="n">of</span> <span class="n">a</span> <span class="n">machine</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">use</span>
+  <span class="o">--</span><span class="nb">max</span> <span class="n">MAX</span>             <span class="n">Maximum</span> <span class="n">samples</span> <span class="n">to</span> <span class="n">add</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">row</span>
+  <span class="o">--</span><span class="n">pattern</span> <span class="n">PATTERN</span>     <span class="n">Pattern</span> <span class="n">of</span> <span class="n">files</span> <span class="n">to</span> <span class="n">submit</span>
+  <span class="o">--</span><span class="n">shuffle</span>             <span class="n">Shuffle</span> <span class="n">samples</span> <span class="n">before</span> <span class="n">submitting</span> <span class="n">them</span>
+  <span class="o">--</span><span class="n">unique</span>              <span class="n">Only</span> <span class="n">submit</span> <span class="n">new</span> <span class="n">samples</span><span class="p">,</span> <span class="n">ignore</span> <span class="n">duplicates</span>
+  <span class="o">--</span><span class="n">quiet</span>               <span class="n">Only</span> <span class="nb">print</span> <span class="n">text</span> <span class="n">on</span> <span class="n">failure</span>
+</pre></div>
+</div>
+<p>If you specify a directory as path, all the files contained in it will be
+submitted for analysis.</p>
+<p>The concept of analysis packages will be dealt later in this documentation (at
+<a class="reference internal" href="packages.html"><span class="doc">Analysis Packages</span></a>). Following are some usage examples:</p>
+<p><em>Example</em>: submit a local binary:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/submit.py /path/to/binary
+</pre></div>
+</div>
+<p><em>Example</em>: submit an URL:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/submit.py --url http://www.example.com
+</pre></div>
+</div>
+<p><em>Example</em>: submit a local binary and specify an higher priority:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/submit.py --priority 5 /path/to/binary
+</pre></div>
+</div>
+<p><em>Example</em>: submit a local binary and specify a custom analysis timeout of
+60 seconds:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/submit.py --timeout 60 /path/to/binary
+</pre></div>
+</div>
+<p><em>Example</em>: submit a local binary and specify a custom analysis package:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/submit.py --package &lt;name of package&gt; /path/to/binary
+</pre></div>
+</div>
+<p><em>Example</em>: submit a local binary and specify a custom analysis package and
+some options (in this case a command line argument for the malware):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/submit.py --package exe --options arguments=--dosomething /path/to/binary.exe
+</pre></div>
+</div>
+<p><em>Example</em>: submit a local binary to be run on virtual machine <em>cuckoo1</em>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/submit.py --machine cuckoo1 /path/to/binary
+</pre></div>
+</div>
+<p><em>Example</em>: submit a local binary to be run on a Windows machine:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/submit.py --platform windows /path/to/binary
+</pre></div>
+</div>
+<p><em>Example</em>: submit a local binary and take a full memory dump of the analysis machine:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/submit.py --memory /path/to/binary
+</pre></div>
+</div>
+<p><em>Example</em>: submit a local binary and force the analysis to be executed for the full timeout (disregarding the internal mechanism that Cuckoo uses to decide when to terminate the analysis):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/submit.py --enforce-timeout /path/to/binary
+</pre></div>
+</div>
+<p><em>Example</em>: submit a local binary and set virtual machine clock. Format is %m-%d-%Y %H:%M:%S. If not specified, the current time is used. For example if we want run a sample the 24 january 2001 at 14:41:20:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/submit.py --clock &quot;01-24-2001 14:41:20&quot; /path/to/binary
+</pre></div>
+</div>
+<p><em>Example</em>: submit a sample for Volatility analysis (to reduce side effects of the cuckoo hooking, switch it off with <em>options free=True</em>):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./utils/submit.py --memory --options free=True /path/to/binary
+</pre></div>
+</div>
+</div>
+<div class="section" id="api">
+<span id="apipy"></span><h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<p>Detailed usage of the REST API interface is described in <a class="reference internal" href="api.html"><span class="doc">REST API</span></a>.</p>
+</div>
+<div class="section" id="distributed-cuckoo">
+<span id="distpy"></span><h2>Distributed Cuckoo<a class="headerlink" href="#distributed-cuckoo" title="Permalink to this headline">¶</a></h2>
+<p>Detailed usage of the Distributed Cuckoo API interface is described in
+<a class="reference internal" href="dist.html"><span class="doc">Distributed Cuckoo</span></a>.</p>
+</div>
+<div class="section" id="python-functions">
+<span id="python"></span><h2>Python Functions<a class="headerlink" href="#python-functions" title="Permalink to this headline">¶</a></h2>
+<p>In order to keep track of submissions, samples and overall execution, Cuckoo
+uses a popular Python ORM called <a class="reference external" href="http://www.sqlalchemy.org">SQLAlchemy</a> that allows you to make the sandbox
+use SQLite, MySQL, PostgreSQL and several other SQL database systems.</p>
+<p>Cuckoo is designed to be easily integrated in larger solutions and to be fully
+automated. In order to automate analysis submission we suggest to use the REST
+API interface described in <a class="reference internal" href="api.html"><span class="doc">REST API</span></a>, but in case you want to write your
+own Python submission script, you can also use the <code class="docutils literal"><span class="pre">add_path()</span></code> and <code class="docutils literal"><span class="pre">add_url()</span></code> functions.</p>
+<dl class="function">
+<dt id="add_path">
+<code class="descname">add_path</code><span class="sig-paren">(</span><em>file_path</em><span class="optional">[</span>, <em>timeout=0</em><span class="optional">[</span>, <em>package=None</em><span class="optional">[</span>, <em>options=None</em><span class="optional">[</span>, <em>priority=1</em><span class="optional">[</span>, <em>custom=None</em><span class="optional">[</span>, <em>owner=&quot;&quot;</em><span class="optional">[</span>, <em>machine=None</em><span class="optional">[</span>, <em>platform=None</em><span class="optional">[</span>, <em>memory=False</em><span class="optional">[</span>, <em>enforce_timeout=False</em><span class="optional">]</span>, <em>clock=None[]</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#add_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a local file to the list of pending analysis tasks. Returns the ID of the newly generated task.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>file_path</strong> (<em>string</em>) &#8211; path to the file to submit</li>
+<li><strong>timeout</strong> (<em>integer</em>) &#8211; maximum amount of seconds to run the analysis for</li>
+<li><strong>package</strong> (<em>string or None</em>) &#8211; analysis package you want to use for the specified file</li>
+<li><strong>options</strong> (<em>string or None</em>) &#8211; list of options to be passed to the analysis package (in the format <code class="docutils literal"><span class="pre">key=value,key=value</span></code>)</li>
+<li><strong>priority</strong> (<em>integer</em>) &#8211; numeric representation of the priority to assign to the specified file (1 being low, 2 medium, 3 high)</li>
+<li><strong>custom</strong> (<em>string or None</em>) &#8211; custom value to be passed over and possibly reused at processing or reporting</li>
+<li><strong>owner</strong> (<em>string or None</em>) &#8211; task owner</li>
+<li><strong>machine</strong> (<em>string or None</em>) &#8211; Cuckoo identifier of the virtual machine you want to use, if none is specified one will be selected automatically</li>
+<li><strong>platform</strong> (<em>string or None</em>) &#8211; operating system platform you want to run the analysis one (currently only Windows)</li>
+<li><strong>memory</strong> (<em>True or False</em>) &#8211; set to <code class="docutils literal"><span class="pre">True</span></code> to generate a full memory dump of the analysis machine</li>
+<li><strong>enforce_timeout</strong> (<em>True or False</em>) &#8211; set to <code class="docutils literal"><span class="pre">True</span></code> to force the execution for the full timeout</li>
+<li><strong>clock</strong> (<em>string or None</em>) &#8211; provide a custom clock time to set in the analysis machine</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">integer</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example usage:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lib.cuckoo.core.database</span> <span class="kn">import</span> <span class="n">Database</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">add_path</span><span class="p">(</span><span class="s2">&quot;/tmp/malware.exe&quot;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="add_url">
+<code class="descname">add_url</code><span class="sig-paren">(</span><em>url</em><span class="optional">[</span>, <em>timeout=0</em><span class="optional">[</span>, <em>package=None</em><span class="optional">[</span>, <em>options=None</em><span class="optional">[</span>, <em>priority=1</em><span class="optional">[</span>, <em>custom=None</em><span class="optional">[</span>, <em>owner=&quot;&quot;</em><span class="optional">[</span>, <em>machine=None</em><span class="optional">[</span>, <em>platform=None</em><span class="optional">[</span>, <em>memory=False</em><span class="optional">[</span>, <em>enforce_timeout=False</em><span class="optional">]</span>, <em>clock=None[]</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#add_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a local file to the list of pending analysis tasks. Returns the ID of the newly generated task.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>url</strong> (<em>string</em>) &#8211; URL to analyze</li>
+<li><strong>timeout</strong> (<em>integer</em>) &#8211; maximum amount of seconds to run the analysis for</li>
+<li><strong>package</strong> (<em>string or None</em>) &#8211; analysis package you want to use for the specified URL</li>
+<li><strong>options</strong> (<em>string or None</em>) &#8211; list of options to be passed to the analysis package (in the format <code class="docutils literal"><span class="pre">key=value,key=value</span></code>)</li>
+<li><strong>priority</strong> (<em>integer</em>) &#8211; numeric representation of the priority to assign to the specified URL (1 being low, 2 medium, 3 high)</li>
+<li><strong>custom</strong> (<em>string or None</em>) &#8211; custom value to be passed over and possibly reused at processing or reporting</li>
+<li><strong>owner</strong> (<em>string or None</em>) &#8211; task owner</li>
+<li><strong>machine</strong> (<em>string or None</em>) &#8211; Cuckoo identifier of the virtual machine you want to use, if none is specified one will be selected automatically</li>
+<li><strong>platform</strong> (<em>string or None</em>) &#8211; operating system platform you want to run the analysis one (currently only Windows)</li>
+<li><strong>memory</strong> (<em>True or False</em>) &#8211; set to <code class="docutils literal"><span class="pre">True</span></code> to generate a full memory dump of the analysis machine</li>
+<li><strong>enforce_timeout</strong> (<em>True or False</em>) &#8211; set to <code class="docutils literal"><span class="pre">True</span></code> to force the execution for the full timeout</li>
+<li><strong>clock</strong> (<em>string or None</em>) &#8211; provide a custom clock time to set in the analysis machine</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">integer</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>Example Usage:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lib.cuckoo.core.database</span> <span class="kn">import</span> <span class="n">Database</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">Database</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">add_url</span><span class="p">(</span><span class="s2">&quot;http://www.cuckoosandbox.org&quot;</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Submit an Analysis</a><ul>
+<li><a class="reference internal" href="#submission-utility">Submission Utility</a></li>
+<li><a class="reference internal" href="#api">API</a></li>
+<li><a class="reference internal" href="#distributed-cuckoo">Distributed Cuckoo</a></li>
+<li><a class="reference internal" href="#python-functions">Python Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="start.html"
+                        title="previous chapter">Starting Cuckoo</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="web.html"
+                        title="next chapter">Web interface</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usage/submit.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="web.html" title="Web interface"
+             >next</a></li>
+        <li class="right" >
+          <a href="start.html" title="Starting Cuckoo"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Usage</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

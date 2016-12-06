@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lib.common.abstracts</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lib-module.html">Package&nbsp;lib</a> ::
+        <a href="lib.common-module.html">Package&nbsp;common</a> ::
+        Module&nbsp;abstracts
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lib.common.abstracts-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lib.common.abstracts-module.html">Module lib.common.abstracts</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">glob</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">_winreg</tt> <tt class="py-keyword">import</tt> <tt class="py-name">CreateKey</tt><tt class="py-op">,</tt> <tt class="py-name">SetValueEx</tt><tt class="py-op">,</tt> <tt class="py-name">CloseKey</tt><tt class="py-op">,</tt> <tt class="py-name">REG_DWORD</tt><tt class="py-op">,</tt> <tt class="py-name">REG_SZ</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.api=lib.api-module.html"><a title="lib.api" class="py-name" href="#" onclick="return doclink('link-1', 'api', 'link-1');">api</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module lib.api.process=lib.api.process-module.html"><a title="lib.api.process" class="py-name" href="#" onclick="return doclink('link-2', 'process', 'link-2');">process</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class lib.api.process.Process=lib.api.process.Process-class.html"><a title="lib.api.process.Process" class="py-name" href="#" onclick="return doclink('link-3', 'Process', 'link-3');">Process</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-4" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-4', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Package lib.common=lib.common-module.html"><a title="lib.common" class="py-name" href="#" onclick="return doclink('link-5', 'common', 'link-5');">common</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Module lib.common.exceptions=lib.common.exceptions-module.html"><a title="lib.common.exceptions" class="py-name" href="#" onclick="return doclink('link-6', 'exceptions', 'link-6');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-7" class="py-name" targets="Class lib.common.exceptions.CuckooPackageError=lib.common.exceptions.CuckooPackageError-class.html"><a title="lib.common.exceptions.CuckooPackageError" class="py-name" href="#" onclick="return doclink('link-7', 'CuckooPackageError', 'link-7');">CuckooPackageError</a></tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<a name="Package"></a><div id="Package-def"><a name="L14"></a><tt class="py-lineno"> 14</tt> <a class="py-toggle" href="#" id="Package-toggle" onclick="return toggle('Package');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.abstracts.Package-class.html">Package</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Package-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Package-expanded"><a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">    <tt class="py-docstring">"""Base abstract analysis package."""</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">    <tt id="link-8" class="py-name" targets="Variable lib.common.abstracts.Package.PATHS=lib.common.abstracts.Package-class.html#PATHS,Variable modules.packages.applet.Applet.PATHS=modules.packages.applet.Applet-class.html#PATHS,Variable modules.packages.com.ComDll.PATHS=modules.packages.com.ComDll-class.html#PATHS,Variable modules.packages.cpl.CPL.PATHS=modules.packages.cpl.CPL-class.html#PATHS,Variable modules.packages.dll.Dll.PATHS=modules.packages.dll.Dll-class.html#PATHS,Variable modules.packages.doc.DOC.PATHS=modules.packages.doc.DOC-class.html#PATHS,Variable modules.packages.ff.Firefox.PATHS=modules.packages.ff.Firefox-class.html#PATHS,Variable modules.packages.generic.Generic.PATHS=modules.packages.generic.Generic-class.html#PATHS,Variable modules.packages.ie.IE.PATHS=modules.packages.ie.IE-class.html#PATHS,Variable modules.packages.jar.Jar.PATHS=modules.packages.jar.Jar-class.html#PATHS,Variable modules.packages.js.Javascript.PATHS=modules.packages.js.Javascript-class.html#PATHS,Variable modules.packages.msi.Msi.PATHS=modules.packages.msi.Msi-class.html#PATHS,Variable modules.packages.pdf.PDF.PATHS=modules.packages.pdf.PDF-class.html#PATHS,Variable modules.packages.ppt.PPT.PATHS=modules.packages.ppt.PPT-class.html#PATHS,Variable modules.packages.ps1.PS1.PATHS=modules.packages.ps1.PS1-class.html#PATHS,Variable modules.packages.pub.PUB.PATHS=modules.packages.pub.PUB-class.html#PATHS,Variable modules.packages.python.Python.PATHS=modules.packages.python.Python-class.html#PATHS,Variable modules.packages.vbs.VBS.PATHS=modules.packages.vbs.VBS-class.html#PATHS,Variable modules.packages.wsf.WSF.PATHS=modules.packages.wsf.WSF-class.html#PATHS,Variable modules.packages.xls.XLS.PATHS=modules.packages.xls.XLS-class.html#PATHS"><a title="lib.common.abstracts.Package.PATHS
+modules.packages.applet.Applet.PATHS
+modules.packages.com.ComDll.PATHS
+modules.packages.cpl.CPL.PATHS
+modules.packages.dll.Dll.PATHS
+modules.packages.doc.DOC.PATHS
+modules.packages.ff.Firefox.PATHS
+modules.packages.generic.Generic.PATHS
+modules.packages.ie.IE.PATHS
+modules.packages.jar.Jar.PATHS
+modules.packages.js.Javascript.PATHS
+modules.packages.msi.Msi.PATHS
+modules.packages.pdf.PDF.PATHS
+modules.packages.ppt.PPT.PATHS
+modules.packages.ps1.PS1.PATHS
+modules.packages.pub.PUB.PATHS
+modules.packages.python.Python.PATHS
+modules.packages.vbs.VBS.PATHS
+modules.packages.wsf.WSF.PATHS
+modules.packages.xls.XLS.PATHS" class="py-name" href="#" onclick="return doclink('link-8', 'PATHS', 'link-8');">PATHS</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt id="link-9" class="py-name" targets="Variable lib.common.abstracts.Package.REGKEYS=lib.common.abstracts.Package-class.html#REGKEYS,Variable modules.packages.doc.DOC.REGKEYS=modules.packages.doc.DOC-class.html#REGKEYS,Variable modules.packages.ie.IE.REGKEYS=modules.packages.ie.IE-class.html#REGKEYS,Variable modules.packages.pdf.PDF.REGKEYS=modules.packages.pdf.PDF-class.html#REGKEYS,Variable modules.packages.ppt.PPT.REGKEYS=modules.packages.ppt.PPT-class.html#REGKEYS,Variable modules.packages.pub.PUB.REGKEYS=modules.packages.pub.PUB-class.html#REGKEYS,Variable modules.packages.xls.XLS.REGKEYS=modules.packages.xls.XLS-class.html#REGKEYS"><a title="lib.common.abstracts.Package.REGKEYS
+modules.packages.doc.DOC.REGKEYS
+modules.packages.ie.IE.REGKEYS
+modules.packages.pdf.PDF.REGKEYS
+modules.packages.ppt.PPT.REGKEYS
+modules.packages.pub.PUB.REGKEYS
+modules.packages.xls.XLS.REGKEYS" class="py-name" href="#" onclick="return doclink('link-9', 'REGKEYS', 'link-9');">REGKEYS</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"> </tt>
+<a name="Package.__init__"></a><div id="Package.__init__-def"><a name="L19"></a><tt class="py-lineno"> 19</tt> <a class="py-toggle" href="#" id="Package.__init__-toggle" onclick="return toggle('Package.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.abstracts.Package-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">options</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> <tt class="py-param">analyzer</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Package.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Package.__init__-expanded"><a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">        <tt class="py-docstring">"""@param options: options dict."""</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">options</tt> <tt class="py-op">=</tt> <tt class="py-name">options</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">analyzer</tt> <tt class="py-op">=</tt> <tt class="py-name">analyzer</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pids</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">        <tt class="py-comment"># Fetch the current working directory, defaults to $TEMP.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">"curdir"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">options</tt><tt class="py-op">:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">curdir</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">expandvars</tt><tt class="py-op">(</tt><tt class="py-name">options</tt><tt class="py-op">[</tt><tt class="py-string">"curdir"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">curdir</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getenv</tt><tt class="py-op">(</tt><tt class="py-string">"TEMP"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="Package.set_pids"></a><div id="Package.set_pids-def"><a name="L31"></a><tt class="py-lineno"> 31</tt> <a class="py-toggle" href="#" id="Package.set_pids-toggle" onclick="return toggle('Package.set_pids');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.abstracts.Package-class.html#set_pids">set_pids</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">pids</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Package.set_pids-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Package.set_pids-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-docstring">"""Update list of monitored PIDs in the package context.</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">        @param pids: list of pids.</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pids</tt> <tt class="py-op">=</tt> <tt class="py-name">pids</tt> </tt>
+</div><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="Package.start"></a><div id="Package.start-def"><a name="L37"></a><tt class="py-lineno"> 37</tt> <a class="py-toggle" href="#" id="Package.start-toggle" onclick="return toggle('Package.start');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.abstracts.Package-class.html#start">start</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">target</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Package.start-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Package.start-expanded"><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-docstring">"""Run analysis package.</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">        @raise NotImplementedError: this method is abstract.</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">NotImplementedError</tt> </tt>
+</div><a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"> </tt>
+<a name="Package.check"></a><div id="Package.check-def"><a name="L43"></a><tt class="py-lineno"> 43</tt> <a class="py-toggle" href="#" id="Package.check-toggle" onclick="return toggle('Package.check');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.abstracts.Package-class.html#check">check</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Package.check-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Package.check-expanded"><a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-docstring">"""Check."""</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="Package.enum_paths"></a><div id="Package.enum_paths-def"><a name="L47"></a><tt class="py-lineno"> 47</tt> <a class="py-toggle" href="#" id="Package.enum_paths-toggle" onclick="return toggle('Package.enum_paths');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.abstracts.Package-class.html#enum_paths">enum_paths</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Package.enum_paths-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Package.enum_paths-expanded"><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-docstring">"""Enumerate available paths."""</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-name">basepaths</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">            <tt class="py-string">"System32"</tt><tt class="py-op">:</tt> <tt class="py-op">[</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getenv</tt><tt class="py-op">(</tt><tt class="py-string">"SystemRoot"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"System32"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">                <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getenv</tt><tt class="py-op">(</tt><tt class="py-string">"SystemRoot"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-string">"SysWOW64"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">            <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">            <tt class="py-string">"ProgramFiles"</tt><tt class="py-op">:</tt> <tt class="py-op">[</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getenv</tt><tt class="py-op">(</tt><tt class="py-string">"ProgramFiles"</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">" (x86)"</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">                <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getenv</tt><tt class="py-op">(</tt><tt class="py-string">"ProgramFiles(x86)"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">            <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">            <tt class="py-string">"HomeDrive"</tt><tt class="py-op">:</tt> <tt class="py-op">[</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">                <tt class="py-comment"># os.path.join() doesn't work well if you give it just "C:"</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                <tt class="py-comment"># so manually append a backslash.</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">                <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getenv</tt><tt class="py-op">(</tt><tt class="py-string">"HomeDrive"</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">"\\"</tt><tt class="py-op">,</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">            <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-op">}</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">path</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="lib.common.abstracts.Package.PATHS
+modules.packages.applet.Applet.PATHS
+modules.packages.com.ComDll.PATHS
+modules.packages.cpl.CPL.PATHS
+modules.packages.dll.Dll.PATHS
+modules.packages.doc.DOC.PATHS
+modules.packages.ff.Firefox.PATHS
+modules.packages.generic.Generic.PATHS
+modules.packages.ie.IE.PATHS
+modules.packages.jar.Jar.PATHS
+modules.packages.js.Javascript.PATHS
+modules.packages.msi.Msi.PATHS
+modules.packages.pdf.PDF.PATHS
+modules.packages.ppt.PPT.PATHS
+modules.packages.ps1.PS1.PATHS
+modules.packages.pub.PUB.PATHS
+modules.packages.python.Python.PATHS
+modules.packages.vbs.VBS.PATHS
+modules.packages.wsf.WSF.PATHS
+modules.packages.xls.XLS.PATHS" class="py-name" href="#" onclick="return doclink('link-10', 'PATHS', 'link-8');">PATHS</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">            <tt class="py-name">basedir</tt> <tt class="py-op">=</tt> <tt class="py-name">path</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">basepath</tt> <tt class="py-keyword">in</tt> <tt class="py-name">basepaths</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-name">basedir</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-name">basedir</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">basepath</tt> <tt class="py-keyword">or</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isdir</tt><tt class="py-op">(</tt><tt class="py-name">basepath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                    <tt class="py-keyword">continue</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">                <tt class="py-keyword">yield</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">basepath</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">path</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"> </tt>
+<a name="Package.get_path"></a><div id="Package.get_path-def"><a name="L73"></a><tt class="py-lineno"> 73</tt> <a class="py-toggle" href="#" id="Package.get_path-toggle" onclick="return toggle('Package.get_path');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.abstracts.Package-class.html#get_path">get_path</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">application</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Package.get_path-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Package.get_path-expanded"><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-docstring">"""Search for the application in all available paths.</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">        @param applicaiton: application executable name</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">        @return: executable path</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">path</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method lib.common.abstracts.Package.enum_paths()=lib.common.abstracts.Package-class.html#enum_paths"><a title="lib.common.abstracts.Package.enum_paths" class="py-name" href="#" onclick="return doclink('link-11', 'enum_paths', 'link-11');">enum_paths</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">path</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt id="link-12" class="py-name"><a title="lib.common.exceptions.CuckooPackageError" class="py-name" href="#" onclick="return doclink('link-12', 'CuckooPackageError', 'link-7');">CuckooPackageError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Unable to find any %s executable."</tt> <tt class="py-op">%</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                                 <tt class="py-name">application</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="Package.get_path_glob"></a><div id="Package.get_path_glob-def"><a name="L85"></a><tt class="py-lineno"> 85</tt> <a class="py-toggle" href="#" id="Package.get_path_glob-toggle" onclick="return toggle('Package.get_path_glob');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.abstracts.Package-class.html#get_path_glob">get_path_glob</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">application</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Package.get_path_glob-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Package.get_path_glob-expanded"><a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-docstring">"""Search for the application in all available paths with glob support.</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"><tt class="py-docstring">        @param applicaiton: application executable name</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line"><tt class="py-docstring">        @return: executable path</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">path</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="lib.common.abstracts.Package.enum_paths" class="py-name" href="#" onclick="return doclink('link-13', 'enum_paths', 'link-11');">enum_paths</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">path</tt> <tt class="py-keyword">in</tt> <tt class="py-name">glob</tt><tt class="py-op">.</tt><tt class="py-name">iglob</tt><tt class="py-op">(</tt><tt class="py-name">path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                    <tt class="py-keyword">return</tt> <tt class="py-name">path</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt id="link-14" class="py-name"><a title="lib.common.exceptions.CuckooPackageError" class="py-name" href="#" onclick="return doclink('link-14', 'CuckooPackageError', 'link-7');">CuckooPackageError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Unable to find any %s executable."</tt> <tt class="py-op">%</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                                 <tt class="py-name">application</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"> </tt>
+<a name="Package.move_curdir"></a><div id="Package.move_curdir-def"><a name="L98"></a><tt class="py-lineno"> 98</tt> <a class="py-toggle" href="#" id="Package.move_curdir-toggle" onclick="return toggle('Package.move_curdir');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.abstracts.Package-class.html#move_curdir">move_curdir</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">filepath</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Package.move_curdir-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Package.move_curdir-expanded"><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-docstring">"""Move a file to the current working directory so it can be executed</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">        from there.</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">        @param filepath: the file to be moved</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">        @return: the new filepath</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-name">outpath</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">curdir</tt><tt class="py-op">,</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">basename</tt><tt class="py-op">(</tt><tt class="py-name">filepath</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">rename</tt><tt class="py-op">(</tt><tt class="py-name">filepath</tt><tt class="py-op">,</tt> <tt class="py-name">outpath</tt><tt class="py-op">)</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">outpath</tt> </tt>
+</div><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"> </tt>
+<a name="Package.init_regkeys"></a><div id="Package.init_regkeys-def"><a name="L108"></a><tt class="py-lineno">108</tt> <a class="py-toggle" href="#" id="Package.init_regkeys-toggle" onclick="return toggle('Package.init_regkeys');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.abstracts.Package-class.html#init_regkeys">init_regkeys</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">regkeys</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Package.init_regkeys-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Package.init_regkeys-expanded"><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-docstring">"""Initializes the registry to avoid annoying popups, configure</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">        settings, etc.</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">        @param regkeys: the root keys, subkeys, and key/value pairs.</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">rootkey</tt><tt class="py-op">,</tt> <tt class="py-name">subkey</tt><tt class="py-op">,</tt> <tt class="py-name">values</tt> <tt class="py-keyword">in</tt> <tt class="py-name">regkeys</tt><tt class="py-op">:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">            <tt class="py-name">key_handle</tt> <tt class="py-op">=</tt> <tt class="py-name">CreateKey</tt><tt class="py-op">(</tt><tt class="py-name">rootkey</tt><tt class="py-op">,</tt> <tt class="py-name">subkey</tt><tt class="py-op">)</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">key</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt> <tt class="py-keyword">in</tt> <tt class="py-name">values</tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">                    <tt class="py-name">SetValueEx</tt><tt class="py-op">(</tt><tt class="py-name">key_handle</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">REG_SZ</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">                    <tt class="py-name">SetValueEx</tt><tt class="py-op">(</tt><tt class="py-name">key_handle</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">REG_DWORD</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">                <tt class="py-keyword">elif</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">value</tt><tt class="py-op">,</tt> <tt class="py-name">dict</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method lib.common.abstracts.Package.init_regkeys()=lib.common.abstracts.Package-class.html#init_regkeys"><a title="lib.common.abstracts.Package.init_regkeys" class="py-name" href="#" onclick="return doclink('link-15', 'init_regkeys', 'link-15');">init_regkeys</a></tt><tt class="py-op">(</tt><tt class="py-op">[</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">                        <tt class="py-op">[</tt><tt class="py-name">rootkey</tt><tt class="py-op">,</tt> <tt class="py-string">"%s\\%s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">subkey</tt><tt class="py-op">,</tt> <tt class="py-name">key</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">                    <tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">                    <tt class="py-keyword">raise</tt> <tt id="link-16" class="py-name"><a title="lib.common.exceptions.CuckooPackageError" class="py-name" href="#" onclick="return doclink('link-16', 'CuckooPackageError', 'link-7');">CuckooPackageError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Invalid value type: %r"</tt> <tt class="py-op">%</tt> <tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">            <tt class="py-name">CloseKey</tt><tt class="py-op">(</tt><tt class="py-name">key_handle</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt>
+<a name="Package.execute"></a><div id="Package.execute-def"><a name="L130"></a><tt class="py-lineno">130</tt> <a class="py-toggle" href="#" id="Package.execute-toggle" onclick="return toggle('Package.execute');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.abstracts.Package-class.html#execute">execute</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">path</tt><tt class="py-op">,</tt> <tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-param">mode</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">maximize</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-param">env</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">                <tt class="py-param">source</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">trigger</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Package.execute-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Package.execute-expanded"><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-docstring">"""Starts an executable for analysis.</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">        @param path: executable path</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-docstring">        @param args: executable arguments</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-docstring">        @param mode: monitor mode - which functions to instrument</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-docstring">        @param maximize: whether the GUI should start maximized</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-docstring">        @param env: additional environment variables</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-docstring">        @param source: parent process of our process</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-docstring">        @param trigger: trigger to indicate analysis start</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-docstring">        @return: process pid</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt id="link-17" class="py-name" targets="Module modules.packages.dll=modules.packages.dll-module.html"><a title="modules.packages.dll" class="py-name" href="#" onclick="return doclink('link-17', 'dll', 'link-17');">dll</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">"dll"</tt><tt class="py-op">)</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-name">free</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">"free"</tt><tt class="py-op">)</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt class="py-name">source</tt> <tt class="py-op">=</tt> <tt class="py-name">source</tt> <tt class="py-keyword">or</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">"from"</tt><tt class="py-op">)</tt> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line">        <tt class="py-name">mode</tt> <tt class="py-op">=</tt> <tt class="py-name">mode</tt> <tt class="py-keyword">or</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">"mode"</tt><tt class="py-op">)</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">trigger</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">"trigger"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">options</tt><tt class="py-op">[</tt><tt class="py-string">"trigger"</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">"exefile"</tt><tt class="py-op">:</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">                <tt class="py-name">trigger</tt> <tt class="py-op">=</tt> <tt class="py-string">"file:%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">path</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line"> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-comment"># Setup pre-defined registry keys.</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="lib.common.abstracts.Package.init_regkeys" class="py-name" href="#" onclick="return doclink('link-18', 'init_regkeys', 'link-15');">init_regkeys</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="lib.common.abstracts.Package.REGKEYS
+modules.packages.doc.DOC.REGKEYS
+modules.packages.ie.IE.REGKEYS
+modules.packages.pdf.PDF.REGKEYS
+modules.packages.ppt.PPT.REGKEYS
+modules.packages.pub.PUB.REGKEYS
+modules.packages.xls.XLS.REGKEYS" class="py-name" href="#" onclick="return doclink('link-19', 'REGKEYS', 'link-9');">REGKEYS</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name"><a title="lib.api.process.Process" class="py-name" href="#" onclick="return doclink('link-20', 'Process', 'link-3');">Process</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">p</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method lib.api.process.Process.execute()=lib.api.process.Process-class.html#execute,Method lib.common.abstracts.Package.execute()=lib.common.abstracts.Package-class.html#execute"><a title="lib.api.process.Process.execute
+lib.common.abstracts.Package.execute" class="py-name" href="#" onclick="return doclink('link-21', 'execute', 'link-21');">execute</a></tt><tt class="py-op">(</tt><tt class="py-name">path</tt><tt class="py-op">=</tt><tt class="py-name">path</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">=</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt id="link-22" class="py-name"><a title="modules.packages.dll" class="py-name" href="#" onclick="return doclink('link-22', 'dll', 'link-17');">dll</a></tt><tt class="py-op">=</tt><tt id="link-23" class="py-name"><a title="modules.packages.dll" class="py-name" href="#" onclick="return doclink('link-23', 'dll', 'link-17');">dll</a></tt><tt class="py-op">,</tt> <tt class="py-name">free</tt><tt class="py-op">=</tt><tt class="py-name">free</tt><tt class="py-op">,</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">                         <tt class="py-name">curdir</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">curdir</tt><tt class="py-op">,</tt> <tt class="py-name">source</tt><tt class="py-op">=</tt><tt class="py-name">source</tt><tt class="py-op">,</tt> <tt class="py-name">mode</tt><tt class="py-op">=</tt><tt class="py-name">mode</tt><tt class="py-op">,</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">                         <tt class="py-name">maximize</tt><tt class="py-op">=</tt><tt class="py-name">maximize</tt><tt class="py-op">,</tt> <tt class="py-name">env</tt><tt class="py-op">=</tt><tt class="py-name">env</tt><tt class="py-op">,</tt> <tt class="py-name">trigger</tt><tt class="py-op">=</tt><tt class="py-name">trigger</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-24" class="py-name"><a title="lib.common.exceptions.CuckooPackageError" class="py-name" href="#" onclick="return doclink('link-24', 'CuckooPackageError', 'link-7');">CuckooPackageError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">                <tt class="py-string">"Unable to execute the initial process, analysis aborted."</tt> </tt>
+<a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">            <tt class="py-op">)</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">p</tt><tt class="py-op">.</tt><tt class="py-name">pid</tt> </tt>
+</div><a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"> </tt>
+<a name="Package.package_files"></a><div id="Package.package_files-def"><a name="L165"></a><tt class="py-lineno">165</tt> <a class="py-toggle" href="#" id="Package.package_files-toggle" onclick="return toggle('Package.package_files');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.abstracts.Package-class.html#package_files">package_files</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Package.package_files-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Package.package_files-expanded"><a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt class="py-docstring">"""A list of files to upload to host.</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring">        The list should be a list of tuples (&lt;path on guest&gt;, &lt;name of file in package_files folder&gt;).</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">        (package_files is a folder that will be created in analysis folder).</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"> </tt>
+<a name="Package.finish"></a><div id="Package.finish-def"><a name="L172"></a><tt class="py-lineno">172</tt> <a class="py-toggle" href="#" id="Package.finish-toggle" onclick="return toggle('Package.finish');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.abstracts.Package-class.html#finish">finish</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Package.finish-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Package.finish-expanded"><a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt class="py-docstring">"""Finish run.</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">        If specified to do so, this method dumps the memory of</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line"><tt class="py-docstring">        all running processes.</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">options</tt><tt class="py-op">.</tt><tt class="py-name">get</tt><tt class="py-op">(</tt><tt class="py-string">"procmemdump"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">pid</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pids</tt><tt class="py-op">:</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">                <tt class="py-name">p</tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name"><a title="lib.api.process.Process" class="py-name" href="#" onclick="return doclink('link-25', 'Process', 'link-3');">Process</a></tt><tt class="py-op">(</tt><tt class="py-name">pid</tt><tt class="py-op">=</tt><tt class="py-name">pid</tt><tt class="py-op">)</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">                <tt class="py-name">p</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Method lib.api.process.Process.dump_memory()=lib.api.process.Process-class.html#dump_memory"><a title="lib.api.process.Process.dump_memory" class="py-name" href="#" onclick="return doclink('link-26', 'dump_memory', 'link-26');">dump_memory</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line"> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+</div></div><a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line"> </tt>
+<a name="Auxiliary"></a><div id="Auxiliary-def"><a name="L184"></a><tt class="py-lineno">184</tt> <a class="py-toggle" href="#" id="Auxiliary-toggle" onclick="return toggle('Auxiliary');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.abstracts.Auxiliary-class.html">Auxiliary</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Auxiliary-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Auxiliary-expanded"><a name="Auxiliary.__init__"></a><div id="Auxiliary.__init__-def"><a name="L185"></a><tt class="py-lineno">185</tt> <a class="py-toggle" href="#" id="Auxiliary.__init__-toggle" onclick="return toggle('Auxiliary.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.abstracts.Auxiliary-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">options</tt><tt class="py-op">=</tt><tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">,</tt> <tt class="py-param">analyzer</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Auxiliary.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Auxiliary.__init__-expanded"><a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">options</tt> <tt class="py-op">=</tt> <tt class="py-name">options</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">analyzer</tt> <tt class="py-op">=</tt> <tt class="py-name">analyzer</tt> </tt>
+</div></div><a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:05 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

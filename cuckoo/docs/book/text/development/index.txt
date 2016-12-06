@@ -1,0 +1,46 @@
+
+Development
+***********
+
+This chapter explains how to write Cuckoo's code and how to
+contribute.
+
+* Development Notes
+
+  * Git branches
+
+  * Release Versioning
+
+  * Ticketing system
+
+  * Contribute
+
+* Coding Style
+
+  * Formatting
+
+    * Copyright header
+
+    * Indentation
+
+    * Maximum Line Length
+
+    * Blank Lines
+
+    * Imports
+
+    * Strings
+
+    * Printing and Logging
+
+    * Checking for keys in data structures
+
+  * Exceptions
+
+    * Naming
+
+    * Exception handling
+
+  * Documentation
+
+  * Automated testing

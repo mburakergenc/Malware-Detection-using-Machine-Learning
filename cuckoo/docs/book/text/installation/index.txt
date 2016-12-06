@@ -1,0 +1,119 @@
+
+Installation
+************
+
+This chapter explains how to install Cuckoo.
+
+Although the recommended setup is *GNU/Linux* (Debian or Ubuntu
+preferably) Cuckoo has proved to work smoothly also on *Mac OS X* as
+host; the recommended and tested setup for guests are *Windows 7* for
+Windows analysis, *Mac OS X Yosemite* for Mac OS X analysis and Debian
+for Linux Analysis, although Cuckoo should work with other releases of
+guest os.
+
+Note: This documentation refers to *Host* as the underlying
+  operating systems on which you are running Cuckoo (generally being a
+  GNU/Linux distribution) and to *Guest* as the Windows virtual
+  machine used to run the isolated analysis.
+
+* Preparing the Host
+
+  * Requirements
+
+    * Installing Python libraries
+
+    * Virtualization Software
+
+    * Installing Tcpdump
+
+    * Installing Volatility
+
+  * Installing Cuckoo
+
+    * Create a user
+
+    * Install Cuckoo
+
+  * Configuration
+
+    * cuckoo.conf
+
+    * auxiliary.conf
+
+    * <machinery>.conf
+
+    * memory.conf
+
+    * processing.conf
+
+    * reporting.conf
+
+  * Configuration (Android Analysis)
+
+    * avd.conf
+
+* Preparing the Guest
+
+  * Creation of the Virtual Machine
+
+  * Requirements
+
+    * Install Python
+
+    * Additional Software
+
+  * Network Configuration
+
+    * Windows Settings
+
+    * Virtual Networking
+
+  * Installing the Agent
+
+  * Saving the Virtual Machine
+
+    * VirtualBox
+
+    * KVM
+
+    * VMware Workstation
+
+    * XenServer
+
+      * Memory Snapshots
+
+      * Booting from Disk
+
+  * Cloning the Virtual Machine
+
+* Preparing the Guest (Physical Machine)
+
+  * Creation of the Physical Machine
+
+  * Requirements
+
+    * Install Python
+
+    * Additional Software
+
+    * Additional Host Requirements
+
+  * Network Configuration
+
+    * Windows Settings
+
+    * Networking
+
+  * Installing the Agent
+
+  * Saving the Guest
+
+    * Fog
+
+    * Setup using VMWare (Bonus!)
+
+* Upgrade from a previous release
+
+  * Upgrade starting from scratch
+
+  * Migrate your Cuckoo

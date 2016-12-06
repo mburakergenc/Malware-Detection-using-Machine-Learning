@@ -1,0 +1,1630 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.machinery.avd</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.machinery-module.html">Package&nbsp;machinery</a> ::
+        Module&nbsp;avd
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.machinery.avd-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.machinery.avd-module.html">Module modules.machinery.avd</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># Originally contributed by Check Point Software Technologies, Ltd.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">subprocess</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">time</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">shutil</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">shlex</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.cuckoo=lib.cuckoo-module.html"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-1', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package lib.cuckoo.common=lib.cuckoo.common-module.html"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-2', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module lib.cuckoo.common.abstracts=lib.cuckoo.common.abstracts-module.html"><a title="lib.cuckoo.common.abstracts" class="py-name" href="#" onclick="return doclink('link-3', 'abstracts', 'link-3');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class lib.cuckoo.common.abstracts.Machinery=lib.cuckoo.common.abstracts.Machinery-class.html"><a title="lib.cuckoo.common.abstracts.Machinery" class="py-name" href="#" onclick="return doclink('link-4', 'Machinery', 'link-4');">Machinery</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-5', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-6', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-7', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module lib.cuckoo.common.exceptions=lib.cuckoo.common.exceptions-module.html"><a title="lib.cuckoo.common.exceptions" class="py-name" href="#" onclick="return doclink('link-8', 'exceptions', 'link-8');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Class lib.cuckoo.common.exceptions.CuckooCriticalError=lib.cuckoo.common.exceptions.CuckooCriticalError-class.html"><a title="lib.cuckoo.common.exceptions.CuckooCriticalError" class="py-name" href="#" onclick="return doclink('link-9', 'CuckooCriticalError', 'link-9');">CuckooCriticalError</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-10', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-11', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Package lib.cuckoo.core=lib.cuckoo.core-module.html"><a title="lib.cuckoo.core" class="py-name" href="#" onclick="return doclink('link-12', 'core', 'link-12');">core</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Module lib.cuckoo.core.resultserver=lib.cuckoo.core.resultserver-module.html"><a title="lib.cuckoo.core.resultserver" class="py-name" href="#" onclick="return doclink('link-13', 'resultserver', 'link-13');">resultserver</a></tt> <tt class="py-keyword">import</tt> <tt id="link-14" class="py-name" targets="Class lib.cuckoo.core.resultserver.ResultServer=lib.cuckoo.core.resultserver.ResultServer-class.html"><a title="lib.cuckoo.core.resultserver.ResultServer" class="py-name" href="#" onclick="return doclink('link-14', 'ResultServer', 'link-14');">ResultServer</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt id="link-15" class="py-name" targets="Variable lib.cuckoo.common.abstracts.log=lib.cuckoo.common.abstracts-module.html#log,Variable lib.cuckoo.common.irc.log=lib.cuckoo.common.irc-module.html#log,Variable lib.cuckoo.common.netlog.log=lib.cuckoo.common.netlog-module.html#log,Variable lib.cuckoo.common.objects.log=lib.cuckoo.common.objects-module.html#log,Variable lib.cuckoo.common.utils.log=lib.cuckoo.common.utils-module.html#log,Variable lib.cuckoo.core.database.log=lib.cuckoo.core.database-module.html#log,Variable lib.cuckoo.core.guest.log=lib.cuckoo.core.guest-module.html#log,Module lib.cuckoo.core.log=lib.cuckoo.core.log-module.html,Variable lib.cuckoo.core.plugins.log=lib.cuckoo.core.plugins-module.html#log,Variable lib.cuckoo.core.resultserver.log=lib.cuckoo.core.resultserver-module.html#log,Variable lib.cuckoo.core.rooter.log=lib.cuckoo.core.rooter-module.html#log,Variable lib.cuckoo.core.scheduler.log=lib.cuckoo.core.scheduler-module.html#log,Variable lib.cuckoo.core.startup.log=lib.cuckoo.core.startup-module.html#log,Variable modules.auxiliary.mitm.log=modules.auxiliary.mitm-module.html#log,Variable modules.auxiliary.reboot.log=modules.auxiliary.reboot-module.html#log,Variable modules.auxiliary.services.log=modules.auxiliary.services-module.html#log,Variable modules.auxiliary.sniffer.log=modules.auxiliary.sniffer-module.html#log,Variable modules.machinery.avd.log=modules.machinery.avd-module.html#log,Variable modules.machinery.physical.log=modules.machinery.physical-module.html#log,Variable modules.machinery.qemu.log=modules.machinery.qemu-module.html#log,Variable modules.machinery.virtualbox.log=modules.machinery.virtualbox-module.html#log,Variable modules.machinery.vmware.log=modules.machinery.vmware-module.html#log,Variable modules.machinery.vsphere.log=modules.machinery.vsphere-module.html#log,Variable modules.machinery.xenserver.log=modules.machinery.xenserver-module.html#log,Variable modules.processing.analysisinfo.log=modules.processing.analysisinfo-module.html#log,Variable modules.processing.apkinfo.log=modules.processing.apkinfo-module.html#log,Variable modules.processing.baseline.log=modules.processing.baseline-module.html#log,Variable modules.processing.behavior.log=modules.processing.behavior-module.html#log,Variable modules.processing.debug.log=modules.processing.debug-module.html#log,Variable modules.processing.droidmon.log=modules.processing.droidmon-module.html#log,Variable modules.processing.dumptls.log=modules.processing.dumptls-module.html#log,Variable modules.processing.googleplay.log=modules.processing.googleplay-module.html#log,Variable modules.processing.irma.log=modules.processing.irma-module.html#log,Variable modules.processing.memory.log=modules.processing.memory-module.html#log,Variable modules.processing.misp.log=modules.processing.misp-module.html#log,Variable modules.processing.network.log=modules.processing.network-module.html#log,Variable modules.processing.platform.linux.log=modules.processing.platform.linux-module.html#log,Variable modules.processing.platform.windows.log=modules.processing.platform.windows-module.html#log,Variable modules.processing.procmemory.log=modules.processing.procmemory-module.html#log,Variable modules.processing.screenshots.log=modules.processing.screenshots-module.html#log,Variable modules.processing.snort.log=modules.processing.snort-module.html#log,Variable modules.processing.static.log=modules.processing.static-module.html#log,Variable modules.processing.suricata.log=modules.processing.suricata-module.html#log,Variable modules.processing.virustotal.log=modules.processing.virustotal-module.html#log,Variable modules.reporting.elasticsearch.log=modules.reporting.elasticsearch-module.html#log,Variable modules.reporting.moloch.log=modules.reporting.moloch-module.html#log"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-15', 'log', 'link-15');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-name">__name__</tt><tt class="py-op">)</tt> </tt>
+<a name="Avd"></a><div id="Avd-def"><a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt> <a class="py-toggle" href="#" id="Avd-toggle" onclick="return toggle('Avd');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html">Avd</a><tt class="py-op">(</tt><tt class="py-base-class">Machinery</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Avd-expanded"><a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-docstring">"""Virtualization layer for Android Emulator."""</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="Avd._initialize_check"></a><div id="Avd._initialize_check-def"><a name="L23"></a><tt class="py-lineno"> 23</tt> <a class="py-toggle" href="#" id="Avd._initialize_check-toggle" onclick="return toggle('Avd._initialize_check');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#_initialize_check">_initialize_check</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd._initialize_check-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd._initialize_check-expanded"><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">        <tt class="py-docstring">"""Runs all checks when a machine manager is initialized.</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">        @raise CuckooMachineError: if the android emulator is not found.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">emulator_processes</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name" targets="Variable lib.cuckoo.core.database.Machine.options=lib.cuckoo.core.database.Machine-class.html#options,Method lib.cuckoo.core.database.Task.options()=lib.cuckoo.core.database.Task-class.html#options"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-16', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Module modules.machinery.avd=modules.machinery.avd-module.html"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-17', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">emulator_path</tt><tt class="py-op">:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-18" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooCriticalError" class="py-name" href="#" onclick="return doclink('link-18', 'CuckooCriticalError', 'link-9');">CuckooCriticalError</a></tt><tt class="py-op">(</tt><tt class="py-string">"emulator path missing, "</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">                                      <tt class="py-string">"please add it to the config file"</tt><tt class="py-op">)</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-19', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-20', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">emulator_path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-21" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooCriticalError" class="py-name" href="#" onclick="return doclink('link-21', 'CuckooCriticalError', 'link-9');">CuckooCriticalError</a></tt><tt class="py-op">(</tt><tt class="py-string">"emulator not found at "</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">                                      <tt class="py-string">"specified path \"%s\""</tt> <tt class="py-op">%</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">                                      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-22', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-23', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">emulator_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-24', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-25', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">adb_path</tt><tt class="py-op">:</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-26" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooCriticalError" class="py-name" href="#" onclick="return doclink('link-26', 'CuckooCriticalError', 'link-9');">CuckooCriticalError</a></tt><tt class="py-op">(</tt><tt class="py-string">"adb path missing, "</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">                                      <tt class="py-string">"please add it to the config file"</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-27', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-28', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">adb_path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-29" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooCriticalError" class="py-name" href="#" onclick="return doclink('link-29', 'CuckooCriticalError', 'link-9');">CuckooCriticalError</a></tt><tt class="py-op">(</tt><tt class="py-string">"adb not found at "</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">                                      <tt class="py-string">"specified path \"%s\""</tt> <tt class="py-op">%</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">                                      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-30', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-31" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-31', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">adb_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-32" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-32', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-33', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">avd_path</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-34" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooCriticalError" class="py-name" href="#" onclick="return doclink('link-34', 'CuckooCriticalError', 'link-9');">CuckooCriticalError</a></tt><tt class="py-op">(</tt><tt class="py-string">"avd path missing, "</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                                      <tt class="py-string">"please add it to the config file"</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-35', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-36', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">avd_path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-37" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooCriticalError" class="py-name" href="#" onclick="return doclink('link-37', 'CuckooCriticalError', 'link-9');">CuckooCriticalError</a></tt><tt class="py-op">(</tt><tt class="py-string">"avd not found at "</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">                                      <tt class="py-string">"specified path \"%s\""</tt> <tt class="py-op">%</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                                      <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-38', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-39', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">avd_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-40', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-41" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-41', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">reference_machine</tt><tt class="py-op">:</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-42" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooCriticalError" class="py-name" href="#" onclick="return doclink('link-42', 'CuckooCriticalError', 'link-9');">CuckooCriticalError</a></tt><tt class="py-op">(</tt><tt class="py-string">"reference machine path missing, "</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                                      <tt class="py-string">"please add it to the config file"</tt><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">machine_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-43" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-43', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-44', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">avd_path</tt><tt class="py-op">,</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">                                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-45', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-46', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">reference_machine</tt><tt class="py-op">)</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-string">"%s.avd"</tt> <tt class="py-op">%</tt> <tt class="py-name">machine_path</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> \ </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">                <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-string">"%s.ini"</tt> <tt class="py-op">%</tt> <tt class="py-name">machine_path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-47" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooCriticalError" class="py-name" href="#" onclick="return doclink('link-47', 'CuckooCriticalError', 'link-9');">CuckooCriticalError</a></tt><tt class="py-op">(</tt><tt class="py-string">"reference machine not found at "</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                                      <tt class="py-string">"specified path \"%s\""</tt> <tt class="py-op">%</tt> <tt class="py-name">machine_path</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="Avd.start"></a><div id="Avd.start-def"><a name="L67"></a><tt class="py-lineno"> 67</tt> <a class="py-toggle" href="#" id="Avd.start-toggle" onclick="return toggle('Avd.start');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#start">start</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">,</tt> <tt class="py-param">task</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd.start-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd.start-expanded"><a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-docstring">"""Start a virtual machine.</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-docstring">        @param label: virtual machine name.</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-docstring">        @param task: task object.</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">        @raise CuckooMachineError: if unable to start.</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt id="link-48" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-48', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-49" class="py-name" targets="Module modules.processing.debug=modules.processing.debug-module.html"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-49', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Starting vm %s"</tt> <tt class="py-op">%</tt> <tt id="link-50" class="py-name" targets="Variable lib.cuckoo.core.database.Guest.label=lib.cuckoo.core.database.Guest-class.html#label,Variable lib.cuckoo.core.database.Machine.label=lib.cuckoo.core.database.Machine-class.html#label"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-50', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-51" class="py-name" targets="Method modules.machinery.avd.Avd.duplicate_reference_machine()=modules.machinery.avd.Avd-class.html#duplicate_reference_machine"><a title="modules.machinery.avd.Avd.duplicate_reference_machine" class="py-name" href="#" onclick="return doclink('link-51', 'duplicate_reference_machine', 'link-51');">duplicate_reference_machine</a></tt><tt class="py-op">(</tt><tt id="link-52" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-52', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-53" class="py-name" targets="Method modules.machinery.avd.Avd.start_emulator()=modules.machinery.avd.Avd-class.html#start_emulator"><a title="modules.machinery.avd.Avd.start_emulator" class="py-name" href="#" onclick="return doclink('link-53', 'start_emulator', 'link-53');">start_emulator</a></tt><tt class="py-op">(</tt><tt id="link-54" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-54', 'label', 'link-50');">label</a></tt><tt class="py-op">,</tt> <tt class="py-name">task</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-55" class="py-name" targets="Method modules.machinery.avd.Avd.port_forward()=modules.machinery.avd.Avd-class.html#port_forward"><a title="modules.machinery.avd.Avd.port_forward" class="py-name" href="#" onclick="return doclink('link-55', 'port_forward', 'link-55');">port_forward</a></tt><tt class="py-op">(</tt><tt id="link-56" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-56', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-57" class="py-name" targets="Method modules.machinery.avd.Avd.start_agent()=modules.machinery.avd.Avd-class.html#start_agent"><a title="modules.machinery.avd.Avd.start_agent" class="py-name" href="#" onclick="return doclink('link-57', 'start_agent', 'link-57');">start_agent</a></tt><tt class="py-op">(</tt><tt id="link-58" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-58', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="Avd.stop"></a><div id="Avd.stop-def"><a name="L80"></a><tt class="py-lineno"> 80</tt> <a class="py-toggle" href="#" id="Avd.stop-toggle" onclick="return toggle('Avd.stop');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#stop">stop</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd.stop-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd.stop-expanded"><a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">        <tt class="py-docstring">"""Stops a virtual machine.</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">        @param label: virtual machine name.</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">        @raise CuckooMachineError: if unable to stop.</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt id="link-59" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-59', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-60', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Stopping vm %s"</tt> <tt class="py-op">%</tt> <tt id="link-61" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-61', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name" targets="Method modules.machinery.avd.Avd.stop_emulator()=modules.machinery.avd.Avd-class.html#stop_emulator"><a title="modules.machinery.avd.Avd.stop_emulator" class="py-name" href="#" onclick="return doclink('link-62', 'stop_emulator', 'link-62');">stop_emulator</a></tt><tt class="py-op">(</tt><tt id="link-63" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-63', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"> </tt>
+<a name="Avd._list"></a><div id="Avd._list-def"><a name="L88"></a><tt class="py-lineno"> 88</tt> <a class="py-toggle" href="#" id="Avd._list-toggle" onclick="return toggle('Avd._list');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#_list">_list</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd._list-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd._list-expanded"><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-docstring">"""Lists virtual machines installed.</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">        @return: virtual machine names list.</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-64" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-64', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-65" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-65', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt id="link-66" class="py-name" targets="Method lib.cuckoo.common.abstracts.Machinery.machines()=lib.cuckoo.common.abstracts.Machinery-class.html#machines"><a title="lib.cuckoo.common.abstracts.Machinery.machines" class="py-name" href="#" onclick="return doclink('link-66', 'machines', 'link-66');">machines</a></tt> </tt>
+</div><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="Avd._status"></a><div id="Avd._status-def"><a name="L94"></a><tt class="py-lineno"> 94</tt> <a class="py-toggle" href="#" id="Avd._status-toggle" onclick="return toggle('Avd._status');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#_status">_status</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd._status-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd._status-expanded"><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-docstring">"""Gets current status of a vm.</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">        @param label: virtual machine name.</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">        @return: status string.</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt id="link-67" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-67', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-68" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-68', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Getting status for %s"</tt> <tt class="py-op">%</tt> <tt id="link-69" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-69', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="Avd.duplicate_reference_machine"></a><div id="Avd.duplicate_reference_machine-def"><a name="L101"></a><tt class="py-lineno">101</tt> <a class="py-toggle" href="#" id="Avd.duplicate_reference_machine-toggle" onclick="return toggle('Avd.duplicate_reference_machine');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#duplicate_reference_machine">duplicate_reference_machine</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd.duplicate_reference_machine-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd.duplicate_reference_machine-expanded"><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-docstring">"""Creates a new emulator based on a reference one."""</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">        <tt class="py-name">reference_machine</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-70" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-70', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-71" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-71', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">reference_machine</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt id="link-72" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-72', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-73" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-73', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Duplicate Reference Machine '{0}'."</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">reference_machine</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-comment"># Clean/delete if new emulator already exists.</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-74" class="py-name" targets="Method modules.machinery.avd.Avd.delete_old_emulator()=modules.machinery.avd.Avd-class.html#delete_old_emulator"><a title="modules.machinery.avd.Avd.delete_old_emulator" class="py-name" href="#" onclick="return doclink('link-74', 'delete_old_emulator', 'link-74');">delete_old_emulator</a></tt><tt class="py-op">(</tt><tt id="link-75" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-75', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-name">avd_config_file</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-76" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-76', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-77" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-77', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">avd_path</tt><tt class="py-op">,</tt> <tt class="py-name">reference_machine</tt><tt class="py-op">+</tt><tt class="py-string">".ini"</tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-name">new_config_file</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-78" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-78', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-79" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-79', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">avd_path</tt><tt class="py-op">,</tt> <tt id="link-80" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-80', 'label', 'link-50');">label</a></tt><tt class="py-op">+</tt><tt class="py-string">".ini"</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-name">reference_avd_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-81" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-81', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-82" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-82', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">avd_path</tt><tt class="py-op">,</tt> <tt class="py-name">reference_machine</tt><tt class="py-op">+</tt><tt class="py-string">".avd/"</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-name">new_avd_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-83" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-83', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-84" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-84', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">avd_path</tt><tt class="py-op">,</tt> <tt id="link-85" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-85', 'label', 'link-50');">label</a></tt><tt class="py-op">+</tt><tt class="py-string">".avd/"</tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-name">hw_qemu_config_file</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">new_avd_path</tt><tt class="py-op">,</tt> <tt class="py-string">"hardware-qemu.ini"</tt><tt class="py-op">)</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-comment"># First we copy the template.</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt id="link-86" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-86', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-87" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-87', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Copy AVD reference config file '{0}' in '{1}'..."</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">avd_config_file</tt><tt class="py-op">,</tt> <tt class="py-name">new_config_file</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-name">shutil</tt><tt class="py-op">.</tt><tt class="py-name">copyfile</tt><tt class="py-op">(</tt><tt class="py-name">avd_config_file</tt><tt class="py-op">,</tt> <tt class="py-name">new_config_file</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-comment"># Copy the internal files of the reference avd.</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt id="link-88" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-88', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-89', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Duplicate the AVD internal content from '{0}' in '{1}'..."</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">reference_avd_path</tt><tt class="py-op">,</tt> <tt class="py-name">new_avd_path</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-string">"cp -R {0} {1}"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">reference_avd_path</tt><tt class="py-op">,</tt> <tt class="py-name">new_avd_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">        <tt id="link-90" class="py-name" targets="Class modules.machinery.avd.OSCommand=modules.machinery.avd.OSCommand-class.html"><a title="modules.machinery.avd.OSCommand" class="py-name" href="#" onclick="return doclink('link-90', 'OSCommand', 'link-90');">OSCommand</a></tt><tt class="py-op">.</tt><tt id="link-91" class="py-name" targets="Static Method modules.machinery.avd.OSCommand.executeCommand()=modules.machinery.avd.OSCommand-class.html#executeCommand"><a title="modules.machinery.avd.OSCommand.executeCommand" class="py-name" href="#" onclick="return doclink('link-91', 'executeCommand', 'link-91');">executeCommand</a></tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-comment"># Than adapt the content of the copied files.</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-92" class="py-name" targets="Method modules.machinery.avd.Avd.replace_content_in_file()=modules.machinery.avd.Avd-class.html#replace_content_in_file"><a title="modules.machinery.avd.Avd.replace_content_in_file" class="py-name" href="#" onclick="return doclink('link-92', 'replace_content_in_file', 'link-92');">replace_content_in_file</a></tt><tt class="py-op">(</tt><tt class="py-name">new_config_file</tt><tt class="py-op">,</tt> <tt class="py-name">reference_machine</tt><tt class="py-op">,</tt> <tt id="link-93" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-93', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-94" class="py-name"><a title="modules.machinery.avd.Avd.replace_content_in_file" class="py-name" href="#" onclick="return doclink('link-94', 'replace_content_in_file', 'link-92');">replace_content_in_file</a></tt><tt class="py-op">(</tt><tt class="py-name">hw_qemu_config_file</tt><tt class="py-op">,</tt> <tt class="py-name">reference_machine</tt><tt class="py-op">,</tt> <tt id="link-95" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-95', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-comment"># self.state = AVDEmulator.STATE_PREPARED</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">        <tt class="py-comment"># todo:will see</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"> </tt>
+<a name="Avd.delete_old_emulator"></a><div id="Avd.delete_old_emulator-def"><a name="L131"></a><tt class="py-lineno">131</tt> <a class="py-toggle" href="#" id="Avd.delete_old_emulator-toggle" onclick="return toggle('Avd.delete_old_emulator');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#delete_old_emulator">delete_old_emulator</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd.delete_old_emulator-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd.delete_old_emulator-expanded"><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-docstring">"""Deletes any trace of an emulator that would have the same name as</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-docstring">        the one of the current emulator."""</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-name">old_emulator_config_file</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-96" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-96', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-97" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-97', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">avd_path</tt><tt class="py-op">,</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">                                                <tt class="py-string">"%s.ini"</tt> <tt class="py-op">%</tt> <tt id="link-98" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-98', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">old_emulator_config_file</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">            <tt id="link-99" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-99', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-100" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-100', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Deleting old emulator config file '{0}'"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">old_emulator_config_file</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">            <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">remove</tt><tt class="py-op">(</tt><tt class="py-name">old_emulator_config_file</tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-name">old_emulator_path</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-101" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-101', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-102" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-102', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">avd_path</tt><tt class="py-op">,</tt> <tt id="link-103" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-103', 'label', 'link-50');">label</a></tt><tt class="py-op">+</tt><tt class="py-string">".avd/"</tt><tt class="py-op">)</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isdir</tt><tt class="py-op">(</tt><tt class="py-name">old_emulator_path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">            <tt id="link-104" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-104', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-105" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-105', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Deleting old emulator FS '{0}'"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">old_emulator_path</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">            <tt class="py-name">shutil</tt><tt class="py-op">.</tt><tt class="py-name">rmtree</tt><tt class="py-op">(</tt><tt class="py-name">old_emulator_path</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"> </tt>
+<a name="Avd.replace_content_in_file"></a><div id="Avd.replace_content_in_file-def"><a name="L146"></a><tt class="py-lineno">146</tt> <a class="py-toggle" href="#" id="Avd.replace_content_in_file-toggle" onclick="return toggle('Avd.replace_content_in_file');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#replace_content_in_file">replace_content_in_file</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">fileName</tt><tt class="py-op">,</tt> <tt class="py-param">contentToReplace</tt><tt class="py-op">,</tt> <tt class="py-param">replacementContent</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd.replace_content_in_file-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd.replace_content_in_file-expanded"><a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line">        <tt class="py-docstring">"""Replaces the specified motif by a specified value in the specified</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-docstring">        file.</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt id="link-106" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-106', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-107" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-107', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Replacing '{0}' with '{1}' in '{2}'"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">contentToReplace</tt><tt class="py-op">,</tt> <tt class="py-name">replacementContent</tt><tt class="py-op">,</tt> <tt class="py-name">fileName</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-name">newLines</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">fileName</tt><tt class="py-op">,</tt> <tt class="py-string">'r'</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">fd</tt><tt class="py-op">:</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">            <tt class="py-name">lines</tt> <tt class="py-op">=</tt> <tt class="py-name">fd</tt><tt class="py-op">.</tt><tt class="py-name">readlines</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">line</tt> <tt class="py-keyword">in</tt> <tt class="py-name">lines</tt><tt class="py-op">:</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">                <tt class="py-name">newLines</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-name">contentToReplace</tt><tt class="py-op">,</tt> <tt class="py-name">replacementContent</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">        <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">fileName</tt><tt class="py-op">,</tt> <tt class="py-string">'w'</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">fd</tt><tt class="py-op">:</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">            <tt class="py-name">fd</tt><tt class="py-op">.</tt><tt class="py-name">writelines</tt><tt class="py-op">(</tt><tt class="py-name">newLines</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"> </tt>
+<a name="Avd.start_emulator"></a><div id="Avd.start_emulator-def"><a name="L161"></a><tt class="py-lineno">161</tt> <a class="py-toggle" href="#" id="Avd.start_emulator-toggle" onclick="return toggle('Avd.start_emulator');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#start_emulator">start_emulator</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">,</tt> <tt class="py-param">task</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd.start_emulator-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd.start_emulator-expanded"><a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line">        <tt class="py-docstring">"""Starts the emulator."""</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">        <tt class="py-name">emulator_port</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-108" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-108', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-109" class="py-name" targets="Method lib.cuckoo.common.config.Config.get()=lib.cuckoo.common.config.Config-class.html#get,Method lib.cuckoo.core.guest.GuestManager.get()=lib.cuckoo.core.guest.GuestManager-class.html#get"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-109', 'get', 'link-109');">get</a></tt><tt class="py-op">(</tt><tt id="link-110" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-110', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-string">"emulator_port"</tt><tt class="py-op">]</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-111" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-111', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-112" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-112', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">emulator_path</tt><tt class="py-op">,</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">            <tt class="py-string">"@%s"</tt> <tt class="py-op">%</tt> <tt id="link-113" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-113', 'label', 'link-50');">label</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">            <tt class="py-string">"-no-snapshot-save"</tt><tt class="py-op">,</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">            <tt class="py-string">"-netspeed"</tt><tt class="py-op">,</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">            <tt class="py-string">"full"</tt><tt class="py-op">,</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">            <tt class="py-string">"-netdelay"</tt><tt class="py-op">,</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">            <tt class="py-string">"none"</tt><tt class="py-op">,</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">            <tt class="py-string">"-port"</tt><tt class="py-op">,</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line">            <tt class="py-string">"%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">emulator_port</tt><tt class="py-op">,</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">            <tt class="py-string">"-tcpdump"</tt><tt class="py-op">,</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-114" class="py-name" targets="Method lib.cuckoo.common.abstracts.Machinery.pcap_path()=lib.cuckoo.common.abstracts.Machinery-class.html#pcap_path"><a title="lib.cuckoo.common.abstracts.Machinery.pcap_path" class="py-name" href="#" onclick="return doclink('link-114', 'pcap_path', 'link-114');">pcap_path</a></tt><tt class="py-op">(</tt><tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-115" class="py-name" targets="Variable lib.cuckoo.core.database.Error.id=lib.cuckoo.core.database.Error-class.html#id,Variable lib.cuckoo.core.database.Guest.id=lib.cuckoo.core.database.Guest-class.html#id,Variable lib.cuckoo.core.database.Machine.id=lib.cuckoo.core.database.Machine-class.html#id,Variable lib.cuckoo.core.database.Sample.id=lib.cuckoo.core.database.Sample-class.html#id,Variable lib.cuckoo.core.database.Tag.id=lib.cuckoo.core.database.Tag-class.html#id,Variable lib.cuckoo.core.database.Task.id=lib.cuckoo.core.database.Task-class.html#id"><a title="lib.cuckoo.core.database.Error.id
+lib.cuckoo.core.database.Guest.id
+lib.cuckoo.core.database.Machine.id
+lib.cuckoo.core.database.Sample.id
+lib.cuckoo.core.database.Tag.id
+lib.cuckoo.core.database.Task.id" class="py-name" href="#" onclick="return doclink('link-115', 'id', 'link-115');">id</a></tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">        <tt class="py-op">]</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line"> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt class="py-comment"># In headless mode we remove the skin, audio, and window support.</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-116" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-116', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-117" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-117', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">mode</tt> <tt class="py-op">==</tt> <tt class="py-string">"headless"</tt><tt class="py-op">:</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">            <tt class="py-name">cmd</tt> <tt class="py-op">+=</tt> <tt class="py-op">[</tt><tt class="py-string">"-no-skin"</tt><tt class="py-op">,</tt> <tt class="py-string">"-no-audio"</tt><tt class="py-op">,</tt> <tt class="py-string">"-no-window"</tt><tt class="py-op">]</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line"> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-comment"># If a proxy address has been provided for this analysis, then we have</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">        <tt class="py-comment"># to pass the proxy address along to the emulator command. The</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">        <tt class="py-comment"># mitmproxy instance is not located at the resultserver's IP address</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">        <tt class="py-comment"># though, so we manually replace the IP address by localhost.</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">"proxy"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-118" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-118', 'options', 'link-16');">options</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">            <tt class="py-name">_</tt><tt class="py-op">,</tt> <tt class="py-name">port</tt> <tt class="py-op">=</tt> <tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-119" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-119', 'options', 'link-16');">options</a></tt><tt class="py-op">[</tt><tt class="py-string">"proxy"</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">":"</tt><tt class="py-op">)</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">            <tt class="py-name">cmd</tt> <tt class="py-op">+=</tt> <tt class="py-op">[</tt><tt class="py-string">"-http-proxy"</tt><tt class="py-op">,</tt> <tt class="py-string">"http://127.0.0.1:%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">port</tt><tt class="py-op">]</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line"> </tt>
+<a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">emulator_processes</tt><tt class="py-op">[</tt><tt id="link-120" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-120', 'label', 'link-50');">label</a></tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-121" class="py-name"><a title="modules.machinery.avd.OSCommand" class="py-name" href="#" onclick="return doclink('link-121', 'OSCommand', 'link-90');">OSCommand</a></tt><tt class="py-op">.</tt><tt id="link-122" class="py-name" targets="Static Method modules.machinery.avd.OSCommand.executeAsyncCommand()=modules.machinery.avd.OSCommand-class.html#executeAsyncCommand"><a title="modules.machinery.avd.OSCommand.executeAsyncCommand" class="py-name" href="#" onclick="return doclink('link-122', 'executeAsyncCommand', 'link-122');">executeAsyncCommand</a></tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+<a name="L192"></a><tt class="py-lineno">192</tt>  <tt class="py-line">        <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt class="py-number">10</tt><tt class="py-op">)</tt> </tt>
+<a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">        <tt class="py-comment"># if not self.__checkADBRecognizeEmu(label):</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-123" class="py-name" targets="Method modules.machinery.avd.Avd.restart_adb_server()=modules.machinery.avd.Avd-class.html#restart_adb_server"><a title="modules.machinery.avd.Avd.restart_adb_server" class="py-name" href="#" onclick="return doclink('link-123', 'restart_adb_server', 'link-123');">restart_adb_server</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">        <tt class="py-comment"># Waits for device to be ready.</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-124" class="py-name" targets="Method modules.machinery.avd.Avd.wait_for_device_ready()=modules.machinery.avd.Avd-class.html#wait_for_device_ready"><a title="modules.machinery.avd.Avd.wait_for_device_ready" class="py-name" href="#" onclick="return doclink('link-124', 'wait_for_device_ready', 'link-124');">wait_for_device_ready</a></tt><tt class="py-op">(</tt><tt id="link-125" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-125', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"> </tt>
+<a name="Avd.stop_emulator"></a><div id="Avd.stop_emulator-def"><a name="L198"></a><tt class="py-lineno">198</tt> <a class="py-toggle" href="#" id="Avd.stop_emulator-toggle" onclick="return toggle('Avd.stop_emulator');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#stop_emulator">stop_emulator</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd.stop_emulator-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd.stop_emulator-expanded"><a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">        <tt class="py-docstring">"""Stop the emulator."""</tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line">        <tt class="py-name">emulator_port</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-126" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-126', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-127" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-127', 'get', 'link-109');">get</a></tt><tt class="py-op">(</tt><tt id="link-128" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-128', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-string">"emulator_port"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L201"></a><tt class="py-lineno">201</tt>  <tt class="py-line">        <tt id="link-129" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-129', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"Stopping AVD listening on port {0}"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">emulator_port</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line"> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">        <tt class="py-comment"># Kill process.</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-130" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-130', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-131" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-131', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">adb_path</tt><tt class="py-op">,</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">            <tt class="py-string">"-s"</tt><tt class="py-op">,</tt> <tt class="py-string">"emulator-%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">emulator_port</tt><tt class="py-op">,</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">            <tt class="py-string">"emu"</tt><tt class="py-op">,</tt> <tt class="py-string">"kill"</tt><tt class="py-op">,</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">        <tt class="py-op">]</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line">        <tt id="link-132" class="py-name"><a title="modules.machinery.avd.OSCommand" class="py-name" href="#" onclick="return doclink('link-132', 'OSCommand', 'link-90');">OSCommand</a></tt><tt class="py-op">.</tt><tt id="link-133" class="py-name"><a title="modules.machinery.avd.OSCommand.executeCommand" class="py-name" href="#" onclick="return doclink('link-133', 'executeCommand', 'link-91');">executeCommand</a></tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">        <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt id="link-134" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-134', 'label', 'link-50');">label</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">emulator_processes</tt><tt class="py-op">:</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">emulator_processes</tt><tt class="py-op">[</tt><tt id="link-135" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-135', 'label', 'link-50');">label</a></tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">kill</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">                <tt id="link-136" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-136', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line"> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">            <tt class="py-keyword">del</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">emulator_processes</tt><tt class="py-op">[</tt><tt id="link-137" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-137', 'label', 'link-50');">label</a></tt><tt class="py-op">]</tt> </tt>
+</div><a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line"> </tt>
+<a name="Avd.wait_for_device_ready"></a><div id="Avd.wait_for_device_ready-def"><a name="L220"></a><tt class="py-lineno">220</tt> <a class="py-toggle" href="#" id="Avd.wait_for_device_ready-toggle" onclick="return toggle('Avd.wait_for_device_ready');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#wait_for_device_ready">wait_for_device_ready</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd.wait_for_device_ready-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd.wait_for_device_ready-expanded"><a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">        <tt class="py-docstring">"""Analyzes the emulator and returns when it's ready."""</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line"> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">        <tt class="py-name">emulator_port</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-138" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-138', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-139" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-139', 'get', 'link-109');">get</a></tt><tt class="py-op">(</tt><tt id="link-140" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-140', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-string">"emulator_port"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">        <tt class="py-name">adb</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-141" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-141', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-142" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-142', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">adb_path</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line"> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">        <tt id="link-143" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-143', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-144" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-144', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Waiting for device emulator-"</tt><tt class="py-op">+</tt><tt class="py-name">emulator_port</tt><tt class="py-op">+</tt><tt class="py-string">" to be ready."</tt><tt class="py-op">)</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">            <tt class="py-name">adb</tt><tt class="py-op">,</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">            <tt class="py-string">"-s"</tt><tt class="py-op">,</tt> <tt class="py-string">"emulator-%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">emulator_port</tt><tt class="py-op">,</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">            <tt class="py-string">"wait-for-device"</tt><tt class="py-op">,</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">        <tt class="py-op">]</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">        <tt id="link-145" class="py-name"><a title="modules.machinery.avd.OSCommand" class="py-name" href="#" onclick="return doclink('link-145', 'OSCommand', 'link-90');">OSCommand</a></tt><tt class="py-op">.</tt><tt id="link-146" class="py-name"><a title="modules.machinery.avd.OSCommand.executeCommand" class="py-name" href="#" onclick="return doclink('link-146', 'executeCommand', 'link-91');">executeCommand</a></tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line"> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">        <tt id="link-147" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-147', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-148" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-148', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Waiting for the emulator to be ready"</tt><tt class="py-op">)</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">        <tt id="link-149" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-149', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-150" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-150', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">" - (dev.bootcomplete)"</tt><tt class="py-op">)</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">        <tt class="py-name">ready</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-keyword">not</tt> <tt class="py-name">ready</tt><tt class="py-op">:</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">            <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">                <tt class="py-name">adb</tt><tt class="py-op">,</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">                <tt class="py-string">"-s"</tt><tt class="py-op">,</tt> <tt class="py-string">"emulator-%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">emulator_port</tt><tt class="py-op">,</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">                <tt class="py-string">"shell"</tt><tt class="py-op">,</tt> <tt class="py-string">"getprop"</tt><tt class="py-op">,</tt> <tt class="py-string">"dev.bootcomplete"</tt><tt class="py-op">,</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">            <tt class="py-op">]</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">            <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt id="link-151" class="py-name"><a title="modules.machinery.avd.OSCommand" class="py-name" href="#" onclick="return doclink('link-151', 'OSCommand', 'link-90');">OSCommand</a></tt><tt class="py-op">.</tt><tt id="link-152" class="py-name"><a title="modules.machinery.avd.OSCommand.executeCommand" class="py-name" href="#" onclick="return doclink('link-152', 'executeCommand', 'link-91');">executeCommand</a></tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">result</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt class="py-name">result</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"1"</tt><tt class="py-op">:</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">                <tt class="py-name">ready</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">                <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line"> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">        <tt id="link-153" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-153', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-154" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-154', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"- (sys_bootcomplete)"</tt><tt class="py-op">)</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">        <tt class="py-name">ready</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-keyword">not</tt> <tt class="py-name">ready</tt><tt class="py-op">:</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">            <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line">                <tt class="py-name">adb</tt><tt class="py-op">,</tt> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">                <tt class="py-string">"-s"</tt><tt class="py-op">,</tt> <tt class="py-string">"emulator-%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">emulator_port</tt><tt class="py-op">,</tt> </tt>
+<a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">                <tt class="py-string">"shell"</tt><tt class="py-op">,</tt> <tt class="py-string">"getprop"</tt><tt class="py-op">,</tt> <tt class="py-string">"sys.boot_completed"</tt><tt class="py-op">,</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">            <tt class="py-op">]</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">            <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt id="link-155" class="py-name"><a title="modules.machinery.avd.OSCommand" class="py-name" href="#" onclick="return doclink('link-155', 'OSCommand', 'link-90');">OSCommand</a></tt><tt class="py-op">.</tt><tt id="link-156" class="py-name"><a title="modules.machinery.avd.OSCommand.executeCommand" class="py-name" href="#" onclick="return doclink('link-156', 'executeCommand', 'link-91');">executeCommand</a></tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">result</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt class="py-name">result</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"1"</tt><tt class="py-op">:</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">                <tt class="py-name">ready</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">                <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line"> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">        <tt id="link-157" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-157', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-158" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-158', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">" - (init.svc.bootanim)"</tt><tt class="py-op">)</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line">        <tt class="py-name">ready</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-keyword">not</tt> <tt class="py-name">ready</tt><tt class="py-op">:</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">            <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line">                <tt class="py-name">adb</tt><tt class="py-op">,</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">                <tt class="py-string">"-s"</tt><tt class="py-op">,</tt> <tt class="py-string">"emulator-%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">emulator_port</tt><tt class="py-op">,</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">                <tt class="py-string">"shell"</tt><tt class="py-op">,</tt> <tt class="py-string">"getprop"</tt><tt class="py-op">,</tt> <tt class="py-string">"init.svc.bootanim"</tt><tt class="py-op">,</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">            <tt class="py-op">]</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">            <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt id="link-159" class="py-name"><a title="modules.machinery.avd.OSCommand" class="py-name" href="#" onclick="return doclink('link-159', 'OSCommand', 'link-90');">OSCommand</a></tt><tt class="py-op">.</tt><tt id="link-160" class="py-name"><a title="modules.machinery.avd.OSCommand.executeCommand" class="py-name" href="#" onclick="return doclink('link-160', 'executeCommand', 'link-91');">executeCommand</a></tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">result</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt> <tt class="py-keyword">and</tt> <tt class="py-name">result</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-string">"stopped"</tt><tt class="py-op">:</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">                <tt class="py-name">ready</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">                <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line"> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">        <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt class="py-number">5</tt><tt class="py-op">)</tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">        <tt id="link-161" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-161', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-162" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-162', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Emulator emulator-"</tt><tt class="py-op">+</tt><tt class="py-name">emulator_port</tt><tt class="py-op">+</tt><tt class="py-string">" is ready !"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line"> </tt>
+<a name="Avd.port_forward"></a><div id="Avd.port_forward-def"><a name="L280"></a><tt class="py-lineno">280</tt> <a class="py-toggle" href="#" id="Avd.port_forward-toggle" onclick="return toggle('Avd.port_forward');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#port_forward">port_forward</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd.port_forward-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd.port_forward-expanded"><a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-163" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-163', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-164" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-164', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">adb_path</tt><tt class="py-op">,</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line">            <tt class="py-string">"-s"</tt><tt class="py-op">,</tt> <tt class="py-string">"emulator-%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-165" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-165', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-166" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-166', 'get', 'link-109');">get</a></tt><tt class="py-op">(</tt><tt id="link-167" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-167', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-string">"emulator_port"</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">            <tt class="py-string">"forward"</tt><tt class="py-op">,</tt> <tt class="py-string">"tcp:8000"</tt><tt class="py-op">,</tt> <tt class="py-string">"tcp:8000"</tt><tt class="py-op">,</tt> </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">        <tt class="py-op">]</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line">        <tt id="link-168" class="py-name"><a title="modules.machinery.avd.OSCommand" class="py-name" href="#" onclick="return doclink('link-168', 'OSCommand', 'link-90');">OSCommand</a></tt><tt class="py-op">.</tt><tt id="link-169" class="py-name"><a title="modules.machinery.avd.OSCommand.executeAsyncCommand" class="py-name" href="#" onclick="return doclink('link-169', 'executeAsyncCommand', 'link-122');">executeAsyncCommand</a></tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line"> </tt>
+<a name="Avd.start_agent"></a><div id="Avd.start_agent-def"><a name="L288"></a><tt class="py-lineno">288</tt> <a class="py-toggle" href="#" id="Avd.start_agent-toggle" onclick="return toggle('Avd.start_agent');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#start_agent">start_agent</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd.start_agent-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd.start_agent-expanded"><a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-170" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-170', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-171" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-171', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">adb_path</tt><tt class="py-op">,</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line">            <tt class="py-string">"-s"</tt><tt class="py-op">,</tt> <tt class="py-string">"emulator-%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-172" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-172', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-173" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-173', 'get', 'link-109');">get</a></tt><tt class="py-op">(</tt><tt id="link-174" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-174', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-string">"emulator_port"</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line">            <tt class="py-string">"shell"</tt><tt class="py-op">,</tt> <tt class="py-string">"/data/local/agent.sh"</tt><tt class="py-op">,</tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line">        <tt class="py-op">]</tt> </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line">        <tt id="link-175" class="py-name"><a title="modules.machinery.avd.OSCommand" class="py-name" href="#" onclick="return doclink('link-175', 'OSCommand', 'link-90');">OSCommand</a></tt><tt class="py-op">.</tt><tt id="link-176" class="py-name"><a title="modules.machinery.avd.OSCommand.executeAsyncCommand" class="py-name" href="#" onclick="return doclink('link-176', 'executeAsyncCommand', 'link-122');">executeAsyncCommand</a></tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line">        <tt class="py-comment"># Sleep 10 seconds to allow the agent to startup properly</tt> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line">        <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt class="py-number">10</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line"> </tt>
+<a name="Avd.check_adb_recognize_emulator"></a><div id="Avd.check_adb_recognize_emulator-def"><a name="L298"></a><tt class="py-lineno">298</tt> <a class="py-toggle" href="#" id="Avd.check_adb_recognize_emulator-toggle" onclick="return toggle('Avd.check_adb_recognize_emulator');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#check_adb_recognize_emulator">check_adb_recognize_emulator</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd.check_adb_recognize_emulator-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd.check_adb_recognize_emulator-expanded"><a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line">        <tt class="py-docstring">"""Checks that ADB recognizes the emulator. Returns True if device is</tt> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line"><tt class="py-docstring">        recognized by ADB, False otherwise.</tt> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line">        <tt id="link-177" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-177', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-178" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-178', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Checking if ADB recognizes emulator..."</tt><tt class="py-op">)</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line"> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-179" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-179', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-180" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-180', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">adb_path</tt><tt class="py-op">,</tt> <tt class="py-string">"devices"</tt><tt class="py-op">]</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt>  <tt class="py-line">        <tt class="py-name">output</tt> <tt class="py-op">=</tt> <tt id="link-181" class="py-name"><a title="modules.machinery.avd.OSCommand" class="py-name" href="#" onclick="return doclink('link-181', 'OSCommand', 'link-90');">OSCommand</a></tt><tt class="py-op">.</tt><tt id="link-182" class="py-name"><a title="modules.machinery.avd.OSCommand.executeCommand" class="py-name" href="#" onclick="return doclink('link-182', 'executeCommand', 'link-91');">executeCommand</a></tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+<a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line"> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line">        <tt class="py-name">emu</tt> <tt class="py-op">=</tt> <tt class="py-string">"emulator-%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-183" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-183', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-184" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-184', 'get', 'link-109');">get</a></tt><tt class="py-op">(</tt><tt id="link-185" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-185', 'label', 'link-50');">label</a></tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-string">"emulator_port"</tt><tt class="py-op">]</tt> </tt>
+<a name="L308"></a><tt class="py-lineno">308</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">emu</tt> <tt class="py-keyword">in</tt> <tt class="py-name">output</tt><tt class="py-op">:</tt> </tt>
+<a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line">            <tt id="link-186" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-186', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-187" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-187', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Emulator has been found!"</tt><tt class="py-op">)</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line"> </tt>
+<a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line">        <tt id="link-188" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-188', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-189" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-189', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Emulator has not been found."</tt><tt class="py-op">)</tt> </tt>
+<a name="L313"></a><tt class="py-lineno">313</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line"> </tt>
+<a name="Avd.restart_adb_server"></a><div id="Avd.restart_adb_server-def"><a name="L315"></a><tt class="py-lineno">315</tt> <a class="py-toggle" href="#" id="Avd.restart_adb_server-toggle" onclick="return toggle('Avd.restart_adb_server');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#restart_adb_server">restart_adb_server</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd.restart_adb_server-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd.restart_adb_server-expanded"><a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">        <tt class="py-docstring">"""Restarts ADB server. This function is not used because we have to</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line"><tt class="py-docstring">        verify we don't have multiple devices.</tt> </tt>
+<a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L319"></a><tt class="py-lineno">319</tt>  <tt class="py-line">        <tt id="link-190" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-190', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-191" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-191', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"Restarting ADB server..."</tt><tt class="py-op">)</tt> </tt>
+<a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line"> </tt>
+<a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-192" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-192', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-193" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-193', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">adb_path</tt><tt class="py-op">,</tt> <tt class="py-string">"kill-server"</tt><tt class="py-op">]</tt> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line">        <tt id="link-194" class="py-name"><a title="modules.machinery.avd.OSCommand" class="py-name" href="#" onclick="return doclink('link-194', 'OSCommand', 'link-90');">OSCommand</a></tt><tt class="py-op">.</tt><tt id="link-195" class="py-name"><a title="modules.machinery.avd.OSCommand.executeCommand" class="py-name" href="#" onclick="return doclink('link-195', 'executeCommand', 'link-91');">executeCommand</a></tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+<a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line">        <tt id="link-196" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-196', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-197" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-197', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"ADB server has been killed."</tt><tt class="py-op">)</tt> </tt>
+<a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line"> </tt>
+<a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-198" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-198', 'options', 'link-16');">options</a></tt><tt class="py-op">.</tt><tt id="link-199" class="py-name"><a title="modules.machinery.avd" class="py-name" href="#" onclick="return doclink('link-199', 'avd', 'link-17');">avd</a></tt><tt class="py-op">.</tt><tt class="py-name">adb_path</tt><tt class="py-op">,</tt> <tt class="py-string">"start-server"</tt><tt class="py-op">]</tt> </tt>
+<a name="L326"></a><tt class="py-lineno">326</tt>  <tt class="py-line">        <tt id="link-200" class="py-name"><a title="modules.machinery.avd.OSCommand" class="py-name" href="#" onclick="return doclink('link-200', 'OSCommand', 'link-90');">OSCommand</a></tt><tt class="py-op">.</tt><tt id="link-201" class="py-name"><a title="modules.machinery.avd.OSCommand.executeCommand" class="py-name" href="#" onclick="return doclink('link-201', 'executeCommand', 'link-91');">executeCommand</a></tt><tt class="py-op">(</tt><tt class="py-name">cmd</tt><tt class="py-op">)</tt> </tt>
+<a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line">        <tt id="link-202" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-202', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt id="link-203" class="py-name"><a title="modules.processing.debug" class="py-name" href="#" onclick="return doclink('link-203', 'debug', 'link-49');">debug</a></tt><tt class="py-op">(</tt><tt class="py-string">"ADB server has been restarted."</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line"> </tt>
+<a name="Avd.get_task_id"></a><div id="Avd.get_task_id-def"><a name="L329"></a><tt class="py-lineno">329</tt> <a class="py-toggle" href="#" id="Avd.get_task_id-toggle" onclick="return toggle('Avd.get_task_id');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.Avd-class.html#get_task_id">get_task_id</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">label</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Avd.get_task_id-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Avd.get_task_id-expanded"><a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line">        <tt class="py-name">analysistasks</tt> <tt class="py-op">=</tt> <tt id="link-204" class="py-name"><a title="lib.cuckoo.core.resultserver.ResultServer" class="py-name" href="#" onclick="return doclink('link-204', 'ResultServer', 'link-14');">ResultServer</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">analysistasks</tt> </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">task_ip</tt> <tt class="py-keyword">in</tt> <tt class="py-name">analysistasks</tt><tt class="py-op">:</tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">analysistasks</tt><tt class="py-op">[</tt><tt class="py-name">task_ip</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-205" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-205', 'label', 'link-50');">label</a></tt> <tt class="py-keyword">is</tt> <tt id="link-206" class="py-name"><a title="lib.cuckoo.core.database.Guest.label
+lib.cuckoo.core.database.Machine.label" class="py-name" href="#" onclick="return doclink('link-206', 'label', 'link-50');">label</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">analysistasks</tt><tt class="py-op">[</tt><tt class="py-name">task_ip</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt id="link-207" class="py-name"><a title="lib.cuckoo.core.database.Error.id
+lib.cuckoo.core.database.Guest.id
+lib.cuckoo.core.database.Machine.id
+lib.cuckoo.core.database.Sample.id
+lib.cuckoo.core.database.Tag.id
+lib.cuckoo.core.database.Task.id" class="py-name" href="#" onclick="return doclink('link-207', 'id', 'link-115');">id</a></tt> </tt>
+<a name="L334"></a><tt class="py-lineno">334</tt>  <tt class="py-line"> </tt>
+<a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div></div><a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line"> </tt>
+<a name="OSCommand"></a><div id="OSCommand-def"><a name="L337"></a><tt class="py-lineno">337</tt> <a class="py-toggle" href="#" id="OSCommand-toggle" onclick="return toggle('OSCommand');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.machinery.avd.OSCommand-class.html">OSCommand</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="OSCommand-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="OSCommand-expanded"><a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line">    <tt class="py-docstring">"""Tool class that provides common methods to execute commands on the OS."""</tt> </tt>
+<a name="L339"></a><tt class="py-lineno">339</tt>  <tt class="py-line"> </tt>
+<a name="L340"></a><tt class="py-lineno">340</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="OSCommand.executeAsyncCommand"></a><div id="OSCommand.executeAsyncCommand-def"><a name="L341"></a><tt class="py-lineno">341</tt> <a class="py-toggle" href="#" id="OSCommand.executeAsyncCommand-toggle" onclick="return toggle('OSCommand.executeAsyncCommand');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.OSCommand-class.html#executeAsyncCommand">executeAsyncCommand</a><tt class="py-op">(</tt><tt class="py-param">commandAndArgs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="OSCommand.executeAsyncCommand-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="OSCommand.executeAsyncCommand-expanded"><a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">Popen</tt><tt class="py-op">(</tt><tt class="py-name">commandAndArgs</tt><tt class="py-op">,</tt> <tt class="py-name">stdout</tt><tt class="py-op">=</tt><tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">PIPE</tt><tt class="py-op">,</tt> <tt class="py-name">stderr</tt><tt class="py-op">=</tt><tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">PIPE</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line"> </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="OSCommand.executeCommand"></a><div id="OSCommand.executeCommand-def"><a name="L345"></a><tt class="py-lineno">345</tt> <a class="py-toggle" href="#" id="OSCommand.executeCommand-toggle" onclick="return toggle('OSCommand.executeCommand');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.machinery.avd.OSCommand-class.html#executeCommand">executeCommand</a><tt class="py-op">(</tt><tt class="py-param">commandAndArgs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="OSCommand.executeCommand-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="OSCommand.executeCommand-expanded"><a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">commandAndArgs</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line">            <tt class="py-name">commandAndArgs</tt> <tt class="py-op">=</tt> <tt class="py-name">shlex</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-name">commandAndArgs</tt><tt class="py-op">)</tt> </tt>
+<a name="L348"></a><tt class="py-lineno">348</tt>  <tt class="py-line"> </tt>
+<a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">check_output</tt><tt class="py-op">(</tt><tt class="py-name">commandAndArgs</tt><tt class="py-op">,</tt> <tt class="py-name">stderr</tt><tt class="py-op">=</tt><tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">STDOUT</tt><tt class="py-op">)</tt> </tt>
+<a name="L351"></a><tt class="py-lineno">351</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L352"></a><tt class="py-lineno">352</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">None</tt> </tt>
+</div></div><a name="L353"></a><tt class="py-lineno">353</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:01 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

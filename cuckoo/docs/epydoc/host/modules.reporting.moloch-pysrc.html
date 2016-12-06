@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.reporting.moloch</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.reporting-module.html">Package&nbsp;reporting</a> ::
+        Module&nbsp;moloch
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.reporting.moloch-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.reporting.moloch-module.html">Module modules.reporting.moloch</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">subprocess</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.cuckoo=lib.cuckoo-module.html"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-1', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package lib.cuckoo.common=lib.cuckoo.common-module.html"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-2', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module lib.cuckoo.common.abstracts=lib.cuckoo.common.abstracts-module.html"><a title="lib.cuckoo.common.abstracts" class="py-name" href="#" onclick="return doclink('link-3', 'abstracts', 'link-3');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class lib.cuckoo.common.abstracts.Report=lib.cuckoo.common.abstracts.Report-class.html"><a title="lib.cuckoo.common.abstracts.Report" class="py-name" href="#" onclick="return doclink('link-4', 'Report', 'link-4');">Report</a></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-5', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-6', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-7', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module lib.cuckoo.common.exceptions=lib.cuckoo.common.exceptions-module.html"><a title="lib.cuckoo.common.exceptions" class="py-name" href="#" onclick="return doclink('link-8', 'exceptions', 'link-8');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Class lib.cuckoo.common.exceptions.CuckooProcessingError=lib.cuckoo.common.exceptions.CuckooProcessingError-class.html"><a title="lib.cuckoo.common.exceptions.CuckooProcessingError" class="py-name" href="#" onclick="return doclink('link-9', 'CuckooProcessingError', 'link-9');">CuckooProcessingError</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt id="link-10" class="py-name" targets="Variable lib.cuckoo.common.abstracts.log=lib.cuckoo.common.abstracts-module.html#log,Variable lib.cuckoo.common.irc.log=lib.cuckoo.common.irc-module.html#log,Variable lib.cuckoo.common.netlog.log=lib.cuckoo.common.netlog-module.html#log,Variable lib.cuckoo.common.objects.log=lib.cuckoo.common.objects-module.html#log,Variable lib.cuckoo.common.utils.log=lib.cuckoo.common.utils-module.html#log,Variable lib.cuckoo.core.database.log=lib.cuckoo.core.database-module.html#log,Variable lib.cuckoo.core.guest.log=lib.cuckoo.core.guest-module.html#log,Module lib.cuckoo.core.log=lib.cuckoo.core.log-module.html,Variable lib.cuckoo.core.plugins.log=lib.cuckoo.core.plugins-module.html#log,Variable lib.cuckoo.core.resultserver.log=lib.cuckoo.core.resultserver-module.html#log,Variable lib.cuckoo.core.rooter.log=lib.cuckoo.core.rooter-module.html#log,Variable lib.cuckoo.core.scheduler.log=lib.cuckoo.core.scheduler-module.html#log,Variable lib.cuckoo.core.startup.log=lib.cuckoo.core.startup-module.html#log,Variable modules.auxiliary.mitm.log=modules.auxiliary.mitm-module.html#log,Variable modules.auxiliary.reboot.log=modules.auxiliary.reboot-module.html#log,Variable modules.auxiliary.services.log=modules.auxiliary.services-module.html#log,Variable modules.auxiliary.sniffer.log=modules.auxiliary.sniffer-module.html#log,Variable modules.machinery.avd.log=modules.machinery.avd-module.html#log,Variable modules.machinery.physical.log=modules.machinery.physical-module.html#log,Variable modules.machinery.qemu.log=modules.machinery.qemu-module.html#log,Variable modules.machinery.virtualbox.log=modules.machinery.virtualbox-module.html#log,Variable modules.machinery.vmware.log=modules.machinery.vmware-module.html#log,Variable modules.machinery.vsphere.log=modules.machinery.vsphere-module.html#log,Variable modules.machinery.xenserver.log=modules.machinery.xenserver-module.html#log,Variable modules.processing.analysisinfo.log=modules.processing.analysisinfo-module.html#log,Variable modules.processing.apkinfo.log=modules.processing.apkinfo-module.html#log,Variable modules.processing.baseline.log=modules.processing.baseline-module.html#log,Variable modules.processing.behavior.log=modules.processing.behavior-module.html#log,Variable modules.processing.debug.log=modules.processing.debug-module.html#log,Variable modules.processing.droidmon.log=modules.processing.droidmon-module.html#log,Variable modules.processing.dumptls.log=modules.processing.dumptls-module.html#log,Variable modules.processing.googleplay.log=modules.processing.googleplay-module.html#log,Variable modules.processing.irma.log=modules.processing.irma-module.html#log,Variable modules.processing.memory.log=modules.processing.memory-module.html#log,Variable modules.processing.misp.log=modules.processing.misp-module.html#log,Variable modules.processing.network.log=modules.processing.network-module.html#log,Variable modules.processing.platform.linux.log=modules.processing.platform.linux-module.html#log,Variable modules.processing.platform.windows.log=modules.processing.platform.windows-module.html#log,Variable modules.processing.procmemory.log=modules.processing.procmemory-module.html#log,Variable modules.processing.screenshots.log=modules.processing.screenshots-module.html#log,Variable modules.processing.snort.log=modules.processing.snort-module.html#log,Variable modules.processing.static.log=modules.processing.static-module.html#log,Variable modules.processing.suricata.log=modules.processing.suricata-module.html#log,Variable modules.processing.virustotal.log=modules.processing.virustotal-module.html#log,Variable modules.reporting.elasticsearch.log=modules.reporting.elasticsearch-module.html#log,Variable modules.reporting.moloch.log=modules.reporting.moloch-module.html#log"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-10', 'log', 'link-10');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-name">__name__</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="Moloch"></a><div id="Moloch-def"><a name="L15"></a><tt class="py-lineno">15</tt> <a class="py-toggle" href="#" id="Moloch-toggle" onclick="return toggle('Moloch');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.reporting.moloch.Moloch-class.html">Moloch</a><tt class="py-op">(</tt><tt class="py-base-class">Report</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Moloch-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Moloch-expanded"><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt class="py-docstring">"""Moloch reporting module."""</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"> </tt>
+<a name="Moloch.run"></a><div id="Moloch.run-def"><a name="L18"></a><tt class="py-lineno">18</tt> <a class="py-toggle" href="#" id="Moloch.run-toggle" onclick="return toggle('Moloch.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.reporting.moloch.Moloch-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">results</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Moloch.run-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Moloch.run-expanded"><a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">moloch_capture</tt> <tt class="py-op">=</tt> \ </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Variable lib.cuckoo.core.database.Machine.options=lib.cuckoo.core.database.Machine-class.html#options,Method lib.cuckoo.core.database.Task.options()=lib.cuckoo.core.database.Task-class.html#options"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-11', 'options', 'link-11');">options</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method lib.cuckoo.common.config.Config.get()=lib.cuckoo.common.config.Config-class.html#get,Method lib.cuckoo.core.guest.GuestManager.get()=lib.cuckoo.core.guest.GuestManager-class.html#get"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-12', 'get', 'link-12');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"moloch_capture"</tt><tt class="py-op">,</tt> <tt class="py-string">"/data/moloch/bin/moloch-capture"</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">config_path</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-13', 'options', 'link-11');">options</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-14', 'get', 'link-12');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"conf"</tt><tt class="py-op">,</tt> <tt class="py-string">"/data/moloch/etc/config.ini"</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instance</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-15', 'options', 'link-11');">options</a></tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-16', 'get', 'link-12');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"instance"</tt><tt class="py-op">,</tt> <tt class="py-string">"cuckoo"</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method lib.cuckoo.common.abstracts.Machinery.pcap_path()=lib.cuckoo.common.abstracts.Machinery-class.html#pcap_path"><a title="lib.cuckoo.common.abstracts.Machinery.pcap_path" class="py-name" href="#" onclick="return doclink('link-17', 'pcap_path', 'link-17');">pcap_path</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">            <tt id="link-18" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-18', 'log', 'link-10');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"Unable to run Moloch as no pcap is available"</tt><tt class="py-op">)</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">moloch_capture</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-19" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooProcessingError" class="py-name" href="#" onclick="return doclink('link-19', 'CuckooProcessingError', 'link-9');">CuckooProcessingError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Unable to locate Moloch binary"</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">config_path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-20" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooProcessingError" class="py-name" href="#" onclick="return doclink('link-20', 'CuckooProcessingError', 'link-9');">CuckooProcessingError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                <tt class="py-string">"Unable to locate Moloch configuration"</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">            <tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">moloch_capture</tt><tt class="py-op">,</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">            <tt class="py-string">"-c"</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">config_path</tt><tt class="py-op">,</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">            <tt class="py-string">"-r"</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="lib.cuckoo.common.abstracts.Machinery.pcap_path" class="py-name" href="#" onclick="return doclink('link-21', 'pcap_path', 'link-17');">pcap_path</a></tt><tt class="py-op">,</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">            <tt class="py-string">"-n"</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instance</tt><tt class="py-op">,</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">            <tt class="py-string">"-q"</tt><tt class="py-op">,</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-op">]</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line"> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">        <tt id="link-22" class="py-name" targets="Variable lib.cuckoo.core.database.Machine.tags=lib.cuckoo.core.database.Machine-class.html#tags,Variable lib.cuckoo.core.database.Task.tags=lib.cuckoo.core.database.Task-class.html#tags"><a title="lib.cuckoo.core.database.Machine.tags
+lib.cuckoo.core.database.Task.tags" class="py-name" href="#" onclick="return doclink('link-22', 'tags', 'link-22');">tags</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt id="link-23" class="py-name"><a title="lib.cuckoo.core.database.Machine.tags
+lib.cuckoo.core.database.Task.tags" class="py-name" href="#" onclick="return doclink('link-23', 'tags', 'link-22');">tags</a></tt><tt class="py-op">[</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">instance</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">task</tt><tt class="py-op">[</tt><tt class="py-string">"id"</tt><tt class="py-op">]</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">task</tt><tt class="py-op">[</tt><tt class="py-string">"category"</tt><tt class="py-op">]</tt> <tt class="py-op">==</tt> <tt class="py-string">"file"</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">            <tt class="py-comment"># Tag file hashes.</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">            <tt class="py-name">f</tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name" targets="Method lib.cuckoo.common.abstracts.Signature.results()=lib.cuckoo.common.abstracts.Signature-class.html#results"><a title="lib.cuckoo.common.abstracts.Signature.results" class="py-name" href="#" onclick="return doclink('link-24', 'results', 'link-24');">results</a></tt><tt class="py-op">.</tt><tt id="link-25" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-25', 'get', 'link-12');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"target"</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-26', 'get', 'link-12');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"file"</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">field</tt> <tt class="py-keyword">in</tt> <tt class="py-op">(</tt><tt class="py-string">"md5"</tt><tt class="py-op">,</tt> <tt class="py-string">"sha1"</tt><tt class="py-op">,</tt> <tt class="py-string">"sha256"</tt><tt class="py-op">,</tt> <tt class="py-string">"sha512"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">field</tt> <tt class="py-keyword">in</tt> <tt class="py-name">f</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">                    <tt id="link-27" class="py-name"><a title="lib.cuckoo.core.database.Machine.tags
+lib.cuckoo.core.database.Task.tags" class="py-name" href="#" onclick="return doclink('link-27', 'tags', 'link-22');">tags</a></tt><tt class="py-op">[</tt><tt class="py-name">field</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">f</tt><tt class="py-op">[</tt><tt class="py-name">field</tt><tt class="py-op">]</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">            <tt class="py-comment"># Tag normalized VirusTotal results.</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">variant</tt> <tt class="py-keyword">in</tt> <tt id="link-28" class="py-name"><a title="lib.cuckoo.common.abstracts.Signature.results" class="py-name" href="#" onclick="return doclink('link-28', 'results', 'link-24');">results</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-29', 'get', 'link-12');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"virustotal"</tt><tt class="py-op">,</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-30', 'get', 'link-12');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"normalized"</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line">                <tt id="link-31" class="py-name"><a title="lib.cuckoo.core.database.Machine.tags
+lib.cuckoo.core.database.Task.tags" class="py-name" href="#" onclick="return doclink('link-31', 'tags', 'link-22');">tags</a></tt><tt class="py-op">[</tt><tt class="py-string">"virustotal"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">variant</tt> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line"> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-32" class="py-name" targets="Variable lib.cuckoo.common.abstracts.BehaviorHandler.key=lib.cuckoo.common.abstracts.BehaviorHandler-class.html#key,Variable modules.processing.behavior.Anomaly.key=modules.processing.behavior.Anomaly-class.html#key,Variable modules.processing.behavior.ApiStats.key=modules.processing.behavior.ApiStats-class.html#key,Variable modules.processing.behavior.BehaviorAnalysis.key=modules.processing.behavior.BehaviorAnalysis-class.html#key,Variable modules.processing.behavior.GenericBehavior.key=modules.processing.behavior.GenericBehavior-class.html#key,Variable modules.processing.behavior.ProcessTree.key=modules.processing.behavior.ProcessTree-class.html#key,Variable modules.processing.behavior.Summary.key=modules.processing.behavior.Summary-class.html#key,Variable modules.processing.dumptls.TLSMasterSecrets.key=modules.processing.dumptls.TLSMasterSecrets-class.html#key,Variable modules.processing.network.NetworkAnalysis.key=modules.processing.network.NetworkAnalysis-class.html#key,Variable modules.processing.platform.linux.LinuxSystemTap.key=modules.processing.platform.linux.LinuxSystemTap-class.html#key,Variable modules.processing.platform.windows.WindowsMonitor.key=modules.processing.platform.windows.WindowsMonitor-class.html#key,Variable modules.processing.procmon.Procmon.key=modules.processing.procmon.Procmon-class.html#key"><a title="lib.cuckoo.common.abstracts.BehaviorHandler.key
+modules.processing.behavior.Anomaly.key
+modules.processing.behavior.ApiStats.key
+modules.processing.behavior.BehaviorAnalysis.key
+modules.processing.behavior.GenericBehavior.key
+modules.processing.behavior.ProcessTree.key
+modules.processing.behavior.Summary.key
+modules.processing.dumptls.TLSMasterSecrets.key
+modules.processing.network.NetworkAnalysis.key
+modules.processing.platform.linux.LinuxSystemTap.key
+modules.processing.platform.windows.WindowsMonitor.key
+modules.processing.procmon.Procmon.key" class="py-name" href="#" onclick="return doclink('link-32', 'key', 'link-32');">key</a></tt><tt class="py-op">,</tt> <tt class="py-name">value</tt> <tt class="py-keyword">in</tt> <tt id="link-33" class="py-name"><a title="lib.cuckoo.core.database.Machine.tags
+lib.cuckoo.core.database.Task.tags" class="py-name" href="#" onclick="return doclink('link-33', 'tags', 'link-22');">tags</a></tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">            <tt class="py-name">args</tt> <tt class="py-op">+=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">                <tt class="py-string">"-t"</tt><tt class="py-op">,</tt> <tt class="py-string">"%s:%s"</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="lib.cuckoo.common.abstracts.BehaviorHandler.key
+modules.processing.behavior.Anomaly.key
+modules.processing.behavior.ApiStats.key
+modules.processing.behavior.BehaviorAnalysis.key
+modules.processing.behavior.GenericBehavior.key
+modules.processing.behavior.ProcessTree.key
+modules.processing.behavior.Summary.key
+modules.processing.dumptls.TLSMasterSecrets.key
+modules.processing.network.NetworkAnalysis.key
+modules.processing.platform.linux.LinuxSystemTap.key
+modules.processing.platform.windows.WindowsMonitor.key
+modules.processing.procmon.Procmon.key" class="py-name" href="#" onclick="return doclink('link-34', 'key', 'link-32');">key</a></tt><tt class="py-op">,</tt> <tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">            <tt class="py-op">]</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">            <tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">check_call</tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">)</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">subprocess</tt><tt class="py-op">.</tt><tt class="py-name">CalledProcessError</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-35" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooProcessingError" class="py-name" href="#" onclick="return doclink('link-35', 'CuckooProcessingError', 'link-9');">CuckooProcessingError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">                <tt class="py-string">"Error submitting PCAP to Moloch: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:00 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

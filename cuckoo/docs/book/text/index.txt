@@ -1,0 +1,454 @@
+
+Cuckoo Sandbox Book
+*******************
+
+Cuckoo Sandbox is an *Open Source* software for automating analysis of
+suspicious files. To do so it makes use of custom components that
+monitor the behavior of the malicious processes while running in an
+isolated environment.
+
+This guide will explain how to set up Cuckoo, use it and customize it.
+
+
+Having troubles?
+================
+
+If you're having troubles you might want to check out the FAQ as it
+may already have the answers to your questions.
+
+* FAQ
+
+  * General Questions
+
+    * Can I analyze URLs with Cuckoo?
+
+    * Can I use Volatility with Cuckoo?
+
+    * What do I need to use Cuckoo with VMware ESXi?
+
+  * Troubleshooting
+
+    * After upgrade Cuckoo stops to work
+
+    * Cuckoo stumbles and produces some error I don't understand
+
+    * Check and restore current snapshot with KVM
+
+    * Check and restore current snapshot with VirtualBox
+
+    * Unable to bind result server error
+
+    * Error during template rendering
+
+    * 501 Unsupported Method ('GET')
+
+Otherwise you can ask the developers and/or other Cuckoo users, see
+Join the discussion.
+
+
+Contents
+========
+
+* Introduction
+
+  * Sandboxing
+
+    * Using a Sandbox
+
+  * What is Cuckoo?
+
+    * Some History
+
+    * Use Cases
+
+    * Architecture
+
+    * Obtaining Cuckoo
+
+  * License
+
+  * Disclaimer
+
+  * Cuckoo Foundation
+
+* Installation
+
+  * Preparing the Host
+
+    * Requirements
+
+      * Installing Python libraries
+
+      * Virtualization Software
+
+      * Installing Tcpdump
+
+      * Installing Volatility
+
+    * Installing Cuckoo
+
+      * Create a user
+
+      * Install Cuckoo
+
+    * Configuration
+
+      * cuckoo.conf
+
+      * auxiliary.conf
+
+      * <machinery>.conf
+
+      * memory.conf
+
+      * processing.conf
+
+      * reporting.conf
+
+    * Configuration (Android Analysis)
+
+      * avd.conf
+
+  * Preparing the Guest
+
+    * Creation of the Virtual Machine
+
+    * Requirements
+
+      * Install Python
+
+      * Additional Software
+
+    * Network Configuration
+
+      * Windows Settings
+
+      * Virtual Networking
+
+    * Installing the Agent
+
+    * Saving the Virtual Machine
+
+      * VirtualBox
+
+      * KVM
+
+      * VMware Workstation
+
+      * XenServer
+
+        * Memory Snapshots
+
+        * Booting from Disk
+
+    * Cloning the Virtual Machine
+
+  * Preparing the Guest (Physical Machine)
+
+    * Creation of the Physical Machine
+
+    * Requirements
+
+      * Install Python
+
+      * Additional Software
+
+      * Additional Host Requirements
+
+    * Network Configuration
+
+      * Windows Settings
+
+      * Networking
+
+    * Installing the Agent
+
+    * Saving the Guest
+
+      * Fog
+
+      * Setup using VMWare (Bonus!)
+
+  * Upgrade from a previous release
+
+    * Upgrade starting from scratch
+
+    * Migrate your Cuckoo
+
+* Usage
+
+  * Starting Cuckoo
+
+  * Submit an Analysis
+
+    * Submission Utility
+
+    * API
+
+    * Distributed Cuckoo
+
+    * Python Functions
+
+  * Web interface
+
+    * Configuration
+
+    * Usage
+
+  * REST API
+
+    * Starting the API server
+
+      * Web deployment
+
+        * uWSGI setup
+
+        * Nginx setup
+
+    * Resources
+
+      * /tasks/create/file
+
+      * /tasks/create/url
+
+      * /tasks/list
+
+      * /tasks/view
+
+      * /tasks/reschedule
+
+      * /tasks/delete
+
+      * /tasks/report
+
+      * /tasks/screenshots
+
+      * /tasks/rereport
+
+      * /memory/list
+
+      * /memory/get
+
+      * /files/view
+
+      * /files/get
+
+      * /pcap/get
+
+      * /machines/list
+
+      * /machines/view
+
+      * /cuckoo/status
+
+      * /vpn/status
+
+  * Distributed Cuckoo
+
+    * Dependencies
+
+    * Starting the Distributed REST API
+
+      * Report Formats
+
+      * Samples Directory
+
+      * Reports Directory
+
+    * RESTful resources
+
+      * GET /api/node
+
+      * POST /api/node
+
+      * GET /api/node/<name>
+
+      * PUT /api/node/<name>
+
+      * DELETE /api/node/<name>
+
+      * GET /api/task
+
+      * POST /api/task
+
+      * GET /api/task/<id>
+
+      * DELETE /api/task/<id>
+
+      * GET /api/report/<id>/<format>
+
+    * Quick usage
+
+    * Proposed setup
+
+      * Configuration settings
+
+        * conf/cuckoo.conf
+
+        * conf/processing.conf
+
+        * conf/reporting.conf
+
+        * conf/virtualbox.conf
+
+      * Setup Cuckoo
+
+      * Setup Distributed Cuckoo
+
+      * Register Cuckoo nodes
+
+  * Analysis Packages
+
+  * Analysis Results
+
+    * analysis.conf
+
+    * analysis.log
+
+    * dump.pcap
+
+    * memory.dmp
+
+    * files/
+
+    * logs/
+
+    * reports/
+
+    * shots/
+
+  * Clean all Tasks and Samples
+
+  * Utilities
+
+    * Submission Utility
+
+    * Web Utility
+
+    * Processing Utility
+
+    * Community Download Utility
+
+    * Database migration utility
+
+    * Stats utility
+
+    * Machine utility
+
+    * Distributed scripts
+
+    * Mac OS X Bootstrap scripts
+
+    * SMTP Sinkhole
+
+    * Setup script
+
+* Customization
+
+  * Auxiliary Modules
+
+  * Machinery Modules
+
+    * Configuration
+
+    * LibVirt
+
+  * Analysis Packages
+
+    * Getting started
+
+      * "start()"
+
+      * "check()"
+
+      * "execute()"
+
+      * "finish()"
+
+    * Options
+
+    * Process API
+
+      * Methods
+
+  * Processing Modules
+
+    * Global Container
+
+    * Getting started
+
+  * Signatures
+
+    * Getting started
+
+    * Creating your new signature
+
+    * Evented Signatures
+
+    * Quickout
+
+    * Matches
+
+    * Helpers
+
+  * Reporting Modules
+
+    * Getting Started
+
+* Development
+
+  * Development Notes
+
+    * Git branches
+
+    * Release Versioning
+
+    * Ticketing system
+
+    * Contribute
+
+  * Coding Style
+
+    * Formatting
+
+      * Copyright header
+
+      * Indentation
+
+      * Maximum Line Length
+
+      * Blank Lines
+
+      * Imports
+
+      * Strings
+
+      * Printing and Logging
+
+      * Checking for keys in data structures
+
+    * Exceptions
+
+      * Naming
+
+      * Exception handling
+
+    * Documentation
+
+    * Automated testing
+
+* Final Remarks
+
+  * Links
+
+  * Join the discussion
+
+  * Support Us
+
+  * People
+
+    * Active Developers
+
+    * Contributors
+
+  * Supporters

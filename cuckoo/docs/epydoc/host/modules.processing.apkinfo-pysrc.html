@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.processing.apkinfo</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.processing-module.html">Package&nbsp;processing</a> ::
+        Module&nbsp;apkinfo
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.processing.apkinfo-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.processing.apkinfo-module.html">Module modules.processing.apkinfo</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># Originally contributed by Check Point Software Technologies, Ltd.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">hashlib</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">zipfile</tt> <tt class="py-keyword">import</tt> <tt class="py-name">BadZipfile</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.cuckoo=lib.cuckoo-module.html"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-1', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package lib.cuckoo.common=lib.cuckoo.common-module.html"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-2', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module lib.cuckoo.common.objects=lib.cuckoo.common.objects-module.html"><a title="lib.cuckoo.common.objects" class="py-name" href="#" onclick="return doclink('link-3', 'objects', 'link-3');">objects</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class lib.cuckoo.common.objects.File=lib.cuckoo.common.objects.File-class.html"><a title="lib.cuckoo.common.objects.File" class="py-name" href="#" onclick="return doclink('link-4', 'File', 'link-4');">File</a></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-5', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-6', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-7', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module lib.cuckoo.common.abstracts=lib.cuckoo.common.abstracts-module.html"><a title="lib.cuckoo.common.abstracts" class="py-name" href="#" onclick="return doclink('link-8', 'abstracts', 'link-8');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Class lib.cuckoo.common.abstracts.Processing=lib.cuckoo.common.abstracts.Processing-class.html"><a title="lib.cuckoo.common.abstracts.Processing" class="py-name" href="#" onclick="return doclink('link-9', 'Processing', 'link-9');">Processing</a></tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-10', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-11', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-12', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Module lib.cuckoo.common.exceptions=lib.cuckoo.common.exceptions-module.html"><a title="lib.cuckoo.common.exceptions" class="py-name" href="#" onclick="return doclink('link-13', 'exceptions', 'link-13');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-14" class="py-name" targets="Class lib.cuckoo.common.exceptions.CuckooProcessingError=lib.cuckoo.common.exceptions.CuckooProcessingError-class.html"><a title="lib.cuckoo.common.exceptions.CuckooProcessingError" class="py-name" href="#" onclick="return doclink('link-14', 'CuckooProcessingError', 'link-14');">CuckooProcessingError</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">androguard</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Package lib.cuckoo.core=lib.cuckoo.core-module.html"><a title="lib.cuckoo.core" class="py-name" href="#" onclick="return doclink('link-15', 'core', 'link-15');">core</a></tt><tt class="py-op">.</tt><tt class="py-name">bytecodes</tt><tt class="py-op">.</tt><tt class="py-name">apk</tt> <tt class="py-keyword">import</tt> <tt class="py-name">APK</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">androguard</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="lib.cuckoo.core" class="py-name" href="#" onclick="return doclink('link-16', 'core', 'link-15');">core</a></tt><tt class="py-op">.</tt><tt class="py-name">bytecodes</tt><tt class="py-op">.</tt><tt class="py-name">dvm</tt> <tt class="py-keyword">import</tt> <tt class="py-name">DalvikVMFormat</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">androguard</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="lib.cuckoo.core" class="py-name" href="#" onclick="return doclink('link-17', 'core', 'link-15');">core</a></tt><tt class="py-op">.</tt><tt class="py-name">analysis</tt><tt class="py-op">.</tt><tt class="py-name">analysis</tt> <tt class="py-keyword">import</tt> <tt class="py-name">uVMAnalysis</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">androguard</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="lib.cuckoo.core" class="py-name" href="#" onclick="return doclink('link-18', 'core', 'link-15');">core</a></tt><tt class="py-op">.</tt><tt class="py-name">analysis</tt> <tt class="py-keyword">import</tt> <tt class="py-name">analysis</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">    <tt id="link-19" class="py-name" targets="Variable lib.cuckoo.common.objects.HAVE_ANDROGUARD=lib.cuckoo.common.objects-module.html#HAVE_ANDROGUARD,Variable modules.processing.apkinfo.HAVE_ANDROGUARD=modules.processing.apkinfo-module.html#HAVE_ANDROGUARD,Variable modules.processing.googleplay.HAVE_ANDROGUARD=modules.processing.googleplay-module.html#HAVE_ANDROGUARD"><a title="lib.cuckoo.common.objects.HAVE_ANDROGUARD
+modules.processing.apkinfo.HAVE_ANDROGUARD
+modules.processing.googleplay.HAVE_ANDROGUARD" class="py-name" href="#" onclick="return doclink('link-19', 'HAVE_ANDROGUARD', 'link-19');">HAVE_ANDROGUARD</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">    <tt id="link-20" class="py-name"><a title="lib.cuckoo.common.objects.HAVE_ANDROGUARD
+modules.processing.apkinfo.HAVE_ANDROGUARD
+modules.processing.googleplay.HAVE_ANDROGUARD" class="py-name" href="#" onclick="return doclink('link-20', 'HAVE_ANDROGUARD', 'link-19');">HAVE_ANDROGUARD</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt id="link-21" class="py-name" targets="Variable lib.cuckoo.common.abstracts.log=lib.cuckoo.common.abstracts-module.html#log,Variable lib.cuckoo.common.irc.log=lib.cuckoo.common.irc-module.html#log,Variable lib.cuckoo.common.netlog.log=lib.cuckoo.common.netlog-module.html#log,Variable lib.cuckoo.common.objects.log=lib.cuckoo.common.objects-module.html#log,Variable lib.cuckoo.common.utils.log=lib.cuckoo.common.utils-module.html#log,Variable lib.cuckoo.core.database.log=lib.cuckoo.core.database-module.html#log,Variable lib.cuckoo.core.guest.log=lib.cuckoo.core.guest-module.html#log,Module lib.cuckoo.core.log=lib.cuckoo.core.log-module.html,Variable lib.cuckoo.core.plugins.log=lib.cuckoo.core.plugins-module.html#log,Variable lib.cuckoo.core.resultserver.log=lib.cuckoo.core.resultserver-module.html#log,Variable lib.cuckoo.core.rooter.log=lib.cuckoo.core.rooter-module.html#log,Variable lib.cuckoo.core.scheduler.log=lib.cuckoo.core.scheduler-module.html#log,Variable lib.cuckoo.core.startup.log=lib.cuckoo.core.startup-module.html#log,Variable modules.auxiliary.mitm.log=modules.auxiliary.mitm-module.html#log,Variable modules.auxiliary.reboot.log=modules.auxiliary.reboot-module.html#log,Variable modules.auxiliary.services.log=modules.auxiliary.services-module.html#log,Variable modules.auxiliary.sniffer.log=modules.auxiliary.sniffer-module.html#log,Variable modules.machinery.avd.log=modules.machinery.avd-module.html#log,Variable modules.machinery.physical.log=modules.machinery.physical-module.html#log,Variable modules.machinery.qemu.log=modules.machinery.qemu-module.html#log,Variable modules.machinery.virtualbox.log=modules.machinery.virtualbox-module.html#log,Variable modules.machinery.vmware.log=modules.machinery.vmware-module.html#log,Variable modules.machinery.vsphere.log=modules.machinery.vsphere-module.html#log,Variable modules.machinery.xenserver.log=modules.machinery.xenserver-module.html#log,Variable modules.processing.analysisinfo.log=modules.processing.analysisinfo-module.html#log,Variable modules.processing.apkinfo.log=modules.processing.apkinfo-module.html#log,Variable modules.processing.baseline.log=modules.processing.baseline-module.html#log,Variable modules.processing.behavior.log=modules.processing.behavior-module.html#log,Variable modules.processing.debug.log=modules.processing.debug-module.html#log,Variable modules.processing.droidmon.log=modules.processing.droidmon-module.html#log,Variable modules.processing.dumptls.log=modules.processing.dumptls-module.html#log,Variable modules.processing.googleplay.log=modules.processing.googleplay-module.html#log,Variable modules.processing.irma.log=modules.processing.irma-module.html#log,Variable modules.processing.memory.log=modules.processing.memory-module.html#log,Variable modules.processing.misp.log=modules.processing.misp-module.html#log,Variable modules.processing.network.log=modules.processing.network-module.html#log,Variable modules.processing.platform.linux.log=modules.processing.platform.linux-module.html#log,Variable modules.processing.platform.windows.log=modules.processing.platform.windows-module.html#log,Variable modules.processing.procmemory.log=modules.processing.procmemory-module.html#log,Variable modules.processing.screenshots.log=modules.processing.screenshots-module.html#log,Variable modules.processing.snort.log=modules.processing.snort-module.html#log,Variable modules.processing.static.log=modules.processing.static-module.html#log,Variable modules.processing.suricata.log=modules.processing.suricata-module.html#log,Variable modules.processing.virustotal.log=modules.processing.virustotal-module.html#log,Variable modules.reporting.elasticsearch.log=modules.reporting.elasticsearch-module.html#log,Variable modules.reporting.moloch.log=modules.reporting.moloch-module.html#log"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-21', 'log', 'link-21');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-name">__name__</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="ApkInfo"></a><div id="ApkInfo-def"><a name="L28"></a><tt class="py-lineno"> 28</tt> <a class="py-toggle" href="#" id="ApkInfo-toggle" onclick="return toggle('ApkInfo');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.processing.apkinfo.ApkInfo-class.html">ApkInfo</a><tt class="py-op">(</tt><tt class="py-base-class">Processing</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApkInfo-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ApkInfo-expanded"><a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-docstring">"""Static android information about analysis session."""</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="ApkInfo.check_size"></a><div id="ApkInfo.check_size-def"><a name="L31"></a><tt class="py-lineno"> 31</tt> <a class="py-toggle" href="#" id="ApkInfo.check_size-toggle" onclick="return toggle('ApkInfo.check_size');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.apkinfo.ApkInfo-class.html#check_size">check_size</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">file_list</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApkInfo.check_size-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ApkInfo.check_size-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">file</tt> <tt class="py-keyword">in</tt> <tt class="py-name">file_list</tt><tt class="py-op">:</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-string">"classes.dex"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">file</tt><tt class="py-op">[</tt><tt class="py-string">"name"</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt><tt class="py-op">(</tt><tt class="py-string">"decompilation_threshold"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Variable lib.cuckoo.core.database.Machine.options=lib.cuckoo.core.database.Machine-class.html#options,Method lib.cuckoo.core.database.Task.options()=lib.cuckoo.core.database.Task-class.html#options"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-22', 'options', 'link-22');">options</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">file</tt><tt class="py-op">[</tt><tt class="py-string">"size"</tt><tt class="py-op">]</tt> <tt class="py-op">&lt;</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-23', 'options', 'link-22');">options</a></tt><tt class="py-op">.</tt><tt class="py-name">decompilation_threshold</tt><tt class="py-op">:</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">                    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">                        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">                    <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"> </tt>
+<a name="ApkInfo._apk_files"></a><div id="ApkInfo._apk_files-def"><a name="L43"></a><tt class="py-lineno"> 43</tt> <a class="py-toggle" href="#" id="ApkInfo._apk_files-toggle" onclick="return toggle('ApkInfo._apk_files');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.apkinfo.ApkInfo-class.html#_apk_files">_apk_files</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">apk</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApkInfo._apk_files-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ApkInfo._apk_files-expanded"><a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-docstring">"""Returns a list of files in the APK."""</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-name">ret</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">fname</tt><tt class="py-op">,</tt> <tt class="py-name">filetype</tt> <tt class="py-keyword">in</tt> <tt class="py-name">apk</tt><tt class="py-op">.</tt><tt class="py-name">get_files_types</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">            <tt class="py-name">buf</tt> <tt class="py-op">=</tt> <tt class="py-name">apk</tt><tt class="py-op">.</tt><tt class="py-name">zip</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method lib.cuckoo.core.resultserver.ResultHandler.read()=lib.cuckoo.core.resultserver.ResultHandler-class.html#read"><a title="lib.cuckoo.core.resultserver.ResultHandler.read" class="py-name" href="#" onclick="return doclink('link-24', 'read', 'link-24');">read</a></tt><tt class="py-op">(</tt><tt class="py-name">fname</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">            <tt class="py-name">ret</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">{</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">                <tt class="py-string">"name"</tt><tt class="py-op">:</tt> <tt class="py-name">fname</tt><tt class="py-op">,</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                <tt class="py-string">"md5"</tt><tt class="py-op">:</tt> <tt class="py-name">hashlib</tt><tt class="py-op">.</tt><tt id="link-25" class="py-name" targets="Variable lib.cuckoo.core.database.Sample.md5=lib.cuckoo.core.database.Sample-class.html#md5"><a title="lib.cuckoo.core.database.Sample.md5" class="py-name" href="#" onclick="return doclink('link-25', 'md5', 'link-25');">md5</a></tt><tt class="py-op">(</tt><tt class="py-name">buf</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">hexdigest</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                <tt class="py-string">"size"</tt><tt class="py-op">:</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">buf</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">                <tt class="py-string">"type"</tt><tt class="py-op">:</tt> <tt class="py-name">filetype</tt><tt class="py-op">,</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">            <tt class="py-op">}</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">ret</tt> </tt>
+</div><a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="ApkInfo.run"></a><div id="ApkInfo.run-def"><a name="L56"></a><tt class="py-lineno"> 56</tt> <a class="py-toggle" href="#" id="ApkInfo.run-toggle" onclick="return toggle('ApkInfo.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.apkinfo.ApkInfo-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApkInfo.run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ApkInfo.run-expanded"><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-docstring">"""Run androguard to extract static android information</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-docstring">                @return: list of static features</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Variable lib.cuckoo.common.abstracts.BehaviorHandler.key=lib.cuckoo.common.abstracts.BehaviorHandler-class.html#key,Variable modules.processing.behavior.Anomaly.key=modules.processing.behavior.Anomaly-class.html#key,Variable modules.processing.behavior.ApiStats.key=modules.processing.behavior.ApiStats-class.html#key,Variable modules.processing.behavior.BehaviorAnalysis.key=modules.processing.behavior.BehaviorAnalysis-class.html#key,Variable modules.processing.behavior.GenericBehavior.key=modules.processing.behavior.GenericBehavior-class.html#key,Variable modules.processing.behavior.ProcessTree.key=modules.processing.behavior.ProcessTree-class.html#key,Variable modules.processing.behavior.Summary.key=modules.processing.behavior.Summary-class.html#key,Variable modules.processing.dumptls.TLSMasterSecrets.key=modules.processing.dumptls.TLSMasterSecrets-class.html#key,Variable modules.processing.network.NetworkAnalysis.key=modules.processing.network.NetworkAnalysis-class.html#key,Variable modules.processing.platform.linux.LinuxSystemTap.key=modules.processing.platform.linux.LinuxSystemTap-class.html#key,Variable modules.processing.platform.windows.WindowsMonitor.key=modules.processing.platform.windows.WindowsMonitor-class.html#key,Variable modules.processing.procmon.Procmon.key=modules.processing.procmon.Procmon-class.html#key"><a title="lib.cuckoo.common.abstracts.BehaviorHandler.key
+modules.processing.behavior.Anomaly.key
+modules.processing.behavior.ApiStats.key
+modules.processing.behavior.BehaviorAnalysis.key
+modules.processing.behavior.GenericBehavior.key
+modules.processing.behavior.ProcessTree.key
+modules.processing.behavior.Summary.key
+modules.processing.dumptls.TLSMasterSecrets.key
+modules.processing.network.NetworkAnalysis.key
+modules.processing.platform.linux.LinuxSystemTap.key
+modules.processing.platform.windows.WindowsMonitor.key
+modules.processing.procmon.Procmon.key" class="py-name" href="#" onclick="return doclink('link-26', 'key', 'link-26');">key</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"apkinfo"</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt id="link-27" class="py-name" targets="Module modules.processing.apkinfo=modules.processing.apkinfo-module.html"><a title="modules.processing.apkinfo" class="py-name" href="#" onclick="return doclink('link-27', 'apkinfo', 'link-27');">apkinfo</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">"file"</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">task</tt><tt class="py-op">[</tt><tt class="py-string">"category"</tt><tt class="py-op">]</tt> <tt class="py-keyword">or</tt> <tt class="py-keyword">not</tt> <tt id="link-28" class="py-name"><a title="lib.cuckoo.common.objects.HAVE_ANDROGUARD
+modules.processing.apkinfo.HAVE_ANDROGUARD
+modules.processing.googleplay.HAVE_ANDROGUARD" class="py-name" href="#" onclick="return doclink('link-28', 'HAVE_ANDROGUARD', 'link-19');">HAVE_ANDROGUARD</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">        <tt class="py-name">f</tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name"><a title="lib.cuckoo.common.objects.File" class="py-name" href="#" onclick="return doclink('link-29', 'File', 'link-4');">File</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">task</tt><tt class="py-op">[</tt><tt class="py-string">"target"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">f</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name" targets="Method lib.cuckoo.common.objects.File.get_name()=lib.cuckoo.common.objects.File-class.html#get_name"><a title="lib.cuckoo.common.objects.File.get_name" class="py-name" href="#" onclick="return doclink('link-30', 'get_name', 'link-30');">get_name</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">endswith</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-string">".zip"</tt><tt class="py-op">,</tt> <tt class="py-string">".apk"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt class="py-string">"zip"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">f</tt><tt class="py-op">.</tt><tt id="link-31" class="py-name" targets="Method lib.cuckoo.common.objects.File.get_type()=lib.cuckoo.common.objects.File-class.html#get_type"><a title="lib.cuckoo.common.objects.File.get_type" class="py-name" href="#" onclick="return doclink('link-31', 'get_type', 'link-31');">get_type</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file_path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt id="link-32" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooProcessingError" class="py-name" href="#" onclick="return doclink('link-32', 'CuckooProcessingError', 'link-14');">CuckooProcessingError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Sample file doesn't exist: \"%s\""</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                <tt class="py-name">a</tt> <tt class="py-op">=</tt> <tt class="py-name">APK</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">file_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">is_valid_APK</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                    <tt class="py-name">manifest</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">                    <tt id="link-33" class="py-name"><a title="modules.processing.apkinfo" class="py-name" href="#" onclick="return doclink('link-33', 'apkinfo', 'link-27');">apkinfo</a></tt><tt class="py-op">[</tt><tt class="py-string">"files"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Method modules.processing.apkinfo.ApkInfo._apk_files()=modules.processing.apkinfo.ApkInfo-class.html#_apk_files"><a title="modules.processing.apkinfo.ApkInfo._apk_files" class="py-name" href="#" onclick="return doclink('link-34', '_apk_files', 'link-34');">_apk_files</a></tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">                    <tt class="py-name">manifest</tt><tt class="py-op">[</tt><tt class="py-string">"package"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">get_package</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">                    <tt class="py-comment"># manifest["permissions"]=a.get_details_permissions_new()</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">                    <tt class="py-name">manifest</tt><tt class="py-op">[</tt><tt class="py-string">"main_activity"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">get_main_activity</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">                    <tt class="py-name">manifest</tt><tt class="py-op">[</tt><tt class="py-string">"activities"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">get_activities</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                    <tt class="py-name">manifest</tt><tt class="py-op">[</tt><tt class="py-string">"services"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">get_services</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">                    <tt class="py-name">manifest</tt><tt class="py-op">[</tt><tt class="py-string">"receivers"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">get_receivers</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                    <tt class="py-comment"># manifest["receivers_actions"]=a.get__extended_receivers()</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                    <tt class="py-name">manifest</tt><tt class="py-op">[</tt><tt class="py-string">"providers"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">get_providers</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">                    <tt class="py-name">manifest</tt><tt class="py-op">[</tt><tt class="py-string">"libraries"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">get_libraries</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                    <tt id="link-35" class="py-name"><a title="modules.processing.apkinfo" class="py-name" href="#" onclick="return doclink('link-35', 'apkinfo', 'link-27');">apkinfo</a></tt><tt class="py-op">[</tt><tt class="py-string">"manifest"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">manifest</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">                    <tt class="py-comment"># apkinfo["certificate"] = a.get_certificate()</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                    <tt class="py-name">static_calls</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Method modules.processing.apkinfo.ApkInfo.check_size()=modules.processing.apkinfo.ApkInfo-class.html#check_size"><a title="modules.processing.apkinfo.ApkInfo.check_size" class="py-name" href="#" onclick="return doclink('link-36', 'check_size', 'link-36');">check_size</a></tt><tt class="py-op">(</tt><tt id="link-37" class="py-name"><a title="modules.processing.apkinfo" class="py-name" href="#" onclick="return doclink('link-37', 'apkinfo', 'link-27');">apkinfo</a></tt><tt class="py-op">[</tt><tt class="py-string">"files"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                        <tt class="py-name">vm</tt> <tt class="py-op">=</tt> <tt class="py-name">DalvikVMFormat</tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">.</tt><tt class="py-name">get_dex</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                        <tt class="py-name">vmx</tt> <tt class="py-op">=</tt> <tt class="py-name">uVMAnalysis</tt><tt class="py-op">(</tt><tt class="py-name">vm</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                        <tt class="py-name">static_calls</tt><tt class="py-op">[</tt><tt class="py-string">"all_methods"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Method modules.processing.apkinfo.ApkInfo.get_methods()=modules.processing.apkinfo.ApkInfo-class.html#get_methods"><a title="modules.processing.apkinfo.ApkInfo.get_methods" class="py-name" href="#" onclick="return doclink('link-38', 'get_methods', 'link-38');">get_methods</a></tt><tt class="py-op">(</tt><tt class="py-name">vmx</tt><tt class="py-op">)</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                        <tt class="py-name">static_calls</tt><tt class="py-op">[</tt><tt class="py-string">"is_native_code"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">analysis</tt><tt class="py-op">.</tt><tt class="py-name">is_native_code</tt><tt class="py-op">(</tt><tt class="py-name">vmx</tt><tt class="py-op">)</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                        <tt class="py-name">static_calls</tt><tt class="py-op">[</tt><tt class="py-string">"is_dynamic_code"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">analysis</tt><tt class="py-op">.</tt><tt class="py-name">is_dyn_code</tt><tt class="py-op">(</tt><tt class="py-name">vmx</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                        <tt class="py-name">static_calls</tt><tt class="py-op">[</tt><tt class="py-string">"is_reflection_code"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">analysis</tt><tt class="py-op">.</tt><tt class="py-name">is_reflection_code</tt><tt class="py-op">(</tt><tt class="py-name">vmx</tt><tt class="py-op">)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                        <tt class="py-comment"># static_calls["dynamic_method_calls"]= analysis.get_show_DynCode(vmx)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                        <tt class="py-comment"># static_calls["reflection_method_calls"]= analysis.get_show_ReflectionCode(vmx)</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">                        <tt class="py-comment"># static_calls["permissions_method_calls"]= analysis.get_show_Permissions(vmx)</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">                        <tt class="py-comment"># static_calls["crypto_method_calls"]= analysis.get_show_CryptoCode(vmx)</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">                        <tt class="py-comment"># static_calls["native_method_calls"]= analysis.get_show_NativeMethods(vmx)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">                    <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">                        <tt id="link-39" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-39', 'log', 'link-21');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"Dex size bigger than: %s"</tt><tt class="py-op">,</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-40', 'options', 'link-22');">options</a></tt><tt class="py-op">.</tt><tt class="py-name">decompilation_threshold</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                    <tt id="link-41" class="py-name"><a title="modules.processing.apkinfo" class="py-name" href="#" onclick="return doclink('link-41', 'apkinfo', 'link-27');">apkinfo</a></tt><tt class="py-op">[</tt><tt class="py-string">"static_method_calls"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">static_calls</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-op">(</tt><tt class="py-name">IOError</tt><tt class="py-op">,</tt> <tt class="py-name">OSError</tt><tt class="py-op">,</tt> <tt class="py-name">BadZipfile</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt id="link-42" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooProcessingError" class="py-name" href="#" onclick="return doclink('link-42', 'CuckooProcessingError', 'link-14');">CuckooProcessingError</a></tt><tt class="py-op">(</tt><tt class="py-string">"Error opening file %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-43" class="py-name"><a title="modules.processing.apkinfo" class="py-name" href="#" onclick="return doclink('link-43', 'apkinfo', 'link-27');">apkinfo</a></tt> </tt>
+</div><a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="ApkInfo.get_methods"></a><div id="ApkInfo.get_methods-def"><a name="L111"></a><tt class="py-lineno">111</tt> <a class="py-toggle" href="#" id="ApkInfo.get_methods-toggle" onclick="return toggle('ApkInfo.get_methods');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.apkinfo.ApkInfo-class.html#get_methods">get_methods</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">vmx</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ApkInfo.get_methods-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="ApkInfo.get_methods-expanded"><a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-name">methods</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">vmx</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="modules.processing.apkinfo.ApkInfo.get_methods" class="py-name" href="#" onclick="return doclink('link-44', 'get_methods', 'link-38');">get_methods</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">            <tt class="py-name">method</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">            <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">create_tags</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt id="link-45" class="py-name" targets="Variable lib.cuckoo.core.database.Machine.tags=lib.cuckoo.core.database.Machine-class.html#tags,Variable lib.cuckoo.core.database.Task.tags=lib.cuckoo.core.database.Task-class.html#tags"><a title="lib.cuckoo.core.database.Machine.tags
+lib.cuckoo.core.database.Task.tags" class="py-name" href="#" onclick="return doclink('link-45', 'tags', 'link-45');">tags</a></tt><tt class="py-op">.</tt><tt class="py-name">empty</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">                <tt class="py-name">proto</tt> <tt class="py-op">=</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">method</tt><tt class="py-op">.</tt><tt class="py-name">proto</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">"("</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">";"</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">                <tt class="py-name">protos</tt> <tt class="py-op">=</tt> <tt class="py-name">proto</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">")"</tt><tt class="py-op">)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">                <tt class="py-name">params</tt> <tt class="py-op">=</tt> <tt class="py-name">protos</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">" "</tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">                <tt class="py-name">method</tt><tt class="py-op">[</tt><tt class="py-string">"class"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">method</tt><tt class="py-op">.</tt><tt class="py-name">get_class_name</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">";"</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">                <tt class="py-name">method</tt><tt class="py-op">[</tt><tt class="py-string">"name"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">i</tt><tt class="py-op">.</tt><tt class="py-name">method</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name" targets="Variable lib.cuckoo.common.abstracts.Signature.name=lib.cuckoo.common.abstracts.Signature-class.html#name,Variable lib.cuckoo.core.database.Guest.name=lib.cuckoo.core.database.Guest-class.html#name,Variable lib.cuckoo.core.database.Machine.name=lib.cuckoo.core.database.Machine-class.html#name,Variable lib.cuckoo.core.database.Tag.name=lib.cuckoo.core.database.Tag-class.html#name,Variable modules.signatures.creates_exe.CreatesExe.name=modules.signatures.creates_exe.CreatesExe-class.html#name,Variable modules.signatures.generic_metrics.SystemMetrics.name=modules.signatures.generic_metrics.SystemMetrics-class.html#name"><a title="lib.cuckoo.common.abstracts.Signature.name
+lib.cuckoo.core.database.Guest.name
+lib.cuckoo.core.database.Machine.name
+lib.cuckoo.core.database.Tag.name
+modules.signatures.creates_exe.CreatesExe.name
+modules.signatures.generic_metrics.SystemMetrics.name" class="py-name" href="#" onclick="return doclink('link-46', 'name', 'link-46');">name</a></tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">params</tt> <tt class="py-keyword">and</tt> <tt class="py-name">params</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">                    <tt class="py-name">method</tt><tt class="py-op">[</tt><tt class="py-string">"params"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">params</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">                <tt class="py-name">method</tt><tt class="py-op">[</tt><tt class="py-string">"return"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">protos</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">                <tt class="py-name">methods</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">method</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">methods</tt> </tt>
+</div></div><a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:01 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

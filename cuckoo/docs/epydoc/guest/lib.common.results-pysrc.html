@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lib.common.results</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lib-module.html">Package&nbsp;lib</a> ::
+        <a href="lib.common-module.html">Package&nbsp;common</a> ::
+        Module&nbsp;results
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lib.common.results-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lib.common.results-module.html">Module lib.common.results</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">socket</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">time</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.core=lib.core-module.html"><a title="lib.core" class="py-name" href="#" onclick="return doclink('link-1', 'core', 'link-1');">core</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Variable lib.api.process.Process.config=lib.api.process.Process-class.html#config,Module lib.core.config=lib.core.config-module.html"><a title="lib.api.process.Process.config
+lib.core.config" class="py-name" href="#" onclick="return doclink('link-2', 'config', 'link-2');">config</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class lib.core.config.Config=lib.core.config.Config-class.html"><a title="lib.core.config.Config" class="py-name" href="#" onclick="return doclink('link-3', 'Config', 'link-3');">Config</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable lib.api.process.log=lib.api.process-module.html#log,Variable lib.common.registry.log=lib.common.registry-module.html#log,Variable lib.common.results.log=lib.common.results-module.html#log,Variable lib.core.pipe.log=lib.core.pipe-module.html#log,Variable lib.core.startup.log=lib.core.startup-module.html#log,Variable modules.auxiliary.disguise.log=modules.auxiliary.disguise-module.html#log,Variable modules.auxiliary.human.log=modules.auxiliary.human-module.html#log,Variable modules.auxiliary.installcert.log=modules.auxiliary.installcert-module.html#log,Variable modules.auxiliary.reboot.log=modules.auxiliary.reboot-module.html#log,Variable modules.auxiliary.recentfiles.log=modules.auxiliary.recentfiles-module.html#log,Variable modules.auxiliary.screenshots.log=modules.auxiliary.screenshots-module.html#log,Variable modules.packages.ie.log=modules.packages.ie-module.html#log,Variable modules.packages.js.log=modules.packages.js-module.html#log,Variable modules.packages.pdf.log=modules.packages.pdf-module.html#log,Variable modules.packages.reboot.log=modules.packages.reboot-module.html#log,Variable modules.packages.wsf.log=modules.packages.wsf-module.html#log,Variable modules.packages.zip.log=modules.packages.zip-module.html#log"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-4', 'log', 'link-4');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-name">__name__</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable lib.common.hashing.BUFSIZE=lib.common.hashing-module.html#BUFSIZE,Variable lib.common.results.BUFSIZE=lib.common.results-module.html#BUFSIZE,Variable lib.core.pipe.BUFSIZE=lib.core.pipe-module.html#BUFSIZE"><a title="lib.common.hashing.BUFSIZE
+lib.common.results.BUFSIZE
+lib.core.pipe.BUFSIZE" class="py-name" href="#" onclick="return doclink('link-5', 'BUFSIZE', 'link-5');">BUFSIZE</a></tt> <tt class="py-op">=</tt> <tt class="py-number">1024</tt><tt class="py-op">*</tt><tt class="py-number">1024</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="upload_to_host"></a><div id="upload_to_host-def"><a name="L17"></a><tt class="py-lineno"> 17</tt> <a class="py-toggle" href="#" id="upload_to_host-toggle" onclick="return toggle('upload_to_host');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.results-module.html#upload_to_host">upload_to_host</a><tt class="py-op">(</tt><tt class="py-param">file_path</tt><tt class="py-op">,</tt> <tt class="py-param">dump_path</tt><tt class="py-op">,</tt> <tt class="py-param">pids</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="upload_to_host-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="upload_to_host-expanded"><a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">    <tt class="py-name">nc</tt> <tt class="py-op">=</tt> <tt class="py-name">infd</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">        <tt class="py-name">nc</tt> <tt class="py-op">=</tt> <tt id="link-6" class="py-name" targets="Class lib.common.results.NetlogFile=lib.common.results.NetlogFile-class.html"><a title="lib.common.results.NetlogFile" class="py-name" href="#" onclick="return doclink('link-6', 'NetlogFile', 'link-6');">NetlogFile</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">        <tt class="py-name">nc</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method lib.common.results.NetlogFile.init()=lib.common.results.NetlogFile-class.html#init"><a title="lib.common.results.NetlogFile.init" class="py-name" href="#" onclick="return doclink('link-7', 'init', 'link-7');">init</a></tt><tt class="py-op">(</tt><tt class="py-name">dump_path</tt><tt class="py-op">,</tt> <tt class="py-name">file_path</tt><tt class="py-op">,</tt> <tt class="py-name">pids</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">        <tt class="py-name">infd</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">file_path</tt><tt class="py-op">,</tt> <tt class="py-string">"rb"</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">        <tt class="py-name">buf</tt> <tt class="py-op">=</tt> <tt class="py-name">infd</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="lib.common.hashing.BUFSIZE
+lib.common.results.BUFSIZE
+lib.core.pipe.BUFSIZE" class="py-name" href="#" onclick="return doclink('link-8', 'BUFSIZE', 'link-5');">BUFSIZE</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-name">buf</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">            <tt class="py-name">nc</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method lib.common.results.NetlogConnection.send()=lib.common.results.NetlogConnection-class.html#send"><a title="lib.common.results.NetlogConnection.send" class="py-name" href="#" onclick="return doclink('link-9', 'send', 'link-9');">send</a></tt><tt class="py-op">(</tt><tt class="py-name">buf</tt><tt class="py-op">,</tt> <tt class="py-name">retry</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">            <tt class="py-name">buf</tt> <tt class="py-op">=</tt> <tt class="py-name">infd</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt id="link-10" class="py-name"><a title="lib.common.hashing.BUFSIZE
+lib.common.results.BUFSIZE
+lib.core.pipe.BUFSIZE" class="py-name" href="#" onclick="return doclink('link-10', 'BUFSIZE', 'link-5');">BUFSIZE</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">        <tt id="link-11" class="py-name"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-11', 'log', 'link-4');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">error</tt><tt class="py-op">(</tt><tt class="py-string">"Exception uploading file %s to host: %s"</tt><tt class="py-op">,</tt> <tt class="py-name">file_path</tt><tt class="py-op">,</tt> <tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-keyword">finally</tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">infd</tt><tt class="py-op">:</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">            <tt class="py-name">infd</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method lib.common.results.NetlogConnection.close()=lib.common.results.NetlogConnection-class.html#close"><a title="lib.common.results.NetlogConnection.close" class="py-name" href="#" onclick="return doclink('link-12', 'close', 'link-12');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">nc</tt><tt class="py-op">:</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">            <tt class="py-name">nc</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="lib.common.results.NetlogConnection.close" class="py-name" href="#" onclick="return doclink('link-13', 'close', 'link-12');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="NetlogConnection"></a><div id="NetlogConnection-def"><a name="L36"></a><tt class="py-lineno"> 36</tt> <a class="py-toggle" href="#" id="NetlogConnection-toggle" onclick="return toggle('NetlogConnection');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.results.NetlogConnection-class.html">NetlogConnection</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetlogConnection-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="NetlogConnection-expanded"><a name="NetlogConnection.__init__"></a><div id="NetlogConnection.__init__-def"><a name="L37"></a><tt class="py-lineno"> 37</tt> <a class="py-toggle" href="#" id="NetlogConnection.__init__-toggle" onclick="return toggle('NetlogConnection.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.results.NetlogConnection-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">proto</tt><tt class="py-op">=</tt><tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetlogConnection.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NetlogConnection.__init__-expanded"><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt id="link-14" class="py-name"><a title="lib.api.process.Process.config
+lib.core.config" class="py-name" href="#" onclick="return doclink('link-14', 'config', 'link-2');">config</a></tt> <tt class="py-op">=</tt> <tt id="link-15" class="py-name"><a title="lib.core.config.Config" class="py-name" href="#" onclick="return doclink('link-15', 'Config', 'link-3');">Config</a></tt><tt class="py-op">(</tt><tt class="py-name">cfg</tt><tt class="py-op">=</tt><tt class="py-string">"analysis.conf"</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">hostip</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">hostport</tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="lib.api.process.Process.config
+lib.core.config" class="py-name" href="#" onclick="return doclink('link-16', 'config', 'link-2');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">ip</tt><tt class="py-op">,</tt> <tt id="link-17" class="py-name"><a title="lib.api.process.Process.config
+lib.core.config" class="py-name" href="#" onclick="return doclink('link-17', 'config', 'link-2');">config</a></tt><tt class="py-op">.</tt><tt class="py-name">port</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sock</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">proto</tt> <tt class="py-op">=</tt> <tt class="py-name">proto</tt> </tt>
+</div><a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"> </tt>
+<a name="NetlogConnection.connect"></a><div id="NetlogConnection.connect-def"><a name="L43"></a><tt class="py-lineno"> 43</tt> <a class="py-toggle" href="#" id="NetlogConnection.connect-toggle" onclick="return toggle('NetlogConnection.connect');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.results.NetlogConnection-class.html#connect">connect</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetlogConnection.connect-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NetlogConnection.connect-expanded"><a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-comment"># Try to connect as quickly as possible. Just sort of force it to</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-comment"># connect with a short timeout.</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sock</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">            <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">                <tt class="py-name">s</tt> <tt class="py-op">=</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">create_connection</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">hostip</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">hostport</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">0.1</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">            <tt class="py-keyword">except</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">error</tt><tt class="py-op">:</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt class="py-number">0.1</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">                <tt class="py-keyword">continue</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">            <tt class="py-name">s</tt><tt class="py-op">.</tt><tt class="py-name">settimeout</tt><tt class="py-op">(</tt><tt class="py-name">None</tt><tt class="py-op">)</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">            <tt class="py-name">s</tt><tt class="py-op">.</tt><tt class="py-name">sendall</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">proto</tt><tt class="py-op">)</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sock</tt> <tt class="py-op">=</tt> <tt class="py-name">s</tt> </tt>
+</div><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"> </tt>
+<a name="NetlogConnection.send"></a><div id="NetlogConnection.send-def"><a name="L58"></a><tt class="py-lineno"> 58</tt> <a class="py-toggle" href="#" id="NetlogConnection.send-toggle" onclick="return toggle('NetlogConnection.send');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.results.NetlogConnection-class.html#send">send</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">data</tt><tt class="py-op">,</tt> <tt class="py-param">retry</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetlogConnection.send-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NetlogConnection.send-expanded"><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sock</tt><tt class="py-op">:</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method lib.common.results.NetlogConnection.connect()=lib.common.results.NetlogConnection-class.html#connect"><a title="lib.common.results.NetlogConnection.connect" class="py-name" href="#" onclick="return doclink('link-18', 'connect', 'link-18');">connect</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sock</tt><tt class="py-op">.</tt><tt class="py-name">sendall</tt><tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">)</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">socket</tt><tt class="py-op">.</tt><tt class="py-name">error</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">retry</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="lib.common.results.NetlogConnection.connect" class="py-name" href="#" onclick="return doclink('link-19', 'connect', 'link-18');">connect</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="lib.common.results.NetlogConnection.send" class="py-name" href="#" onclick="return doclink('link-20', 'send', 'link-9');">send</a></tt><tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">,</tt> <tt class="py-name">retry</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                <tt class="py-keyword">print</tt> <tt class="py-op">&gt;&gt;</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">,</tt> <tt class="py-string">"Unhandled exception in NetlogConnection:"</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-op">&gt;&gt;</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stderr</tt><tt class="py-op">,</tt> <tt class="py-string">"Unhandled exception in NetlogConnection:"</tt><tt class="py-op">,</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">e</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">            <tt class="py-comment"># We really have nowhere to log this, if the netlog connection</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">            <tt class="py-comment"># does not work, we can assume that any logging won't work either.</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">            <tt class="py-comment"># So we just fail silently.</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="lib.common.results.NetlogConnection.close" class="py-name" href="#" onclick="return doclink('link-21', 'close', 'link-12');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="NetlogConnection.close"></a><div id="NetlogConnection.close-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="NetlogConnection.close-toggle" onclick="return toggle('NetlogConnection.close');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.results.NetlogConnection-class.html#close">close</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetlogConnection.close-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NetlogConnection.close-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">sock</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="lib.common.results.NetlogConnection.close" class="py-name" href="#" onclick="return doclink('link-22', 'close', 'link-12');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">            <tt class="py-keyword">pass</tt> </tt>
+</div></div><a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"> </tt>
+<a name="NetlogFile"></a><div id="NetlogFile-def"><a name="L83"></a><tt class="py-lineno"> 83</tt> <a class="py-toggle" href="#" id="NetlogFile-toggle" onclick="return toggle('NetlogFile');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.results.NetlogFile-class.html">NetlogFile</a><tt class="py-op">(</tt><tt class="py-base-class">NetlogConnection</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetlogFile-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="NetlogFile-expanded"><a name="NetlogFile.init"></a><div id="NetlogFile.init-def"><a name="L84"></a><tt class="py-lineno"> 84</tt> <a class="py-toggle" href="#" id="NetlogFile.init-toggle" onclick="return toggle('NetlogFile.init');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.results.NetlogFile-class.html#init">init</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">dump_path</tt><tt class="py-op">,</tt> <tt class="py-param">filepath</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">pids</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetlogFile.init-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NetlogFile.init-expanded"><a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">filepath</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">proto</tt> <tt class="py-op">=</tt> <tt class="py-string">"FILE 2\n{0}\n{1}\n{2}\n"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                <tt class="py-name">dump_path</tt><tt class="py-op">,</tt> <tt class="py-name">filepath</tt><tt class="py-op">,</tt> <tt class="py-string">" "</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">pids</tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">            <tt class="py-op">)</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">proto</tt> <tt class="py-op">=</tt> <tt class="py-string">"FILE\n{0}\n"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">dump_path</tt><tt class="py-op">)</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="lib.common.results.NetlogConnection.connect" class="py-name" href="#" onclick="return doclink('link-23', 'connect', 'link-18');">connect</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="NetlogHandler"></a><div id="NetlogHandler-def"><a name="L94"></a><tt class="py-lineno"> 94</tt> <a class="py-toggle" href="#" id="NetlogHandler-toggle" onclick="return toggle('NetlogHandler');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="lib.common.results.NetlogHandler-class.html">NetlogHandler</a><tt class="py-op">(</tt><tt class="py-base-class">logging</tt><tt class="py-op">.</tt><tt class="py-base-class">Handler</tt><tt class="py-op">,</tt> <tt class="py-base-class">NetlogConnection</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetlogHandler-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="NetlogHandler-expanded"><a name="NetlogHandler.__init__"></a><div id="NetlogHandler.__init__-def"><a name="L95"></a><tt class="py-lineno"> 95</tt> <a class="py-toggle" href="#" id="NetlogHandler.__init__-toggle" onclick="return toggle('NetlogHandler.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.results.NetlogHandler-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetlogHandler.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NetlogHandler.__init__-expanded"><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">Handler</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name" targets="Method lib.api.process.Process.__init__()=lib.api.process.Process-class.html#__init__,Method lib.common.abstracts.Auxiliary.__init__()=lib.common.abstracts.Auxiliary-class.html#__init__,Method lib.common.abstracts.Package.__init__()=lib.common.abstracts.Package-class.html#__init__,Method lib.common.results.NetlogConnection.__init__()=lib.common.results.NetlogConnection-class.html#__init__,Method lib.common.results.NetlogHandler.__init__()=lib.common.results.NetlogHandler-class.html#__init__,Method lib.core.config.Config.__init__()=lib.core.config.Config-class.html#__init__,Method lib.core.pipe.PipeDispatcher.__init__()=lib.core.pipe.PipeDispatcher-class.html#__init__,Method lib.core.pipe.PipeForwarder.__init__()=lib.core.pipe.PipeForwarder-class.html#__init__,Method lib.core.pipe.PipeServer.__init__()=lib.core.pipe.PipeServer-class.html#__init__,Method modules.auxiliary.human.Human.__init__()=modules.auxiliary.human.Human-class.html#__init__,Method modules.auxiliary.screenshots.Screenshots.__init__()=modules.auxiliary.screenshots.Screenshots-class.html#__init__"><a title="lib.api.process.Process.__init__
+lib.common.abstracts.Auxiliary.__init__
+lib.common.abstracts.Package.__init__
+lib.common.results.NetlogConnection.__init__
+lib.common.results.NetlogHandler.__init__
+lib.core.config.Config.__init__
+lib.core.pipe.PipeDispatcher.__init__
+lib.core.pipe.PipeForwarder.__init__
+lib.core.pipe.PipeServer.__init__
+modules.auxiliary.human.Human.__init__
+modules.auxiliary.screenshots.Screenshots.__init__" class="py-name" href="#" onclick="return doclink('link-24', '__init__', 'link-24');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">        <tt id="link-25" class="py-name" targets="Class lib.common.results.NetlogConnection=lib.common.results.NetlogConnection-class.html"><a title="lib.common.results.NetlogConnection" class="py-name" href="#" onclick="return doclink('link-25', 'NetlogConnection', 'link-25');">NetlogConnection</a></tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="lib.api.process.Process.__init__
+lib.common.abstracts.Auxiliary.__init__
+lib.common.abstracts.Package.__init__
+lib.common.results.NetlogConnection.__init__
+lib.common.results.NetlogHandler.__init__
+lib.core.config.Config.__init__
+lib.core.pipe.PipeDispatcher.__init__
+lib.core.pipe.PipeForwarder.__init__
+lib.core.pipe.PipeServer.__init__
+modules.auxiliary.human.Human.__init__
+modules.auxiliary.screenshots.Screenshots.__init__" class="py-name" href="#" onclick="return doclink('link-26', '__init__', 'link-24');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">proto</tt><tt class="py-op">=</tt><tt class="py-string">"LOG\n"</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="lib.common.results.NetlogConnection.connect" class="py-name" href="#" onclick="return doclink('link-27', 'connect', 'link-18');">connect</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="NetlogHandler.emit"></a><div id="NetlogHandler.emit-def"><a name="L100"></a><tt class="py-lineno">100</tt> <a class="py-toggle" href="#" id="NetlogHandler.emit-toggle" onclick="return toggle('NetlogHandler.emit');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.common.results.NetlogHandler-class.html#emit">emit</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">record</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="NetlogHandler.emit-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="NetlogHandler.emit-expanded"><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-name">msg</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">record</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="lib.common.results.NetlogConnection.send" class="py-name" href="#" onclick="return doclink('link-28', 'send', 'link-9');">send</a></tt><tt class="py-op">(</tt><tt class="py-string">"{0}\n"</tt><tt class="py-op">.</tt><tt class="py-name">format</tt><tt class="py-op">(</tt><tt class="py-name">msg</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:04 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

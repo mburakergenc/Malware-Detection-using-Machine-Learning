@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.machinery.kvm.KVM</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.machinery-module.html">Package&nbsp;machinery</a> ::
+        <a href="modules.machinery.kvm-module.html">Module&nbsp;kvm</a> ::
+        Class&nbsp;KVM
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.machinery.kvm.KVM-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class KVM</h1><p class="nomargin-top"><span class="codelink"><a href="modules.machinery.kvm-pysrc.html#KVM">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+                              object --+        
+                                       |        
+   <a href="lib.cuckoo.common.abstracts.Machinery-class.html">lib.cuckoo.common.abstracts.Machinery</a> --+    
+                                           |    
+<a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html">lib.cuckoo.common.abstracts.LibVirtMachinery</a> --+
+                                               |
+                                              <strong class="uidshort">KVM</strong>
+</pre>
+
+<hr />
+<p>Virtualization layer for KVM based on python-libvirt.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html">lib.cuckoo.common.abstracts.LibVirtMachinery</a></code></b>:
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#__init__">__init__</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#dump_memory">dump_memory</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#initialize">initialize</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#shutdown">shutdown</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#start">start</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#stop">stop</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html">lib.cuckoo.common.abstracts.LibVirtMachinery</a></code></b> (private):
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#_connect" onclick="show_private();">_connect</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#_disconnect" onclick="show_private();">_disconnect</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#_fetch_machines" onclick="show_private();">_fetch_machines</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#_get_snapshot" onclick="show_private();">_get_snapshot</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#_initialize_check" onclick="show_private();">_initialize_check</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#_list" onclick="show_private();">_list</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#_lookup" onclick="show_private();">_lookup</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#_status" onclick="show_private();">_status</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#_version_check" onclick="show_private();">_version_check</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html">lib.cuckoo.common.abstracts.Machinery</a></code></b>:
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#acquire">acquire</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#availables">availables</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#machines">machines</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#pcap_path">pcap_path</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#release">release</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#running">running</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#set_options">set_options</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#set_status">set_status</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html">lib.cuckoo.common.abstracts.Machinery</a></code></b> (private):
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#_get_resultserver_port" onclick="show_private();">_get_resultserver_port</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#_initialize" onclick="show_private();">_initialize</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#_wait_status" onclick="show_private();">_wait_status</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="dsn"></a><span class="summary-name">dsn</span> = <code title="&quot;qemu:///system&quot;">&quot;qemu:///system&quot;</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html">lib.cuckoo.common.abstracts.LibVirtMachinery</a></code></b>:
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#ABORTED">ABORTED</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#ERROR">ERROR</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#PAUSED">PAUSED</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#POWEROFF">POWEROFF</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#RUNNING">RUNNING</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html">lib.cuckoo.common.abstracts.Machinery</a></code></b>:
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#LABEL">LABEL</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:21:58 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

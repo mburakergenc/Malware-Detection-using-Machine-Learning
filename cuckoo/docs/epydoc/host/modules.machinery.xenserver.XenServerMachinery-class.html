@@ -1,0 +1,904 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.machinery.xenserver.XenServerMachinery</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.machinery-module.html">Package&nbsp;machinery</a> ::
+        <a href="modules.machinery.xenserver-module.html">Module&nbsp;xenserver</a> ::
+        Class&nbsp;XenServerMachinery
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.machinery.xenserver.XenServerMachinery-class.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class XenServerMachinery</h1><p class="nomargin-top"><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+                           object --+    
+                                    |    
+<a href="lib.cuckoo.common.abstracts.Machinery-class.html">lib.cuckoo.common.abstracts.Machinery</a> --+
+                                        |
+                                       <strong class="uidshort">XenServerMachinery</strong>
+</pre>
+
+<hr />
+<p>Virtualization layer for XenServer using the XenAPI XML-RPC 
+  interface.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Instance Methods</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-InstanceMethods"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#_initialize_check" class="summary-sig-name" onclick="show_private();">_initialize_check</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Check XenServer configuration, initialize a Xen API connection, and 
+      verify machine validity.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._initialize_check">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#session" class="summary-sig-name">session</a>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery.session">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="_make_xenapi_session"></a><span class="summary-sig-name">_make_xenapi_session</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tid</span>=<span class="summary-sig-default">None</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._make_xenapi_session">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#_get_vm_ref" class="summary-sig-name" onclick="show_private();">_get_vm_ref</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">uuid</span>)</span><br />
+      Get a virtual machine reference.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._get_vm_ref">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#_get_vm_record" class="summary-sig-name" onclick="show_private();">_get_vm_record</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ref</span>)</span><br />
+      Get the virtual machine record.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._get_vm_record">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#_get_vm_power_state" class="summary-sig-name" onclick="show_private();">_get_vm_power_state</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">ref</span>)</span><br />
+      Get the virtual machine power state.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._get_vm_power_state">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#_check_vm" class="summary-sig-name" onclick="show_private();">_check_vm</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">uuid</span>)</span><br />
+      Check vm existence and validity.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._check_vm">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#_check_snapshot" class="summary-sig-name" onclick="show_private();">_check_snapshot</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">vm_uuid</span>,
+        <span class="summary-sig-arg">snapshot_uuid</span>)</span><br />
+      Check snapshot existence and that the snapshot is of the specified vm
+      uuid.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._check_snapshot">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#_check_disks_reset" class="summary-sig-name" onclick="show_private();">_check_disks_reset</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">vm</span>)</span><br />
+      Check whether each attached disk is set to reset on boot.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._check_disks_reset">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#_snapshot_from_vm_uuid" class="summary-sig-name" onclick="show_private();">_snapshot_from_vm_uuid</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">uuid</span>)</span><br />
+      Get the snapshot uuid from a virtual machine.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._snapshot_from_vm_uuid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#_is_halted" class="summary-sig-name" onclick="show_private();">_is_halted</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">vm</span>)</span><br />
+      Checks if the virtual machine is running.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._is_halted">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#start" class="summary-sig-name">start</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">label</span>,
+        <span class="summary-sig-arg">task</span>)</span><br />
+      Start a virtual machine.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery.start">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#stop" class="summary-sig-name">stop</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">label</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Stop a virtual machine.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery.stop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#_list" class="summary-sig-name" onclick="show_private();">_list</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      List available virtual machines.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._list">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="modules.machinery.xenserver.XenServerMachinery-class.html#_status" class="summary-sig-name" onclick="show_private();">_status</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">label</span>)</span><br />
+      Gets current status of a vm.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._status">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html">lib.cuckoo.common.abstracts.Machinery</a></code></b>:
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#__init__">__init__</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#acquire">acquire</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#availables">availables</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#dump_memory">dump_memory</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#initialize">initialize</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#machines">machines</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#pcap_path">pcap_path</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#release">release</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#running">running</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#set_options">set_options</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#set_status">set_status</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#shutdown">shutdown</a></code>
+      </p>
+    <div class="private">    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html">lib.cuckoo.common.abstracts.Machinery</a></code></b> (private):
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#_get_resultserver_port" onclick="show_private();">_get_resultserver_port</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#_initialize" onclick="show_private();">_initialize</a></code>,
+      <code><a href="lib.cuckoo.common.abstracts.Machinery-class.html#_wait_status" onclick="show_private();">_wait_status</a></code>
+      </p></div>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__new__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__str__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Class Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-ClassVariables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="LABEL"></a><span class="summary-name">LABEL</span> = <code title="&quot;uuid&quot;">&quot;uuid&quot;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="RUNNING"></a><span class="summary-name">RUNNING</span> = <code title="&quot;Running&quot;">&quot;Running&quot;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="PAUSED"></a><span class="summary-name">PAUSED</span> = <code title="&quot;Paused&quot;">&quot;Paused&quot;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="POWEROFF"></a><span class="summary-name">POWEROFF</span> = <code title="&quot;Halted&quot;">&quot;Halted&quot;</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="ABORTED"></a><span class="summary-name">ABORTED</span> = <code title="&quot;Suspended&quot;">&quot;Suspended&quot;</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Properties</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Properties"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Method Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-MethodDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="_initialize_check"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_initialize_check</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._initialize_check">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Check XenServer configuration, initialize a Xen API connection, and 
+  verify machine validity.</p>
+  <dl class="fields">
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="lib.cuckoo.common.exceptions.CuckooMachineError-class.html">CuckooMachineError</a></strong></code> - if a misconfiguration or a unkown vm state is found.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="lib.cuckoo.common.abstracts.Machinery-class.html#_initialize_check" onclick="show_private();">lib.cuckoo.common.abstracts.Machinery._initialize_check</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="session"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">session</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery.session">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  
+  <dl class="fields">
+    <dt>Decorators:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code>@property</code></li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_get_vm_ref"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_get_vm_ref</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">uuid</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._get_vm_ref">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get a virtual machine reference.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>uuid</code></strong> - vm uuid</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_get_vm_record"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_get_vm_record</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ref</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._get_vm_record">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the virtual machine record.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ref</code></strong> - vm reference</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_get_vm_power_state"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_get_vm_power_state</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">ref</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._get_vm_power_state">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the virtual machine power state.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>ref</code></strong> - vm reference</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_check_vm"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_check_vm</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">uuid</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._check_vm">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Check vm existence and validity.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>uuid</code></strong> - vm uuid</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_check_snapshot"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_check_snapshot</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">vm_uuid</span>,
+        <span class="sig-arg">snapshot_uuid</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._check_snapshot">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Check snapshot existence and that the snapshot is of the specified vm 
+  uuid.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>vm_uuid</code></strong> - vm uuid</li>
+        <li><strong class="pname"><code>snapshot_uuid</code></strong> - snapshot uuid</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_check_disks_reset"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_check_disks_reset</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">vm</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._check_disks_reset">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Check whether each attached disk is set to reset on boot.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>vm</code></strong> - vm record</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_snapshot_from_vm_uuid"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_snapshot_from_vm_uuid</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">uuid</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._snapshot_from_vm_uuid">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Get the snapshot uuid from a virtual machine.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>uuid</code></strong> - vm uuid</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_is_halted"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_is_halted</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">vm</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._is_halted">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Checks if the virtual machine is running.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>uuid</code></strong> - vm uuid</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="start"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">start</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">label</span>,
+        <span class="sig-arg">task</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery.start">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Start a virtual machine.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>label</code></strong> - vm uuid</li>
+        <li><strong class="pname"><code>task</code></strong> - task object.</li>
+    </ul></dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'>NotImplementedError</strong></code> - this method is abstract.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="lib.cuckoo.common.abstracts.Machinery-class.html#start">lib.cuckoo.common.abstracts.Machinery.start</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="stop"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">stop</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">label</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery.stop">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Stop a virtual machine.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>label</code></strong> - vm uuid</li>
+    </ul></dd>
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'>NotImplementedError</strong></code> - this method is abstract.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="lib.cuckoo.common.abstracts.Machinery-class.html#stop">lib.cuckoo.common.abstracts.Machinery.stop</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_list"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_list</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._list">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>List available virtual machines.</p>
+  <dl class="fields">
+    <dt>Raises:</dt>
+    <dd><ul class="nomargin-top">
+        <li><code><strong class='fraise'><a href="lib.cuckoo.common.exceptions.CuckooMachineError-class.html">CuckooMachineError</a></strong></code> - if unable to list virtual machines.</li>
+    </ul></dd>
+    <dt>Overrides:
+        <a href="lib.cuckoo.common.abstracts.Machinery-class.html#_list" onclick="show_private();">lib.cuckoo.common.abstracts.Machinery._list</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="_status"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_status</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">label</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="modules.machinery.xenserver-pysrc.html#XenServerMachinery._status">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Gets current status of a vm.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>label</code></strong> - virtual machine uuid</li>
+    </ul></dd>
+    <dt>Returns:</dt>
+        <dd>status string.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:21:58 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

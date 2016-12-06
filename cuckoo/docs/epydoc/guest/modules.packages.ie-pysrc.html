@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.packages.ie</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.packages-module.html">Package&nbsp;packages</a> ::
+        Module&nbsp;ie
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.packages.ie-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.packages.ie-module.html">Module modules.packages.ie</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">_winreg</tt> <tt class="py-keyword">import</tt> <tt class="py-name">HKEY_LOCAL_MACHINE</tt><tt class="py-op">,</tt> <tt class="py-name">HKEY_CURRENT_USER</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.common=lib.common-module.html"><a title="lib.common" class="py-name" href="#" onclick="return doclink('link-1', 'common', 'link-1');">common</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module lib.common.abstracts=lib.common.abstracts-module.html"><a title="lib.common.abstracts" class="py-name" href="#" onclick="return doclink('link-2', 'abstracts', 'link-2');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Class lib.common.abstracts.Package=lib.common.abstracts.Package-class.html"><a title="lib.common.abstracts.Package" class="py-name" href="#" onclick="return doclink('link-3', 'Package', 'link-3');">Package</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt id="link-4" class="py-name" targets="Variable lib.api.process.log=lib.api.process-module.html#log,Variable lib.common.registry.log=lib.common.registry-module.html#log,Variable lib.common.results.log=lib.common.results-module.html#log,Variable lib.core.pipe.log=lib.core.pipe-module.html#log,Variable lib.core.startup.log=lib.core.startup-module.html#log,Variable modules.auxiliary.disguise.log=modules.auxiliary.disguise-module.html#log,Variable modules.auxiliary.human.log=modules.auxiliary.human-module.html#log,Variable modules.auxiliary.installcert.log=modules.auxiliary.installcert-module.html#log,Variable modules.auxiliary.reboot.log=modules.auxiliary.reboot-module.html#log,Variable modules.auxiliary.recentfiles.log=modules.auxiliary.recentfiles-module.html#log,Variable modules.auxiliary.screenshots.log=modules.auxiliary.screenshots-module.html#log,Variable modules.packages.ie.log=modules.packages.ie-module.html#log,Variable modules.packages.js.log=modules.packages.js-module.html#log,Variable modules.packages.pdf.log=modules.packages.pdf-module.html#log,Variable modules.packages.reboot.log=modules.packages.reboot-module.html#log,Variable modules.packages.wsf.log=modules.packages.wsf-module.html#log,Variable modules.packages.zip.log=modules.packages.zip-module.html#log"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-4', 'log', 'link-4');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-name">__name__</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="IE"></a><div id="IE-def"><a name="L15"></a><tt class="py-lineno"> 15</tt> <a class="py-toggle" href="#" id="IE-toggle" onclick="return toggle('IE');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.packages.ie.IE-class.html">IE</a><tt class="py-op">(</tt><tt class="py-base-class">Package</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IE-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="IE-expanded"><a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">    <tt class="py-docstring">"""Internet Explorer analysis package."""</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">    <tt id="link-5" class="py-name" targets="Variable lib.common.abstracts.Package.PATHS=lib.common.abstracts.Package-class.html#PATHS,Variable modules.packages.applet.Applet.PATHS=modules.packages.applet.Applet-class.html#PATHS,Variable modules.packages.com.ComDll.PATHS=modules.packages.com.ComDll-class.html#PATHS,Variable modules.packages.cpl.CPL.PATHS=modules.packages.cpl.CPL-class.html#PATHS,Variable modules.packages.dll.Dll.PATHS=modules.packages.dll.Dll-class.html#PATHS,Variable modules.packages.doc.DOC.PATHS=modules.packages.doc.DOC-class.html#PATHS,Variable modules.packages.ff.Firefox.PATHS=modules.packages.ff.Firefox-class.html#PATHS,Variable modules.packages.generic.Generic.PATHS=modules.packages.generic.Generic-class.html#PATHS,Variable modules.packages.ie.IE.PATHS=modules.packages.ie.IE-class.html#PATHS,Variable modules.packages.jar.Jar.PATHS=modules.packages.jar.Jar-class.html#PATHS,Variable modules.packages.js.Javascript.PATHS=modules.packages.js.Javascript-class.html#PATHS,Variable modules.packages.msi.Msi.PATHS=modules.packages.msi.Msi-class.html#PATHS,Variable modules.packages.pdf.PDF.PATHS=modules.packages.pdf.PDF-class.html#PATHS,Variable modules.packages.ppt.PPT.PATHS=modules.packages.ppt.PPT-class.html#PATHS,Variable modules.packages.ps1.PS1.PATHS=modules.packages.ps1.PS1-class.html#PATHS,Variable modules.packages.pub.PUB.PATHS=modules.packages.pub.PUB-class.html#PATHS,Variable modules.packages.python.Python.PATHS=modules.packages.python.Python-class.html#PATHS,Variable modules.packages.vbs.VBS.PATHS=modules.packages.vbs.VBS-class.html#PATHS,Variable modules.packages.wsf.WSF.PATHS=modules.packages.wsf.WSF-class.html#PATHS,Variable modules.packages.xls.XLS.PATHS=modules.packages.xls.XLS-class.html#PATHS"><a title="lib.common.abstracts.Package.PATHS
+modules.packages.applet.Applet.PATHS
+modules.packages.com.ComDll.PATHS
+modules.packages.cpl.CPL.PATHS
+modules.packages.dll.Dll.PATHS
+modules.packages.doc.DOC.PATHS
+modules.packages.ff.Firefox.PATHS
+modules.packages.generic.Generic.PATHS
+modules.packages.ie.IE.PATHS
+modules.packages.jar.Jar.PATHS
+modules.packages.js.Javascript.PATHS
+modules.packages.msi.Msi.PATHS
+modules.packages.pdf.PDF.PATHS
+modules.packages.ppt.PPT.PATHS
+modules.packages.ps1.PS1.PATHS
+modules.packages.pub.PUB.PATHS
+modules.packages.python.Python.PATHS
+modules.packages.vbs.VBS.PATHS
+modules.packages.wsf.WSF.PATHS
+modules.packages.xls.XLS.PATHS" class="py-name" href="#" onclick="return doclink('link-5', 'PATHS', 'link-5');">PATHS</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">        <tt class="py-op">(</tt><tt class="py-string">"ProgramFiles"</tt><tt class="py-op">,</tt> <tt class="py-string">"Internet Explorer"</tt><tt class="py-op">,</tt> <tt class="py-string">"iexplore.exe"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">    <tt id="link-6" class="py-name" targets="Variable lib.common.abstracts.Package.REGKEYS=lib.common.abstracts.Package-class.html#REGKEYS,Variable modules.packages.doc.DOC.REGKEYS=modules.packages.doc.DOC-class.html#REGKEYS,Variable modules.packages.ie.IE.REGKEYS=modules.packages.ie.IE-class.html#REGKEYS,Variable modules.packages.pdf.PDF.REGKEYS=modules.packages.pdf.PDF-class.html#REGKEYS,Variable modules.packages.ppt.PPT.REGKEYS=modules.packages.ppt.PPT-class.html#REGKEYS,Variable modules.packages.pub.PUB.REGKEYS=modules.packages.pub.PUB-class.html#REGKEYS,Variable modules.packages.xls.XLS.REGKEYS=modules.packages.xls.XLS-class.html#REGKEYS"><a title="lib.common.abstracts.Package.REGKEYS
+modules.packages.doc.DOC.REGKEYS
+modules.packages.ie.IE.REGKEYS
+modules.packages.pdf.PDF.REGKEYS
+modules.packages.ppt.PPT.REGKEYS
+modules.packages.pub.PUB.REGKEYS
+modules.packages.xls.XLS.REGKEYS" class="py-name" href="#" onclick="return doclink('link-6', 'REGKEYS', 'link-6');">REGKEYS</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">        <tt class="py-op">[</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">            <tt class="py-name">HKEY_CURRENT_USER</tt><tt class="py-op">,</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">            <tt class="py-string">"Software\\Microsoft\\Internet Explorer\\Main"</tt><tt class="py-op">,</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">            <tt class="py-op">{</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">                <tt class="py-comment"># "Would you like Internet Explorer as default browser?"</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">                <tt class="py-string">"Check_Associations"</tt><tt class="py-op">:</tt> <tt class="py-string">"no"</tt><tt class="py-op">,</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">                <tt class="py-comment"># "Set Up Windows Internet Explorer 8"</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">                <tt class="py-string">"DisableFirstRunCustomize"</tt><tt class="py-op">:</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">            <tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">        <tt class="py-op">[</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">            <tt class="py-name">HKEY_CURRENT_USER</tt><tt class="py-op">,</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">            <tt class="py-string">"Software\\Microsoft\\Internet Explorer\\Security"</tt><tt class="py-op">,</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">            <tt class="py-op">{</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">                <tt class="py-string">"Safety Warning Level"</tt><tt class="py-op">:</tt> <tt class="py-string">"Low"</tt><tt class="py-op">,</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">                <tt class="py-string">"Sending_Security"</tt><tt class="py-op">:</tt> <tt class="py-string">"Low"</tt><tt class="py-op">,</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">                <tt class="py-string">"Viewing_Security"</tt><tt class="py-op">:</tt> <tt class="py-string">"Low"</tt><tt class="py-op">,</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">            <tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">        <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-op">[</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">            <tt class="py-name">HKEY_LOCAL_MACHINE</tt><tt class="py-op">,</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">            <tt class="py-string">"Software\\Microsoft\\Internet Explorer\\Main"</tt><tt class="py-op">,</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">            <tt class="py-op">{</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                <tt class="py-comment"># Disable Security Settings Check.</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">                <tt class="py-string">"DisableSecuritySettingsCheck"</tt><tt class="py-op">:</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">            <tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-op">[</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">            <tt class="py-name">HKEY_CURRENT_USER</tt><tt class="py-op">,</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">            <tt class="py-string">"Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl"</tt><tt class="py-op">,</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">            <tt class="py-op">{</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">                <tt class="py-string">"FEATURE_LOCALMACHINE_LOCKDOWN"</tt><tt class="py-op">:</tt> <tt class="py-op">{</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">                    <tt class="py-comment"># "To help protect your security, Internet Explorer has</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">                    <tt class="py-comment"># restricted this webpage from running scripts or ActiveX</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                    <tt class="py-comment"># controls that could access your computer. Click here for</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">                    <tt class="py-comment"># options..."</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">                    <tt class="py-string">"iexplore.exe"</tt><tt class="py-op">:</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                <tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">                <tt class="py-string">"FEATURE_RESTRICT_FILEDOWNLOAD"</tt><tt class="py-op">:</tt> <tt class="py-op">{</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">                    <tt class="py-comment"># "To help protect your security, Windows Internet</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">                    <tt class="py-comment"># Explorer blocked this site from downloading files to</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">                    <tt class="py-comment"># your computer. Click here for more options..."</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                    <tt class="py-string">"iexplore.exe"</tt><tt class="py-op">:</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                <tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">            <tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">        <tt class="py-op">[</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">            <tt class="py-name">HKEY_CURRENT_USER</tt><tt class="py-op">,</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">            <tt class="py-string">"Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings"</tt><tt class="py-op">,</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">            <tt class="py-op">{</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                <tt class="py-comment"># "You are about to be redirected to a connection that is not secure."</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                <tt class="py-string">"WarnOnHTTPSToHTTPRedirect"</tt><tt class="py-op">:</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">                <tt class="py-comment"># "You are about to view pages over a secure connection."</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">                <tt class="py-string">"WarnOnZoneCrossing"</tt><tt class="py-op">:</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">            <tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-op">[</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">            <tt class="py-name">HKEY_CURRENT_USER</tt><tt class="py-op">,</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">            <tt class="py-string">"Software\\Microsoft\\Internet Explorer\\Document Windows"</tt><tt class="py-op">,</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">            <tt class="py-op">{</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">                <tt class="py-comment"># Maximize the window by default.</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                <tt class="py-string">"Maximized"</tt><tt class="py-op">:</tt> <tt class="py-string">"yes"</tt><tt class="py-op">,</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">        <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">        <tt class="py-op">[</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">            <tt class="py-name">HKEY_CURRENT_USER</tt><tt class="py-op">,</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">            <tt class="py-string">"Software\\Microsoft\\Internet Explorer\\Download"</tt><tt class="py-op">,</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-op">{</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">                <tt class="py-comment"># "Internet Explorer - Security Warning"</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                <tt class="py-comment"># "The publisher could not be verified."</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                <tt class="py-string">"CheckExeSignatures"</tt><tt class="py-op">:</tt> <tt class="py-string">"no"</tt><tt class="py-op">,</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">            <tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">    <tt class="py-op">]</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"> </tt>
+<a name="IE.setup_proxy"></a><div id="IE.setup_proxy-def"><a name="L99"></a><tt class="py-lineno"> 99</tt> <a class="py-toggle" href="#" id="IE.setup_proxy-toggle" onclick="return toggle('IE.setup_proxy');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.packages.ie.IE-class.html#setup_proxy">setup_proxy</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">proxy_host</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IE.setup_proxy-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IE.setup_proxy-expanded"><a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-docstring">"""Configure Internet Explorer to route all traffic through a</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">        proxy."""</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method lib.common.abstracts.Package.init_regkeys()=lib.common.abstracts.Package-class.html#init_regkeys"><a title="lib.common.abstracts.Package.init_regkeys" class="py-name" href="#" onclick="return doclink('link-7', 'init_regkeys', 'link-7');">init_regkeys</a></tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-op">[</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">            <tt class="py-name">HKEY_CURRENT_USER</tt><tt class="py-op">,</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">            <tt class="py-string">"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings"</tt><tt class="py-op">,</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">            <tt class="py-op">{</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">                <tt class="py-string">"MigrateProxy"</tt><tt class="py-op">:</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">                <tt class="py-string">"ProxyEnable"</tt><tt class="py-op">:</tt> <tt class="py-number">1</tt><tt class="py-op">,</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">                <tt class="py-string">"ProxyHttp1.1"</tt><tt class="py-op">:</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">                <tt class="py-string">"ProxyServer"</tt><tt class="py-op">:</tt> <tt class="py-string">"http://%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">proxy_host</tt><tt class="py-op">,</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">                <tt class="py-string">"ProxyOverride"</tt><tt class="py-op">:</tt> <tt class="py-string">"&lt;local&gt;"</tt><tt class="py-op">,</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">            <tt class="py-op">}</tt><tt class="py-op">,</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-op">]</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="IE.start"></a><div id="IE.start-def"><a name="L114"></a><tt class="py-lineno">114</tt> <a class="py-toggle" href="#" id="IE.start-toggle" onclick="return toggle('IE.start');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.packages.ie.IE-class.html#start">start</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">target</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="IE.start-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="IE.start-expanded"><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">"proxy"</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">options</tt><tt class="py-op">:</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method modules.packages.ie.IE.setup_proxy()=modules.packages.ie.IE-class.html#setup_proxy"><a title="modules.packages.ie.IE.setup_proxy" class="py-name" href="#" onclick="return doclink('link-8', 'setup_proxy', 'link-8');">setup_proxy</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">options</tt><tt class="py-op">[</tt><tt class="py-string">"proxy"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-comment"># If it's a HTML file, force an extension, or otherwise Internet</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-comment"># Explorer will open it as a text file or something else non-html.</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">target</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">target</tt><tt class="py-op">.</tt><tt class="py-name">endswith</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-string">".htm"</tt><tt class="py-op">,</tt> <tt class="py-string">".html"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">            <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">rename</tt><tt class="py-op">(</tt><tt class="py-name">target</tt><tt class="py-op">,</tt> <tt class="py-name">target</tt> <tt class="py-op">+</tt> <tt class="py-string">".html"</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">            <tt class="py-name">target</tt> <tt class="py-op">+=</tt> <tt class="py-string">".html"</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">            <tt id="link-9" class="py-name"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-9', 'log', 'link-4');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"Submitted file is missing extension, adding .html"</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-name">iexplore</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method lib.common.abstracts.Package.get_path()=lib.common.abstracts.Package-class.html#get_path"><a title="lib.common.abstracts.Package.get_path" class="py-name" href="#" onclick="return doclink('link-10', 'get_path', 'link-10');">get_path</a></tt><tt class="py-op">(</tt><tt class="py-string">"Internet Explorer"</tt><tt class="py-op">)</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method lib.api.process.Process.execute()=lib.api.process.Process-class.html#execute,Method lib.common.abstracts.Package.execute()=lib.common.abstracts.Package-class.html#execute"><a title="lib.api.process.Process.execute
+lib.common.abstracts.Package.execute" class="py-name" href="#" onclick="return doclink('link-11', 'execute', 'link-11');">execute</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">            <tt class="py-name">iexplore</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-name">target</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">maximize</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">,</tt> <tt class="py-name">mode</tt><tt class="py-op">=</tt><tt class="py-string">"iexplore"</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">        <tt class="py-op">)</tt> </tt>
+</div></div><a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:04 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

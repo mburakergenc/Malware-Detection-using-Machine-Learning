@@ -1,0 +1,544 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Distributed Cuckoo &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../index.html" />
+    <link rel="up" title="Usage" href="index.html" />
+    <link rel="next" title="Analysis Packages" href="packages.html" />
+    <link rel="prev" title="REST API" href="api.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="packages.html" title="Analysis Packages"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="api.html" title="REST API"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Usage</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="distributed-cuckoo">
+<h1>Distributed Cuckoo<a class="headerlink" href="#distributed-cuckoo" title="Permalink to this headline">¶</a></h1>
+<p>As mentioned in <a class="reference internal" href="submit.html"><span class="doc">Submit an Analysis</span></a>, Cuckoo provides a REST API for Distributed
+Cuckoo usage. The distributed script allows one to setup a single REST API
+point to which samples and URLs can be submitted which will then, in turn, be
+submitted to one of the configured Cuckoo nodes.</p>
+<p>A typical setup thus includes a machine on which the distributed script is run
+and one or more machines running an instance of the Cuckoo daemon
+(<code class="docutils literal"><span class="pre">./cuckoo.py</span></code>) and the <a class="reference internal" href="api.html"><span class="doc">Cuckoo REST API</span></a>.</p>
+<p>A few notes;</p>
+<ul class="simple">
+<li>Using the distributed script makes more sense when running at least two
+cuckoo nodes.</li>
+<li>The distributed script can be run on a machine that also runs a Cuckoo
+daemon and REST API, however, make sure it has enough disk space if the
+intention is to submit a lot of samples.</li>
+</ul>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>The distributed script uses a few Python libraries which can be installed
+through the following command (on Debian/Ubuntu):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo pip install flask flask-sqlalchemy requests
+</pre></div>
+</div>
+</div>
+<div class="section" id="starting-the-distributed-rest-api">
+<h2>Starting the Distributed REST API<a class="headerlink" href="#starting-the-distributed-rest-api" title="Permalink to this headline">¶</a></h2>
+<p>The Distributed REST API requires a few commandline options in order to run.
+Following is a listing of all available commandline options:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ ./distributed/app.py -h
+
+usage: app.py [-h] [-s SETTINGS] [-v] [host] [port]
+
+positional arguments:
+    host                  Host to listen on.
+    port                  Port to listen on.
+
+optional arguments:
+    -h, --help            show this help message and exit
+    -s SETTINGS, --settings SETTINGS
+                          Settings file.
+    -v, --verbose         Enable verbose logging.
+</pre></div>
+</div>
+<p>The various configuration options are described in the configuration file, but following we have more in-depth
+descriptions as well.</p>
+<div class="section" id="report-formats">
+<h3>Report Formats<a class="headerlink" href="#report-formats" title="Permalink to this headline">¶</a></h3>
+<p>The reporting formats denote which reports you&#8217;d like to retrieve later on.
+Note that all task-related data will be removed from the Cuckoo nodes once the
+related reports have been fetches so that the machines are not running out of
+disk space. This does, however, force you to specify all the report formats
+that you&#8217;re interested in, because otherwise that information will be lost.</p>
+<p>Reporting formats include, but are not limited to and may also include your
+own reporting formats, <code class="docutils literal"><span class="pre">json</span></code>, <code class="docutils literal"><span class="pre">html</span></code>, etc.</p>
+</div>
+<div class="section" id="samples-directory">
+<h3>Samples Directory<a class="headerlink" href="#samples-directory" title="Permalink to this headline">¶</a></h3>
+<p>The samples directory denotes the directory where the submitted samples will
+be stored temporarily, until they&#8217;re passed on to a Cuckoo node and processed.</p>
+</div>
+<div class="section" id="reports-directory">
+<h3>Reports Directory<a class="headerlink" href="#reports-directory" title="Permalink to this headline">¶</a></h3>
+<p>Much like the <code class="docutils literal"><span class="pre">Samples</span> <span class="pre">Directory</span></code> the Reports Directory defines the
+directory where reports will be stored until they&#8217;re fetched and deleted from
+the Distributed REST API.</p>
+</div>
+</div>
+<div class="section" id="restful-resources">
+<h2>RESTful resources<a class="headerlink" href="#restful-resources" title="Permalink to this headline">¶</a></h2>
+<p>Following are all RESTful resources. Also make sure to check out the
+<a class="reference internal" href="#quick-usage"><span class="std std-ref">Quick usage</span></a> section which documents the most commonly used commands.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Resource</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">GET</span></code> <a class="reference internal" href="#node-root-get"><span class="std std-ref">GET /api/node</span></a></td>
+<td>Get a list of all enabled Cuckoo nodes.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">POST</span></code> <a class="reference internal" href="#node-root-post"><span class="std std-ref">POST /api/node</span></a></td>
+<td>Register a new Cuckoo node.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">GET</span></code> <a class="reference internal" href="#node-get"><span class="std std-ref">GET /api/node/&lt;name&gt;</span></a></td>
+<td>Get basic information about a node.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">PUT</span></code> <a class="reference internal" href="#node-put"><span class="std std-ref">PUT /api/node/&lt;name&gt;</span></a></td>
+<td>Update basic information of a node.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">DELETE</span></code> <a class="reference internal" href="#node-delete"><span class="std std-ref">DELETE /api/node/&lt;name&gt;</span></a></td>
+<td>Disable (not completely remove!) a node.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">GET</span></code> <a class="reference internal" href="#task-root-get"><span class="std std-ref">GET /api/task</span></a></td>
+<td>Get a list of all (or a part) of the tasks in the database.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">POST</span></code> <a class="reference internal" href="#task-root-post"><span class="std std-ref">POST /api/task</span></a></td>
+<td>Create a new analysis task.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">GET</span></code> <a class="reference internal" href="#task-get"><span class="std std-ref">GET /api/task/&lt;id&gt;</span></a></td>
+<td>Get basic information about a task.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">DELETE</span></code> <a class="reference internal" href="#task-delete"><span class="std std-ref">DELETE /api/task/&lt;id&gt;</span></a></td>
+<td>Delete all associated information of a task.</td>
+</tr>
+<tr class="row-odd"><td rowspan="2"><code class="docutils literal"><span class="pre">GET</span></code> <a class="reference internal" href="#report-get"><span class="std std-ref">GET /api/report/&lt;id&gt;/&lt;format&gt;</span></a></td>
+<td rowspan="2">Fetch an analysis report.</td>
+</tr>
+<tr class="row-even"></tr>
+</tbody>
+</table>
+<div class="section" id="get-api-node">
+<span id="node-root-get"></span><h3>GET /api/node<a class="headerlink" href="#get-api-node" title="Permalink to this headline">¶</a></h3>
+<p>Returns all enabled nodes. For each node its associated name, API url, and
+machines are returned:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl http://localhost:9003/api/node
+{
+    &quot;success&quot;: true,
+    &quot;nodes&quot;: {
+        &quot;localhost&quot;: {
+            &quot;machines&quot;: [
+                {
+                    &quot;name&quot;: &quot;cuckoo1&quot;,
+                    &quot;platform&quot;: &quot;windows&quot;,
+                    &quot;tags&quot;: []
+                }
+            ],
+            &quot;name&quot;: &quot;localhost&quot;,
+            &quot;url&quot;: &quot;http://localhost:8090/&quot;
+        }
+    }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="post-api-node">
+<span id="node-root-post"></span><h3>POST /api/node<a class="headerlink" href="#post-api-node" title="Permalink to this headline">¶</a></h3>
+<p>Register a new Cuckoo node by providing the name and the URL:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl http://localhost:9003/api/node -F name=localhost \
+    -F url=http://localhost:8090/
+{
+    &quot;success&quot;: true
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-api-node-name">
+<span id="node-get"></span><h3>GET /api/node/&lt;name&gt;<a class="headerlink" href="#get-api-node-name" title="Permalink to this headline">¶</a></h3>
+<p>Get basic information about a particular Cuckoo node:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl http://localhost:9003/api/node/localhost
+{
+    &quot;success&quot;: true,
+    &quot;nodes&quot;: [
+        {
+            &quot;name&quot;: &quot;localhost&quot;,
+            &quot;url&quot;: &quot;http://localhost:8090/&quot;
+            &quot;machines&quot;: [
+                {
+                    &quot;name&quot;: &quot;cuckoo1&quot;,
+                    &quot;platform&quot;: &quot;windows&quot;,
+                    &quot;tags&quot;: []
+                }
+            ]
+        }
+    ]
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="put-api-node-name">
+<span id="node-put"></span><h3>PUT /api/node/&lt;name&gt;<a class="headerlink" href="#put-api-node-name" title="Permalink to this headline">¶</a></h3>
+<p>Update basic information of a Cuckoo node:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -XPUT http://localhost:9003/api/node/localhost -F name=newhost \
+    -F url=http://1.2.3.4:8090/
+{
+    &quot;success&quot;: true
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete-api-node-name">
+<span id="node-delete"></span><h3>DELETE /api/node/&lt;name&gt;<a class="headerlink" href="#delete-api-node-name" title="Permalink to this headline">¶</a></h3>
+<p>Disable a Cuckoo node, therefore not having it process any new tasks, but
+keeping its history in the Distributed&#8217;s database:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -XDELETE http://localhost:9003/node/localhost
+{
+    &quot;success&quot;: true
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-api-task">
+<span id="task-root-get"></span><h3>GET /api/task<a class="headerlink" href="#get-api-task" title="Permalink to this headline">¶</a></h3>
+<p>Get a list of all tasks in the database. In order to limit the amount of
+results, there&#8217;s an <code class="docutils literal"><span class="pre">offset</span></code>, <code class="docutils literal"><span class="pre">limit</span></code>, <code class="docutils literal"><span class="pre">finished</span></code>, and <code class="docutils literal"><span class="pre">owner</span></code> field
+available:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl http://localhost:9003/api/task?limit=1
+{
+    &quot;success&quot;: true,
+    &quot;tasks&quot;: {
+        &quot;1&quot;: {
+            &quot;clock&quot;: null,
+            &quot;custom&quot;: null,
+            &quot;owner&quot;: &quot;&quot;,
+            &quot;enforce_timeout&quot;: null,
+            &quot;machine&quot;: null,
+            &quot;memory&quot;: null,
+            &quot;options&quot;: null,
+            &quot;package&quot;: null,
+            &quot;path&quot;: &quot;/tmp/dist-samples/tmphal8mS&quot;,
+            &quot;platform&quot;: &quot;windows&quot;,
+            &quot;priority&quot;: 1,
+            &quot;tags&quot;: null,
+            &quot;task_id&quot;: 1,
+            &quot;timeout&quot;: null
+        }
+    }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="post-api-task">
+<span id="task-root-post"></span><h3>POST /api/task<a class="headerlink" href="#post-api-task" title="Permalink to this headline">¶</a></h3>
+<p>Submit a new file or URL to be analyzed:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl http://localhost:9003/api/task -F file=@sample.exe
+{
+    &quot;success&quot;: true,
+    &quot;task_id&quot;: 2
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-api-task-id">
+<span id="task-get"></span><h3>GET /api/task/&lt;id&gt;<a class="headerlink" href="#get-api-task-id" title="Permalink to this headline">¶</a></h3>
+<p>Get basic information about a particular task:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl http://localhost:9003/api/task/2
+{
+    &quot;success&quot;: true,
+    &quot;tasks&quot;: {
+        &quot;2&quot;: {
+            &quot;id&quot;: 2,
+            &quot;clock&quot;: null,
+            &quot;custom&quot;: null,
+            &quot;owner&quot;: &quot;&quot;,
+            &quot;enforce_timeout&quot;: null,
+            &quot;machine&quot;: null,
+            &quot;memory&quot;: null,
+            &quot;options&quot;: null,
+            &quot;package&quot;: null,
+            &quot;path&quot;: &quot;/tmp/tmpPwUeXm&quot;,
+            &quot;platform&quot;: &quot;windows&quot;,
+            &quot;priority&quot;: 1,
+            &quot;tags&quot;: null,
+            &quot;timeout&quot;: null,
+            &quot;task_id&quot;: 1,
+            &quot;node_id&quot;: 2,
+            &quot;finished&quot;: false
+        }
+    }
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="delete-api-task-id">
+<span id="task-delete"></span><h3>DELETE /api/task/&lt;id&gt;<a class="headerlink" href="#delete-api-task-id" title="Permalink to this headline">¶</a></h3>
+<p>Delete all associated data of a task, namely the binary and the reports:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -XDELETE http://localhost:9003/api/task/2
+{
+    &quot;success&quot;: true
+}
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-api-report-id-format">
+<span id="report-get"></span><h3>GET /api/report/&lt;id&gt;/&lt;format&gt;<a class="headerlink" href="#get-api-report-id-format" title="Permalink to this headline">¶</a></h3>
+<p>Fetch a report for the given task in the specified format:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span># Defaults to the JSON report.
+$ curl http://localhost:9003/report/2
+...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="quick-usage">
+<span id="id1"></span><h2>Quick usage<a class="headerlink" href="#quick-usage" title="Permalink to this headline">¶</a></h2>
+<p>For practical usage the following few commands will be most interesting.</p>
+<p>Register a Cuckoo node - a Cuckoo API running on the same machine in this
+case:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl http://localhost:9003/api/node \
+    -F name=localhost -F url=http://localhost:8090/
+</pre></div>
+</div>
+<p>Disable a Cuckoo node:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl -XDELETE http://localhost:9003/api/node/localhost
+</pre></div>
+</div>
+<p>Submit a new analysis task without any special requirements (e.g., using
+Cuckoo <code class="docutils literal"><span class="pre">tags</span></code>, a particular machine, etc):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl http://localhost:9003/api/task -F file=@/path/to/sample.exe
+</pre></div>
+</div>
+<p>Get the report of a task has been finished (if it hasn&#8217;t finished you&#8217;ll get
+an error with code 420). Following example will default to the <code class="docutils literal"><span class="pre">JSON</span></code>
+report:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl http://localhost:9003/api/report/1
+</pre></div>
+</div>
+</div>
+<div class="section" id="proposed-setup">
+<h2>Proposed setup<a class="headerlink" href="#proposed-setup" title="Permalink to this headline">¶</a></h2>
+<p>The following description depicts a Distributed Cuckoo setup with two Cuckoo
+machines, <strong>cuckoo0</strong> and <strong>cuckoo1</strong>. In this setup the first machine,
+cuckoo0, also hosts the Distributed Cuckoo REST API.</p>
+<div class="section" id="configuration-settings">
+<h3>Configuration settings<a class="headerlink" href="#configuration-settings" title="Permalink to this headline">¶</a></h3>
+<p>Our setup will require a couple of updates with regards to the configuration
+files.</p>
+<div class="section" id="conf-cuckoo-conf">
+<h4>conf/cuckoo.conf<a class="headerlink" href="#conf-cuckoo-conf" title="Permalink to this headline">¶</a></h4>
+<p>Update <code class="docutils literal"><span class="pre">process_results</span></code> to <code class="docutils literal"><span class="pre">off</span></code> as we will be running our own results
+processing script (for performance reasons).</p>
+<p>Update <code class="docutils literal"><span class="pre">tmppath</span></code> to something that holds enough storage to store a few
+hundred binaries. On some servers or setups <code class="docutils literal"><span class="pre">/tmp</span></code> may have a limited amount
+of space and thus this wouldn&#8217;t suffice.</p>
+<p>Update <code class="docutils literal"><span class="pre">connection</span></code> to use something <em>not</em> sqlite3. Preferably PostgreSQL or
+MySQL. SQLite3 doesn&#8217;t support multi-threaded applications that well and this
+will give errors at random if used.</p>
+<p>You should create your own empty database for the distributed cuckoo setup. Do not be tempted to use any existing cuckoo database in order to avoid update problems with the DB scripts. In the config use the new database name, the remaining stuff like usernames , servers can be the same as for your cuckoo install.Don´t forget to use one DB per node and another one more for the first machine which run the distributed script (so the say the &#8220;management machine&#8221; ).</p>
+</div>
+<div class="section" id="conf-processing-conf">
+<h4>conf/processing.conf<a class="headerlink" href="#conf-processing-conf" title="Permalink to this headline">¶</a></h4>
+<p>You may want to disable some processing modules, such as <code class="docutils literal"><span class="pre">virustotal</span></code>.</p>
+</div>
+<div class="section" id="conf-reporting-conf">
+<h4>conf/reporting.conf<a class="headerlink" href="#conf-reporting-conf" title="Permalink to this headline">¶</a></h4>
+<p>Depending on which report(s) are required for integration with your system it
+might make sense to only make those report(s) that you&#8217;re going to use. Thus
+disable the other ones.</p>
+</div>
+<div class="section" id="conf-virtualbox-conf">
+<h4>conf/virtualbox.conf<a class="headerlink" href="#conf-virtualbox-conf" title="Permalink to this headline">¶</a></h4>
+<p>Assuming <code class="docutils literal"><span class="pre">VirtualBox</span></code> is the Virtual Machine manager of choice, the <code class="docutils literal"><span class="pre">mode</span></code>
+will have to be changed to <code class="docutils literal"><span class="pre">headless</span></code> or you will have some restless nights.</p>
+</div>
+</div>
+<div class="section" id="setup-cuckoo">
+<h3>Setup Cuckoo<a class="headerlink" href="#setup-cuckoo" title="Permalink to this headline">¶</a></h3>
+<p>On each machine the following three scripts should be ran:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">cuckoo</span><span class="o">.</span><span class="n">py</span>
+<span class="o">./</span><span class="n">utils</span><span class="o">/</span><span class="n">api</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">H</span> <span class="mf">1.2</span><span class="o">.</span><span class="mf">3.4</span>  <span class="c1"># IP accessible by the Distributed script.</span>
+<span class="o">./</span><span class="n">utils</span><span class="o">/</span><span class="n">process</span><span class="o">.</span><span class="n">py</span> <span class="n">auto</span>
+</pre></div>
+</div>
+<p>One way to do this is by placing each script in its own <code class="docutils literal"><span class="pre">screen(1)</span></code> session
+as follows, this allows one to check back on each script to ensure it&#8217;s
+(still) running successfully:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ screen -S cuckoo  ./cuckoo.py
+$ screen -S api     ./utils/api.py
+$ screen -S process ./utils/process.py auto
+</pre></div>
+</div>
+</div>
+<div class="section" id="setup-distributed-cuckoo">
+<h3>Setup Distributed Cuckoo<a class="headerlink" href="#setup-distributed-cuckoo" title="Permalink to this headline">¶</a></h3>
+<p>On the first machine (so the say the &#8220;management machine&#8221; ) start a few separate <code class="docutils literal"><span class="pre">screen(1)</span></code> sessions for the
+Distributed Cuckoo scripts with all the required parameters (see the rest of
+the documentation on the parameters for this script):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ screen -S distributed ./distributed/app.py
+$ SCREEN -S dist_scheduler ./distributed/instance.py dist.scheduler
+$ SCREEN -S dist_status ./distributed/instance.py dist.status
+$ SCREEN -S cuckoo0 ./distributed/instance.py -v cuckoo0
+$ SCREEN -S cuckoo1 ./distributed/instance.py -v cuckoo1
+</pre></div>
+</div>
+<p>The -v parameter enables verbose output and the cuckoo1 parameter is the name assigned to the actual cuckoo instance running the virtual machine while registering the node as outlined below.It´s mandatory to register the nodes before run the instance.py due to the script check the DB.</p>
+</div>
+<div class="section" id="register-cuckoo-nodes">
+<h3>Register Cuckoo nodes<a class="headerlink" href="#register-cuckoo-nodes" title="Permalink to this headline">¶</a></h3>
+<p>As outlined in <a class="reference internal" href="#quick-usage"><span class="std std-ref">Quick usage</span></a> the Cuckoo nodes have to be registered with
+the Distributed Cuckoo script:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ curl http://localhost:9003/api/node -F name=cuckoo0 -F url=http://localhost:8090/
+$ curl http://localhost:9003/api/node -F name=cuckoo1 -F url=http://1.2.3.4:8090/
+</pre></div>
+</div>
+<p>Having registered the Cuckoo nodes all that&#8217;s left to do now is to submit
+tasks and fetch reports once finished. Documentation on these commands can be
+found in the <a class="reference internal" href="#quick-usage"><span class="std std-ref">Quick usage</span></a> section. In case you are not using localhost, replace localhost with the IP of the node where there distributed.py is running and the -F url parameter points to the nodes running the actual virtual machines.</p>
+<p>If you want to experiment a real load balancing between the nodes you should use a lower value for the threshold parameter in the distributed/settings.py file, the default value is 500.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Distributed Cuckoo</a><ul>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#starting-the-distributed-rest-api">Starting the Distributed REST API</a><ul>
+<li><a class="reference internal" href="#report-formats">Report Formats</a></li>
+<li><a class="reference internal" href="#samples-directory">Samples Directory</a></li>
+<li><a class="reference internal" href="#reports-directory">Reports Directory</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#restful-resources">RESTful resources</a><ul>
+<li><a class="reference internal" href="#get-api-node">GET /api/node</a></li>
+<li><a class="reference internal" href="#post-api-node">POST /api/node</a></li>
+<li><a class="reference internal" href="#get-api-node-name">GET /api/node/&lt;name&gt;</a></li>
+<li><a class="reference internal" href="#put-api-node-name">PUT /api/node/&lt;name&gt;</a></li>
+<li><a class="reference internal" href="#delete-api-node-name">DELETE /api/node/&lt;name&gt;</a></li>
+<li><a class="reference internal" href="#get-api-task">GET /api/task</a></li>
+<li><a class="reference internal" href="#post-api-task">POST /api/task</a></li>
+<li><a class="reference internal" href="#get-api-task-id">GET /api/task/&lt;id&gt;</a></li>
+<li><a class="reference internal" href="#delete-api-task-id">DELETE /api/task/&lt;id&gt;</a></li>
+<li><a class="reference internal" href="#get-api-report-id-format">GET /api/report/&lt;id&gt;/&lt;format&gt;</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#quick-usage">Quick usage</a></li>
+<li><a class="reference internal" href="#proposed-setup">Proposed setup</a><ul>
+<li><a class="reference internal" href="#configuration-settings">Configuration settings</a><ul>
+<li><a class="reference internal" href="#conf-cuckoo-conf">conf/cuckoo.conf</a></li>
+<li><a class="reference internal" href="#conf-processing-conf">conf/processing.conf</a></li>
+<li><a class="reference internal" href="#conf-reporting-conf">conf/reporting.conf</a></li>
+<li><a class="reference internal" href="#conf-virtualbox-conf">conf/virtualbox.conf</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#setup-cuckoo">Setup Cuckoo</a></li>
+<li><a class="reference internal" href="#setup-distributed-cuckoo">Setup Distributed Cuckoo</a></li>
+<li><a class="reference internal" href="#register-cuckoo-nodes">Register Cuckoo nodes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="previous chapter">REST API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="packages.html"
+                        title="next chapter">Analysis Packages</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usage/dist.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="packages.html" title="Analysis Packages"
+             >next</a></li>
+        <li class="right" >
+          <a href="api.html" title="REST API"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Usage</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

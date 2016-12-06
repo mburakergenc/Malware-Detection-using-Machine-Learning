@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>lib.core.startup</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="lib-module.html">Package&nbsp;lib</a> ::
+        <a href="lib.core-module.html">Package&nbsp;core</a> ::
+        Module&nbsp;startup
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="lib.core.startup-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="lib.core.startup-module.html">Module lib.core.startup</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">ctypes</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.common=lib.common-module.html"><a title="lib.common" class="py-name" href="#" onclick="return doclink('link-1', 'common', 'link-1');">common</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Module lib.common.defines=lib.common.defines-module.html"><a title="lib.common.defines" class="py-name" href="#" onclick="return doclink('link-2', 'defines', 'link-2');">defines</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name" targets="Variable lib.common.defines.KERNEL32=lib.common.defines-module.html#KERNEL32"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-3', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">,</tt> <tt id="link-4" class="py-name" targets="Class lib.common.defines.SYSTEMTIME=lib.common.defines.SYSTEMTIME-class.html"><a title="lib.common.defines.SYSTEMTIME" class="py-name" href="#" onclick="return doclink('link-4', 'SYSTEMTIME', 'link-4');">SYSTEMTIME</a></tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-5', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="lib.common" class="py-name" href="#" onclick="return doclink('link-6', 'common', 'link-1');">common</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Module lib.common.results=lib.common.results-module.html"><a title="lib.common.results" class="py-name" href="#" onclick="return doclink('link-7', 'results', 'link-7');">results</a></tt> <tt class="py-keyword">import</tt> <tt id="link-8" class="py-name" targets="Class lib.common.results.NetlogHandler=lib.common.results.NetlogHandler-class.html"><a title="lib.common.results.NetlogHandler" class="py-name" href="#" onclick="return doclink('link-8', 'NetlogHandler', 'link-8');">NetlogHandler</a></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable lib.api.process.log=lib.api.process-module.html#log,Variable lib.common.registry.log=lib.common.registry-module.html#log,Variable lib.common.results.log=lib.common.results-module.html#log,Variable lib.core.pipe.log=lib.core.pipe-module.html#log,Variable lib.core.startup.log=lib.core.startup-module.html#log,Variable modules.auxiliary.disguise.log=modules.auxiliary.disguise-module.html#log,Variable modules.auxiliary.human.log=modules.auxiliary.human-module.html#log,Variable modules.auxiliary.installcert.log=modules.auxiliary.installcert-module.html#log,Variable modules.auxiliary.reboot.log=modules.auxiliary.reboot-module.html#log,Variable modules.auxiliary.recentfiles.log=modules.auxiliary.recentfiles-module.html#log,Variable modules.auxiliary.screenshots.log=modules.auxiliary.screenshots-module.html#log,Variable modules.packages.ie.log=modules.packages.ie-module.html#log,Variable modules.packages.js.log=modules.packages.js-module.html#log,Variable modules.packages.pdf.log=modules.packages.pdf-module.html#log,Variable modules.packages.reboot.log=modules.packages.reboot-module.html#log,Variable modules.packages.wsf.log=modules.packages.wsf-module.html#log,Variable modules.packages.zip.log=modules.packages.zip-module.html#log"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-9', 'log', 'link-9');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
+<a name="init_logging"></a><div id="init_logging-def"><a name="L14"></a><tt class="py-lineno">14</tt> <a class="py-toggle" href="#" id="init_logging-toggle" onclick="return toggle('init_logging');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.startup-module.html#init_logging">init_logging</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="init_logging-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="init_logging-expanded"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">    <tt class="py-docstring">"""Initialize logger."""</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">    <tt class="py-name">formatter</tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">Formatter</tt><tt class="py-op">(</tt><tt class="py-string">"%(asctime)s [%(name)s] %(levelname)s: %(message)s"</tt><tt class="py-op">)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line">    <tt class="py-name">sh</tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">StreamHandler</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">    <tt class="py-name">sh</tt><tt class="py-op">.</tt><tt class="py-name">setFormatter</tt><tt class="py-op">(</tt><tt class="py-name">formatter</tt><tt class="py-op">)</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line">    <tt id="link-10" class="py-name"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-10', 'log', 'link-9');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">addHandler</tt><tt class="py-op">(</tt><tt class="py-name">sh</tt><tt class="py-op">)</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">    <tt class="py-name">nh</tt> <tt class="py-op">=</tt> <tt id="link-11" class="py-name"><a title="lib.common.results.NetlogHandler" class="py-name" href="#" onclick="return doclink('link-11', 'NetlogHandler', 'link-8');">NetlogHandler</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">    <tt class="py-name">nh</tt><tt class="py-op">.</tt><tt class="py-name">setFormatter</tt><tt class="py-op">(</tt><tt class="py-name">formatter</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">    <tt id="link-12" class="py-name"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-12', 'log', 'link-9');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">addHandler</tt><tt class="py-op">(</tt><tt class="py-name">nh</tt><tt class="py-op">)</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">    <tt id="link-13" class="py-name"><a title="lib.api.process.log
+lib.common.registry.log
+lib.common.results.log
+lib.core.pipe.log
+lib.core.startup.log
+modules.auxiliary.disguise.log
+modules.auxiliary.human.log
+modules.auxiliary.installcert.log
+modules.auxiliary.reboot.log
+modules.auxiliary.recentfiles.log
+modules.auxiliary.screenshots.log
+modules.packages.ie.log
+modules.packages.js.log
+modules.packages.pdf.log
+modules.packages.reboot.log
+modules.packages.wsf.log
+modules.packages.zip.log" class="py-name" href="#" onclick="return doclink('link-13', 'log', 'link-9');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">setLevel</tt><tt class="py-op">(</tt><tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">DEBUG</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="set_clock"></a><div id="set_clock-def"><a name="L27"></a><tt class="py-lineno">27</tt> <a class="py-toggle" href="#" id="set_clock-toggle" onclick="return toggle('set_clock');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="lib.core.startup-module.html#set_clock">set_clock</a><tt class="py-op">(</tt><tt class="py-param">clock</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="set_clock-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="set_clock-expanded"><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">    <tt class="py-name">st</tt> <tt class="py-op">=</tt> <tt id="link-14" class="py-name"><a title="lib.common.defines.SYSTEMTIME" class="py-name" href="#" onclick="return doclink('link-14', 'SYSTEMTIME', 'link-4');">SYSTEMTIME</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">    <tt class="py-name">st</tt><tt class="py-op">.</tt><tt class="py-name">wYear</tt> <tt class="py-op">=</tt> <tt class="py-name">clock</tt><tt class="py-op">.</tt><tt class="py-name">year</tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">    <tt class="py-name">st</tt><tt class="py-op">.</tt><tt class="py-name">wMonth</tt> <tt class="py-op">=</tt> <tt class="py-name">clock</tt><tt class="py-op">.</tt><tt class="py-name">month</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">    <tt class="py-name">st</tt><tt class="py-op">.</tt><tt class="py-name">wDay</tt> <tt class="py-op">=</tt> <tt class="py-name">clock</tt><tt class="py-op">.</tt><tt class="py-name">day</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">    <tt class="py-name">st</tt><tt class="py-op">.</tt><tt class="py-name">wHour</tt> <tt class="py-op">=</tt> <tt class="py-name">clock</tt><tt class="py-op">.</tt><tt class="py-name">hour</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">    <tt class="py-name">st</tt><tt class="py-op">.</tt><tt class="py-name">wMinute</tt> <tt class="py-op">=</tt> <tt class="py-name">clock</tt><tt class="py-op">.</tt><tt class="py-name">minute</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">    <tt class="py-name">st</tt><tt class="py-op">.</tt><tt class="py-name">wSecond</tt> <tt class="py-op">=</tt> <tt class="py-name">clock</tt><tt class="py-op">.</tt><tt class="py-name">second</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line">    <tt class="py-name">st</tt><tt class="py-op">.</tt><tt class="py-name">wMilliseconds</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">    <tt id="link-15" class="py-name"><a title="lib.common.defines.KERNEL32" class="py-name" href="#" onclick="return doclink('link-15', 'KERNEL32', 'link-3');">KERNEL32</a></tt><tt class="py-op">.</tt><tt class="py-name">SetLocalTime</tt><tt class="py-op">(</tt><tt class="py-name">ctypes</tt><tt class="py-op">.</tt><tt class="py-name">byref</tt><tt class="py-op">(</tt><tt class="py-name">st</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:04 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

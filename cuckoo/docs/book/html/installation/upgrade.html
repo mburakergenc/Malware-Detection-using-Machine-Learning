@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Upgrade from a previous release &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../index.html" />
+    <link rel="up" title="Installation" href="index.html" />
+    <link rel="next" title="Usage" href="../usage/index.html" />
+    <link rel="prev" title="Saving the Guest" href="guest_physical/saving.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../usage/index.html" title="Usage"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="guest_physical/saving.html" title="Saving the Guest"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Installation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="upgrade-from-a-previous-release">
+<h1>Upgrade from a previous release<a class="headerlink" href="#upgrade-from-a-previous-release" title="Permalink to this headline">¶</a></h1>
+<p>Cuckoo Sandbox grows really fast and in every release new features are added and
+some others are fixed or removed.
+There are two ways to upgrade your Cuckoo: start from scratch or migrate your
+&#8220;old&#8221; setup (migration is supported only starting from Cuckoo 0.6).
+The suggested way to upgrade Cuckoo is to start from a fresh setup because it&#8217;s
+easier and faster than migrate your old setup.</p>
+<div class="section" id="upgrade-starting-from-scratch">
+<h2>Upgrade starting from scratch<a class="headerlink" href="#upgrade-starting-from-scratch" title="Permalink to this headline">¶</a></h2>
+<p>To start from scratch you have to perform a fresh setup as described in <a class="reference internal" href="index.html"><span class="doc">Installation</span></a>.
+The following steps are suggested:</p>
+<ol class="arabic simple">
+<li>Backup your installation.</li>
+<li>Read the documentation shipped with the new release.</li>
+<li>Make sure to have installed all required dependencies, otherwise install them.</li>
+<li>Do a Cuckoo fresh installation of the Host components.</li>
+<li>Reconfigure Cuckoo as explained in this book (copying old configuration files
+is not safe because options can change between releases).</li>
+<li>If you are using an external database instead of the default or you are using
+the MongoDb reporting module is suggested to start all databases from scratch,
+due to possible schema changes between Cuckoo releases.</li>
+<li>Test it!</li>
+</ol>
+<p>If something goes wrong you probably failed to do some steps during the fresh
+installation or reconfiguration. Check again the procedure explained in this
+book.</p>
+<p>It&#8217;s not recommended to rewrite an old Cuckoo installation with the latest
+release files, as it might raise some problems because:</p>
+<ul class="simple">
+<li>You are overwriting Python source files (.py) but Python bytecode files (.pyc)
+are still in place.</li>
+<li>There are configuration files changes across the two versions, check our
+CHANGELOG file for added or removed configuration options.</li>
+<li>The part of Cuckoo which runs inside guests (agent.py) may change.</li>
+<li>If you are using an external database like the reporting module for MongoDb a
+change in the data schema may corrupt your database.</li>
+</ul>
+</div>
+<div class="section" id="migrate-your-cuckoo">
+<h2>Migrate your Cuckoo<a class="headerlink" href="#migrate-your-cuckoo" title="Permalink to this headline">¶</a></h2>
+<p>Data migration is shipped starting from Cuckoo 1.1 and supports migration
+starting from Cuckoo 0.6.
+If your Cuckoo release is older than 0.6 you can&#8217;t migrate your data.</p>
+<p>The following steps are suggested as requirement to migrate your data:</p>
+<ol class="arabic simple">
+<li>Backup your installation.</li>
+<li>Read the documentation shipped with the new release.</li>
+<li>Make sure to have installed all required dependencies, otherwise install them.</li>
+<li>Download and extract the latest Cuckoo.</li>
+<li>Reconfigure Cuckoo as explained in this book (copying old configuration files
+is not safe because options can change between releases), and update agent in
+your virtual machines.</li>
+<li>Copy from your backup &#8220;storage&#8221; and &#8220;db&#8221; folders. (Reports and analyses
+already present in &#8220;storage&#8221; folder will keep the old format.)</li>
+</ol>
+<p>Now setup Alembic (the framework used for migrations) and dateutil with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">alembic</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">dateutil</span>
+</pre></div>
+</div>
+<p>Enter the alembic migration directory in &#8220;utils/db_migration&#8221; with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">utils</span><span class="o">/</span><span class="n">db_migration</span>
+</pre></div>
+</div>
+<p>Before starting the migration script you must set your database connection in &#8220;cuckoo.conf&#8221;
+if you are using a custom one. Alembic migration script will use the database
+connection parameters configured in cuckoo.conf.</p>
+<p>Again, please remember to backup before launching migration tool! A wrong
+configuration may corrupt your data, backup should save kittens!</p>
+<p>Run the database migrations with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">alembic</span> <span class="n">upgrade</span> <span class="n">head</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Upgrade from a previous release</a><ul>
+<li><a class="reference internal" href="#upgrade-starting-from-scratch">Upgrade starting from scratch</a></li>
+<li><a class="reference internal" href="#migrate-your-cuckoo">Migrate your Cuckoo</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="guest_physical/saving.html"
+                        title="previous chapter">Saving the Guest</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../usage/index.html"
+                        title="next chapter">Usage</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/installation/upgrade.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../usage/index.html" title="Usage"
+             >next</a></li>
+        <li class="right" >
+          <a href="guest_physical/saving.html" title="Saving the Guest"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Installation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

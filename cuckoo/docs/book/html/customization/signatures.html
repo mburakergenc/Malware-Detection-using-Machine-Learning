@@ -1,0 +1,1196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Signatures &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../index.html" />
+    <link rel="up" title="Customization" href="index.html" />
+    <link rel="next" title="Reporting Modules" href="reporting.html" />
+    <link rel="prev" title="Processing Modules" href="processing.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="reporting.html" title="Reporting Modules"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="processing.html" title="Processing Modules"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Customization</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="signatures">
+<h1>Signatures<a class="headerlink" href="#signatures" title="Permalink to this headline">¶</a></h1>
+<p>With Cuckoo you&#8217;re able to create some customized signatures that you can run against
+the analysis results in order to identify some predefined pattern that might
+represent a particular malicious behavior or an indicator you&#8217;re interested in.</p>
+<p>These signatures are very useful to give a context to the analyses: both because they
+simplify the interpretation of the results as well as for automatically identifying
+malware samples of interest.</p>
+<dl class="docutils">
+<dt>Some examples of what you can use Cuckoo&#8217;s signatures for:</dt>
+<dd><ul class="first last simple">
+<li>Identify a particular malware family you&#8217;re interested in by isolating some unique behaviors (like file names or mutexes).</li>
+<li>Spot interesting modifications the malware performs on the system, such as installation of device drivers.</li>
+<li>Identify particular malware categories, such as Banking Trojans or Ransomware by isolating typical actions commonly performed by those.</li>
+<li>Classify samples into the categories malware/unknown (it is not possible to identify clean samples)</li>
+</ul>
+</dd>
+</dl>
+<p>You can find signatures created by us and by other Cuckoo users on our <a class="reference external" href="https://github.com/cuckoosandbox/community">Community</a> repository.</p>
+<div class="section" id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>Creation of signatures is a very simple process and requires just a decent
+understanding of Python programming.</p>
+<p>First things first, all signatures must be located inside <em>modules/signatures/</em>.</p>
+<p>The following is a basic example signature:</p>
+<blockquote>
+<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lib.cuckoo.common.abstracts</span> <span class="kn">import</span> <span class="n">Signature</span>
+
+<span class="k">class</span> <span class="nc">CreatesExe</span><span class="p">(</span><span class="n">Signature</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;creates_exe&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Creates a Windows executable on the filesystem&quot;</span>
+    <span class="n">severity</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;generic&quot;</span><span class="p">]</span>
+    <span class="n">authors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Cuckoo Developers&quot;</span><span class="p">]</span>
+    <span class="n">minimum</span> <span class="o">=</span> <span class="s2">&quot;2.0&quot;</span>
+
+    <span class="k">def</span> <span class="nf">on_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_file</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;.*</span><span class="se">\\</span><span class="s2">.exe$&quot;</span><span class="p">,</span>
+                               <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>As you can see the structure is really simple and consistent with the other
+modules. We&#8217;re going to get into details later, but since version 1.2 Cuckoo
+provides some helper functions that make the process of
+creating signatures much easier.</p>
+<p>In this example we just walk through all the accessed files in the summary and check
+if there is anything ending with &#8220;<em>.exe</em>&#8221;: in that case it will return <code class="docutils literal"><span class="pre">True</span></code>, meaning that
+the signature matched, otherwise return <code class="docutils literal"><span class="pre">False</span></code>.</p>
+<p>the function <code class="docutils literal"><span class="pre">on_complete</span></code> is called at the end of the cuckoo signature process.
+Other function will be called before on specific events and help you to write
+more sophisticated and faster signatures.</p>
+<p>In case the signature gets matched, a new entry in the &#8220;signatures&#8221; section will be added to
+the global container as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="s2">&quot;signatures&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Creates a Windows executable on the filesystem&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;alert&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">&quot;references&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;C:</span><span class="se">\\</span><span class="s2">d.exe&quot;</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;creates_exe&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-your-new-signature">
+<h2>Creating your new signature<a class="headerlink" href="#creating-your-new-signature" title="Permalink to this headline">¶</a></h2>
+<p>In order to make you better understand the process of creating a signature, we
+are going to create a very simple one together and walk through the steps and
+the available options. For this purpose, we&#8217;re simply going to create a
+signature that checks whether the malware analyzed opened a mutex named
+&#8220;i_am_a_malware&#8221;.</p>
+<p>The first thing to do is import the dependencies, create a skeleton and define
+some initial attributes. These are the ones you can currently set:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">name</span></code>: an identifier for the signature.</li>
+<li><code class="docutils literal"><span class="pre">description</span></code>: a brief description of what the signature represents.</li>
+<li><code class="docutils literal"><span class="pre">severity</span></code>: a number identifying the severity of the events matched (generally between 1 and 3).</li>
+<li><code class="docutils literal"><span class="pre">categories</span></code>: a list of categories that describe the type of event being matched (for example &#8220;<em>banker</em>&#8221;, &#8220;<em>injection</em>&#8221; or &#8220;<em>anti-vm</em>&#8221;).</li>
+<li><code class="docutils literal"><span class="pre">families</span></code>: a list of malware family names, in case the signature specifically matches a known one.</li>
+<li><code class="docutils literal"><span class="pre">authors</span></code>: a list of people who authored the signature.</li>
+<li><code class="docutils literal"><span class="pre">references</span></code>: a list of references (URLs) to give context to the signature.</li>
+<li><code class="docutils literal"><span class="pre">enable</span></code>: if set to False the signature will be skipped.</li>
+<li><code class="docutils literal"><span class="pre">alert</span></code>: if set to True can be used to specify that the signature should be reported (perhaps by a dedicated reporting module).</li>
+<li><code class="docutils literal"><span class="pre">minimum</span></code>: the minimum required version of Cuckoo to successfully run this signature.</li>
+<li><code class="docutils literal"><span class="pre">maximum</span></code>: the maximum required version of Cuckoo to successfully run this signature.</li>
+</ul>
+</div></blockquote>
+<p>In our example, we would create the following skeleton:</p>
+<blockquote>
+<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lib.cuckoo.common.abstracts</span> <span class="kn">import</span> <span class="n">Signature</span>
+
+<span class="k">class</span> <span class="nc">BadBadMalware</span><span class="p">(</span><span class="n">Signature</span><span class="p">):</span> <span class="c1"># We initialize the class inheriting Signature.</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;badbadmalware&quot;</span> <span class="c1"># We define the name of the signature</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Creates a mutex known to be associated with Win32.BadBadMalware&quot;</span> <span class="c1"># We provide a description</span>
+    <span class="n">severity</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># We set the severity to maximum</span>
+    <span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;trojan&quot;</span><span class="p">]</span> <span class="c1"># We add a category</span>
+    <span class="n">families</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;badbadmalware&quot;</span><span class="p">]</span> <span class="c1"># We add the name of our fictional malware family</span>
+    <span class="n">authors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Me&quot;</span><span class="p">]</span> <span class="c1"># We specify the author</span>
+    <span class="n">minimum</span> <span class="o">=</span> <span class="s2">&quot;2.0&quot;</span> <span class="c1"># We specify that in order to run the signature, the user will simply need Cuckoo 2.0</span>
+
+    <span class="k">def</span> <span class="nf">on_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>This is a perfectly valid signature. It doesn&#8217;t really do anything yet,
+so now we need to define the conditions for the signature to be matched.</p>
+<p>As we said, we want to match a particular mutex name, so we proceed as follows:</p>
+<blockquote>
+<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lib.cuckoo.common.abstracts</span> <span class="kn">import</span> <span class="n">Signature</span>
+
+<span class="k">class</span> <span class="nc">BadBadMalware</span><span class="p">(</span><span class="n">Signature</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;badbadmalware&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Creates a mutex known to be associated with Win32.BadBadMalware&quot;</span>
+    <span class="n">severity</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;trojan&quot;</span><span class="p">]</span>
+    <span class="n">families</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;badbadmalware&quot;</span><span class="p">]</span>
+    <span class="n">authors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Me&quot;</span><span class="p">]</span>
+    <span class="n">minimum</span> <span class="o">=</span> <span class="s2">&quot;2.0&quot;</span>
+
+    <span class="k">def</span> <span class="nf">on_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_mutex</span><span class="p">(</span><span class="s2">&quot;i_am_a_malware&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>Simple as that, now our signature will return <code class="docutils literal"><span class="pre">True</span></code> whether the analyzed
+malware was observed opening the specified mutex.</p>
+<p>If you want to be more explicit and directly access the global container,
+you could translate the previous signature in the following way:</p>
+<blockquote>
+<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lib.cuckoo.common.abstracts</span> <span class="kn">import</span> <span class="n">Signature</span>
+
+<span class="k">class</span> <span class="nc">BadBadMalware</span><span class="p">(</span><span class="n">Signature</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;badbadmalware&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Creates a mutex known to be associated with Win32.BadBadMalware&quot;</span>
+    <span class="n">severity</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;trojan&quot;</span><span class="p">]</span>
+    <span class="n">families</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;badbadmalware&quot;</span><span class="p">]</span>
+    <span class="n">authors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Me&quot;</span><span class="p">]</span>
+    <span class="n">minimum</span> <span class="o">=</span> <span class="s2">&quot;2.0&quot;</span>
+
+    <span class="k">def</span> <span class="nf">on_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">process</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_processes_by_pid</span><span class="p">():</span>
+            <span class="k">if</span> <span class="s2">&quot;summary&quot;</span> <span class="ow">in</span> <span class="n">process</span> <span class="ow">and</span> <span class="s2">&quot;mutexes&quot;</span> <span class="ow">in</span> <span class="n">process</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">]:</span>
+                <span class="k">for</span> <span class="n">mutex</span> <span class="ow">in</span> <span class="n">process</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">][</span><span class="s2">&quot;mutexes&quot;</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">mutex</span> <span class="o">==</span> <span class="s2">&quot;i_am_a_malware&quot;</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="k">return</span> <span class="bp">False</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+</div>
+<div class="section" id="evented-signatures">
+<h2>Evented Signatures<a class="headerlink" href="#evented-signatures" title="Permalink to this headline">¶</a></h2>
+<p>Since version 1.0, Cuckoo provides a way to write more high performance signatures.
+In the past every signature was required to loop through the whole collection of API calls
+collected during the analysis. This was necessarily causing some performance issues when such
+collection would be of a large size.</p>
+<p>Since 1.2 Cuckoo only supports the so called &#8220;evented signatures&#8221;. The old signatures
+based on the <code class="docutils literal"><span class="pre">run</span></code> function can be ported to using <code class="docutils literal"><span class="pre">on_complete</span></code>.
+The main difference is that with this new format, all the signatures will be executed in parallel
+and a callback function called <code class="docutils literal"><span class="pre">on_call()</span></code> will be invoked for each signature within one
+single loop through the collection of API calls.</p>
+<p>An example signature using this technique is the following:</p>
+<blockquote>
+<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">lib.cuckoo.common.abstracts</span> <span class="kn">import</span> <span class="n">Signature</span>
+
+<span class="k">class</span> <span class="nc">SystemMetrics</span><span class="p">(</span><span class="n">Signature</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;generic_metrics&quot;</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Uses GetSystemMetrics&quot;</span>
+    <span class="n">severity</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;generic&quot;</span><span class="p">]</span>
+    <span class="n">authors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Cuckoo Developers&quot;</span><span class="p">]</span>
+    <span class="n">minimum</span> <span class="o">=</span> <span class="s2">&quot;2.0&quot;</span>
+
+    <span class="c1"># Evented signatures can specify filters that reduce the amount of</span>
+    <span class="c1"># API calls that are streamed in. One can filter Process name, API</span>
+    <span class="c1"># name/identifier and category. These should be sets for faster lookup.</span>
+    <span class="n">filter_processnames</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">filter_apinames</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="s2">&quot;GetSystemMetrics&quot;</span><span class="p">])</span>
+    <span class="n">filter_categories</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="c1"># This is a signature template. It should be used as a skeleton for</span>
+    <span class="c1"># creating custom signatures, therefore is disabled by default.</span>
+    <span class="c1"># The on_call function is used in &quot;evented&quot; signatures.</span>
+    <span class="c1"># These use a more efficient way of processing logged API calls.</span>
+    <span class="n">enabled</span> <span class="o">=</span> <span class="bp">False</span>
+
+    <span class="k">def</span> <span class="nf">on_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># In the on_complete method one can implement any cleanup code and</span>
+        <span class="c1">#  decide one last time if this signature matches or not.</span>
+        <span class="c1">#  Return True in case it matches.</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+    <span class="c1"># This method will be called for every logged API call by the loop</span>
+    <span class="c1"># in the RunSignatures plugin. The return value determines the &quot;state&quot;</span>
+    <span class="c1"># of this signature. True means the signature matched and False it did not this time.</span>
+    <span class="c1"># Use self.deactivate() to stop streaming in API calls.</span>
+    <span class="k">def</span> <span class="nf">on_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">tid</span><span class="p">):</span>
+        <span class="c1"># This check would in reality not be needed as we already make use</span>
+        <span class="c1"># of filter_apinames above.</span>
+        <span class="k">if</span> <span class="n">call</span><span class="p">[</span><span class="s2">&quot;api&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;GetSystemMetrics&quot;</span><span class="p">:</span>
+            <span class="c1"># Signature matched, return True.</span>
+            <span class="k">return</span> <span class="bp">True</span>
+
+        <span class="c1"># continue</span>
+        <span class="k">return</span> <span class="bp">None</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>The inline comments are already self-explanatory.</p>
+<p>Another event is triggered when a signature matches.</p>
+<blockquote>
+<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_signature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matched_sig</span><span class="p">):</span>
+    <span class="n">required</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;creates_exe&quot;</span><span class="p">,</span> <span class="s2">&quot;badmalware&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">sig</span> <span class="ow">in</span> <span class="n">required</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sig</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_signatures</span><span class="p">():</span>
+            <span class="k">return</span>
+    <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+</td></tr></table></div>
+</div></blockquote>
+<p>This kind of signature can be used to combine several signatures identifying anomalies into one signature
+classifying the sample (malware alert).</p>
+<p>Two more events can be used to write more complex signatures. They are called when new processes are processed or new threads.
+<code class="docutils literal"><span class="pre">on_process</span></code> and <code class="docutils literal"><span class="pre">on_thread</span></code>. They can be used to reset the state of flags when a new process is entered. Allowing
+to write signatures that take into account if a series of events happened in one thread/process or globally.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pid</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">on_thread</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">tid</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="quickout">
+<h2>Quickout<a class="headerlink" href="#quickout" title="Permalink to this headline">¶</a></h2>
+<p>Additionally to the filters you can use a quickout function to determine if the
+signature can be matched at all. For example if a signature is written to identify
+behavior of malicious PDFs you could test for the file type to be PDF. Returning <code class="docutils literal"><span class="pre">True</span></code> will
+remove the signature from the list of potential candidates (reducing False Positives and processing time).</p>
+<p>You can find many more example of signatures in our <a class="reference external" href="https://github.com/cuckoosandbox/community">community repository</a>.</p>
+</div>
+<div class="section" id="matches">
+<h2>Matches<a class="headerlink" href="#matches" title="Permalink to this headline">¶</a></h2>
+<p>Starting from version 1.2, signatures are able to log exactly what triggered
+the signature. This allows users to better understand why this signature is
+present in the log, and to be able to better focus malware analysis.</p>
+<p>Two helpers have been included in order to specify matching data.</p>
+<dl class="function">
+<dt id="Signature.add_match">
+<code class="descclassname">Signature.</code><code class="descname">add_match</code><span class="sig-paren">(</span><em>process</em>, <em>type</em>, <em>match</em><span class="sig-paren">)</span><a class="headerlink" href="#Signature.add_match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a match to the signature. Can be called several times for the same signature.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>process</strong> (<em>dict</em>) &#8211; process dictionary (same as the <code class="docutils literal"><span class="pre">on_call</span></code> argument). Should be <code class="docutils literal"><span class="pre">None</span></code> except when used in evented signatures.</li>
+<li><strong>type</strong> (<em>string</em>) &#8211; nature of the matching data. Can be anything (ex: <code class="docutils literal"><span class="pre">'file'</span></code>, <code class="docutils literal"><span class="pre">'registry'</span></code>, etc.). If match is composed of api calls (when used in evented signatures), should be <code class="docutils literal"><span class="pre">'api'</span></code>.</li>
+<li><strong>match</strong> &#8211; matching data. Can be a single element or a list of elements. An element can be a string, a dict or an API call (when used in evented signatures).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example Usage, with a single element:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">add_match</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="s2">&quot;http://malicious_url_detected.com&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Example Usage, with a more complex signature, needing several API calls to be triggered:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">signs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">signs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">first_api_call</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">signs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">second_api_call</span><span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">add_match</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="s1">&#39;api&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">signs</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.has_matches">
+<code class="descclassname">Signature.</code><code class="descname">has_matches</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.has_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the current signature has any matching data registered. Returns <code class="docutils literal"><span class="pre">True</span></code> in case it does, otherwise returns <code class="docutils literal"><span class="pre">False</span></code>.</p>
+<p>This can be used to easily add several matches for the same signature. If you want to do so, make sure that all the api calls are scanned by making sure that <code class="docutils literal"><span class="pre">on_call</span></code> never returns <code class="docutils literal"><span class="pre">True</span></code>. Then, use <code class="docutils literal"><span class="pre">on_complete</span></code> with <code class="docutils literal"><span class="pre">has_matches</span></code> so that the signature is triggered if any match was previously added.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+<p>Example Usage, from the <cite>network_tor</cite> signature:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">,</span> <span class="n">process</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_argument_call</span><span class="p">(</span><span class="n">call</span><span class="p">,</span>
+                                <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;Tor Win32 Service&quot;</span><span class="p">,</span>
+                                <span class="n">api</span><span class="o">=</span><span class="s2">&quot;CreateServiceA&quot;</span><span class="p">,</span>
+                                <span class="n">category</span><span class="o">=</span><span class="s2">&quot;services&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_match</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="s2">&quot;api&quot;</span><span class="p">,</span> <span class="n">call</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">on_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_matches</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+</div>
+<div class="section" id="helpers">
+<h2>Helpers<a class="headerlink" href="#helpers" title="Permalink to this headline">¶</a></h2>
+<p>As anticipated, from version 0.5 the <code class="docutils literal"><span class="pre">Signature</span></code> base class also provides
+some helper methods that simplify the creation of signatures and avoid the need
+for you having to access the global container directly (at least most of the times).</p>
+<p>With Cuckoo 1.2 the amount of information extracted from a sample grew another step and the
+resulting data format got more complex. To avoid having to port your signatures with every extension and to reduce
+errors we strongly suggest to use the helpers to access data.</p>
+<p>Following is a list of available methods.</p>
+<dl class="function">
+<dt id="Signature.check_file">
+<code class="descclassname">Signature.</code><code class="descname">check_file</code><span class="sig-paren">(</span><em>pattern</em><span class="optional">[</span>, <em>regex=False</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.check_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the malware opened or created a file matching the specified pattern. Returns <code class="docutils literal"><span class="pre">True</span></code> in case it did, otherwise returns <code class="docutils literal"><span class="pre">False</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pattern</strong> (<em>string</em>) &#8211; file name or file path pattern to be matched</li>
+<li><strong>regex</strong> (<em>boolean</em>) &#8211; enable to compile the pattern as a regular expression</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example Usage:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">check_file</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;.*\.exe$&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.check_key">
+<code class="descclassname">Signature.</code><code class="descname">check_key</code><span class="sig-paren">(</span><em>pattern</em><span class="optional">[</span>, <em>regex=False</em><span class="optional">[</span>, <em>actions=[&quot;regkey_written&quot;</em>, <em>&quot;regkey_opened&quot;</em>, <em>&quot;regkey_read&quot;]</em><span class="optional">[</span>, <em>pid=None</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.check_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the malware opened or created a registry key matching the specified pattern. Returns <code class="docutils literal"><span class="pre">True</span></code> in case it did, otherwise returns <code class="docutils literal"><span class="pre">False</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pattern</strong> (<em>string</em>) &#8211; registry key pattern to be matched</li>
+<li><strong>regex</strong> (<em>boolean</em>) &#8211; enable to compile the pattern as a regular expression</li>
+<li><strong>actions</strong> (<em>list</em>) &#8211; a list of key-access-actions to search the key in</li>
+<li><strong>pid</strong> (<em>int</em>) &#8211; process id to filter for</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example Usage:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">check_key</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;.*CurrentVersion</span><span class="se">\\</span><span class="s2">Run$&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.check_mutex">
+<code class="descclassname">Signature.</code><code class="descname">check_mutex</code><span class="sig-paren">(</span><em>pattern</em><span class="optional">[</span>, <em>regex=False</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.check_mutex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the malware opened or created a mutex matching the specified pattern. Returns <code class="docutils literal"><span class="pre">True</span></code> in case it did, otherwise returns <code class="docutils literal"><span class="pre">False</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pattern</strong> (<em>string</em>) &#8211; mutex pattern to be matched</li>
+<li><strong>regex</strong> (<em>boolean</em>) &#8211; enable to compile the pattern as a regular expression</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example Usage:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">check_mutex</span><span class="p">(</span><span class="s2">&quot;mutex_name&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.check_api">
+<code class="descclassname">Signature.</code><code class="descname">check_api</code><span class="sig-paren">(</span><em>pattern</em><span class="optional">[</span>, <em>process=None</em><span class="optional">[</span>, <em>regex=False</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.check_api" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether Windows function was invoked. Returns <code class="docutils literal"><span class="pre">True</span></code> in case it was, otherwise returns <code class="docutils literal"><span class="pre">False</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pattern</strong> (<em>string</em>) &#8211; function name pattern to be matched</li>
+<li><strong>process</strong> (<em>string</em>) &#8211; name of the process performing the call</li>
+<li><strong>regex</strong> (<em>boolean</em>) &#8211; enable to compile the pattern as a regular expression</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example Usage:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">check_api</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;URLDownloadToFileW&quot;</span><span class="p">,</span> <span class="n">process</span><span class="o">=</span><span class="s2">&quot;AcroRd32.exe&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.check_argument_call">
+<code class="descclassname">Signature.</code><code class="descname">check_argument_call</code><span class="sig-paren">(</span><em>call, pattern[, name=Name[, api=None[, category=None[, regex=False]]]</em><span class="sig-paren">)</span><a class="headerlink" href="#Signature.check_argument_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the malware invoked a function with a specific argument value. Returns <code class="docutils literal"><span class="pre">True</span></code> in case it did, otherwise returns <code class="docutils literal"><span class="pre">False</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>call</strong> &#8211; the call to check to check the argument in</li>
+<li><strong>pattern</strong> (<em>string</em>) &#8211; argument value pattern to be matched</li>
+<li><strong>name</strong> (<em>string</em>) &#8211; name of the argument to be matched</li>
+<li><strong>api</strong> (<em>string</em>) &#8211; name of the Windows function associated with the argument value</li>
+<li><strong>category</strong> (<em>string</em>) &#8211; name of the category of the function to be matched</li>
+<li><strong>regex</strong> (<em>boolean</em>) &#8211; enable to compile the pattern as a regular expression</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example Usage:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">check_argument_call</span><span class="p">(</span><span class="n">call</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;.*cuckoo.*&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;filesystem&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signatures.list_signatures">
+<code class="descclassname">Signatures.</code><code class="descname">list_signatures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Signatures.list_signatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of signature names that matched so far. It can be used to write meta-signatures combining several
+signatures on anomalies into a classification.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+<p>Example Usage:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_signature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matched_sig</span><span class="p">):</span>
+    <span class="n">required</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;creates_exe&quot;</span><span class="p">,</span> <span class="s2">&quot;badmalware&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">sig</span> <span class="ow">in</span> <span class="n">required</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">sig</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_signatures</span><span class="p">():</span>
+            <span class="k">return</span>
+    <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signatures.get_processes">
+<code class="descclassname">Signatures.</code><code class="descname">get_processes</code><span class="sig-paren">(</span><span class="optional">[</span><em>name=None</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signatures.get_processes" title="Permalink to this definition">¶</a></dt>
+<dd><p>An iterator returning the processes monitored. If name is given, they will be filtered for the name</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>string</em>) &#8211; Name of the process to filter for</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">iterator</td>
+</tr>
+</tbody>
+</table>
+<p>Example Usage:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">process</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_processes</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signatures.get_processes_by_pid">
+<code class="descclassname">Signatures.</code><code class="descname">get_processes_by_pid</code><span class="sig-paren">(</span><span class="optional">[</span><em>pid=None</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signatures.get_processes_by_pid" title="Permalink to this definition">¶</a></dt>
+<dd><p>An iterator returning the processes monitored. If pid is given, they will be filtered for the process id</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pid</strong> (<em>int</em>) &#8211; Process ID of the process to filter for</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">iterator</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">process</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_processes_by_pid</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signatures.get_threads">
+<code class="descclassname">Signatures.</code><code class="descname">get_threads</code><span class="sig-paren">(</span><span class="optional">[</span><em>pid=None</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signatures.get_threads" title="Permalink to this definition">¶</a></dt>
+<dd><p>An iterator returning the threads monitored. If pid is given, they will be filtered for the process id.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pid</strong> (<em>int</em>) &#8211; Name of the process to filter for</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">iterator</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">thread</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_threads</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signatures.get_files">
+<code class="descclassname">Signatures.</code><code class="descname">get_files</code><span class="sig-paren">(</span><span class="optional">[</span><em>pid=None</em><span class="optional">[</span>, <em>actions=None</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signatures.get_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates over the files accessed by a process (or all processes). Access type can be a list of &#8220;file_written&#8221;,
+&#8220;file_read&#8221;, &#8220;file_deleted&#8221;. Default is all.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pid</strong> (<em>int</em>) &#8211; Name of the process to filter for</li>
+<li><strong>actions</strong> (<em>list</em>) &#8211; access types of the files to return</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">iterator</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">afile</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_files</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signatures.get_keys">
+<code class="descclassname">Signatures.</code><code class="descname">get_keys</code><span class="sig-paren">(</span><span class="optional">[</span><em>pid=None</em><span class="optional">[</span>, <em>actions=None</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signatures.get_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates over the registry keys accessed by a process (or all processes). Access type can be a list of &#8220;regkey_written&#8221;,
+&#8220;regkey_opened&#8221;, &#8220;regkey_read&#8221;. Default is all.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pid</strong> (<em>int</em>) &#8211; Name of the process to filter for</li>
+<li><strong>actions</strong> (<em>list</em>) &#8211; access types of the registry keys to return</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">iterator</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">akey</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_keys</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signatures.get_mutexes">
+<code class="descclassname">Signatures.</code><code class="descname">get_mutexes</code><span class="sig-paren">(</span><span class="optional">[</span><em>pid=None</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signatures.get_mutexes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of mutexes. Optionally filtered by process id</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pid</strong> (<em>int</em>) &#8211; Name of the process to filter for</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">mutex</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_mutexes</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.get_net_hosts">
+<code class="descclassname">Signature.</code><code class="descname">get_net_hosts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.get_net_hosts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of hosts from the network sniffing part of the collected data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_net_hosts</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.get_net_domains">
+<code class="descclassname">Signature.</code><code class="descname">get_net_domains</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.get_net_domains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of domains from the network sniffing part of the collected data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">domain</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_net_domains</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.get_net_http">
+<code class="descclassname">Signature.</code><code class="descname">get_net_http</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.get_net_http" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of http information blocks from the network sniffing part of the collected data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">http_data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_net_http</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.get_net_udp">
+<code class="descclassname">Signature.</code><code class="descname">get_net_udp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.get_net_udp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of udp information blocks from the network sniffing part of the collected data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">udp_data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_net_udp</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.get_net_icmp">
+<code class="descclassname">Signature.</code><code class="descname">get_net_icmp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.get_net_icmp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of icmp information blocks from the network sniffing part of the collected data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">icmp_data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_net_icmp</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.get_net_irc">
+<code class="descclassname">Signature.</code><code class="descname">get_net_irc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.get_net_irc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of irc information blocks from the network sniffing part of the collected data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">irc_data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_net_irc</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.get_net_smtp">
+<code class="descclassname">Signature.</code><code class="descname">get_net_smtp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.get_net_smtp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of smtp information blocks from the network sniffing part of the collected data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">smtp_data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_net_smtp</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.check_ip">
+<code class="descclassname">Signature.</code><code class="descname">check_ip</code><span class="sig-paren">(</span><em>pattern</em><span class="optional">[</span>, <em>regex=False</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.check_ip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the malware contacted the specified IP address. Returns <code class="docutils literal"><span class="pre">True</span></code> in case it did, otherwise returns <code class="docutils literal"><span class="pre">False</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pattern</strong> (<em>string</em>) &#8211; IP address to be matched</li>
+<li><strong>regex</strong> (<em>boolean</em>) &#8211; enable to compile the pattern as a regular expression</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example Usage:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">check_ip</span><span class="p">(</span><span class="s2">&quot;123.123.123.123&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.check_domain">
+<code class="descclassname">Signature.</code><code class="descname">check_domain</code><span class="sig-paren">(</span><em>pattern</em><span class="optional">[</span>, <em>regex=False</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.check_domain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the malware contacted the specified domain. Returns <code class="docutils literal"><span class="pre">True</span></code> in case it did, otherwise returns <code class="docutils literal"><span class="pre">False</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pattern</strong> (<em>string</em>) &#8211; domain name to be matched</li>
+<li><strong>regex</strong> (<em>boolean</em>) &#8211; enable to compile the pattern as a regular expression</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example Usage:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">check_domain</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;.*cuckoosandbox.org$&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.check_url">
+<code class="descclassname">Signature.</code><code class="descname">check_url</code><span class="sig-paren">(</span><em>pattern</em><span class="optional">[</span>, <em>regex=False</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.check_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether the malware performed an HTTP request to the specified URL. Returns <code class="docutils literal"><span class="pre">True</span></code> in case it did, otherwise returns <code class="docutils literal"><span class="pre">False</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>pattern</strong> (<em>string</em>) &#8211; URL pattern to be matched</li>
+<li><strong>regex</strong> (<em>boolean</em>) &#8211; enable to compile the pattern as a regular expression</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example Usage:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">check_url</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;^.+\/load\.php\?file=[0-9a-zA-Z]+$&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.flags.set">
+<code class="descclassname">Signature.flags.</code><code class="descname">set</code><span class="sig-paren">(</span><em>name</em><span class="optional">[</span>, <em>pid=None</em><span class="optional">[</span>, <em>tid=None</em><span class="optional">[</span>, <em>timestamp=None</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.flags.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flags can be used to collect information in the on_call section of a signature and react (decide to alert) in the
+on_complete part if all required flags are set. Flags are signature specific. They are identified by their name.
+PID, TID and timestamp can be later used to identify if a flag was set in a specific process/thread or at a specific
+time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>string</em>) &#8211; Name of the flag to set</li>
+<li><strong>pid</strong> (<em>int</em>) &#8211; process id</li>
+<li><strong>tid</strong> (<em>int</em>) &#8211; thread id</li>
+<li><strong>timestamp</strong> (<em>int</em>) &#8211; timestamp in the log to mark this flag for</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">tid</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2345</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.flags.find">
+<code class="descclassname">Signature.flags.</code><code class="descname">find</code><span class="sig-paren">(</span><em>[name=None[, pid=None[, tid=None[, before=None[, after=None]]]]</em><span class="sig-paren">)</span><a class="headerlink" href="#Signature.flags.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of flags matching the given criteria</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>string</em>) &#8211; Name of the flag look for</li>
+<li><strong>pid</strong> (<em>int</em>) &#8211; process id to filter for</li>
+<li><strong>tid</strong> (<em>int</em>) &#8211; thread id to filter for</li>
+<li><strong>before</strong> (<em>int</em>) &#8211; flag timestamp must be &lt;= before-timestamp</li>
+<li><strong>after</strong> (<em>int</em>) &#8211; flag timestamp must be &gt;= after-timestamp</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;foo&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;Flag found matching name&quot;</span><span class="p">:</span> <span class="s2">&quot;foo&quot;</span><span class="p">})</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.mark_start">
+<code class="descclassname">Signature.</code><code class="descname">mark_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.mark_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mark the start of a api-call region relevant for the signature. This way the report can contain a link to the API call that triggered the signature.
+As soon as the signature returns <code class="docutils literal"><span class="pre">True</span></code> this mark will be stored in the report. Subsequent start marks will overwrite the old one till it is
+stored in the results with the triggering of the signature. So you can set a start mark &#8220;on suspicion&#8221; and overwrite it several times till the signature triggers.</p>
+<p>It is marking the api call. So the only reasonable signatures to use it is in on_call evented ones</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">tid</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_argument_call</span><span class="p">(</span><span class="n">call</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;.*cuckoo.*&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;filesystem&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mark_start</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.mark_end">
+<code class="descclassname">Signature.</code><code class="descname">mark_end</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.mark_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>A complementary function to mark_start. It is optional and marks the end of a api call range that triggered the signature. It should be
+called before returning the <code class="docutils literal"><span class="pre">True</span></code> result.</p>
+<p>Without a prior mark_start, the end-mark will not be stored in the result.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">tid</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_argument_call</span><span class="p">(</span><span class="n">call</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;.*foo.*&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;filesystem&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mark_start</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_argument_call</span><span class="p">(</span><span class="n">call</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;.*cuckoo.*&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;filesystem&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mark_end</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.deactivate">
+<code class="descclassname">Signature.</code><code class="descname">deactivate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.deactivate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deactivate a signature. Deactivated signatures will not be notified in <code class="docutils literal"><span class="pre">on_call</span></code> events. This can be used after a
+signature triggered (just before the return) to match this signature only once.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">call</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="n">tid</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">call</span><span class="p">[</span><span class="s2">&quot;api&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;LdrGetProcedureAddress&quot;</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deactivate</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">True</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+<dl class="function">
+<dt id="Signature.activate">
+<code class="descclassname">Signature.</code><code class="descname">activate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Signature.activate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Re-activates a signature after it has been de-activated.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">on_process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pid</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Signatures</a><ul>
+<li><a class="reference internal" href="#getting-started">Getting started</a></li>
+<li><a class="reference internal" href="#creating-your-new-signature">Creating your new signature</a></li>
+<li><a class="reference internal" href="#evented-signatures">Evented Signatures</a></li>
+<li><a class="reference internal" href="#quickout">Quickout</a></li>
+<li><a class="reference internal" href="#matches">Matches</a></li>
+<li><a class="reference internal" href="#helpers">Helpers</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="processing.html"
+                        title="previous chapter">Processing Modules</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="reporting.html"
+                        title="next chapter">Reporting Modules</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/customization/signatures.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="reporting.html" title="Reporting Modules"
+             >next</a></li>
+        <li class="right" >
+          <a href="processing.html" title="Processing Modules"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Customization</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

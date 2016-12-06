@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Requirements &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../../index.html" />
+    <link rel="up" title="Preparing the Host" href="index.html" />
+    <link rel="next" title="Installing Cuckoo" href="installation.html" />
+    <link rel="prev" title="Preparing the Host" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="installation.html" title="Installing Cuckoo"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Preparing the Host"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Installation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Preparing the Host</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="requirements">
+<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
+<p>Before proceeding on configuring Cuckoo, you&#8217;ll need to install some required
+software and libraries.</p>
+<div class="section" id="installing-python-libraries">
+<h2>Installing Python libraries<a class="headerlink" href="#installing-python-libraries" title="Permalink to this headline">¶</a></h2>
+<p>Cuckoo host components are completely written in Python, therefore make sure to
+have an appropriate version installed. For the current release <strong>Python 2.7</strong> is
+preferred.</p>
+<p>Install the basic dependencies:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo apt-get install python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev
+</pre></div>
+</div>
+<p>If you want to use the Django-based web interface, you&#8217;ll have to install
+MongoDB too:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo apt-get install mongodb
+</pre></div>
+</div>
+<p>In order to properly function, Cuckoo requires some dependencies. They can all
+be installed through PyPI like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo pip install -r requirements.txt
+</pre></div>
+</div>
+<p><a class="reference external" href="http://virustotal.github.io/yara/">Yara</a> and <a class="reference external" href="https://github.com/kbandla/pydeep">Pydeep</a> are <em>optional</em> plugins but will have to be installed
+manually, so please refer to their websites.</p>
+<p>If you want to use KVM it&#8217;s packaged too and you can install it with the
+following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils python-libvirt
+</pre></div>
+</div>
+<p>If you want to use XenServer you&#8217;ll have to install the <em>XenAPI</em> Python package:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo pip install XenAPI
+</pre></div>
+</div>
+<p>If you want to use the <em>mitm</em> auxiliary module (to intercept SSL/TLS generated
+traffic), you need to install <a class="reference external" href="https://mitmproxy.org/">mitmproxy</a>. Please refer to its website for
+installation instructions.</p>
+</div>
+<div class="section" id="virtualization-software">
+<h2>Virtualization Software<a class="headerlink" href="#virtualization-software" title="Permalink to this headline">¶</a></h2>
+<p>Despite heavily relying on <a class="reference external" href="http://www.virtualbox.org">VirtualBox</a> in the past, Cuckoo has moved on being
+architecturally independent from the virtualization software.
+As you will see throughout this documentation, you&#8217;ll be able to define and
+write modules to support any software of your choice.</p>
+<p>For the sake of this guide we will assume that you have VirtualBox installed
+(which still is the default option), but this does <strong>not</strong> affect anyhow the
+execution and general configuration of the sandbox.</p>
+<p>You are completely responsible for the choice, configuration and execution of
+your virtualization software, therefore please refrain from asking for help on
+it in our channels and lists: refer to the software&#8217;s official documentation
+and support.</p>
+<p>Assuming you decide to go for VirtualBox, you can get the proper package for
+your distribution at the <a class="reference external" href="https://www.virtualbox.org/wiki/Linux_Downloads">official download page</a>.
+The installation of VirtualBox is outside the scope of this documentation, if
+you are not familiar with it please refer to the <a class="reference external" href="https://www.virtualbox.org/wiki/Documentation">official documentation</a>.</p>
+</div>
+<div class="section" id="installing-tcpdump">
+<h2>Installing Tcpdump<a class="headerlink" href="#installing-tcpdump" title="Permalink to this headline">¶</a></h2>
+<p>In order to dump the network activity performed by the malware during
+execution, you&#8217;ll need a network sniffer properly configured to capture
+the traffic and dump it to a file.</p>
+<p>By default Cuckoo adopts <a class="reference external" href="http://www.tcpdump.org">tcpdump</a>, the prominent open source solution.</p>
+<p>Install it on Ubuntu:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo apt-get install tcpdump
+</pre></div>
+</div>
+<p>Tcpdump requires root privileges, but since you don&#8217;t want Cuckoo to run as root
+you&#8217;ll have to set specific Linux capabilities to the binary:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
+</pre></div>
+</div>
+<p>You can verify the results of last command with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ getcap /usr/sbin/tcpdump
+/usr/sbin/tcpdump = cap_net_admin,cap_net_raw+eip
+</pre></div>
+</div>
+<p>If you don&#8217;t have <cite>setcap</cite> installed you can get it with:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo apt-get install libcap2-bin
+</pre></div>
+</div>
+<p>Or otherwise (<strong>not recommended</strong>) do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo chmod +s /usr/sbin/tcpdump
+</pre></div>
+</div>
+<p>Please keep in mind that even the <cite>setcap</cite> method is definitely not perfectly
+safe if the system has other users which are potentially untrusted. We recommend
+to run Cuckoo on a dedicated system or a trusted environment where the
+privileged tcpdump execution is contained otherwise.</p>
+</div>
+<div class="section" id="installing-volatility">
+<h2>Installing Volatility<a class="headerlink" href="#installing-volatility" title="Permalink to this headline">¶</a></h2>
+<p>Volatility is an optional tool to do forensic analysis on memory dumps.
+In combination with Cuckoo, it can automatically provide additional visibility
+into deep modifications in the operating system as well as detect the presence
+of rootkit technology that escaped the monitoring domain of Cuckoo&#8217;s analyzer.</p>
+<p>In order to function properly, Cuckoo requires at least version 2.3 of
+Volatility.
+You can get it from the <a class="reference external" href="https://github.com/volatilityfoundation">official repository</a>.</p>
+<p>See the volatility documentation for detailed instructions on how to install it.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Requirements</a><ul>
+<li><a class="reference internal" href="#installing-python-libraries">Installing Python libraries</a></li>
+<li><a class="reference internal" href="#virtualization-software">Virtualization Software</a></li>
+<li><a class="reference internal" href="#installing-tcpdump">Installing Tcpdump</a></li>
+<li><a class="reference internal" href="#installing-volatility">Installing Volatility</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Preparing the Host</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="next chapter">Installing Cuckoo</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/installation/host/requirements.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="installation.html" title="Installing Cuckoo"
+             >next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Preparing the Host"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Installation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Preparing the Host</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

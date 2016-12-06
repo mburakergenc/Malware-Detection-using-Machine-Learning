@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Saving the Guest &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../../index.html" />
+    <link rel="up" title="Preparing the Guest (Physical Machine)" href="index.html" />
+    <link rel="next" title="Upgrade from a previous release" href="../upgrade.html" />
+    <link rel="prev" title="Network Configuration" href="network.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../upgrade.html" title="Upgrade from a previous release"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="network.html" title="Network Configuration"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Installation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Preparing the Guest (Physical Machine)</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="saving-the-guest">
+<h1>Saving the Guest<a class="headerlink" href="#saving-the-guest" title="Permalink to this headline">¶</a></h1>
+<p>Now you should be ready to save the physical machine to a clean state.
+In order for the physical machine manager to work, you must have a way
+for physical machines to be returned to a clean state.</p>
+<p>Before doing this <strong>make sure you rebooted it softly and that it&#8217;s currently
+running, with Cuckoo&#8217;s agent running and with Windows fully booted</strong>.</p>
+<p>Now you can proceed saving the machine. The way to do it obviously depends on
+the imaging software you decided to use.</p>
+<p>In development/testing Fog (<a class="reference external" href="http://www.fogproject.org/">http://www.fogproject.org/</a>) was used as a platform
+to handle re-imaging the physical machines.
+However, any re-imaging platform can be used (Clonezilla, Deepfreeze, etc.) to
+accomplish this.</p>
+<p>If you follow all the below steps properly, your virtual machine should be ready
+to be used by Cuckoo.</p>
+<div class="section" id="fog">
+<h2>Fog<a class="headerlink" href="#fog" title="Permalink to this headline">¶</a></h2>
+<p>After installing Fog, you will need to create an image and add an image and a
+host to the Fog server.</p>
+<p>To add an image to the fog server, open the Image Management window
+(http://&lt;your_fog_server&gt;/fog/management/index.php?node=images)
+and click &#8220;Create New Image.&#8221;
+Provide the proper inputs for your OS configuration and click &#8220;Add&#8221;</p>
+<blockquote>
+<div><img alt="../../_images/fog_image_management.png" class="align-center" src="../../_images/fog_image_management.png" />
+</div></blockquote>
+<p>Next you will need to add the host you plan to re-image to Fog.
+To add a host, open a web browser and navigate to the Host Management page of
+Fog (http://&lt;your_fog_server&gt;/fog/management/index.php?node=host).
+Click &#8220;Create New Host.&#8221;
+Provide the proper inputs for your host configuration. Be sure to select the
+image you created above from the &#8220;Host Image&#8221; option, when finished click the
+&#8220;Add&#8221; button.</p>
+<blockquote>
+<div><img alt="../../_images/fog_host_management.png" class="align-center" src="../../_images/fog_host_management.png" />
+</div></blockquote>
+<p>At this point you should be ready to take an image from the guest machine.
+In order to take an image you will need to navigate to the Task Management page
+and list all hosts (http://&lt;your_fog_server&gt;/fog/management/index.php?node=tasks&amp;sub=listhosts).
+From here you should be able to click the Upload icon (Green up arrow), which
+should instantly add a task to the queue to take an image.
+Now you should reboot your Cuckoo guest image and it should PXE boot into Fog
+and capture the base image from the cuckoo guest.</p>
+<p>After you have successfully taken an image of the guest machine, you can use
+that image as one to deploy to the Cuckoo physical sandbox as needed.
+It is recommended to use a scheduled task to accomplish this.
+In order to create a scheduled task to re-image sandboxes, navigate to the Host
+Management page on Fog (<a class="reference external" href="http:/">http:/</a>/&lt;your_fog_server&gt;/fog/management/index.php?node=host&amp;sub=list).
+Then click &#8220;Download&#8221; the machine you wish to schedule the re-image task for.
+From this menu, select &#8220;Schedule Cron-style Deployment&#8221; and put in the values
+you wish for the schedule to apply to (<code class="docutils literal"><span class="pre">*/5</span> <span class="pre">*</span> <span class="pre">*</span> <span class="pre">*</span> <span class="pre">*</span></code>) in the case shown in the
+screenshot below, but you may need to tweak these times for your environment.</p>
+<blockquote>
+<div><img alt="../../_images/fog_scheduled_job.png" class="align-center" src="../../_images/fog_scheduled_job.png" />
+</div></blockquote>
+</div>
+<div class="section" id="setup-using-vmware-bonus">
+<h2>Setup using VMWare (Bonus!)<a class="headerlink" href="#setup-using-vmware-bonus" title="Permalink to this headline">¶</a></h2>
+<p>Traditionally Cuckoo requires to be running some sort of virtualization software
+(e.g. VMware, Virtualbox, etc).
+The physical machine manager will also work with other virtual machines, so long
+as they are configured to revert to a snapshot on shutdown/reboot, and running
+the agent.py script.
+A use case for this functionality would be to run the cuckoo server and the
+guest sandboxes each in their own virtual machine on a single host, allowing for
+development/testing of Cuckoo without requiring a dedicated Linux host.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Saving the Guest</a><ul>
+<li><a class="reference internal" href="#fog">Fog</a></li>
+<li><a class="reference internal" href="#setup-using-vmware-bonus">Setup using VMWare (Bonus!)</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="network.html"
+                        title="previous chapter">Network Configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../upgrade.html"
+                        title="next chapter">Upgrade from a previous release</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/installation/guest_physical/saving.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../upgrade.html" title="Upgrade from a previous release"
+             >next</a></li>
+        <li class="right" >
+          <a href="network.html" title="Network Configuration"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Installation</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" >Preparing the Guest (Physical Machine)</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

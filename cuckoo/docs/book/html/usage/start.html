@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Starting Cuckoo &#8212; Cuckoo Sandbox v2.0-rc2 Book</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.0-rc2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="top" title="Cuckoo Sandbox v2.0-rc2 Book" href="../index.html" />
+    <link rel="up" title="Usage" href="index.html" />
+    <link rel="next" title="Submit an Analysis" href="submit.html" />
+    <link rel="prev" title="Usage" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="submit.html" title="Submit an Analysis"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Usage"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Usage</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="starting-cuckoo">
+<h1>Starting Cuckoo<a class="headerlink" href="#starting-cuckoo" title="Permalink to this headline">¶</a></h1>
+<p>To start Cuckoo use the command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python cuckoo.py
+</pre></div>
+</div>
+<p>Make sure to run it inside Cuckoo&#8217;s root directory.</p>
+<p>You will get an output similar to this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>  eeee e   e eeee e   e  eeeee eeeee
+  8  8 8   8 8  8 8   8  8  88 8  88
+  8e   8e  8 8e   8eee8e 8   8 8   8
+  88   88  8 88   88   8 8   8 8   8
+  88e8 88ee8 88e8 88   8 8eee8 8eee8
+
+ Cuckoo Sandbox 1.2
+ www.cuckoosandbox.org
+ Copyright (c) 2010-2015
+
+ Checking for updates...
+ Good! You have the latest version available.
+
+2013-04-07 15:57:17,459 [lib.cuckoo.core.scheduler] INFO: Using &quot;virtualbox&quot; machine manager
+2013-04-07 15:57:17,861 [lib.cuckoo.core.scheduler] INFO: Loaded 1 machine/s
+2013-04-07 15:57:17,862 [lib.cuckoo.core.scheduler] INFO: Waiting for analysis tasks...
+</pre></div>
+</div>
+<p>Note that Cuckoo checks for updates on a remote API located at <em>api.cuckoosandbox.org</em>.
+You can avoid this by disabling the <code class="docutils literal"><span class="pre">version_check</span></code> option in the configuration file.</p>
+<p>Now Cuckoo is ready to run and it&#8217;s waiting for submissions.</p>
+<p><code class="docutils literal"><span class="pre">cuckoo.py</span></code> accepts some command line options as shown by the help:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">cuckoo</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">v</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">t</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">m</span> <span class="n">MAX_ANALYSIS_COUNT</span><span class="p">]</span>
+                 <span class="p">[</span><span class="o">-</span><span class="n">u</span> <span class="n">USER</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">clean</span><span class="p">]</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">q</span><span class="p">,</span> <span class="o">--</span><span class="n">quiet</span>           <span class="n">Display</span> <span class="n">only</span> <span class="n">error</span> <span class="n">messages</span>
+  <span class="o">-</span><span class="n">d</span><span class="p">,</span> <span class="o">--</span><span class="n">debug</span>           <span class="n">Display</span> <span class="n">debug</span> <span class="n">messages</span>
+  <span class="o">-</span><span class="n">v</span><span class="p">,</span> <span class="o">--</span><span class="n">version</span>         <span class="n">show</span> <span class="n">program</span><span class="s1">&#39;s version number and exit</span>
+  <span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="o">--</span><span class="n">artwork</span>         <span class="n">Show</span> <span class="n">artwork</span>
+  <span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="o">--</span><span class="n">test</span>            <span class="n">Test</span> <span class="n">startup</span>
+  <span class="o">-</span><span class="n">m</span> <span class="n">MAX_ANALYSIS_COUNT</span><span class="p">,</span> <span class="o">--</span><span class="nb">max</span><span class="o">-</span><span class="n">analysis</span><span class="o">-</span><span class="n">count</span> <span class="n">MAX_ANALYSIS_COUNT</span>
+                        <span class="n">Maximum</span> <span class="n">number</span> <span class="n">of</span> <span class="n">analyses</span>
+  <span class="o">-</span><span class="n">u</span> <span class="n">USER</span><span class="p">,</span> <span class="o">--</span><span class="n">user</span> <span class="n">USER</span>  <span class="n">Drop</span> <span class="n">user</span> <span class="n">privileges</span> <span class="n">to</span> <span class="n">this</span> <span class="n">user</span>
+  <span class="o">--</span><span class="n">clean</span>               <span class="n">Remove</span> <span class="nb">all</span> <span class="n">tasks</span> <span class="ow">and</span> <span class="n">samples</span> <span class="ow">and</span> <span class="n">their</span> <span class="n">associated</span> <span class="n">data</span>
+</pre></div>
+</div>
+<p>Most importantly <code class="docutils literal"><span class="pre">--debug</span></code> and <code class="docutils literal"><span class="pre">--quiet</span></code> respectively increase and decrease the logging
+verbosity.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/cuckoo.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Usage</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="submit.html"
+                        title="next chapter">Submit an Analysis</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/usage/start.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="submit.html" title="Submit an Analysis"
+             >next</a></li>
+        <li class="right" >
+          <a href="index.html" title="Usage"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Cuckoo Sandbox v2.0-rc2 Book</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Usage</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010-2016, Cuckoo Foundation.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.8.
+    </div>
+  </body>
+</html>

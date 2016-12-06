@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.auxiliary.services</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.auxiliary-module.html">Package&nbsp;auxiliary</a> ::
+        Module&nbsp;services
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.auxiliary.services-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.auxiliary.services-module.html">Module modules.auxiliary.services</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">time</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.cuckoo=lib.cuckoo-module.html"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-1', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package lib.cuckoo.common=lib.cuckoo.common-module.html"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-2', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module lib.cuckoo.common.abstracts=lib.cuckoo.common.abstracts-module.html"><a title="lib.cuckoo.common.abstracts" class="py-name" href="#" onclick="return doclink('link-3', 'abstracts', 'link-3');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class lib.cuckoo.common.abstracts.Auxiliary=lib.cuckoo.common.abstracts.Auxiliary-class.html"><a title="lib.cuckoo.common.abstracts.Auxiliary" class="py-name" href="#" onclick="return doclink('link-4', 'Auxiliary', 'link-4');">Auxiliary</a></tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-5" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-5', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-6" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-6', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-7', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Module lib.cuckoo.common.config=lib.cuckoo.common.config-module.html"><a title="lib.cuckoo.common.config" class="py-name" href="#" onclick="return doclink('link-8', 'config', 'link-8');">config</a></tt> <tt class="py-keyword">import</tt> <tt id="link-9" class="py-name" targets="Class lib.cuckoo.common.config.Config=lib.cuckoo.common.config.Config-class.html"><a title="lib.cuckoo.common.config.Config" class="py-name" href="#" onclick="return doclink('link-9', 'Config', 'link-9');">Config</a></tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-10" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-10', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-11', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Package lib.cuckoo.core=lib.cuckoo.core-module.html"><a title="lib.cuckoo.core" class="py-name" href="#" onclick="return doclink('link-12', 'core', 'link-12');">core</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Module lib.cuckoo.core.database=lib.cuckoo.core.database-module.html"><a title="lib.cuckoo.core.database" class="py-name" href="#" onclick="return doclink('link-13', 'database', 'link-13');">database</a></tt> <tt class="py-keyword">import</tt> <tt id="link-14" class="py-name" targets="Class lib.cuckoo.core.database.Database=lib.cuckoo.core.database.Database-class.html"><a title="lib.cuckoo.core.database.Database" class="py-name" href="#" onclick="return doclink('link-14', 'Database', 'link-14');">Database</a></tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt id="link-15" class="py-name" targets="Variable lib.cuckoo.common.abstracts.log=lib.cuckoo.common.abstracts-module.html#log,Variable lib.cuckoo.common.irc.log=lib.cuckoo.common.irc-module.html#log,Variable lib.cuckoo.common.netlog.log=lib.cuckoo.common.netlog-module.html#log,Variable lib.cuckoo.common.objects.log=lib.cuckoo.common.objects-module.html#log,Variable lib.cuckoo.common.utils.log=lib.cuckoo.common.utils-module.html#log,Variable lib.cuckoo.core.database.log=lib.cuckoo.core.database-module.html#log,Variable lib.cuckoo.core.guest.log=lib.cuckoo.core.guest-module.html#log,Module lib.cuckoo.core.log=lib.cuckoo.core.log-module.html,Variable lib.cuckoo.core.plugins.log=lib.cuckoo.core.plugins-module.html#log,Variable lib.cuckoo.core.resultserver.log=lib.cuckoo.core.resultserver-module.html#log,Variable lib.cuckoo.core.rooter.log=lib.cuckoo.core.rooter-module.html#log,Variable lib.cuckoo.core.scheduler.log=lib.cuckoo.core.scheduler-module.html#log,Variable lib.cuckoo.core.startup.log=lib.cuckoo.core.startup-module.html#log,Variable modules.auxiliary.mitm.log=modules.auxiliary.mitm-module.html#log,Variable modules.auxiliary.reboot.log=modules.auxiliary.reboot-module.html#log,Variable modules.auxiliary.services.log=modules.auxiliary.services-module.html#log,Variable modules.auxiliary.sniffer.log=modules.auxiliary.sniffer-module.html#log,Variable modules.machinery.avd.log=modules.machinery.avd-module.html#log,Variable modules.machinery.physical.log=modules.machinery.physical-module.html#log,Variable modules.machinery.qemu.log=modules.machinery.qemu-module.html#log,Variable modules.machinery.virtualbox.log=modules.machinery.virtualbox-module.html#log,Variable modules.machinery.vmware.log=modules.machinery.vmware-module.html#log,Variable modules.machinery.vsphere.log=modules.machinery.vsphere-module.html#log,Variable modules.machinery.xenserver.log=modules.machinery.xenserver-module.html#log,Variable modules.processing.analysisinfo.log=modules.processing.analysisinfo-module.html#log,Variable modules.processing.apkinfo.log=modules.processing.apkinfo-module.html#log,Variable modules.processing.baseline.log=modules.processing.baseline-module.html#log,Variable modules.processing.behavior.log=modules.processing.behavior-module.html#log,Variable modules.processing.debug.log=modules.processing.debug-module.html#log,Variable modules.processing.droidmon.log=modules.processing.droidmon-module.html#log,Variable modules.processing.dumptls.log=modules.processing.dumptls-module.html#log,Variable modules.processing.googleplay.log=modules.processing.googleplay-module.html#log,Variable modules.processing.irma.log=modules.processing.irma-module.html#log,Variable modules.processing.memory.log=modules.processing.memory-module.html#log,Variable modules.processing.misp.log=modules.processing.misp-module.html#log,Variable modules.processing.network.log=modules.processing.network-module.html#log,Variable modules.processing.platform.linux.log=modules.processing.platform.linux-module.html#log,Variable modules.processing.platform.windows.log=modules.processing.platform.windows-module.html#log,Variable modules.processing.procmemory.log=modules.processing.procmemory-module.html#log,Variable modules.processing.screenshots.log=modules.processing.screenshots-module.html#log,Variable modules.processing.snort.log=modules.processing.snort-module.html#log,Variable modules.processing.static.log=modules.processing.static-module.html#log,Variable modules.processing.suricata.log=modules.processing.suricata-module.html#log,Variable modules.processing.virustotal.log=modules.processing.virustotal-module.html#log,Variable modules.reporting.elasticsearch.log=modules.reporting.elasticsearch-module.html#log,Variable modules.reporting.moloch.log=modules.reporting.moloch-module.html#log"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-15', 'log', 'link-15');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-name">__name__</tt><tt class="py-op">)</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt id="link-16" class="py-name" targets="Variable lib.cuckoo.core.rooter.cfg=lib.cuckoo.core.rooter-module.html#cfg,Variable modules.auxiliary.services.cfg=modules.auxiliary.services-module.html#cfg,Variable modules.processing.network.cfg=modules.processing.network-module.html#cfg"><a title="lib.cuckoo.core.rooter.cfg
+modules.auxiliary.services.cfg
+modules.processing.network.cfg" class="py-name" href="#" onclick="return doclink('link-16', 'cfg', 'link-16');">cfg</a></tt> <tt class="py-op">=</tt> <tt id="link-17" class="py-name"><a title="lib.cuckoo.common.config.Config" class="py-name" href="#" onclick="return doclink('link-17', 'Config', 'link-9');">Config</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt id="link-18" class="py-name" targets="Variable lib.cuckoo.core.guest.db=lib.cuckoo.core.guest-module.html#db,Variable modules.auxiliary.services.db=modules.auxiliary.services-module.html#db"><a title="lib.cuckoo.core.guest.db
+modules.auxiliary.services.db" class="py-name" href="#" onclick="return doclink('link-18', 'db', 'link-18');">db</a></tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name"><a title="lib.cuckoo.core.database.Database" class="py-name" href="#" onclick="return doclink('link-19', 'Database', 'link-14');">Database</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"> </tt>
+<a name="Services"></a><div id="Services-def"><a name="L17"></a><tt class="py-lineno">17</tt> <a class="py-toggle" href="#" id="Services-toggle" onclick="return toggle('Services');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.auxiliary.services.Services-class.html">Services</a><tt class="py-op">(</tt><tt class="py-base-class">Auxiliary</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Services-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Services-expanded"><a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line">    <tt class="py-docstring">"""Allows one or more additional VMs to be run next to an analysis. Either</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">    as global services (which are generally never rebooted) or on a</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">    per-analysis basis."""</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"> </tt>
+<a name="Services.start_service"></a><div id="Services.start_service-def"><a name="L22"></a><tt class="py-lineno">22</tt> <a class="py-toggle" href="#" id="Services.start_service-toggle" onclick="return toggle('Services.start_service');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.auxiliary.services.Services-class.html#start_service">start_service</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">service</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Services.start_service-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Services.start_service-expanded"><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-docstring">"""Start a VM containing one or more services."""</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">        <tt class="py-comment"># We give all services a total of 5 minutes to boot up before</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">        <tt class="py-comment"># starting the actual analysis.</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">        <tt id="link-20" class="py-name" targets="Variable lib.cuckoo.core.database.Task.timeout=lib.cuckoo.core.database.Task-class.html#timeout"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-20', 'timeout', 'link-20');">timeout</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-21', 'timeout', 'link-20');">timeout</a></tt> <tt class="py-keyword">or</tt> <tt id="link-22" class="py-name"><a title="lib.cuckoo.core.rooter.cfg
+modules.auxiliary.services.cfg
+modules.processing.network.cfg" class="py-name" href="#" onclick="return doclink('link-22', 'cfg', 'link-16');">cfg</a></tt><tt class="py-op">.</tt><tt class="py-name">timeouts</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Function modules.reporting.jsondump.default()=modules.reporting.jsondump-module.html#default,Function modules.reporting.notification.default()=modules.reporting.notification-module.html#default"><a title="modules.reporting.jsondump.default
+modules.reporting.notification.default" class="py-name" href="#" onclick="return doclink('link-23', 'default', 'link-23');">default</a></tt> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">        <tt id="link-24" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-24', 'timeout', 'link-20');">timeout</a></tt> <tt class="py-op">+=</tt> <tt class="py-number">300</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">        <tt id="link-25" class="py-name" targets="Variable lib.cuckoo.core.database.Machine.tags=lib.cuckoo.core.database.Machine-class.html#tags,Variable lib.cuckoo.core.database.Task.tags=lib.cuckoo.core.database.Task-class.html#tags"><a title="lib.cuckoo.core.database.Machine.tags
+lib.cuckoo.core.database.Task.tags" class="py-name" href="#" onclick="return doclink('link-25', 'tags', 'link-25');">tags</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"service,%s"</tt> <tt class="py-op">%</tt> <tt class="py-name">service</tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-26" class="py-name"><a title="lib.cuckoo.core.guest.db
+modules.auxiliary.services.db" class="py-name" href="#" onclick="return doclink('link-26', 'db', 'link-18');">db</a></tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Method lib.cuckoo.core.database.Database.add_service()=lib.cuckoo.core.database.Database-class.html#add_service"><a title="lib.cuckoo.core.database.Database.add_service" class="py-name" href="#" onclick="return doclink('link-27', 'add_service', 'link-27');">add_service</a></tt><tt class="py-op">(</tt><tt id="link-28" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-28', 'timeout', 'link-20');">timeout</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Variable lib.cuckoo.core.database.Task.owner=lib.cuckoo.core.database.Task-class.html#owner"><a title="lib.cuckoo.core.database.Task.owner" class="py-name" href="#" onclick="return doclink('link-29', 'owner', 'link-29');">owner</a></tt><tt class="py-op">,</tt> <tt id="link-30" class="py-name"><a title="lib.cuckoo.core.database.Machine.tags
+lib.cuckoo.core.database.Task.tags" class="py-name" href="#" onclick="return doclink('link-30', 'tags', 'link-25');">tags</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"> </tt>
+<a name="Services.stop_service"></a><div id="Services.stop_service-def"><a name="L32"></a><tt class="py-lineno">32</tt> <a class="py-toggle" href="#" id="Services.stop_service-toggle" onclick="return toggle('Services.stop_service');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.auxiliary.services.Services-class.html#stop_service">stop_service</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">task_id</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Services.stop_service-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Services.stop_service-expanded"><a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">        <tt class="py-docstring">"""Stop a VM containing one or more services."""</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">        <tt id="link-31" class="py-name"><a title="lib.cuckoo.core.guest.db
+modules.auxiliary.services.db" class="py-name" href="#" onclick="return doclink('link-31', 'db', 'link-18');">db</a></tt><tt class="py-op">.</tt><tt id="link-32" class="py-name" targets="Method lib.cuckoo.core.database.Database.guest_set_status()=lib.cuckoo.core.database.Database-class.html#guest_set_status"><a title="lib.cuckoo.core.database.Database.guest_set_status" class="py-name" href="#" onclick="return doclink('link-32', 'guest_set_status', 'link-32');">guest_set_status</a></tt><tt class="py-op">(</tt><tt id="link-33" class="py-name" targets="Variable lib.cuckoo.core.database.Error.task_id=lib.cuckoo.core.database.Error-class.html#task_id,Variable lib.cuckoo.core.database.Guest.task_id=lib.cuckoo.core.database.Guest-class.html#task_id"><a title="lib.cuckoo.core.database.Error.task_id
+lib.cuckoo.core.database.Guest.task_id" class="py-name" href="#" onclick="return doclink('link-33', 'task_id', 'link-33');">task_id</a></tt><tt class="py-op">,</tt> <tt class="py-string">"stop"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="Services.start"></a><div id="Services.start-def"><a name="L36"></a><tt class="py-lineno">36</tt> <a class="py-toggle" href="#" id="Services.start-toggle" onclick="return toggle('Services.start');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.auxiliary.services.Services-class.html#start">start</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Services.start-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Services.start-expanded"><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tasks</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line"> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name" targets="Variable lib.cuckoo.core.database.Task.category=lib.cuckoo.core.database.Task-class.html#category"><a title="lib.cuckoo.core.database.Task.category" class="py-name" href="#" onclick="return doclink('link-34', 'category', 'link-34');">category</a></tt> <tt class="py-op">==</tt> <tt class="py-string">"service"</tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line">        <tt class="py-comment"># Have to explicitly enable services.</tt> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name" targets="Variable lib.cuckoo.core.database.Machine.options=lib.cuckoo.core.database.Machine-class.html#options,Method lib.cuckoo.core.database.Task.options()=lib.cuckoo.core.database.Task-class.html#options"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-35', 'options', 'link-35');">options</a></tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Method lib.cuckoo.common.config.Config.get()=lib.cuckoo.common.config.Config-class.html#get,Method lib.cuckoo.core.guest.GuestManager.get()=lib.cuckoo.core.guest.GuestManager-class.html#get"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-36', 'get', 'link-36');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"services"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line"> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">service</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-37', 'options', 'link-35');">options</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-38', 'get', 'link-36');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"services"</tt><tt class="py-op">,</tt> <tt class="py-string">""</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">","</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">            <tt class="py-name">service</tt> <tt class="py-op">=</tt> <tt class="py-name">service</tt><tt class="py-op">.</tt><tt class="py-name">strip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">service</tt><tt class="py-op">:</tt> </tt>
+<a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line">                <tt class="py-keyword">continue</tt> </tt>
+<a name="L50"></a><tt class="py-lineno">50</tt>  <tt class="py-line"> </tt>
+<a name="L51"></a><tt class="py-lineno">51</tt>  <tt class="py-line">            <tt id="link-39" class="py-name"><a title="lib.cuckoo.core.database.Error.task_id
+lib.cuckoo.core.database.Guest.task_id" class="py-name" href="#" onclick="return doclink('link-39', 'task_id', 'link-33');">task_id</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name" targets="Method modules.auxiliary.services.Services.start_service()=modules.auxiliary.services.Services-class.html#start_service"><a title="modules.auxiliary.services.Services.start_service" class="py-name" href="#" onclick="return doclink('link-40', 'start_service', 'link-40');">start_service</a></tt><tt class="py-op">(</tt><tt class="py-name">service</tt><tt class="py-op">)</tt> </tt>
+<a name="L52"></a><tt class="py-lineno">52</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tasks</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt id="link-41" class="py-name"><a title="lib.cuckoo.core.database.Error.task_id
+lib.cuckoo.core.database.Guest.task_id" class="py-name" href="#" onclick="return doclink('link-41', 'task_id', 'link-33');">task_id</a></tt><tt class="py-op">,</tt> <tt class="py-name">service</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno">53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno">54</tt>  <tt class="py-line">            <tt id="link-42" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-42', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"Started service %s #%d for task #%d"</tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno">55</tt>  <tt class="py-line">                     <tt class="py-name">service</tt><tt class="py-op">,</tt> <tt id="link-43" class="py-name"><a title="lib.cuckoo.core.database.Error.task_id
+lib.cuckoo.core.database.Guest.task_id" class="py-name" href="#" onclick="return doclink('link-43', 'task_id', 'link-33');">task_id</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name" targets="Variable lib.cuckoo.core.database.Error.id=lib.cuckoo.core.database.Error-class.html#id,Variable lib.cuckoo.core.database.Guest.id=lib.cuckoo.core.database.Guest-class.html#id,Variable lib.cuckoo.core.database.Machine.id=lib.cuckoo.core.database.Machine-class.html#id,Variable lib.cuckoo.core.database.Sample.id=lib.cuckoo.core.database.Sample-class.html#id,Variable lib.cuckoo.core.database.Tag.id=lib.cuckoo.core.database.Tag-class.html#id,Variable lib.cuckoo.core.database.Task.id=lib.cuckoo.core.database.Task-class.html#id"><a title="lib.cuckoo.core.database.Error.id
+lib.cuckoo.core.database.Guest.id
+lib.cuckoo.core.database.Machine.id
+lib.cuckoo.core.database.Sample.id
+lib.cuckoo.core.database.Tag.id
+lib.cuckoo.core.database.Task.id" class="py-name" href="#" onclick="return doclink('link-44', 'id', 'link-44');">id</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno">56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno">57</tt>  <tt class="py-line">        <tt class="py-comment"># Wait until each service is either starting to run, running, or for</tt> </tt>
+<a name="L58"></a><tt class="py-lineno">58</tt>  <tt class="py-line">        <tt class="py-comment"># some reason stopped.</tt> </tt>
+<a name="L59"></a><tt class="py-lineno">59</tt>  <tt class="py-line">        <tt class="py-name">wait_states</tt> <tt class="py-op">=</tt> <tt class="py-string">"starting"</tt><tt class="py-op">,</tt> <tt class="py-string">"running"</tt><tt class="py-op">,</tt> <tt class="py-string">"stopping"</tt> </tt>
+<a name="L60"></a><tt class="py-lineno">60</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-45" class="py-name"><a title="lib.cuckoo.core.database.Error.task_id
+lib.cuckoo.core.database.Guest.task_id" class="py-name" href="#" onclick="return doclink('link-45', 'task_id', 'link-33');">task_id</a></tt><tt class="py-op">,</tt> <tt class="py-name">service</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tasks</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno">61</tt>  <tt class="py-line">            <tt class="py-keyword">while</tt> <tt id="link-46" class="py-name"><a title="lib.cuckoo.core.guest.db
+modules.auxiliary.services.db" class="py-name" href="#" onclick="return doclink('link-46', 'db', 'link-18');">db</a></tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Method lib.cuckoo.core.database.Database.guest_get_status()=lib.cuckoo.core.database.Database-class.html#guest_get_status"><a title="lib.cuckoo.core.database.Database.guest_get_status" class="py-name" href="#" onclick="return doclink('link-47', 'guest_get_status', 'link-47');">guest_get_status</a></tt><tt class="py-op">(</tt><tt id="link-48" class="py-name"><a title="lib.cuckoo.core.database.Error.task_id
+lib.cuckoo.core.database.Guest.task_id" class="py-name" href="#" onclick="return doclink('link-48', 'task_id', 'link-33');">task_id</a></tt><tt class="py-op">)</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">wait_states</tt><tt class="py-op">:</tt> </tt>
+<a name="L62"></a><tt class="py-lineno">62</tt>  <tt class="py-line">                <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L63"></a><tt class="py-lineno">63</tt>  <tt class="py-line"> </tt>
+<a name="L64"></a><tt class="py-lineno">64</tt>  <tt class="py-line">        <tt class="py-comment"># Wait an additional timeout before starting the actual analysis.</tt> </tt>
+<a name="L65"></a><tt class="py-lineno">65</tt>  <tt class="py-line">        <tt id="link-49" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-49', 'timeout', 'link-20');">timeout</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-50" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-50', 'options', 'link-35');">options</a></tt><tt class="py-op">.</tt><tt id="link-51" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-51', 'get', 'link-36');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"timeout"</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno">66</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt id="link-52" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-52', 'timeout', 'link-20');">timeout</a></tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L67"></a><tt class="py-lineno">67</tt>  <tt class="py-line">            <tt class="py-name">time</tt><tt class="py-op">.</tt><tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt id="link-53" class="py-name"><a title="lib.cuckoo.core.database.Task.timeout" class="py-name" href="#" onclick="return doclink('link-53', 'timeout', 'link-20');">timeout</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L68"></a><tt class="py-lineno">68</tt>  <tt class="py-line"> </tt>
+<a name="Services.stop"></a><div id="Services.stop-def"><a name="L69"></a><tt class="py-lineno">69</tt> <a class="py-toggle" href="#" id="Services.stop-toggle" onclick="return toggle('Services.stop');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.auxiliary.services.Services-class.html#stop">stop</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Services.stop-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Services.stop-expanded"><a name="L70"></a><tt class="py-lineno">70</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="lib.cuckoo.core.database.Task.category" class="py-name" href="#" onclick="return doclink('link-54', 'category', 'link-34');">category</a></tt> <tt class="py-op">==</tt> <tt class="py-string">"service"</tt><tt class="py-op">:</tt> </tt>
+<a name="L71"></a><tt class="py-lineno">71</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L72"></a><tt class="py-lineno">72</tt>  <tt class="py-line"> </tt>
+<a name="L73"></a><tt class="py-lineno">73</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt id="link-55" class="py-name"><a title="lib.cuckoo.core.database.Error.task_id
+lib.cuckoo.core.database.Guest.task_id" class="py-name" href="#" onclick="return doclink('link-55', 'task_id', 'link-33');">task_id</a></tt><tt class="py-op">,</tt> <tt class="py-name">service</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tasks</tt><tt class="py-op">:</tt> </tt>
+<a name="L74"></a><tt class="py-lineno">74</tt>  <tt class="py-line">            <tt id="link-56" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-56', 'log', 'link-15');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-string">"Stopping service %s #%d for task #%d"</tt><tt class="py-op">,</tt> </tt>
+<a name="L75"></a><tt class="py-lineno">75</tt>  <tt class="py-line">                     <tt class="py-name">service</tt><tt class="py-op">,</tt> <tt id="link-57" class="py-name"><a title="lib.cuckoo.core.database.Error.task_id
+lib.cuckoo.core.database.Guest.task_id" class="py-name" href="#" onclick="return doclink('link-57', 'task_id', 'link-33');">task_id</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">task</tt><tt class="py-op">.</tt><tt id="link-58" class="py-name"><a title="lib.cuckoo.core.database.Error.id
+lib.cuckoo.core.database.Guest.id
+lib.cuckoo.core.database.Machine.id
+lib.cuckoo.core.database.Sample.id
+lib.cuckoo.core.database.Tag.id
+lib.cuckoo.core.database.Task.id" class="py-name" href="#" onclick="return doclink('link-58', 'id', 'link-44');">id</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L76"></a><tt class="py-lineno">76</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name" targets="Method modules.auxiliary.services.Services.stop_service()=modules.auxiliary.services.Services-class.html#stop_service"><a title="modules.auxiliary.services.Services.stop_service" class="py-name" href="#" onclick="return doclink('link-59', 'stop_service', 'link-59');">stop_service</a></tt><tt class="py-op">(</tt><tt id="link-60" class="py-name"><a title="lib.cuckoo.core.database.Error.task_id
+lib.cuckoo.core.database.Guest.task_id" class="py-name" href="#" onclick="return doclink('link-60', 'task_id', 'link-33');">task_id</a></tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L77"></a><tt class="py-lineno">77</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:21:59 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

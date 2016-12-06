@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.reporting.notification</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.reporting-module.html">Package&nbsp;reporting</a> ::
+        Module&nbsp;notification
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.reporting.notification-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.reporting.notification-module.html">Module modules.reporting.notification</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno"> 1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">json</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">datetime</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">calendar</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">requests</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">    <tt id="link-0" class="py-name" targets="Variable lib.cuckoo.common.virustotal.HAVE_REQUESTS=lib.cuckoo.common.virustotal-module.html#HAVE_REQUESTS,Variable modules.processing.irma.HAVE_REQUESTS=modules.processing.irma-module.html#HAVE_REQUESTS,Variable modules.reporting.mattermost.HAVE_REQUESTS=modules.reporting.mattermost-module.html#HAVE_REQUESTS,Variable modules.reporting.notification.HAVE_REQUESTS=modules.reporting.notification-module.html#HAVE_REQUESTS"><a title="lib.cuckoo.common.virustotal.HAVE_REQUESTS
+modules.processing.irma.HAVE_REQUESTS
+modules.reporting.mattermost.HAVE_REQUESTS
+modules.reporting.notification.HAVE_REQUESTS" class="py-name" href="#" onclick="return doclink('link-0', 'HAVE_REQUESTS', 'link-0');">HAVE_REQUESTS</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">    <tt id="link-1" class="py-name"><a title="lib.cuckoo.common.virustotal.HAVE_REQUESTS
+modules.processing.irma.HAVE_REQUESTS
+modules.reporting.mattermost.HAVE_REQUESTS
+modules.reporting.notification.HAVE_REQUESTS" class="py-name" href="#" onclick="return doclink('link-1', 'HAVE_REQUESTS', 'link-0');">HAVE_REQUESTS</a></tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-2', 'lib', 'link-2');">lib</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Package lib.cuckoo=lib.cuckoo-module.html"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-3', 'cuckoo', 'link-3');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Package lib.cuckoo.common=lib.cuckoo.common-module.html"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-4', 'common', 'link-4');">common</a></tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Module lib.cuckoo.common.abstracts=lib.cuckoo.common.abstracts-module.html"><a title="lib.cuckoo.common.abstracts" class="py-name" href="#" onclick="return doclink('link-5', 'abstracts', 'link-5');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-6" class="py-name" targets="Class lib.cuckoo.common.abstracts.Report=lib.cuckoo.common.abstracts.Report-class.html"><a title="lib.cuckoo.common.abstracts.Report" class="py-name" href="#" onclick="return doclink('link-6', 'Report', 'link-6');">Report</a></tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-7" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-7', 'lib', 'link-2');">lib</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-8', 'cuckoo', 'link-3');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-9', 'common', 'link-4');">common</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Module lib.cuckoo.common.exceptions=lib.cuckoo.common.exceptions-module.html"><a title="lib.cuckoo.common.exceptions" class="py-name" href="#" onclick="return doclink('link-10', 'exceptions', 'link-10');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-11" class="py-name" targets="Class lib.cuckoo.common.exceptions.CuckooReportError=lib.cuckoo.common.exceptions.CuckooReportError-class.html"><a title="lib.cuckoo.common.exceptions.CuckooReportError" class="py-name" href="#" onclick="return doclink('link-11', 'CuckooReportError', 'link-11');">CuckooReportError</a></tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-12" class="py-name"><a title="lib" class="py-name" href="#" onclick="return doclink('link-12', 'lib', 'link-2');">lib</a></tt><tt class="py-op">.</tt><tt id="link-13" class="py-name"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-13', 'cuckoo', 'link-3');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-14', 'common', 'link-4');">common</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="lib.cuckoo.common.exceptions" class="py-name" href="#" onclick="return doclink('link-15', 'exceptions', 'link-10');">exceptions</a></tt> <tt class="py-keyword">import</tt> <tt id="link-16" class="py-name" targets="Class lib.cuckoo.common.exceptions.CuckooOperationalError=lib.cuckoo.common.exceptions.CuckooOperationalError-class.html"><a title="lib.cuckoo.common.exceptions.CuckooOperationalError" class="py-name" href="#" onclick="return doclink('link-16', 'CuckooOperationalError', 'link-16');">CuckooOperationalError</a></tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"> </tt>
+<a name="default"></a><div id="default-def"><a name="L19"></a><tt class="py-lineno">19</tt> <a class="py-toggle" href="#" id="default-toggle" onclick="return toggle('default');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.reporting.notification-module.html#default">default</a><tt class="py-op">(</tt><tt class="py-param">obj</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="default-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="default-expanded"><a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">obj</tt><tt class="py-op">,</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">datetime</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">obj</tt><tt class="py-op">.</tt><tt class="py-name">utcoffset</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">            <tt class="py-name">obj</tt> <tt class="py-op">=</tt> <tt class="py-name">obj</tt> <tt class="py-op">-</tt> <tt class="py-name">obj</tt><tt class="py-op">.</tt><tt class="py-name">utcoffset</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">calendar</tt><tt class="py-op">.</tt><tt class="py-name">timegm</tt><tt class="py-op">(</tt><tt class="py-name">obj</tt><tt class="py-op">.</tt><tt class="py-name">timetuple</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">obj</tt><tt class="py-op">.</tt><tt class="py-name">microsecond</tt> <tt class="py-op">/</tt> <tt class="py-number">1000000.0</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">    <tt class="py-keyword">raise</tt> <tt class="py-name">TypeError</tt><tt class="py-op">(</tt><tt class="py-string">"%r is not JSON serializable"</tt> <tt class="py-op">%</tt> <tt class="py-name">obj</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"> </tt>
+<a name="Notification"></a><div id="Notification-def"><a name="L26"></a><tt class="py-lineno">26</tt> <a class="py-toggle" href="#" id="Notification-toggle" onclick="return toggle('Notification');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.reporting.notification.Notification-class.html">Notification</a><tt class="py-op">(</tt><tt class="py-base-class">Report</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Notification-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Notification-expanded"><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">    <tt class="py-docstring">"""Notifies external service about finished analysis via URL."""</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt>
+<a name="Notification.run"></a><div id="Notification.run-def"><a name="L29"></a><tt class="py-lineno">29</tt> <a class="py-toggle" href="#" id="Notification.run-toggle" onclick="return toggle('Notification.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.reporting.notification.Notification-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">results</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Notification.run-collapsed" style="display:none;" pad="++" indent="++++++++"></div><div id="Notification.run-expanded"><a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt id="link-17" class="py-name"><a title="lib.cuckoo.common.virustotal.HAVE_REQUESTS
+modules.processing.irma.HAVE_REQUESTS
+modules.reporting.mattermost.HAVE_REQUESTS
+modules.reporting.notification.HAVE_REQUESTS" class="py-name" href="#" onclick="return doclink('link-17', 'HAVE_REQUESTS', 'link-0');">HAVE_REQUESTS</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-18" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooOperationalError" class="py-name" href="#" onclick="return doclink('link-18', 'CuckooOperationalError', 'link-16');">CuckooOperationalError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">                <tt class="py-string">"The Notification reporting module requires the requests "</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                <tt class="py-string">"library (install with `pip install requests`)"</tt> </tt>
+<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line">            <tt class="py-op">)</tt> </tt>
+<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno">36</tt>  <tt class="py-line">        <tt id="link-19" class="py-name" targets="Method lib.cuckoo.core.guest.GuestManager.post()=lib.cuckoo.core.guest.GuestManager-class.html#post"><a title="lib.cuckoo.core.guest.GuestManager.post" class="py-name" href="#" onclick="return doclink('link-19', 'post', 'link-19');">post</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
+<a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">            <tt class="py-string">"identifier"</tt><tt class="py-op">:</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Variable lib.cuckoo.core.database.Machine.options=lib.cuckoo.core.database.Machine-class.html#options,Method lib.cuckoo.core.database.Task.options()=lib.cuckoo.core.database.Task-class.html#options"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-20', 'options', 'link-20');">options</a></tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method lib.cuckoo.common.config.Config.get()=lib.cuckoo.common.config.Config-class.html#get,Method lib.cuckoo.core.guest.GuestManager.get()=lib.cuckoo.core.guest.GuestManager-class.html#get"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-21', 'get', 'link-21');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"identifier"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">            <tt class="py-string">"data"</tt><tt class="py-op">:</tt> <tt class="py-name">json</tt><tt class="py-op">.</tt><tt class="py-name">dumps</tt><tt class="py-op">(</tt> </tt>
+<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                <tt id="link-22" class="py-name" targets="Method lib.cuckoo.common.abstracts.Signature.results()=lib.cuckoo.common.abstracts.Signature-class.html#results"><a title="lib.cuckoo.common.abstracts.Signature.results" class="py-name" href="#" onclick="return doclink('link-22', 'results', 'link-22');">results</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-23', 'get', 'link-21');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"info"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt id="link-24" class="py-name" targets="Function modules.reporting.jsondump.default()=modules.reporting.jsondump-module.html#default,Function modules.reporting.notification.default()=modules.reporting.notification-module.html#default"><a title="modules.reporting.jsondump.default
+modules.reporting.notification.default" class="py-name" href="#" onclick="return doclink('link-24', 'default', 'link-24');">default</a></tt><tt class="py-op">=</tt><tt id="link-25" class="py-name"><a title="modules.reporting.jsondump.default
+modules.reporting.notification.default" class="py-name" href="#" onclick="return doclink('link-25', 'default', 'link-24');">default</a></tt><tt class="py-op">,</tt> <tt class="py-name">sort_keys</tt><tt class="py-op">=</tt><tt class="py-name">False</tt> </tt>
+<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">            <tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">        <tt class="py-op">}</tt> </tt>
+<a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt>
+<a name="L43"></a><tt class="py-lineno">43</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L44"></a><tt class="py-lineno">44</tt>  <tt class="py-line">            <tt class="py-name">requests</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="lib.cuckoo.core.guest.GuestManager.post" class="py-name" href="#" onclick="return doclink('link-26', 'post', 'link-19');">post</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="lib.cuckoo.core.database.Machine.options
+lib.cuckoo.core.database.Task.options" class="py-name" href="#" onclick="return doclink('link-27', 'options', 'link-20');">options</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-28', 'get', 'link-21');">get</a></tt><tt class="py-op">(</tt><tt class="py-string">"url"</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">data</tt><tt class="py-op">=</tt><tt id="link-29" class="py-name"><a title="lib.cuckoo.core.guest.GuestManager.post" class="py-name" href="#" onclick="return doclink('link-29', 'post', 'link-19');">post</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L45"></a><tt class="py-lineno">45</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt> <tt class="py-keyword">as</tt> <tt class="py-name">e</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno">46</tt>  <tt class="py-line">            <tt class="py-keyword">raise</tt> <tt id="link-30" class="py-name"><a title="lib.cuckoo.common.exceptions.CuckooReportError" class="py-name" href="#" onclick="return doclink('link-30', 'CuckooReportError', 'link-11');">CuckooReportError</a></tt><tt class="py-op">(</tt> </tt>
+<a name="L47"></a><tt class="py-lineno">47</tt>  <tt class="py-line">                <tt class="py-string">"Failed posting message via Notification: %s"</tt> <tt class="py-op">%</tt> <tt class="py-name">e</tt> </tt>
+<a name="L48"></a><tt class="py-lineno">48</tt>  <tt class="py-line">            <tt class="py-op">)</tt> </tt>
+</div></div><a name="L49"></a><tt class="py-lineno">49</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:22:01 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

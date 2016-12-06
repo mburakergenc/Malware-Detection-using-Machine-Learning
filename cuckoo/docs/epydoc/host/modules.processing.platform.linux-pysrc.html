@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>modules.processing.platform.linux</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="modules-module.html">Package&nbsp;modules</a> ::
+        <a href="modules.processing-module.html">Package&nbsp;processing</a> ::
+        <a href="modules.processing.platform-module.html">Package&nbsp;platform</a> ::
+        Module&nbsp;linux
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="modules.processing.platform.linux-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="modules.processing.platform.linux-module.html">Module modules.processing.platform.linux</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2010-2013 Claudio Guarnieri.</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (C) 2014-2016 Cuckoo Foundation.</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># This file is part of Cuckoo Sandbox - http://www.cuckoosandbox.org</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment"># See the file 'docs/LICENSE' for copying permission.</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">datetime</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">dateutil</tt><tt class="py-op">.</tt><tt class="py-name">parser</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Package lib=lib-module.html"><a title="lib" class="py-name" href="#" onclick="return doclink('link-0', 'lib', 'link-0');">lib</a></tt><tt class="py-op">.</tt><tt id="link-1" class="py-name" targets="Package lib.cuckoo=lib.cuckoo-module.html"><a title="lib.cuckoo" class="py-name" href="#" onclick="return doclink('link-1', 'cuckoo', 'link-1');">cuckoo</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Package lib.cuckoo.common=lib.cuckoo.common-module.html"><a title="lib.cuckoo.common" class="py-name" href="#" onclick="return doclink('link-2', 'common', 'link-2');">common</a></tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Module lib.cuckoo.common.abstracts=lib.cuckoo.common.abstracts-module.html"><a title="lib.cuckoo.common.abstracts" class="py-name" href="#" onclick="return doclink('link-3', 'abstracts', 'link-3');">abstracts</a></tt> <tt class="py-keyword">import</tt> <tt id="link-4" class="py-name" targets="Class lib.cuckoo.common.abstracts.BehaviorHandler=lib.cuckoo.common.abstracts.BehaviorHandler-class.html"><a title="lib.cuckoo.common.abstracts.BehaviorHandler" class="py-name" href="#" onclick="return doclink('link-4', 'BehaviorHandler', 'link-4');">BehaviorHandler</a></tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable lib.cuckoo.common.abstracts.log=lib.cuckoo.common.abstracts-module.html#log,Variable lib.cuckoo.common.irc.log=lib.cuckoo.common.irc-module.html#log,Variable lib.cuckoo.common.netlog.log=lib.cuckoo.common.netlog-module.html#log,Variable lib.cuckoo.common.objects.log=lib.cuckoo.common.objects-module.html#log,Variable lib.cuckoo.common.utils.log=lib.cuckoo.common.utils-module.html#log,Variable lib.cuckoo.core.database.log=lib.cuckoo.core.database-module.html#log,Variable lib.cuckoo.core.guest.log=lib.cuckoo.core.guest-module.html#log,Module lib.cuckoo.core.log=lib.cuckoo.core.log-module.html,Variable lib.cuckoo.core.plugins.log=lib.cuckoo.core.plugins-module.html#log,Variable lib.cuckoo.core.resultserver.log=lib.cuckoo.core.resultserver-module.html#log,Variable lib.cuckoo.core.rooter.log=lib.cuckoo.core.rooter-module.html#log,Variable lib.cuckoo.core.scheduler.log=lib.cuckoo.core.scheduler-module.html#log,Variable lib.cuckoo.core.startup.log=lib.cuckoo.core.startup-module.html#log,Variable modules.auxiliary.mitm.log=modules.auxiliary.mitm-module.html#log,Variable modules.auxiliary.reboot.log=modules.auxiliary.reboot-module.html#log,Variable modules.auxiliary.services.log=modules.auxiliary.services-module.html#log,Variable modules.auxiliary.sniffer.log=modules.auxiliary.sniffer-module.html#log,Variable modules.machinery.avd.log=modules.machinery.avd-module.html#log,Variable modules.machinery.physical.log=modules.machinery.physical-module.html#log,Variable modules.machinery.qemu.log=modules.machinery.qemu-module.html#log,Variable modules.machinery.virtualbox.log=modules.machinery.virtualbox-module.html#log,Variable modules.machinery.vmware.log=modules.machinery.vmware-module.html#log,Variable modules.machinery.vsphere.log=modules.machinery.vsphere-module.html#log,Variable modules.machinery.xenserver.log=modules.machinery.xenserver-module.html#log,Variable modules.processing.analysisinfo.log=modules.processing.analysisinfo-module.html#log,Variable modules.processing.apkinfo.log=modules.processing.apkinfo-module.html#log,Variable modules.processing.baseline.log=modules.processing.baseline-module.html#log,Variable modules.processing.behavior.log=modules.processing.behavior-module.html#log,Variable modules.processing.debug.log=modules.processing.debug-module.html#log,Variable modules.processing.droidmon.log=modules.processing.droidmon-module.html#log,Variable modules.processing.dumptls.log=modules.processing.dumptls-module.html#log,Variable modules.processing.googleplay.log=modules.processing.googleplay-module.html#log,Variable modules.processing.irma.log=modules.processing.irma-module.html#log,Variable modules.processing.memory.log=modules.processing.memory-module.html#log,Variable modules.processing.misp.log=modules.processing.misp-module.html#log,Variable modules.processing.network.log=modules.processing.network-module.html#log,Variable modules.processing.platform.linux.log=modules.processing.platform.linux-module.html#log,Variable modules.processing.platform.windows.log=modules.processing.platform.windows-module.html#log,Variable modules.processing.procmemory.log=modules.processing.procmemory-module.html#log,Variable modules.processing.screenshots.log=modules.processing.screenshots-module.html#log,Variable modules.processing.snort.log=modules.processing.snort-module.html#log,Variable modules.processing.static.log=modules.processing.static-module.html#log,Variable modules.processing.suricata.log=modules.processing.suricata-module.html#log,Variable modules.processing.virustotal.log=modules.processing.virustotal-module.html#log,Variable modules.reporting.elasticsearch.log=modules.reporting.elasticsearch-module.html#log,Variable modules.reporting.moloch.log=modules.reporting.moloch-module.html#log"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-5', 'log', 'link-5');">log</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-name">__name__</tt><tt class="py-op">)</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="FilteredProcessLog"></a><div id="FilteredProcessLog-def"><a name="L17"></a><tt class="py-lineno"> 17</tt> <a class="py-toggle" href="#" id="FilteredProcessLog-toggle" onclick="return toggle('FilteredProcessLog');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.processing.platform.linux.FilteredProcessLog-class.html">FilteredProcessLog</a><tt class="py-op">(</tt><tt class="py-base-class">list</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FilteredProcessLog-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="FilteredProcessLog-expanded"><a name="FilteredProcessLog.__init__"></a><div id="FilteredProcessLog.__init__-def"><a name="L18"></a><tt class="py-lineno"> 18</tt> <a class="py-toggle" href="#" id="FilteredProcessLog.__init__-toggle" onclick="return toggle('FilteredProcessLog.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.platform.linux.FilteredProcessLog-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">eventstream</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwfilters</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FilteredProcessLog.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FilteredProcessLog.__init__-expanded"><a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">eventstream</tt> <tt class="py-op">=</tt> <tt class="py-name">eventstream</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">kwfilters</tt> <tt class="py-op">=</tt> <tt class="py-name">kwfilters</tt> </tt>
+</div><a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"> </tt>
+<a name="FilteredProcessLog.__iter__"></a><div id="FilteredProcessLog.__iter__-def"><a name="L22"></a><tt class="py-lineno"> 22</tt> <a class="py-toggle" href="#" id="FilteredProcessLog.__iter__-toggle" onclick="return toggle('FilteredProcessLog.__iter__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.platform.linux.FilteredProcessLog-class.html#__iter__">__iter__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FilteredProcessLog.__iter__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FilteredProcessLog.__iter__-expanded"><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">event</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">eventstream</tt><tt class="py-op">:</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">k</tt><tt class="py-op">,</tt> <tt class="py-name">v</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">kwfilters</tt><tt class="py-op">.</tt><tt class="py-name">items</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">event</tt><tt class="py-op">[</tt><tt class="py-name">k</tt><tt class="py-op">]</tt> <tt class="py-op">!=</tt> <tt class="py-name">v</tt><tt class="py-op">:</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">                    <tt class="py-keyword">continue</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">                <tt class="py-keyword">del</tt> <tt class="py-name">event</tt><tt class="py-op">[</tt><tt class="py-string">"type"</tt><tt class="py-op">]</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">                <tt class="py-keyword">yield</tt> <tt class="py-name">event</tt> </tt>
+</div><a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"> </tt>
+<a name="FilteredProcessLog.__nonzero__"></a><div id="FilteredProcessLog.__nonzero__-def"><a name="L31"></a><tt class="py-lineno"> 31</tt> <a class="py-toggle" href="#" id="FilteredProcessLog.__nonzero__-toggle" onclick="return toggle('FilteredProcessLog.__nonzero__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.platform.linux.FilteredProcessLog-class.html#__nonzero__">__nonzero__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FilteredProcessLog.__nonzero__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FilteredProcessLog.__nonzero__-expanded"><a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+</div></div><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="LinuxSystemTap"></a><div id="LinuxSystemTap-def"><a name="L34"></a><tt class="py-lineno"> 34</tt> <a class="py-toggle" href="#" id="LinuxSystemTap-toggle" onclick="return toggle('LinuxSystemTap');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.processing.platform.linux.LinuxSystemTap-class.html">LinuxSystemTap</a><tt class="py-op">(</tt><tt class="py-base-class">BehaviorHandler</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinuxSystemTap-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="LinuxSystemTap-expanded"><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-docstring">"""Parses systemtap generated plaintext logs (see data/strace.stp)."""</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">    <tt id="link-6" class="py-name" targets="Variable lib.cuckoo.common.abstracts.BehaviorHandler.key=lib.cuckoo.common.abstracts.BehaviorHandler-class.html#key,Variable modules.processing.behavior.Anomaly.key=modules.processing.behavior.Anomaly-class.html#key,Variable modules.processing.behavior.ApiStats.key=modules.processing.behavior.ApiStats-class.html#key,Variable modules.processing.behavior.BehaviorAnalysis.key=modules.processing.behavior.BehaviorAnalysis-class.html#key,Variable modules.processing.behavior.GenericBehavior.key=modules.processing.behavior.GenericBehavior-class.html#key,Variable modules.processing.behavior.ProcessTree.key=modules.processing.behavior.ProcessTree-class.html#key,Variable modules.processing.behavior.Summary.key=modules.processing.behavior.Summary-class.html#key,Variable modules.processing.dumptls.TLSMasterSecrets.key=modules.processing.dumptls.TLSMasterSecrets-class.html#key,Variable modules.processing.network.NetworkAnalysis.key=modules.processing.network.NetworkAnalysis-class.html#key,Variable modules.processing.platform.linux.LinuxSystemTap.key=modules.processing.platform.linux.LinuxSystemTap-class.html#key,Variable modules.processing.platform.windows.WindowsMonitor.key=modules.processing.platform.windows.WindowsMonitor-class.html#key,Variable modules.processing.procmon.Procmon.key=modules.processing.procmon.Procmon-class.html#key"><a title="lib.cuckoo.common.abstracts.BehaviorHandler.key
+modules.processing.behavior.Anomaly.key
+modules.processing.behavior.ApiStats.key
+modules.processing.behavior.BehaviorAnalysis.key
+modules.processing.behavior.GenericBehavior.key
+modules.processing.behavior.ProcessTree.key
+modules.processing.behavior.Summary.key
+modules.processing.dumptls.TLSMasterSecrets.key
+modules.processing.network.NetworkAnalysis.key
+modules.processing.platform.linux.LinuxSystemTap.key
+modules.processing.platform.windows.WindowsMonitor.key
+modules.processing.procmon.Procmon.key" class="py-name" href="#" onclick="return doclink('link-6', 'key', 'link-6');">key</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"processes"</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line"> </tt>
+<a name="LinuxSystemTap.__init__"></a><div id="LinuxSystemTap.__init__-def"><a name="L39"></a><tt class="py-lineno"> 39</tt> <a class="py-toggle" href="#" id="LinuxSystemTap.__init__-toggle" onclick="return toggle('LinuxSystemTap.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.platform.linux.LinuxSystemTap-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">kwargs</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinuxSystemTap.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LinuxSystemTap.__init__-expanded"><a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-name">super</tt><tt class="py-op">(</tt><tt id="link-7" class="py-name" targets="Class modules.processing.platform.linux.LinuxSystemTap=modules.processing.platform.linux.LinuxSystemTap-class.html"><a title="modules.processing.platform.linux.LinuxSystemTap" class="py-name" href="#" onclick="return doclink('link-7', 'LinuxSystemTap', 'link-7');">LinuxSystemTap</a></tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method lib.cuckoo.common.abstracts.Auxiliary.__init__()=lib.cuckoo.common.abstracts.Auxiliary-class.html#__init__,Method lib.cuckoo.common.abstracts.BehaviorHandler.__init__()=lib.cuckoo.common.abstracts.BehaviorHandler-class.html#__init__,Method lib.cuckoo.common.abstracts.LibVirtMachinery.__init__()=lib.cuckoo.common.abstracts.LibVirtMachinery-class.html#__init__,Method lib.cuckoo.common.abstracts.Machinery.__init__()=lib.cuckoo.common.abstracts.Machinery-class.html#__init__,Method lib.cuckoo.common.abstracts.Processing.__init__()=lib.cuckoo.common.abstracts.Processing-class.html#__init__,Method lib.cuckoo.common.abstracts.ProtocolHandler.__init__()=lib.cuckoo.common.abstracts.ProtocolHandler-class.html#__init__,Method lib.cuckoo.common.abstracts.Report.__init__()=lib.cuckoo.common.abstracts.Report-class.html#__init__,Method lib.cuckoo.common.abstracts.Signature.__init__()=lib.cuckoo.common.abstracts.Signature-class.html#__init__,Method lib.cuckoo.common.config.Config.__init__()=lib.cuckoo.common.config.Config-class.html#__init__,Method lib.cuckoo.common.irc.ircMessage.__init__()=lib.cuckoo.common.irc.ircMessage-class.html#__init__,Method lib.cuckoo.common.objects.File.__init__()=lib.cuckoo.common.objects.File-class.html#__init__,Method lib.cuckoo.common.objects.URL.__init__()=lib.cuckoo.common.objects.URL-class.html#__init__,Method lib.cuckoo.common.utils.SuperLock.__init__()=lib.cuckoo.common.utils.SuperLock-class.html#__init__,Method lib.cuckoo.common.utils.TimeoutServer.__init__()=lib.cuckoo.common.utils.TimeoutServer-class.html#__init__,Method lib.cuckoo.common.utils.TimeoutTransport.__init__()=lib.cuckoo.common.utils.TimeoutTransport-class.html#__init__,Method lib.cuckoo.common.virustotal.VirusTotalAPI.__init__()=lib.cuckoo.common.virustotal.VirusTotalAPI-class.html#__init__,Method lib.cuckoo.core.database.Database.__init__()=lib.cuckoo.core.database.Database-class.html#__init__,Method lib.cuckoo.core.database.Error.__init__()=lib.cuckoo.core.database.Error-class.html#__init__,Method lib.cuckoo.core.database.Guest.__init__()=lib.cuckoo.core.database.Guest-class.html#__init__,Method lib.cuckoo.core.database.Machine.__init__()=lib.cuckoo.core.database.Machine-class.html#__init__,Method lib.cuckoo.core.database.Sample.__init__()=lib.cuckoo.core.database.Sample-class.html#__init__,Method lib.cuckoo.core.database.Tag.__init__()=lib.cuckoo.core.database.Tag-class.html#__init__,Method lib.cuckoo.core.database.Task.__init__()=lib.cuckoo.core.database.Task-class.html#__init__,Method lib.cuckoo.core.guest.GuestManager.__init__()=lib.cuckoo.core.guest.GuestManager-class.html#__init__,Method lib.cuckoo.core.guest.OldGuestManager.__init__()=lib.cuckoo.core.guest.OldGuestManager-class.html#__init__,Method lib.cuckoo.core.plugins.RunAuxiliary.__init__()=lib.cuckoo.core.plugins.RunAuxiliary-class.html#__init__,Method lib.cuckoo.core.plugins.RunProcessing.__init__()=lib.cuckoo.core.plugins.RunProcessing-class.html#__init__,Method lib.cuckoo.core.plugins.RunReporting.__init__()=lib.cuckoo.core.plugins.RunReporting-class.html#__init__,Method lib.cuckoo.core.plugins.RunSignatures.__init__()=lib.cuckoo.core.plugins.RunSignatures-class.html#__init__,Method lib.cuckoo.core.resultserver.ResultServer.__init__()=lib.cuckoo.core.resultserver.ResultServer-class.html#__init__,Method lib.cuckoo.core.scheduler.AnalysisManager.__init__()=lib.cuckoo.core.scheduler.AnalysisManager-class.html#__init__,Method lib.cuckoo.core.scheduler.Scheduler.__init__()=lib.cuckoo.core.scheduler.Scheduler-class.html#__init__,Method modules.auxiliary.mitm.MITM.__init__()=modules.auxiliary.mitm.MITM-class.html#__init__,Method modules.auxiliary.sniffer.Sniffer.__init__()=modules.auxiliary.sniffer.Sniffer-class.html#__init__,Method modules.machinery.qemu.QEMU.__init__()=modules.machinery.qemu.QEMU-class.html#__init__,Method modules.machinery.vsphere.vSphere.__init__()=modules.machinery.vsphere.vSphere-class.html#__init__,Method modules.processing.behavior.Anomaly.__init__()=modules.processing.behavior.Anomaly-class.html#__init__,Method modules.processing.behavior.ApiStats.__init__()=modules.processing.behavior.ApiStats-class.html#__init__,Method modules.processing.behavior.GenericBehavior.__init__()=modules.processing.behavior.GenericBehavior-class.html#__init__,Method modules.processing.behavior.ProcessTree.__init__()=modules.processing.behavior.ProcessTree-class.html#__init__,Method modules.processing.behavior.RebootInformation.__init__()=modules.processing.behavior.RebootInformation-class.html#__init__,Method modules.processing.behavior.Summary.__init__()=modules.processing.behavior.Summary-class.html#__init__,Method modules.processing.debug.Logfile.__init__()=modules.processing.debug.Logfile-class.html#__init__,Method modules.processing.droidmon.Droidmon.__init__()=modules.processing.droidmon.Droidmon-class.html#__init__,Method modules.processing.memory.VolatilityAPI.__init__()=modules.processing.memory.VolatilityAPI-class.html#__init__,Method modules.processing.memory.VolatilityManager.__init__()=modules.processing.memory.VolatilityManager-class.html#__init__,Method modules.processing.network.Pcap.__init__()=modules.processing.network.Pcap-class.html#__init__,Method modules.processing.network.Pcap2.__init__()=modules.processing.network.Pcap2-class.html#__init__,Method modules.processing.network.SortCap.__init__()=modules.processing.network.SortCap-class.html#__init__,Method modules.processing.platform.linux.FilteredProcessLog.__init__()=modules.processing.platform.linux.FilteredProcessLog-class.html#__init__,Method modules.processing.platform.linux.LinuxSystemTap.__init__()=modules.processing.platform.linux.LinuxSystemTap-class.html#__init__,Method modules.processing.platform.linux.StapParser.__init__()=modules.processing.platform.linux.StapParser-class.html#__init__,Method modules.processing.platform.windows.BehaviorReconstructor.__init__()=modules.processing.platform.windows.BehaviorReconstructor-class.html#__init__,Method modules.processing.platform.windows.MonitorProcessLog.__init__()=modules.processing.platform.windows.MonitorProcessLog-class.html#__init__,Method modules.processing.platform.windows.WindowsMonitor.__init__()=modules.processing.platform.windows.WindowsMonitor-class.html#__init__,Method modules.processing.procmon.ProcmonLog.__init__()=modules.processing.procmon.ProcmonLog-class.html#__init__,Method modules.processing.static.OfficeDocument.__init__()=modules.processing.static.OfficeDocument-class.html#__init__,Method modules.processing.static.PdfDocument.__init__()=modules.processing.static.PdfDocument-class.html#__init__,Method modules.processing.static.PortableExecutable.__init__()=modules.processing.static.PortableExecutable-class.html#__init__,Method modules.processing.static.WindowsScriptFile.__init__()=modules.processing.static.WindowsScriptFile-class.html#__init__"><a title="lib.cuckoo.common.abstracts.Auxiliary.__init__
+lib.cuckoo.common.abstracts.BehaviorHandler.__init__
+lib.cuckoo.common.abstracts.LibVirtMachinery.__init__
+lib.cuckoo.common.abstracts.Machinery.__init__
+lib.cuckoo.common.abstracts.Processing.__init__
+lib.cuckoo.common.abstracts.ProtocolHandler.__init__
+lib.cuckoo.common.abstracts.Report.__init__
+lib.cuckoo.common.abstracts.Signature.__init__
+lib.cuckoo.common.config.Config.__init__
+lib.cuckoo.common.irc.ircMessage.__init__
+lib.cuckoo.common.objects.File.__init__
+lib.cuckoo.common.objects.URL.__init__
+lib.cuckoo.common.utils.SuperLock.__init__
+lib.cuckoo.common.utils.TimeoutServer.__init__
+lib.cuckoo.common.utils.TimeoutTransport.__init__
+lib.cuckoo.common.virustotal.VirusTotalAPI.__init__
+lib.cuckoo.core.database.Database.__init__
+lib.cuckoo.core.database.Error.__init__
+lib.cuckoo.core.database.Guest.__init__
+lib.cuckoo.core.database.Machine.__init__
+lib.cuckoo.core.database.Sample.__init__
+lib.cuckoo.core.database.Tag.__init__
+lib.cuckoo.core.database.Task.__init__
+lib.cuckoo.core.guest.GuestManager.__init__
+lib.cuckoo.core.guest.OldGuestManager.__init__
+lib.cuckoo.core.plugins.RunAuxiliary.__init__
+lib.cuckoo.core.plugins.RunProcessing.__init__
+lib.cuckoo.core.plugins.RunReporting.__init__
+lib.cuckoo.core.plugins.RunSignatures.__init__
+lib.cuckoo.core.resultserver.ResultServer.__init__
+lib.cuckoo.core.scheduler.AnalysisManager.__init__
+lib.cuckoo.core.scheduler.Scheduler.__init__
+modules.auxiliary.mitm.MITM.__init__
+modules.auxiliary.sniffer.Sniffer.__init__
+modules.machinery.qemu.QEMU.__init__
+modules.machinery.vsphere.vSphere.__init__
+modules.processing.behavior.Anomaly.__init__
+modules.processing.behavior.ApiStats.__init__
+modules.processing.behavior.GenericBehavior.__init__
+modules.processing.behavior.ProcessTree.__init__
+modules.processing.behavior.RebootInformation.__init__
+modules.processing.behavior.Summary.__init__
+modules.processing.debug.Logfile.__init__
+modules.processing.droidmon.Droidmon.__init__
+modules.processing.memory.VolatilityAPI.__init__
+modules.processing.memory.VolatilityManager.__init__
+modules.processing.network.Pcap.__init__
+modules.processing.network.Pcap2.__init__
+modules.processing.network.SortCap.__init__
+modules.processing.platform.linux.FilteredProcessLog.__init__
+modules.processing.platform.linux.LinuxSystemTap.__init__
+modules.processing.platform.linux.StapParser.__init__
+modules.processing.platform.windows.BehaviorReconstructor.__init__
+modules.processing.platform.windows.MonitorProcessLog.__init__
+modules.processing.platform.windows.WindowsMonitor.__init__
+modules.processing.procmon.ProcmonLog.__init__
+modules.processing.static.OfficeDocument.__init__
+modules.processing.static.PdfDocument.__init__
+modules.processing.static.PortableExecutable.__init__
+modules.processing.static.WindowsScriptFile.__init__" class="py-name" href="#" onclick="return doclink('link-8', '__init__', 'link-8');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-op">*</tt><tt class="py-name">args</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">kwargs</tt><tt class="py-op">)</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">processes</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pids_seen</tt> <tt class="py-op">=</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">forkmap</tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">matched</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Method modules.processing.platform.linux.LinuxSystemTap._check_for_probelkm()=modules.processing.platform.linux.LinuxSystemTap-class.html#_check_for_probelkm"><a title="modules.processing.platform.linux.LinuxSystemTap._check_for_probelkm" class="py-name" href="#" onclick="return doclink('link-9', '_check_for_probelkm', 'link-9');">_check_for_probelkm</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="LinuxSystemTap._check_for_probelkm"></a><div id="LinuxSystemTap._check_for_probelkm-def"><a name="L49"></a><tt class="py-lineno"> 49</tt> <a class="py-toggle" href="#" id="LinuxSystemTap._check_for_probelkm-toggle" onclick="return toggle('LinuxSystemTap._check_for_probelkm');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.platform.linux.LinuxSystemTap-class.html#_check_for_probelkm">_check_for_probelkm</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinuxSystemTap._check_for_probelkm-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LinuxSystemTap._check_for_probelkm-expanded"><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-name">path_lkm</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">analysis</tt><tt class="py-op">.</tt><tt class="py-name">logs_path</tt><tt class="py-op">,</tt> <tt class="py-string">"all.lkm"</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">exists</tt><tt class="py-op">(</tt><tt class="py-name">path_lkm</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">            <tt class="py-name">lines</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">path_lkm</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">readlines</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">            <tt class="py-name">forks</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">findall</tt><tt class="py-op">(</tt><tt class="py-string">"task (\d+)@0x[0-9a-f]+ forked to (\d+)@0x[0-9a-f]+"</tt><tt class="py-op">,</tt> <tt class="py-name">line</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">line</tt> <tt class="py-keyword">in</tt> <tt class="py-name">lines</tt><tt class="py-op">]</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">forkmap</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">j</tt><tt class="py-op">,</tt> <tt class="py-name">i</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">i</tt><tt class="py-op">,</tt> <tt class="py-name">j</tt> <tt class="py-keyword">in</tt> <tt class="py-name">reduce</tt><tt class="py-op">(</tt><tt class="py-keyword">lambda</tt> <tt class="py-name">x</tt><tt class="py-op">,</tt> <tt class="py-name">y</tt><tt class="py-op">:</tt> <tt class="py-name">x</tt><tt class="py-op">+</tt><tt class="py-name">y</tt><tt class="py-op">,</tt> <tt class="py-name">forks</tt><tt class="py-op">,</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">            <tt class="py-comment"># self.results["source"].append("probelkm")</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="LinuxSystemTap.handles_path"></a><div id="LinuxSystemTap.handles_path-def"><a name="L59"></a><tt class="py-lineno"> 59</tt> <a class="py-toggle" href="#" id="LinuxSystemTap.handles_path-toggle" onclick="return toggle('LinuxSystemTap.handles_path');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.platform.linux.LinuxSystemTap-class.html#handles_path">handles_path</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinuxSystemTap.handles_path-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LinuxSystemTap.handles_path-expanded"><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">endswith</tt><tt class="py-op">(</tt><tt class="py-string">".stap"</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">matched</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"> </tt>
+<a name="LinuxSystemTap.parse"></a><div id="LinuxSystemTap.parse-def"><a name="L64"></a><tt class="py-lineno"> 64</tt> <a class="py-toggle" href="#" id="LinuxSystemTap.parse-toggle" onclick="return toggle('LinuxSystemTap.parse');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.platform.linux.LinuxSystemTap-class.html#parse">parse</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">path</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinuxSystemTap.parse-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LinuxSystemTap.parse-expanded"><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-name">parser</tt> <tt class="py-op">=</tt> <tt id="link-10" class="py-name" targets="Class modules.processing.platform.linux.StapParser=modules.processing.platform.linux.StapParser-class.html"><a title="modules.processing.platform.linux.StapParser" class="py-name" href="#" onclick="return doclink('link-10', 'StapParser', 'link-10');">StapParser</a></tt><tt class="py-op">(</tt><tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">path</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">event</tt> <tt class="py-keyword">in</tt> <tt class="py-name">parser</tt><tt class="py-op">:</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">            <tt class="py-name">pid</tt> <tt class="py-op">=</tt> <tt class="py-name">event</tt><tt class="py-op">[</tt><tt class="py-string">"pid"</tt><tt class="py-op">]</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">pid</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pids_seen</tt><tt class="py-op">:</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">pids_seen</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Method lib.cuckoo.core.database.Database.add()=lib.cuckoo.core.database.Database-class.html#add"><a title="lib.cuckoo.core.database.Database.add" class="py-name" href="#" onclick="return doclink('link-11', 'add', 'link-11');">add</a></tt><tt class="py-op">(</tt><tt class="py-name">pid</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">                <tt class="py-name">ppid</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">forkmap</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method lib.cuckoo.common.config.Config.get()=lib.cuckoo.common.config.Config-class.html#get,Method lib.cuckoo.core.guest.GuestManager.get()=lib.cuckoo.core.guest.GuestManager-class.html#get"><a title="lib.cuckoo.common.config.Config.get
+lib.cuckoo.core.guest.GuestManager.get" class="py-name" href="#" onclick="return doclink('link-12', 'get', 'link-12');">get</a></tt><tt class="py-op">(</tt><tt class="py-name">pid</tt><tt class="py-op">,</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">)</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">                <tt id="link-13" class="py-name" targets="Method lib.cuckoo.core.plugins.RunProcessing.process()=lib.cuckoo.core.plugins.RunProcessing-class.html#process,Method lib.cuckoo.core.plugins.RunReporting.process()=lib.cuckoo.core.plugins.RunReporting-class.html#process"><a title="lib.cuckoo.core.plugins.RunProcessing.process
+lib.cuckoo.core.plugins.RunReporting.process" class="py-name" href="#" onclick="return doclink('link-13', 'process', 'link-13');">process</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                    <tt class="py-string">"pid"</tt><tt class="py-op">:</tt> <tt class="py-name">pid</tt><tt class="py-op">,</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">                    <tt class="py-string">"ppid"</tt><tt class="py-op">:</tt> <tt class="py-name">ppid</tt><tt class="py-op">,</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">                    <tt class="py-string">"process_name"</tt><tt class="py-op">:</tt> <tt class="py-name">event</tt><tt class="py-op">[</tt><tt class="py-string">"process_name"</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">                    <tt class="py-string">"first_seen"</tt><tt class="py-op">:</tt> <tt class="py-name">event</tt><tt class="py-op">[</tt><tt class="py-string">"time"</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">                <tt class="py-op">}</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                <tt class="py-comment"># create a process event as we don't have those with linux+systemtap</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">                <tt class="py-name">pevent</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt id="link-14" class="py-name"><a title="lib.cuckoo.core.plugins.RunProcessing.process
+lib.cuckoo.core.plugins.RunReporting.process" class="py-name" href="#" onclick="return doclink('link-14', 'process', 'link-13');">process</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                <tt class="py-name">pevent</tt><tt class="py-op">[</tt><tt class="py-string">"type"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-string">"process"</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                <tt class="py-keyword">yield</tt> <tt class="py-name">pevent</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line"> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                <tt id="link-15" class="py-name"><a title="lib.cuckoo.core.plugins.RunProcessing.process
+lib.cuckoo.core.plugins.RunReporting.process" class="py-name" href="#" onclick="return doclink('link-15', 'process', 'link-13');">process</a></tt><tt class="py-op">[</tt><tt class="py-string">"calls"</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name" targets="Class modules.processing.platform.linux.FilteredProcessLog=modules.processing.platform.linux.FilteredProcessLog-class.html"><a title="modules.processing.platform.linux.FilteredProcessLog" class="py-name" href="#" onclick="return doclink('link-16', 'FilteredProcessLog', 'link-16');">FilteredProcessLog</a></tt><tt class="py-op">(</tt><tt class="py-name">parser</tt><tt class="py-op">,</tt> <tt class="py-name">pid</tt><tt class="py-op">=</tt><tt class="py-name">pid</tt><tt class="py-op">)</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">processes</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-17" class="py-name"><a title="lib.cuckoo.core.plugins.RunProcessing.process
+lib.cuckoo.core.plugins.RunReporting.process" class="py-name" href="#" onclick="return doclink('link-17', 'process', 'link-13');">process</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line"> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">            <tt class="py-keyword">yield</tt> <tt class="py-name">event</tt> </tt>
+</div><a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"> </tt>
+<a name="LinuxSystemTap.run"></a><div id="LinuxSystemTap.run-def"><a name="L90"></a><tt class="py-lineno"> 90</tt> <a class="py-toggle" href="#" id="LinuxSystemTap.run-toggle" onclick="return toggle('LinuxSystemTap.run');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.platform.linux.LinuxSystemTap-class.html#run">run</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="LinuxSystemTap.run-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="LinuxSystemTap.run-expanded"><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">matched</tt><tt class="py-op">:</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">processes</tt><tt class="py-op">.</tt><tt class="py-name">sort</tt><tt class="py-op">(</tt><tt id="link-18" class="py-name"><a title="lib.cuckoo.common.abstracts.BehaviorHandler.key
+modules.processing.behavior.Anomaly.key
+modules.processing.behavior.ApiStats.key
+modules.processing.behavior.BehaviorAnalysis.key
+modules.processing.behavior.GenericBehavior.key
+modules.processing.behavior.ProcessTree.key
+modules.processing.behavior.Summary.key
+modules.processing.dumptls.TLSMasterSecrets.key
+modules.processing.network.NetworkAnalysis.key
+modules.processing.platform.linux.LinuxSystemTap.key
+modules.processing.platform.windows.WindowsMonitor.key
+modules.processing.procmon.Procmon.key" class="py-name" href="#" onclick="return doclink('link-18', 'key', 'link-6');">key</a></tt><tt class="py-op">=</tt><tt class="py-keyword">lambda</tt> <tt id="link-19" class="py-name"><a title="lib.cuckoo.core.plugins.RunProcessing.process
+lib.cuckoo.core.plugins.RunReporting.process" class="py-name" href="#" onclick="return doclink('link-19', 'process', 'link-13');">process</a></tt><tt class="py-op">:</tt> <tt id="link-20" class="py-name"><a title="lib.cuckoo.core.plugins.RunProcessing.process
+lib.cuckoo.core.plugins.RunReporting.process" class="py-name" href="#" onclick="return doclink('link-20', 'process', 'link-13');">process</a></tt><tt class="py-op">[</tt><tt class="py-string">"first_seen"</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">processes</tt> </tt>
+</div></div><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="StapParser"></a><div id="StapParser-def"><a name="L97"></a><tt class="py-lineno"> 97</tt> <a class="py-toggle" href="#" id="StapParser-toggle" onclick="return toggle('StapParser');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="modules.processing.platform.linux.StapParser-class.html">StapParser</a><tt class="py-op">(</tt><tt class="py-base-class">object</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StapParser-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="StapParser-expanded"><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">    <tt class="py-docstring">"""Handle .stap logs from the Linux analyzer."""</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"> </tt>
+<a name="StapParser.__init__"></a><div id="StapParser.__init__-def"><a name="L100"></a><tt class="py-lineno">100</tt> <a class="py-toggle" href="#" id="StapParser.__init__-toggle" onclick="return toggle('StapParser.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.platform.linux.StapParser-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">fd</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StapParser.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StapParser.__init__-expanded"><a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fd</tt> <tt class="py-op">=</tt> <tt class="py-name">fd</tt> </tt>
+</div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="StapParser.__iter__"></a><div id="StapParser.__iter__-def"><a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="StapParser.__iter__-toggle" onclick="return toggle('StapParser.__iter__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="modules.processing.platform.linux.StapParser-class.html#__iter__">__iter__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="StapParser.__iter__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="StapParser.__iter__-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fd</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method lib.cuckoo.core.resultserver.ResultHandler.seek()=lib.cuckoo.core.resultserver.ResultHandler-class.html#seek"><a title="lib.cuckoo.core.resultserver.ResultHandler.seek" class="py-name" href="#" onclick="return doclink('link-21', 'seek', 'link-21');">seek</a></tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">line</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">fd</tt><tt class="py-op">:</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">            <tt class="py-comment"># 'Thu May  7 14:58:43 2015.390178 python@7f798cb95240[2114] close(6) = 0\n'</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">            <tt class="py-comment"># datetime is 31 characters</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">            <tt class="py-name">datetimepart</tt><tt class="py-op">,</tt> <tt class="py-name">rest</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-number">31</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-name">line</tt><tt class="py-op">[</tt><tt class="py-number">32</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">            <tt class="py-comment"># incredibly sophisticated date time handling</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">            <tt class="py-name">dtms</tt> <tt class="py-op">=</tt> <tt class="py-name">datetime</tt><tt class="py-op">.</tt><tt class="py-name">timedelta</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">datetimepart</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">"."</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">            <tt class="py-name">dt</tt> <tt class="py-op">=</tt> <tt class="py-name">dateutil</tt><tt class="py-op">.</tt><tt class="py-name">parser</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name" targets="Method lib.cuckoo.common.abstracts.BehaviorHandler.parse()=lib.cuckoo.common.abstracts.BehaviorHandler-class.html#parse,Method modules.processing.platform.linux.LinuxSystemTap.parse()=modules.processing.platform.linux.LinuxSystemTap-class.html#parse,Method modules.processing.platform.windows.WindowsMonitor.parse()=modules.processing.platform.windows.WindowsMonitor-class.html#parse"><a title="lib.cuckoo.common.abstracts.BehaviorHandler.parse
+modules.processing.platform.linux.LinuxSystemTap.parse
+modules.processing.platform.windows.WindowsMonitor.parse" class="py-name" href="#" onclick="return doclink('link-22', 'parse', 'link-22');">parse</a></tt><tt class="py-op">(</tt><tt class="py-name">datetimepart</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">"."</tt><tt class="py-op">,</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-name">dtms</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">            <tt class="py-name">parts</tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-string">"^(.+)@([a-f0-9]+)\[(\d+)\] (\w+)\((.*)\) = (\S+){0,1}\s{0,1}(\(\w+\)){0,1}$"</tt><tt class="py-op">,</tt> <tt class="py-name">rest</tt><tt class="py-op">)</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">parts</tt><tt class="py-op">:</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">                <tt id="link-23" class="py-name"><a title="lib.cuckoo.common.abstracts.log
+lib.cuckoo.common.irc.log
+lib.cuckoo.common.netlog.log
+lib.cuckoo.common.objects.log
+lib.cuckoo.common.utils.log
+lib.cuckoo.core.database.log
+lib.cuckoo.core.guest.log
+lib.cuckoo.core.log
+lib.cuckoo.core.plugins.log
+lib.cuckoo.core.resultserver.log
+lib.cuckoo.core.rooter.log
+lib.cuckoo.core.scheduler.log
+lib.cuckoo.core.startup.log
+modules.auxiliary.mitm.log
+modules.auxiliary.reboot.log
+modules.auxiliary.services.log
+modules.auxiliary.sniffer.log
+modules.machinery.avd.log
+modules.machinery.physical.log
+modules.machinery.qemu.log
+modules.machinery.virtualbox.log
+modules.machinery.vmware.log
+modules.machinery.vsphere.log
+modules.machinery.xenserver.log
+modules.processing.analysisinfo.log
+modules.processing.apkinfo.log
+modules.processing.baseline.log
+modules.processing.behavior.log
+modules.processing.debug.log
+modules.processing.droidmon.log
+modules.processing.dumptls.log
+modules.processing.googleplay.log
+modules.processing.irma.log
+modules.processing.memory.log
+modules.processing.misp.log
+modules.processing.network.log
+modules.processing.platform.linux.log
+modules.processing.platform.windows.log
+modules.processing.procmemory.log
+modules.processing.screenshots.log
+modules.processing.snort.log
+modules.processing.static.log
+modules.processing.suricata.log
+modules.processing.virustotal.log
+modules.reporting.elasticsearch.log
+modules.reporting.moloch.log" class="py-name" href="#" onclick="return doclink('link-23', 'log', 'link-5');">log</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"Could not parse syscall trace line: %s"</tt><tt class="py-op">,</tt> <tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">                <tt class="py-keyword">continue</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">            <tt class="py-name">pname</tt><tt class="py-op">,</tt> <tt id="link-24" class="py-name" targets="Variable lib.cuckoo.core.database.Machine.ip=lib.cuckoo.core.database.Machine-class.html#ip"><a title="lib.cuckoo.core.database.Machine.ip" class="py-name" href="#" onclick="return doclink('link-24', 'ip', 'link-24');">ip</a></tt><tt class="py-op">,</tt> <tt class="py-name">pid</tt><tt class="py-op">,</tt> <tt class="py-name">fn</tt><tt class="py-op">,</tt> <tt class="py-name">arguments</tt><tt class="py-op">,</tt> <tt class="py-name">retval</tt><tt class="py-op">,</tt> <tt class="py-name">ecode</tt> <tt class="py-op">=</tt> <tt class="py-name">parts</tt><tt class="py-op">.</tt><tt class="py-name">groups</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">            <tt class="py-name">argsplit</tt> <tt class="py-op">=</tt> <tt class="py-name">arguments</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">", "</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">            <tt class="py-name">arguments</tt> <tt class="py-op">=</tt> <tt class="py-name">dict</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-string">"p%u"</tt> <tt class="py-op">%</tt> <tt class="py-name">pos</tt><tt class="py-op">,</tt> <tt class="py-name">argsplit</tt><tt class="py-op">[</tt><tt class="py-name">pos</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">pos</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">argsplit</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">            <tt class="py-name">pid</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">pid</tt><tt class="py-op">)</tt> <tt class="py-keyword">if</tt> <tt class="py-name">pid</tt><tt class="py-op">.</tt><tt class="py-name">isdigit</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> <tt class="py-keyword">else</tt> <tt class="py-op">-</tt><tt class="py-number">1</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">            <tt class="py-keyword">yield</tt> <tt class="py-op">{</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">                <tt class="py-string">"time"</tt><tt class="py-op">:</tt> <tt class="py-name">dt</tt><tt class="py-op">,</tt> <tt class="py-string">"process_name"</tt><tt class="py-op">:</tt> <tt class="py-name">pname</tt><tt class="py-op">,</tt> <tt class="py-string">"pid"</tt><tt class="py-op">:</tt> <tt class="py-name">pid</tt><tt class="py-op">,</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">                <tt class="py-string">"instruction_pointer"</tt><tt class="py-op">:</tt> <tt id="link-25" class="py-name"><a title="lib.cuckoo.core.database.Machine.ip" class="py-name" href="#" onclick="return doclink('link-25', 'ip', 'link-24');">ip</a></tt><tt class="py-op">,</tt> <tt class="py-string">"api"</tt><tt class="py-op">:</tt> <tt class="py-name">fn</tt><tt class="py-op">,</tt> <tt class="py-string">"arguments"</tt><tt class="py-op">:</tt> <tt class="py-name">arguments</tt><tt class="py-op">,</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">                <tt class="py-string">"return_value"</tt><tt class="py-op">:</tt> <tt class="py-name">retval</tt><tt class="py-op">,</tt> <tt class="py-string">"status"</tt><tt class="py-op">:</tt> <tt class="py-name">ecode</tt><tt class="py-op">,</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">                <tt class="py-string">"type"</tt><tt class="py-op">:</tt> <tt class="py-string">"apicall"</tt><tt class="py-op">,</tt> <tt class="py-string">"raw"</tt><tt class="py-op">:</tt> <tt class="py-name">line</tt><tt class="py-op">,</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">            <tt class="py-op">}</tt> </tt>
+</div></div><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            ><a class="navbar" target="_top" href="http://cuckoosandbox.org">Cuckoo Sandbox</a></th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Nov  4 23:21:59 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
